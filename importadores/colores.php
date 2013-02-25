@@ -24,7 +24,7 @@ while (odbc_fetch_row($rs))
 
 odbc_close($conn);
 
-require_once("db.php");
+require_once("../db.php");
 
 
 $dbnivel=new DB('192.168.1.11','edu','admin','risase');
