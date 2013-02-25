@@ -16,7 +16,15 @@ if (!$rs)
   {exit("Error in SQL");}
 
 
-print_r(odbc_fetch_row($rs));
+
+
+while (odbc_fetch_row($rs))
+  {
+  $idcol=odbc_result($rs,"col_IdColor");
+  $color=odbc_result($rs,"col_Color");
+  echo "$idcol -> $color <br>";
+  
+  }
 
 odbc_close($conn);
 
