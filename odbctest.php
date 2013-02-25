@@ -9,7 +9,7 @@ if (!$conn)
   {exit("Connection Failed: " . $conn);}
 
 
-$sql="SELECT * FROM colores";
+$sql="SELECT * FROM Colores";
 
 $rs=odbc_exec($conn,$sql);
 if (!$rs)
