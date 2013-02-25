@@ -20,13 +20,26 @@ if (!$rs)
 
 while (odbc_fetch_row($rs))
   {
-  $idcol=odbc_result($rs,"col_IdColor");
-  $color=odbc_result($rs,"col_Color");
-  echo "$idcol -> $color <br>";
-  
+  $colores[odbc_result($rs,"col_IdColor")]=odbc_result($rs,"col_Color");
   }
 
 odbc_close($conn);
+
+require_once("db.php");
+
+
+$dbnivel=new DB('192.168.1.11','edu','admin','risase');
+if (!$dbnivel->open()){die($dbnivel->error());};
+
+foreach ($colores as $id => $color) {
+	
+
+$queryp= "INSERT INTO colores (id,color) values ('$id','$color');";
+$dbnivel->query($queryp);
+
+}
+
+if (!$dbnivel->close()){die($dbnivel->error());};
 
 
 ?>
