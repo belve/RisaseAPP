@@ -1,0 +1,39 @@
+body {
+    
+    font-family: Arial;
+    font-size: 12px;
+    margin:0px;
+    
+}
+
+                  
+
+
+
+
+.blnco_limpio{
+	border: 1px solid #888888;
+	width:170px; height:268px;
+	background-color: white;
+	
+	
+}
+
+.blnco_limpio ul{
+list-style-type: none;
+padding: 0px;
+margin: 0px;
+	
+}
+
+.blnco_limpio li{
+height:15px; width:100%; padding-left:3px; cursor:pointer;
+}
+
+.blnco_limpio li:hover{background-color:#8DC29E;}
+.blnco_limpio li:pointed{background-color:#8DC29E;}
+
+
+.corto {width:50px;}
+.medio {width:100px;}
+.largo {width:200px;}
