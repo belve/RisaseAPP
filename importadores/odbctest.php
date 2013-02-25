@@ -30,17 +30,19 @@ require_once("db.php");
 $dbnivel=new DB('192.168.1.11','edu','admin','risase');
 if (!$dbnivel->open()){die($dbnivel->error());};
 
-foreach ($colores as $id => $color) {
-	
 
-$queryp= "INSERT INTO colores (id,color) values ('$id','$color');";
+
+$queryp= "delete from colores;";
 $dbnivel->query($queryp);
 
+foreach ($colores as $id => $color) {
+$queryp= "INSERT INTO colores (id,color) values ('$id','$color');";
+$dbnivel->query($queryp);
 }
 
 if (!$dbnivel->close()){die($dbnivel->error());};
 
-
+echo json_encode($colores);
 ?>
 
 
