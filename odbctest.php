@@ -7,7 +7,9 @@ $user="edu";
 $password="admin";
 $database="Test";
 
-$conexión = odbc_connect("Driver={SQL Server Native Client 10.0};Server=$server;Database=$database;", $user, $password);
+$conn=odbc_connect('risase','edu','admin');
+$sql="SELECT * FROM colores";
+$rs=odbc_exec($conn,$sql);
 
 ?>
 
