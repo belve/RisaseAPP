@@ -1,6 +1,5 @@
-
-
 <?php
+set_time_limit(0);
 
 
 $conn=odbc_connect('risase','edu','admin');
