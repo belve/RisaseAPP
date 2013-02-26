@@ -36,7 +36,7 @@ $queryp= "delete from colores;";
 $dbnivel->query($queryp);
 
 foreach ($colores as $id => $color) {
-$queryp= "INSERT INTO colores (id,color) values ('$id','$color');";
+$queryp= "INSERT INTO colores (id,nombre) values ('$id','$color');";
 $dbnivel->query($queryp);
 }
 
