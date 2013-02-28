@@ -24,12 +24,12 @@
 
 
 <div class="botonera">
-	<div class="iconos ini_on" onclick="javascrit:cargaColoresINI();"></div>
-	<div class="iconos prev_on" onclick="javascrit:cargaColoresMENOS();"></div>
-	<div class="iconos next_on" onclick="javascrit:cargaColoresMAS();"></div>
-	<div class="iconos fin_on" onclick="javascrit:cargaColoresFIN();"></div>
+	<div class="iconos ini_on" onclick="javascrit:cargaGruposINI();"></div>
+	<div class="iconos prev_on" onclick="javascrit:cargaGruposMENOS();"></div>
+	<div class="iconos next_on" onclick="javascrit:cargaGruposMAS();"></div>
+	<div class="iconos fin_on" onclick="javascrit:cargaGruposFIN();"></div>
 	
-	<div class="iconos save_on" onclick="javascrit:saveColor();"></div>
+	<div class="iconos save_on" onclick="javascrit:saveGrupo();"></div>
 </div>
 <div style="clear: both;margin-bottom: 10px; "></div>	
 <table>
@@ -37,11 +37,11 @@
 		
 		<tr>
 			<td>Código</td>
-			<td><input type="text" name="idmost" class="corto" id="color_id" onchange="javascrit:cargaColoresS();" ></td>
+			<td><input type="text" name="idmost" class="corto" id="color_id" onchange="javascrit:cargaGruposS();" ></td>
 		</tr>
 		
 		<tr>
-			<td>Color</td>
+			<td>Grupo</td>
 			<td><input type="text" name="color" class="largo" id="color_name"></td>
 		</tr>
 
@@ -53,5 +53,5 @@
 
 
 <script>
-	cargaColores(0);
+	cargaGrupos(0);
 </script>		
