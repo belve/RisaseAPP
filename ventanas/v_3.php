@@ -20,7 +20,7 @@
 
 </head>
 <body>
-<input type="hidden" name="id" class="corto" id="color_hid">
+<input type="hidden" name="id" class="corto" id="grupos_hid">
 
 
 <div class="botonera">
@@ -37,12 +37,12 @@
 		
 		<tr>
 			<td>Código</td>
-			<td><input type="text" name="idmost" class="corto" id="color_id" onchange="javascrit:cargaGruposS();" ></td>
+			<td><input type="text" name="idmost" class="corto" id="grupos_id" onchange="javascrit:cargaGruposS();" ></td>
 		</tr>
 		
 		<tr>
 			<td>Grupo</td>
-			<td><input type="text" name="color" class="largo" id="color_name"></td>
+			<td><input type="text" name="color" class="largo" id="grupos_name"></td>
 		</tr>
 
 </tbody>

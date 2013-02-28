@@ -2,13 +2,23 @@
 set_time_limit(0);
 
 
+##### datos OLD
+$Ntab='Grupos';
+$Nid='gru_IdGrupo';
+$Nnom='gru_Grupo';
+
+##### datos NEW
+$nNtab="grupos";
+$nNid='id';
+$nNnom='nombre';
+
 $conn=odbc_connect('risase','edu','admin');
 
 if (!$conn)
   {exit("Connection Failed: " . $conn);}
 
 
-$sql="SELECT * FROM Grupos";
+$sql="SELECT * FROM $Ntab ORDER BY $Nid ASC ";
 
 $rs=odbc_exec($conn,$sql);
 if (!$rs)
@@ -19,7 +29,7 @@ if (!$rs)
 
 while (odbc_fetch_row($rs))
   {
-  $colores[odbc_result($rs,"gru_IdGrupo")]=odbc_result($rs,"gru_Grupo");
+  $colores[odbc_result($rs,$Nid)]=odbc_result($rs,$Nnom);
   }
 
 odbc_close($conn);
@@ -32,11 +42,11 @@ if (!$dbnivel->open()){die($dbnivel->error());};
 
 
 
-$queryp= "delete from grupos;";
+$queryp= "delete from $nNtab;";
 $dbnivel->query($queryp);
 
-foreach ($colores as $id => $color) {
-$queryp= "INSERT INTO grupos (id,nombre) values ('$id','$color');";
+foreach ($colores as $val1 => $val2) {
+$queryp= "INSERT INTO $nNtab ($nNid,$nNnom) values ('$val1','$val2');";
 $dbnivel->query($queryp);
 }
 

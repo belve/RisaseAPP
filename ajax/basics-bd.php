@@ -9,7 +9,9 @@ if (!$dbnivel->open()){die($dbnivel->error());};
 if($pointer<0){
 $queryp= "select * from $tabla ORDER BY id DESC limit 0,1;";	
 }else{
-if($pointer>0){$pointer--;};
+	
+if(($pointer>0)&&($tabla=='colores')){$pointer--;};
+
 $queryp= "select * from $tabla ORDER BY id ASC limit $pointer,1;";
 }
 
