@@ -36,7 +36,7 @@ if (!$rs)
 while (odbc_fetch_row($rs))
   {
   $valores[trim(odbc_result($rs,$Nid))][1]=trim(odbc_result($rs,$Nrel));	
-  $valores[trim(odbc_result($rs,$Nid))][2]=trim(odbc_result($rs,$Nnom));
+  $valores[trim(odbc_result($rs,$Nid))][2]=trim(utf8_encode(odbc_result($rs,$Nnom)));
   $valores[trim(odbc_result($rs,$Nid))][3]=trim(odbc_result($rs,$Nclave));
   }
 
