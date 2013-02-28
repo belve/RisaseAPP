@@ -29,7 +29,7 @@ if (!$rs)
 
 while (odbc_fetch_row($rs))
   {
-  $colores[odbc_result($rs,$Nid)]=odbc_result($rs,$Nnom);
+  $valores[trim(odbc_result($rs,$Nid))]=trim(odbc_result($rs,$Nnom));
   }
 
 odbc_close($conn);
@@ -45,7 +45,7 @@ if (!$dbnivel->open()){die($dbnivel->error());};
 $queryp= "delete from $nNtab;";
 $dbnivel->query($queryp);
 
-foreach ($colores as $val1 => $val2) {
+foreach ($valores as $val1 => $val2) {
 $queryp= "INSERT INTO $nNtab ($nNid,$nNnom) values ('$val1','$val2');";
 $dbnivel->query($queryp);
 }
