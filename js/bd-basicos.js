@@ -98,7 +98,33 @@ $.getJSON(url, function(data) {
 
 
 
+function cargaSubGrupos(pointer){
+var actual=	document.getElementById('1_hid').value;
+
+if (pointer == 'menos'){pointer=(actual*1)-1;};
+if (pointer == 'mas'){pointer=(actual*1)+1;};
+
+url = "/ajax/subgrupos.php?pointer=" + pointer;
+$.getJSON(url, function(data) {
+$.each(data, function(key, val) {
+  
+  if(key == 1){
+  	document.getElementById('1_hid').value=val;
+   	document.getElementById('1').value=val;
+   	}
+   if(key == 2){document.getElementById('2').value=val;};
+   if(key == 3){document.getElementById('3').value=val;};
+   if(key == 4){document.getElementById('4').value=val;};
+  	
+ 
+});
+});
+}
 
 
+function cargaSubGruposS(){
+var actual=	document.getElementById('1').value;
+cargaSubGrupos(actual);
+}
 
 

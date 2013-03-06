@@ -52,7 +52,7 @@ $dbnivel->query($queryp);
 
 if (!$dbnivel->close()){die($dbnivel->error());};
 
-echo json_encode($colores);
+echo json_encode($valores);
 ?>
 
 
