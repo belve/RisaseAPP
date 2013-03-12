@@ -87,6 +87,7 @@ $dbnivel->query($queryp);
 foreach ($valores as $val1 => $val2) {
 $nval1=$val2[1];$nval2=$val2[2];$nval3=$val2[3];
 
+$sqlcamps="";$sqlvals="";
 foreach ($val2 as $nnkey => $valuecamp)	{
 	
 	$sqlcamps .= "$ncamp[$nnkey],";
