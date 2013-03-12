@@ -55,6 +55,8 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 	<div class="iconos fin_on" 	onclick="javascrit:cargaSubGrupos('fin');"></div>
 	
 	<div class="iconos save_on" onclick="javascrit:saveSubGrupo();"></div>
+	<div class="iconos new_on" onclick="javascrit:createSubGrupo();"></div>
+	
 </div>
 <div style="clear: both;margin-bottom: 10px; "></div>	
 <table>

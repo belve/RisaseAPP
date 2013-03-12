@@ -57,4 +57,5 @@ height:15px; width:100%; padding-left:3px; cursor:pointer;
 .next_on {cursor:pointer; width:19px; height:18px; background-position:-57px -17px; float:left; margin-left: 2px;}
 .next_of {cursor:pointer; width:19px; height:18px; background-position:-57px -35px; float:left; margin-left: 2px;}
 
+.new_on {cursor:pointer; width:19px; height:18px; background-position:-97px -17px; float:right; margin-right:5px;}
 .save_on {cursor:pointer; width:19px; height:18px; background-position:-77px -17px; float:right;}
