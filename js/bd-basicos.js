@@ -128,3 +128,16 @@ cargaSubGrupos(actual);
 }
 
 
+
+function saveSubGrupo(){
+var id=	document.getElementById('1_hid').value;	
+var grupo=document.getElementById('2').value;
+var subgrupo=document.getElementById('3').value;
+var clave=document.getElementById('4').value;
+	
+url = "/ajax/update2.php?tabla=subgrupos&campos[id_grupo]=" + grupo + "&campos[nombre]=" + subgrupo  + "&campos[clave]=" + clave  +  "&id=" + id;
+$.getJSON(url, function(data) {
+});
+}
+
+
