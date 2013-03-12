@@ -65,7 +65,7 @@ while (odbc_fetch_row($rs))
 
 
 foreach($camp as $nkey => $nomcampo){
-	 $valores[trim(odbc_result($rs,$Nid))][$nkey]=trim(odbc_result($rs,$nomcampo));
+	 $valores[trim(odbc_result($rs,$Nid))][$nkey]=trim(utf8_encode(odbc_result($rs,$nomcampo)));
 }
 
 
