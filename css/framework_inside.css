@@ -13,7 +13,7 @@ body {
 
 .blnco_limpio{
 	border: 1px solid #888888;
-	width:170px; height:268px;
+	width:170px; height:403px;
 	background-color: white;
 	
 	
@@ -27,12 +27,13 @@ margin: 0px;
 }
 
 .blnco_limpio li{
-height:15px; width:100%; padding-left:3px; cursor:pointer;
+height:15px; width:98%; padding-left:3px; cursor:pointer;
 }
 
 .blnco_limpio li:hover{background-color:#8DC29E;}
 .blnco_limpio li:pointed{background-color:#8DC29E;}
 
+.tselected {background-color:#B8B8B8;}
 
 .corto {width:50px;}
 .medio {width:100px;}
