@@ -32,6 +32,8 @@
 	
 </div>
 <input type="hidden" id="seleccionado" value="" />
+<input type="hidden" id="seleccionado2" value="" />
+
 <div class="botonera" style="clear:both; ">
 	
 	<div class="iconos prev_on" onclick="javascrit:ordenatienda('up');"></div>
@@ -39,8 +41,9 @@
 	
 	
 	
-	<div class="iconos save_on" onclick="javascrit:saveproveedores();"></div>
-	<div class="iconos new_on" onclick="javascrit:createproveedores();"></div>
+	<div class="iconos save_on" onclick="javascrit:savetienda();"></div>
+	<div class="iconos new_on" onclick="javascrit:createtienda();"></div>
+	<div style="float:right;"><input type="text" class="newcod" id="newcod" /></div>
 </div>
 </div>
 

@@ -39,6 +39,11 @@ height:15px; width:98%; padding-left:3px; cursor:pointer;
 .medio {width:100px;}
 .largo {width:200px;}
 
+.newcod {  font-size: 10px;
+    height: 14px;
+    margin-top: -2px;
+    width: 38px;}
+
 .iconos {
     background-image: url("/iconos/iconos.png");
     background-repeat: no-repeat;
