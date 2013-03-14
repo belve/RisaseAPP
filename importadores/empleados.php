@@ -12,7 +12,7 @@ $camp[2]='emp_Nombre';
 $camp[3]='emp_Apellido1';
 $camp[4]='emp_Apellido2';
 $camp[5]='emp_Trabajando';
-$camp[6]='emp_Nombre';
+$camp[6]='emp_Orden';
 
 
 
