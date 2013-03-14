@@ -15,6 +15,10 @@ document.getElementById(key).value=val;
 }
 });
 });
+
+document.getElementById('empleados').src='/ajax/listempleados.php?id=' + id;
+setCookie('empleados','',1);
+
 }
 
 function ordenatienda(orden){
@@ -25,6 +29,7 @@ $("#tiendas").load(url);
 
 
 }
+
 
 function savetienda(){
 var id=	document.getElementById('seleccionado2').value;
@@ -62,4 +67,13 @@ url = "/ajax/createtienda.php?newcod=" + newcod;
 $("#tiendas").load(url);	
 }
 }
+
+
+function create_empleados(){
+var idtienda=document.getElementById('seleccionado2').value;	
+var url='/ajax/create_empleado.php?idt=' + idtienda;
+
+document.getElementById('empleados').src=url;	
+}
+
 

@@ -8,7 +8,7 @@
 <script type="text/javascript" src="/js/jquery.tinyscrollbar.min.js"></script>
 <script type="text/javascript" src="/js/focus.js"></script>
 <script type="text/javascript" src="/js/tiendas.js"></script>
-
+<script type="text/javascript" src="/js/tablas.js"></script>
 
 
 
@@ -109,7 +109,23 @@
 	</table>
 </div>	
 
+<div style="clear:both;"></div>
+<div style="margin-top:20px;position:relative">
+	
+<div class="cabemp">
+	<div class="cabtab_emp nom_tab_emp">NOMBRE</div>
+	<div class="cabtab_emp ap1_tab_emp">APELLIDO 1</div>
+	<div class="cabtab_emp ap2_tab_emp">APELLIDO 2</div>
+	<div class="cabtab_emp trbj_tab_emp">TRB</div>
+	<div class="cabtab_emp orde_tab_emp">ORD</div>
+</div>
+<iframe id="empleados" src="/ventanas/blank.html" width="100%" height="185" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
+</div>
 
+<div class="pieemp">
+	<div class="iconos save_on" onclick="javascrit:save_tabla('empleados');"></div>
+	<div class="iconos new_on" onclick="javascrit:create_empleados();"></div>
+</div>
 	
 </div>
 
@@ -121,6 +137,8 @@
 <script>
   $("#tiendas").load("/ajax/cargatiendas.php");
 </script>
+
+
 </div>
 
 </body>
