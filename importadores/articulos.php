@@ -1,7 +1,7 @@
 <?php
 set_time_limit(0);
-
-
+foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
+$fin=$ini+500;
 ##### datos OLD
 $Ntab='Articulos';
 
@@ -56,7 +56,7 @@ if (!$conn)
   {exit("Connection Failed: " . $conn);}
 
 
-$sql="SELECT * FROM $Ntab where $Nid <=100 ORDER BY $Nid ASC;";
+$sql="SELECT * FROM $Ntab where $Nid > $ini AND $Nid <= $fin ORDER BY $Nid ASC;";
 
 
 $rs=odbc_exec($conn,$sql);
@@ -109,9 +109,11 @@ $dbnivel->query($queryp);
 
 if (!$dbnivel->close()){die($dbnivel->error());};
 
-echo json_encode($valores);
+
 ?>
 
-
+<script>
+	 window.location.href = "/importadores/articulos.php?ini=<?php echo $fin;?>";
+</script>
 
 
