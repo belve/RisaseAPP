@@ -56,7 +56,8 @@ if (!$conn)
   {exit("Connection Failed: " . $conn);}
 
 
-$sql="SELECT * FROM $Ntab ORDER BY $Nid ASC limit 20;";
+$sql="SELECT * FROM $Ntab where $Nid <=100 ORDER BY $Nid ASC;";
+
 
 $rs=odbc_exec($conn,$sql);
 if (!$rs)
