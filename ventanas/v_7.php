@@ -64,7 +64,7 @@ url = "/ajax/listarticulos.php?id_proveedor=" + prov
 	<div class="cabtab_art tab_art_stini">Stock Ini</div>
 	<div class="cabtab_art tab_art_cong">Cong</div>
 </div>
-<iframe id="articulos" src="/ajax/listarticulos.php" width="537" height="685" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
+<iframe id="articulos" src="/ajax/listarticulos.php" width="537" height="550" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
 
 
 	

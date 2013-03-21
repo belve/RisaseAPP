@@ -120,3 +120,13 @@ height:15px; width:98%; padding-left:3px; cursor:pointer;
 
 .boton {padding:4px 10px 4px 10px; border: 1px solid #888888; text-align: center; margin-top:10px; color:#333333; cursor:pointer; background-color: #aaaaaa;}
 
+.codbarras ul{
+list-style-type: none;
+padding: 0px;
+margin: 0px;
+	
+}
+
+.codbarras li{
+height:15px; width:96%; padding-left:3px; cursor:pointer;
+}

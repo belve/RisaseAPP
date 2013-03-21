@@ -10,7 +10,7 @@
 <link rel='stylesheet' type='text/css' href='/css/framework_inside.css' />
 <script type="text/javascript" src="/js/jquery.tinyscrollbar.min.js"></script>
 <script type="text/javascript" src="/js/focus.js"></script>
-
+<script type="text/javascript" src="/js/masivas.js"></script>
 
 
 
@@ -37,13 +37,13 @@
 
 
 </div>
-<iframe id="altasmas" src="/ajax/altasmas.php" width="435" height="600" border="0" frameborder="0" marginheight="0" scrolling="yes"></iframe>
+<iframe id="altasmas" src="/ajax/altasmas.php" width="435" height="520" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
 </div>
 
-<div style="position:relative; float: left; margin-left: 20px;">
+<div style="position:relative; float: left; margin-left: 10px;">
 	
 <div class="cabmas2" ></div>
-<iframe id="codgenerados" src="/ajax/codgenerados.php" width="100" height="600" border="0" frameborder="0" marginheight="0" scrolling="yes"></iframe>
+<iframe id="codgenerados" src="/ajax/codgenerados.php" width="100" height="520" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
 </div>
 
 
@@ -82,7 +82,7 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 	<table>
 		<tr>
 			<td>Proveedor</td>
-			<td><select id="2" class="largo">
+			<td><select id="2" class="largo" onchange="prov_grid(this.value);">
 				<?php echo $htmlProv; ?>
 			</select></td>
 		</tr>
@@ -91,7 +91,31 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 		
 	</table>
 	
-
+<table>
+		<tr>
+			<td>Dto. <input type="text" id="3" value="" class="corto" /></td>
+			<td>2º Dto. <input type="text" id="4" value="" class="corto" /></td>
+			<td>IVA <?php echo $iva;?> %</td></td>
+		</tr>
+		
+		<tr>
+			<td>Temporada</td><td><input type="text" id="5" value="" class="corto" /></td>
+			
+		</tr>
+		
+		<tr>
+			<td><div class="boton" onclick="generar_altas();">Generar Altas</div></td>
+			
+		</tr>
+		
+		<tr>
+			<td><div class="boton" onclick="limpiar();">Limpiar</div></td>
+			
+		</tr>
+		
+		
+	</table>
+	
 	
 </div>	
 
