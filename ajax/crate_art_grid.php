@@ -10,6 +10,7 @@ if (!$dbnivel->open()){die($dbnivel->error());};
 
 
 
+
 $queryp= "select nomcorto from proveedores where id=$id_proveedor;";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){$abrePro=$row['nomcorto'];};
