@@ -78,7 +78,7 @@ $sqlcamps=substr($sqlcamps, 0,strlen($sqlcamps)-1);
 $sqlvals=substr($sqlvals, 0,strlen($sqlvals)-1);	
 	
 $queryp= "INSERT INTO $nNtab ($sqlcamps) values ($sqlvals);";
-$dbnivel->query($queryp);
+if($ini <= 2011){$dbnivel->query($queryp);};
 #echo $queryp . "\n";
 }
 
