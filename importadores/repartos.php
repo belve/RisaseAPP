@@ -2,8 +2,7 @@
 set_time_limit(0);
 foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
 
-if(!$ini){$ini=0;};
-$fin=$ini+500;
+
 ##### datos OLD
 $Ntab='Repartos';
 
@@ -42,11 +41,11 @@ if (!$rs)
 
 
 
-
+$count=1;
 while (odbc_fetch_row($rs))
   {
 
-$count=1;
+
 foreach($camp as $nkey => $nomcampo){$count++;
 	 $valores[$count][$nkey]=trim(utf8_encode(odbc_result($rs,$nomcampo)));
 }
