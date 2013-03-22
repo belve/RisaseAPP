@@ -22,7 +22,7 @@ while ($row = $dbnivel->fetchassoc()){$ultREP=$row['ultimo'];};
 
 if(!$ultREP){$ultREP="0";};
 
-$queryp= "select id, nomrep from repartos where id > $ultREP limit 50;";
+$queryp= "select id, nomrep from repartos where id > $ultREP limit 10;";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){$cuales[$row['id']]=$row['nomrep'];};
 
@@ -127,9 +127,9 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 
 ?>
 
-<!--
+
 <script>
-	 window.location.href = "/importadores/repartos.php?ini=<?php echo $ini;?>";
+	 window.location.href = "/importadores/detreparto.php";
 </script>
--->
+
 
