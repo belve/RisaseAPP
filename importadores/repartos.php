@@ -43,10 +43,10 @@ if (!$rs)
 
 $count=1;
 while (odbc_fetch_row($rs))
-  {
+  {$count++;
 
 
-foreach($camp as $nkey => $nomcampo){$count++;
+foreach($camp as $nkey => $nomcampo){
 	 $valores[$count][$nkey]=trim(utf8_encode(odbc_result($rs,$nomcampo)));
 }
 
@@ -61,7 +61,7 @@ require_once("../db.php");
 $dbnivel=new DB('192.168.1.11','edu','admin','risase');
 if (!$dbnivel->open()){die($dbnivel->error());};
 
-print_r($valores);
+
 
 foreach ($valores as $val1 => $val2) {
 
@@ -78,6 +78,7 @@ $sqlvals=substr($sqlvals, 0,strlen($sqlvals)-1);
 	
 $queryp= "INSERT INTO $nNtab ($sqlcamps) values ($sqlvals);";
 #$dbnivel->query($queryp);
+echo $queryp . "\n";
 }
 
 if (!$dbnivel->close()){die($dbnivel->error());};
