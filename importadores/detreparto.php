@@ -75,7 +75,7 @@ if (!$conn)
 
 foreach($cuales as $id => $nomr){
 
-$sql="SELECT * FROM $Ntab where det_idreparto=$nomr;";
+$sql="SELECT * FROM $Ntab where det_idreparto='$nomr';";
 
 
 $rs=odbc_exec($conn,$sql);
