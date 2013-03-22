@@ -33,7 +33,7 @@ if (!$conn)
   {exit("Connection Failed: " . $conn);}
 
 
-$sql="SELECT * FROM $Ntab where rep_fecha <= '31/12/2010' AND rep_fecha >= '01/01/2010';";
+$sql="SELECT * FROM $Ntab where rep_fecha <= '31/12/2010' AND rep_fecha >= '01/11/2010';";
 
 
 $rs=odbc_exec($conn,$sql);
@@ -65,7 +65,7 @@ if (!$dbnivel->open()){die($dbnivel->error());};
 print_r($valores);
 
 foreach ($valores as $val1 => $val2) {
-$nval1=$val2[1];$nval2=$val2[2];$nval3=$val2[3];
+
 
 $sqlcamps="";$sqlvals="";
 foreach ($val2 as $nnkey => $valuecamp)	{
