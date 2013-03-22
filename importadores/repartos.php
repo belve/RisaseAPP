@@ -1,4 +1,5 @@
-<?php
+<?php 
+$ini=2001;
 set_time_limit(0);
 foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
 
@@ -32,7 +33,7 @@ if (!$conn)
   {exit("Connection Failed: " . $conn);}
 
 
-$sql="SELECT * FROM $Ntab where rep_fecha <= '31/12/2010' AND rep_fecha >= '01/11/2010';";
+$sql="SELECT * FROM $Ntab where rep_fecha <= '31/12/$ini' AND rep_fecha >= '01/01/$ini';";
 
 
 $rs=odbc_exec($conn,$sql);
@@ -77,17 +78,17 @@ $sqlcamps=substr($sqlcamps, 0,strlen($sqlcamps)-1);
 $sqlvals=substr($sqlvals, 0,strlen($sqlvals)-1);	
 	
 $queryp= "INSERT INTO $nNtab ($sqlcamps) values ($sqlvals);";
-#$dbnivel->query($queryp);
-echo $queryp . "\n";
+$dbnivel->query($queryp);
+#echo $queryp . "\n";
 }
 
 if (!$dbnivel->close()){die($dbnivel->error());};
 
 
 ?>
-<!--
+
 <script>
-	 window.location.href = "/importadores/articulos.php?ini=<?php echo $fin;?>";
+	 window.location.href = "/importadores/repartos.php?ini=<?php echo $ini++;?>";
 </script>
--->
+
 
