@@ -20,6 +20,8 @@ $queryp= "select max(id_reparto) as ultimo from detreparto;";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){$ultREP=$row['ultimo'];};
 
+if(!$ultREP){$ultREP="0";};
+
 $queryp= "select id, nomrep from repartos where id > $ultREP limit 50;";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){$cuales[$row['id']]=$row['nomrep'];};
@@ -29,7 +31,7 @@ while ($row = $dbnivel->fetchassoc()){$cuales[$row['id']]=$row['nomrep'];};
 if (!$dbnivel->close()){die($dbnivel->error());};
 
 
-print_r($T);
+print_r($cuales);
 echo "<br> $ultREP";
 
 
