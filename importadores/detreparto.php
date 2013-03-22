@@ -22,7 +22,7 @@ while ($row = $dbnivel->fetchassoc()){$ultREP=$row['ultimo'];};
 
 if(!$ultREP){$ultREP="0";};
 
-$queryp= "select id, nomrep from repartos where id > $ultREP limit 10;";
+$queryp= "select id, nomrep from repartos where id > $ultREP limit 1;";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){$cuales[$row['id']]=$row['nomrep'];};
 
