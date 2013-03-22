@@ -84,9 +84,9 @@ if (!$rs)
  {exit("Error in SQL");}
 
 
-$count++;
+
 while (odbc_fetch_row($rs))
-{
+{$count++;
 foreach($camp as $nkey => $nomcampo){
 $valores[$id][$count][$nkey]=trim(utf8_encode(odbc_result($rs,$nomcampo)));
 }}
