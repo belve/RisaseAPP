@@ -73,6 +73,7 @@ $conn=odbc_connect('risase','edu','admin');
 if (!$conn)
   {exit("Connection Failed: " . $conn);}
 
+$count=0;
 foreach($cuales as $id => $nomr){
 
 $sql="SELECT * FROM $Ntab where det_idreparto='$nomr';";
@@ -83,11 +84,11 @@ if (!$rs)
  {exit("Error in SQL");}
 
 
-
+$count++;
 while (odbc_fetch_row($rs))
 {
 foreach($camp as $nkey => $nomcampo){
-$valores[$id][$nkey]=trim(utf8_encode(odbc_result($rs,$nomcampo)));
+$valores[$id][$count][$nkey]=trim(utf8_encode(odbc_result($rs,$nomcampo)));
 }}
 
 }
@@ -101,7 +102,7 @@ odbc_close($conn);
 
 
 
-foreach ($valores as $val1 => $val2) {
+foreach ($valores as $val1 => $val2a) {foreach($val2a as $cuenta => $val2){
 
 
 $sqlcamps="";$sqlvals="";
@@ -119,7 +120,7 @@ $sqlvals=substr($sqlvals, 0,strlen($sqlvals)-1);
 $queryp= "INSERT INTO $nNtab (id_reparto,$sqlcamps) values ($val1,$sqlvals);";
 $dbnivel->query($queryp);
 #echo $queryp . "\n";
-}
+}}
 
 if (!$dbnivel->close()){die($dbnivel->error());};
 
