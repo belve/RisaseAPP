@@ -28,7 +28,7 @@ while ($row = $dbnivel->fetchassoc()){$cuales[$row['id']]=$row['nomrep'];};
 
 
 
-if (!$dbnivel->close()){die($dbnivel->error());};
+
 
 
 print_r($cuales);
@@ -97,8 +97,7 @@ odbc_close($conn);
 
 
 
-$dbnivel=new DB('192.168.1.11','edu','admin','risase');
-if (!$dbnivel->open()){die($dbnivel->error());};
+
 
 
 
