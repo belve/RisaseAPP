@@ -1,6 +1,7 @@
 function cargatiend(id){
+	$.ajaxSetup({'async': false});
 url = "/ajax/loadtiend.php?id=" + id;
-
+timer(1);
 var antiguo=document.getElementById('seleccionado').value;
 if(document.getElementById(antiguo)){document.getElementById(antiguo).setAttribute("class", "");};
 document.getElementById('t-'+ id).setAttribute("class", "tselected");
@@ -9,7 +10,8 @@ document.getElementById('seleccionado2').value=id;
 $.getJSON(url, function(data) {
 $.each(data, function(key, val) {
 if(key==9){
-	document.getElementById(9).checked=true;
+	if(val==1){document.getElementById(9).checked=true;};
+	if(val==0){document.getElementById(9).checked=false;};
 }else{	
 document.getElementById(key).value=val;
 }
@@ -32,6 +34,8 @@ $("#tiendas").load(url);
 
 
 function savetienda(){
+		$.ajaxSetup({'async': false});
+	timer(1);
 var id=	document.getElementById('seleccionado2').value;
 var id_tienda=	document.getElementById('1').value;	
 var nombre=document.getElementById('2').value;
@@ -41,6 +45,10 @@ var poblacion=document.getElementById('5').value;
 var ciudad=document.getElementById('6').value;
 var provincia=document.getElementById('7').value;
 var telefono=document.getElementById('8').value;
+
+
+if(document.getElementById('9').checked==true){$activ=1;};
+if(document.getElementById('9').checked==false){$activ=0;};
 	
 url = "/ajax/update2.php?tabla=tiendas"
 + "&campos[nombre]=" + nombre  
@@ -50,12 +58,12 @@ url = "/ajax/update2.php?tabla=tiendas"
 + "&campos[ciudad]=" + ciudad  
 + "&campos[provincia]=" + provincia  
 + "&campos[telefono]=" + telefono  
-
++ "&campos[activa]=" + $activ 
 
 +  "&id=" + id;
 $.getJSON(url, function(data) {
 });	
-	
+timer(0);	
 }
 
 function createtienda(){

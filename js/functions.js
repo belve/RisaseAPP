@@ -82,7 +82,12 @@ function owin(value,tit){
 	
 }
 
+function timer(w){
 
+if(w==0){document.getElementById("timer").style.visibility = "hidden";};
+if(w==1){document.getElementById("timer").style.visibility = "visible";};	
+	
+}
 
 
 function example_append() {

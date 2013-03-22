@@ -10,7 +10,7 @@
 <link rel='stylesheet' type='text/css' href='/css/framework_inside.css' />
 <script type="text/javascript" src="/js/jquery.tinyscrollbar.min.js"></script>
 <script type="text/javascript" src="/js/focus.js"></script>
-
+<script type="text/javascript" src="/js/functions.js"></script>
 
 
 
@@ -24,6 +24,7 @@ function cargasubgrupo (id) {
 }
 
 function listaArticulos(){
+timer(1);
 var prov=document.getElementById(2).value
 var grup=document.getElementById(3).value
 var subg=document.getElementById(4).value
@@ -44,7 +45,7 @@ url = "/ajax/listarticulos.php?id_proveedor=" + prov
  + "&temporada=" + temp;
  
  document.getElementById('articulos').src=url;
-   	
+ 	
 }
   
 </script>
@@ -64,7 +65,7 @@ url = "/ajax/listarticulos.php?id_proveedor=" + prov
 	<div class="cabtab_art tab_art_stini">Stock Ini</div>
 	<div class="cabtab_art tab_art_cong">Cong</div>
 </div>
-<iframe id="articulos" src="/ajax/listarticulos.php" width="537" height="550" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
+<iframe id="articulos" src="/ajax/listarticulos.php" width="537" height="500" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
 
 
 	
@@ -197,7 +198,7 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 
 
 
-
+<div class="timer" id="timer" style="visibility: hidden; left: 35%; top:35%;"><img src="/iconos/loading1.gif"></div>
 
 </body>
 

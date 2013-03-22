@@ -26,7 +26,8 @@ $.getJSON(url, function(data) {
 
 
 function save_tabla(tabla){
-
+	$.ajaxSetup({'async': false});
+timer(1);
 var iframe = document.getElementById(tabla);
 var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
 var url='/ajax/updatefields.php?tabla=' + tabla + "&";
@@ -48,6 +49,7 @@ url=url+campos;
 setCookie(tabla,'',1);
 $.getJSON(url, function(data) {
 });	
+timer(0);
 }
 	
 

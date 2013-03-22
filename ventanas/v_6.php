@@ -9,7 +9,7 @@
 <script type="text/javascript" src="/js/focus.js"></script>
 <script type="text/javascript" src="/js/tiendas.js"></script>
 <script type="text/javascript" src="/js/tablas.js"></script>
-
+<script type="text/javascript" src="/js/functions.js"></script>
 
 
 </head>
@@ -132,6 +132,7 @@
 
 
 
+<div class="timer" id="timer" style="visibility: hidden; left: 57%; top:57%;"><img src="/iconos/loading1.gif"></div>
 	
 <div id="recarga">
 <script>

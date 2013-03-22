@@ -104,17 +104,33 @@ height:15px; width:98%; padding-left:3px; cursor:pointer;
 
 
 
-.tab_mas_rpro 	{width: 125px; } 		.camp_mas_rpro 		{border:0px; width:115px; font-size:10px; }
-.tab_mas_g 	{width: 24px; } 			.camp_mas_g			{border:0px; width:15px; font-size:10px; }
+.tab_mas_rpro 	{width: 124px; } 		.camp_mas_rpro 		{border:0px; width:115px; font-size:10px; }
+.tab_mas_g 	{width: 25px; } 			.camp_mas_g			{border:0px; width:15px; font-size:10px; }
 .tab_mas_s 	{width: 24px; }  			.camp_mas_s			{border:0px; width:15px; font-size:10px; }
-.tab_mas_color 	{width: 48px; }  		.camp_mas_color		{border:0px; width:40px; font-size:10px; }
+.tab_mas_color 	{width: 47px; }  		.camp_mas_color		{border:0px; width:40px; font-size:10px; }
 .tab_mas_cantidad 	{width: 47px; }  	.camp_mas_cantidad	{border:0px; width:40px; font-size:10px; }
-.tab_mas_alarma 	{width: 47px; }  	.camp_mas_alarma	{border:0px; width:40px; font-size:10px; }
-.tab_mas_precioC 	{width: 48px; }  	.camp_mas_precioC	{border:0px; width:40px; font-size:10px; }
+.tab_mas_alarma 	{width: 48px; }  	.camp_mas_alarma	{border:0px; width:40px; font-size:10px; }
+.tab_mas_precioC 	{width: 47px; }  	.camp_mas_precioC	{border:0px; width:40px; font-size:10px; }
 .tab_mas_pvp 	{width: 45px; }  		.camp_mas_pvp		{border:0px; width:40px; font-size:10px; }
 
 
 .pieart {  background-color: #B8B8B8; border: 1px solid #888888; height: 18px; margin-top: -3px; padding: 7px; width: 544px;}
+
+
+
+
+
+
+.cabartC {height: 25px; width: 199px; background-color: #B8B8B8;  border-right: 1px solid #888888;  border-top: 1px solid #888888;}
+
+.cabtab_artC 		{border-left:1px solid #888888; height:20px; text-align: center; float:left; padding-top:5px; font-size:10px}
+.tab_artC_codbar 	{width: 148px; } 	.camp_artC_codbar	{border:0px; width:130px; font-size:10px; }
+.tab_artC_cong 	{width: 45px; }  		.camp_artC_cong		{border:0px; width:40px; font-size:10px; }
+
+
+
+
+
 
 
 
@@ -130,3 +146,16 @@ margin: 0px;
 .codbarras li{
 height:15px; width:96%; padding-left:3px; cursor:pointer;
 }
+
+
+
+
+.timer {  
+	height: 25px; 
+    visibility: hidden;
+    left: 40%;
+    margin: auto;
+    position: absolute;
+    top: 42%;
+    width: 25px;
+    }

@@ -39,8 +39,12 @@ if($color < 10){$color="0" . $color;};
 $codbarras=$id_g . $id_s . $color . $codparabarras;
 $precioC=str_replace(',','.',$precioC);
 $pvp=str_replace(',','.',$pvp);
-$precioN= ($precioC - ($precioC * $dto1) - ($precioC *$dto2)) * ('1.' . $iva);
-$precioF= ($precioC - ($precioC * $dto1) - ($precioC *$dto2)) * 1.20;
+
+if($dto1>0){$dto1=$precioC / (100/$dto1);};
+if($dto2>0){$dto2=$precioC / (100/$dto1);};
+
+$precioN= ($precioC - $dto1 -$dto2) * ('1.' . $iva);
+$precioF= ($precioC - $dto1 -$dto2)  * 1.20;
 
 $queryp= "INSERT INTO articulos 
 (id,id_proveedor,id_subgrupo,id_color,codigo,refprov,stock,uniminimas,codbarras,temporada,preciocosto,precioneto,preciofran,pvp,congelado,stockini) 
