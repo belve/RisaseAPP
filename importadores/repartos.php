@@ -84,11 +84,11 @@ $dbnivel->query($queryp);
 
 if (!$dbnivel->close()){die($dbnivel->error());};
 
-
+$ini++;
 ?>
 
 <script>
-	 window.location.href = "/importadores/repartos.php?ini=<?php echo $ini++;?>";
+	 window.location.href = "/importadores/repartos.php?ini=<?php echo $ini;?>";
 </script>
 
 
