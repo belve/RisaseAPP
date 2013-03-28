@@ -90,6 +90,7 @@ td		{width: 90px; border: 1px  solid #888888; margin:0px;}
 </div>
 
 
+<input type="hidden" id="filsel" value="">
 <input type="hidden" id="idrep" value="<?php echo $id; ?>">
 <input type="hidden" id="filas" value="<?php echo $lastid; ?>">
 <input type="hidden" id="columnas" value="<?php echo $numtiendas; ?>">

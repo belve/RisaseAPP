@@ -48,6 +48,12 @@ require_once("../functions/gettiendas.php");
 <div class="eReparto">Estado del Reparto:</div>
 <div class="eREP" id='eREP'></div>
 
+<div class="imprimir">
+<div class="impREP">		<div class='boton'>Imprimir Reparto</div></div>
+<div class="impREPtiend">	<div class='boton'>Imprimir por Tiendas</div></div>
+</div>
+
+
 <div style="clear:both;"></div>
 <div class="cabREP">
 	<div class="cabtab_REP tab_REP_art">Artículos</div>

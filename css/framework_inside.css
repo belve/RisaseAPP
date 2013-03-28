@@ -129,7 +129,7 @@ height:15px; width:98%; padding-left:3px; cursor:pointer;
 
 
 
-.cabREP {height: 20px; width: 968px; background-color: #999999;  border-right: 1px solid #888888;  border-top: 1px solid #888888; margin-top:5px;  border-left: 1px solid #888888; }
+.cabREP {height: 20px; width: 968px; background-color: #999999;  border-right: 1px solid #888888;  border-top: 1px solid #888888; margin-top:5px;  border-left: 1px solid #888888; border-bottom: 1px solid #888888; }
 
 .cabtab_REP 		{border-right:1px solid #888888; height:15px; text-align: left; float:left; padding-top:5px; font-size:9px; padding-left:2px;background-color: #cccccc;}
 .tab_REP_art 		{width: 148px; } 								.camp_REP_art		{border:0px; width:148px; font-size:9px; height: 15px; background-color: transparent; }
@@ -141,7 +141,7 @@ height:15px; width:98%; padding-left:3px; cursor:pointer;
 .estRep_F {background-color: #00CC66;}
 /*.estRep_A {background-color: yellow;}*/
 
-
+.selector {width:9px;height: 9px; border:1px solid #666666; margin-left:5px; position:relative; top:8px; cursor:pointer; background-color:white;}
 
 .boton {padding:4px 10px 4px 10px; border: 1px solid #888888; text-align: center; margin-top:10px; color:#333333; cursor:pointer; background-color: #aaaaaa;}
 
@@ -156,6 +156,12 @@ margin: 0px;
 height:15px; width:96%; padding-left:3px; cursor:pointer;
 }
 
+
+
+
+.imprimir 		{ height: 22px; left: 770px; position: absolute; top: -10px; width: 200px;}
+.impREP 		{ }
+.impREPtiend 	{ }
 
 .eReparto { height: 22px;
     left: 358px;

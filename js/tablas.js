@@ -334,6 +334,43 @@ document.getElementById('eREP').innerHTML=textE;
 	
 }
 
+function selectFile(file){
+	
+var filsel=document.getElementById('filsel').value;
+var Afilsel=filsel.split(',');	
+
+var noesta=0;
+var newA = [];
+
+for (var i = 0; i < Afilsel.length; i++) {
+if(Afilsel[i]>0){
+if (file!=Afilsel[i]){
+	newA.push(Afilsel[i]);
+	}else{
+	var noesta=1;
+	document.getElementById('F' + file).setAttribute("style", "background-color:white;");
+	document.getElementById('trC' + file).setAttribute("style", "background-color:white;");
+	document.getElementById('trA' + file).setAttribute("style", "background-color:white;");	
+	}    
+}}	
+
+if(noesta==0){
+newA.push(file);	
+document.getElementById('F' + file).setAttribute("style", "background-color:#CBE9FE;");
+document.getElementById('trC' + file).setAttribute("style", "background-color:#CBE9FE;");
+document.getElementById('trA' + file).setAttribute("style", "background-color:#CBE9FE;");
+}	
+
+var filsel="";
+for (var i = 0; i < newA.length; i++) {
+filsel=filsel + newA[i] + ',';	
+}
+
+filsel=filsel.substr(0,(filsel.length)-1);
+document.getElementById('filsel').value=filsel;
+	
+}
+
 
 function moveFieldRepart(value){
 		
