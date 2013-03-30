@@ -49,8 +49,8 @@ require_once("../functions/gettiendas.php");
 <div class="eREP" id='eREP'></div>
 
 <div class="imprimir">
-<div class="impREP">		<div class='boton'>Imprimir Reparto</div></div>
-<div class="impREPtiend">	<div class='boton'>Imprimir por Tiendas</div></div>
+<div class="impREP">		<div class='boton' onclick="impREP()">Imprimir Reparto</div></div>
+<div class="impREPtiend">	<div class='boton' onclick="impREPt()">Imprimir por Tiendas</div></div>
 </div>
 
 
@@ -72,6 +72,7 @@ echo "<div onclick='sumatienda($postiendas,\"$nomt\")' class='cabtab_REP tab_REP
 	
 </div>
 <iframe id="repartos" src="/ajax/repartos.php" width="970" height="480" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
+<iframe id="print" src="" width="0" height="0" border="0" frameborder="0" marginheight="0" scrolling="no"></iframe>
 
 <div onclick="cambiEstado('A');" class="boton" style="width:100px;float:left;margin:5px 5px 0px 0px;">Pasar a Almacén</div>
 <div onclick="cambiEstado('T');" class="boton" style="width:100px;float:left;margin:5px 5px 0px 0px;">Enviar a Tienda</div>

@@ -1,28 +1,20 @@
 <?php
 
 
-function GenerateGrid($id,$dtiendas,$lastid){
+function GenerateGrid($id,$dtiendas,$lastid,$dart){
 
 global $tiendas;
 global $dbnivel;
 
 
-if (!$dbnivel->open()){die($dbnivel->error());};
 
 
-$queryp= "select  
-refprov, 
-codbarras, 
-stock from articulos where id=$id";
+$codbarras=$dart[$id]['codbarras'];$refpro=$dart[$id]['refprov'];$stock=$dart[$id]['stock'];	
 
 
-
-$dbnivel->query($queryp);
-while ($row = $dbnivel->fetchassoc()){$codbarras=$row['codbarras'];$refpro=$row['refprov'];$stock=$row['stock'];};
-
-if (!$dbnivel->close()){die($dbnivel->error());};
 
 if($id){
+	
 $prov="$codbarras / $refpro";
 
 
@@ -31,8 +23,8 @@ $htmlART="
 
 <tr id='trC$lastid'>
 <td style='border-bottom: 1px solid #dddddd;'>											<input id='CART$codbarras' value='$codbarras' type='hidden'>	<input type='text' class='camp_REP_art' value='$prov'></td>
-<td style='width:28px;border-bottom: 1px solid #dddddd;'>									<input id='CR$lastid' onfocus='this.select();' type='text' class='camp_REP_rep' value=''></td>
-<td style='width:28px;border-bottom: 1px solid #dddddd;border-right:2px solid orange;'>		<input id='CA$lastid' onfocus='this.select();' type='text' class='camp_REP_alm' value='$stock'></td>
+<td style='width:28px;border-bottom: 1px solid #dddddd;'>								<input id='CR$lastid' onfocus='this.select();' type='text' class='camp_REP_rep' value=''></td>
+<td style='width:28px;border-bottom: 1px solid #dddddd;border-right:2px solid orange;'>	<input id='CA$lastid' onfocus='this.select();' type='text' class='camp_REP_alm' value='$stock'></td>
 
 ";
 

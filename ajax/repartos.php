@@ -25,17 +25,34 @@ $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){$id=$row['id'];};
 }else{
 
-$queryp= "select * from detreparto where id_reparto=$id;";
+$queryp= "select 
+(select codbarras from articulos where articulos.id=detreparto.id_articulo) as codbarras,
+(select refprov from articulos where articulos.id=detreparto.id_articulo) as refprov, 
+id_articulo, 
+cantidad, 
+estado,
+recibida, 
+stockmin, 
+(select stock from articulos where articulos.id=detreparto.id_articulo) as stock, 
+(select pvp from articulos where articulos.id=detreparto.id_articulo) as pvp, 
+id_tienda
+from detreparto where id_reparto=$id;";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){
 $grid[$row['id_articulo']][$row['id_tienda']]['cantidad']=$row['cantidad'];	
 $grid[$row['id_articulo']][$row['id_tienda']]['recibida']=$row['recibida'];	
 $grid[$row['id_articulo']][$row['id_tienda']]['alarma']=$row['stockmin'];
 $grid[$row['id_articulo']][$row['id_tienda']]['estado']=$row['estado'];	
-$grid[$row['id_articulo']][$row['id_tienda']]['id']=$row['id'];			
+$grid[$row['id_articulo']][$row['id_tienda']]['id']=$row['id_tienda'];	
+$dart[$row['id_articulo']]['codbarras']=$row['codbarras'];	
+$dart[$row['id_articulo']]['refprov']=$row['refprov'];	
+$dart[$row['id_articulo']]['stock']=$row['stock'];			
 }
 	
 }	
+
+
+
 
 
 if (!$dbnivel->close()){die($dbnivel->error());};
@@ -43,7 +60,7 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 $lastid=0;
 if(count($grid)>0){
 foreach ($grid as $idarticulo => $dtiendas) {$lastid++;
-$valores=GenerateGrid($idarticulo,$dtiendas,$lastid);	
+$valores=GenerateGrid($idarticulo,$dtiendas,$lastid,$dart);	
 $html .=$valores['html'];
 }}elseif($id){
 $nomrep2="<div class='repnue'>Reparto $nomrep creado. Insterte articulos.</div>";		
