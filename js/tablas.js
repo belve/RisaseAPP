@@ -191,27 +191,84 @@ $('#grid').append(fila);
 }
 
 
+function limpiarGRID(){
+
+document.getElementById('pegar').setAttribute("style", "visibility:hidden;");
+var iframe = document.getElementById('repartos');
+var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+innerDoc.getElementById('gridRepartos').innerHTML='';	
+innerDoc.getElementById('filsel').value="";
+innerDoc.getElementById('idrep').value="";
+innerDoc.getElementById('filas').value="";
+innerDoc.getElementById('LinCOP').value="";
+
+
+	
+}
+
+
+
 function addArticulo(codigo){
+$.ajaxSetup({'async': false});	
+
+timer(1);
 
 var iframe = document.getElementById('repartos');
 var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
 
-var filas = innerDoc.getElementById('filas').value;
+if(innerDoc.getElementById('filas')){var filas = innerDoc.getElementById('filas').value;}else{var filas = 0;};
+
+
+
+
+
+if(codigo=='listador'){
+
+
+
+var prov=document.getElementById(2).value
+var grup=document.getElementById(3).value
+var subg=document.getElementById(4).value
+var colo=document.getElementById(5).value
+var codi=document.getElementById(6).value
+var pvp=document.getElementById(7).value
+var desd=document.getElementById(8).value
+var hast=document.getElementById(9).value
+var temp=document.getElementById(10).value
+	
+url = "/ajax/gridRepart.php?id_proveedor=" + prov
+ + "&id_grupo=" + grup
+ + "&id_subgrupo=" + subg
+ + "&id_color=" + colo
+ + "&codigo=" + codi
+ + "&pvp=" + pvp
+ + "&desde=" + desd
+ + "&hasta=" + hast
+ + "&temporada=" + temp
+ + '&ultifila=' + filas
+ + '&listador=1'; 
+
+
+
+
+	
+}else{
+
 url = "/ajax/gridRepart.php?codbarras=" + codigo + '&ultifila=' + filas;
-
-
-
+	
+}
 
 
 
 if(innerDoc.getElementById('CART' + codigo)){
-alert('Articulo ya introducido en el reparto');	
+alert('Articulo ya listado en el grid');	
 }else{
 $.getJSON(url, function(data) {
 $.each(data, function(key, val) {
 var iframe = document.getElementById('repartos');
 var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
 if(key=='html'){var html=val;}
+if(key=='ultfile'){var ultfile=val;}
 if(key=='error'){alert(val);}else{
 innerDoc.getElementById('repnue').innerHTML='';	
 var grid=innerDoc.getElementById('gridRepartos');
@@ -220,7 +277,7 @@ $(grid).append(html);
 var $contents = $('#repartos').contents();
 $contents.scrollTop($contents.height());	
 filas++;
-innerDoc.getElementById('filas').value=filas;
+innerDoc.getElementById('filas').value=ultfile;
 
 }
 
@@ -232,7 +289,23 @@ innerDoc.getElementById('filas').value=filas;
 
 
 document.getElementById('art').select();
+
+timer(0);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 function reparto(reparto){
@@ -258,7 +331,7 @@ var stock2=CA.value;
 var ncol=document.getElementById('columnas').value;
 
 var a=0; var rep=0;
-while (a <= ncol){a++;
+while (a < ncol){a++;
 if(document.getElementById('CI'+ fila + 'P' + a)){
 var rep=rep + ((document.getElementById('CI'+ fila + 'P' + a).value) *1);	
 }
@@ -302,7 +375,7 @@ $.each(data, function(key, val) {
 
 
 function estadoT(estado){
-parent.document.getElementById('eREP').innerHTML=estado;
+
 }
 
 function sumatienda(tienda,TIE){
@@ -340,11 +413,85 @@ document.getElementById('eREP').innerHTML=textE;
 	
 }
 
+function pegarLIN(){
+$.ajaxSetup({'async': false});	
+timer(1);
+var iframe = document.getElementById('repartos');
+var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+var LinCOP=innerDoc.getElementById('LinCOP').value;	
+var filsel=innerDoc.getElementById('filsel').value;
+var columnas=innerDoc.getElementById('columnas').value;
+
+
+
+var idarti=	innerDoc.getElementById('idarti'+ LinCOP).value;
+var Afilsel=filsel.split(',');
+for (var i = 0; i < Afilsel.length; i++) {var a=0;
+var idarti_new=	innerDoc.getElementById('idarti'+ Afilsel[i]).value;
+
+var url='/ajax/copiReparto.php?idarticulo=' +idarti + '&idarticulo_new=' + idarti_new;
+$.getJSON(url, function(data) {
+$.each(data, function(key, val) {
+
+});
+});
+
+
+
+while (a < columnas){a++;
+vcopio=innerDoc.getElementById('CI' + LinCOP + 'P' + a).value;
+vacopio=innerDoc.getElementById('AI' + LinCOP + 'P' + a).value;
+if(vcopio>0){
+innerDoc.getElementById('CI' + Afilsel[i] + 'P' + a).value=vcopio;
+innerDoc.getElementById('AI' + Afilsel[i] + 'P' + a).value=vacopio;
+}	
+}}
+
+timer(0);	
+}
+
+
+
+
+
+
+function copiarLIN(){
+
+document.getElementById('pegar').setAttribute("style", "visibility:visible;");
+var iframe = document.getElementById('repartos');
+var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+var LinCOP=innerDoc.getElementById('filsel').value;
+
+innerDoc.getElementById('F' + LinCOP).setAttribute("style", "background-color:white;");
+innerDoc.getElementById('trC' + LinCOP).setAttribute("style", "background-color:white;");
+innerDoc.getElementById('trA' + LinCOP).setAttribute("style", "background-color:white;");	
+
+innerDoc.getElementById('LinCOP').value=LinCOP;
+innerDoc.getElementById('filsel').value='';		
+}
+
 function selectFile(file){
 	
 
 	
 var filsel=document.getElementById('filsel').value;
+var LinCOP=document.getElementById('LinCOP').value;
+
+if(LinCOP==''){
+
+if(filsel!=''){
+document.getElementById('F' + filsel).setAttribute("style", "background-color:white;");
+document.getElementById('trC' + filsel).setAttribute("style", "background-color:white;");
+document.getElementById('trA' + filsel).setAttribute("style", "background-color:white;");		
+}
+document.getElementById('F' + file).setAttribute("style", "background-color:#CBE9FE;");
+document.getElementById('trC' + file).setAttribute("style", "background-color:#CBE9FE;");
+document.getElementById('trA' + file).setAttribute("style", "background-color:#CBE9FE;");
+
+document.getElementById('filsel').value=file;
+
+	
+}else{
 var Afilsel=filsel.split(',');	
 
 var noesta=0;
@@ -376,6 +523,7 @@ filsel=filsel + newA[i] + ',';
 
 filsel=filsel.substr(0,(filsel.length)-1);
 document.getElementById('filsel').value=filsel;
+}
 	
 }
 
@@ -456,6 +604,18 @@ setTimeout("timer(0);",6000);
 
 
 }
+
+function marcListRep(){
+timer(1);
+document.getElementById('repartos').src='/ajax/ListRep.php';	
+	
+}
+
+function opRep(idrep){
+alert(idrep);
+}
+
+
 
 
 

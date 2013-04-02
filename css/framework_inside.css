@@ -129,7 +129,7 @@ height:15px; width:98%; padding-left:3px; cursor:pointer;
 
 
 
-.cabREP {height: 20px; width: 968px; background-color: #999999;  border-right: 1px solid #888888;  border-top: 1px solid #888888; margin-top:5px;  border-left: 1px solid #888888; border-bottom: 1px solid #888888; }
+.cabREP {height: 20px; width: 991px; background-color: #999999;  border-right: 1px solid #888888;  border-top: 1px solid #888888; margin-top:5px;  border-left: 1px solid #888888; border-bottom: 1px solid #888888; }
 
 .cabtab_REP 		{border-right:1px solid #888888; height:15px; text-align: left; float:left; padding-top:5px; font-size:9px; padding-left:2px;background-color: #cccccc;}
 .tab_REP_art 		{width: 148px; } 								.camp_REP_art		{border:0px; width:148px; font-size:9px; height: 15px; background-color: transparent; }
@@ -179,6 +179,36 @@ height:15px; width:96%; padding-left:3px; cursor:pointer;
     width: 132px;}
     
 .repnue {margin-top:30px;}    
+
+
+
+
+.cabLREP {height: 20px; width: 353px; background-color: #999999;  border-top: 1px solid #888888; margin-top:5px;border-left: 1px solid #888888; border-bottom: 1px solid #888888; }
+
+.cabtab_LREP 		{border-right:1px solid #888888; height:15px; text-align: left; float:left; padding-top:5px; font-size:9px; padding-left:2px;background-color: #cccccc;}
+.tab_LREP_art 		{width: 168px; } 								
+.tab_LREP_rep 		{width: 68px; }  								
+.tab_LREP_alm 		{width: 108px; }  	
+
+
+
+.cabtab_LREP0 		{background-color:white; border-right:1px solid #888888;border-bottom:1px solid #888888; height:15px; text-align: left; float:left; padding-top:5px; font-size:9px; padding-left:2px;}
+
+.tab_LREP_1 		{width: 168px;  border-left: 1px solid #888888; } 	
+.tab_LREP_2 		{width: 68px; }  	
+.tab_LREP_3 		{width: 108px; }  	
+
+
+
+
+
+
+
+
+
+
+
+
 
 .timer {  
 	height: 25px; 

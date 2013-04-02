@@ -17,38 +17,7 @@
 </head>
 
 
-<script>
 
-function cargasubgrupo (id) {
- $("#4").load("/ajax/subgruposparalist.php?id=" + id); 
-}
-
-function listaArticulos(){
-timer(1);
-var prov=document.getElementById(2).value
-var grup=document.getElementById(3).value
-var subg=document.getElementById(4).value
-var colo=document.getElementById(5).value
-var codi=document.getElementById(6).value
-var pvp=document.getElementById(7).value
-var desd=document.getElementById(8).value
-var hast=document.getElementById(9).value
-var temp=document.getElementById(10).value
-	
-url = "/ajax/listarticulos.php?id_proveedor=" + prov
- + "&id_subgrupo=" + subg
- + "&id_color=" + colo
- + "&codigo=" + codi
- + "&pvp=" + pvp
- + "&desde=" + desd
- + "&hasta=" + hast
- + "&temporada=" + temp;
- 
- document.getElementById('articulos').src=url;
- 	
-}
-  
-</script>
 
 
 <body>
@@ -158,7 +127,7 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 		
 		<tr>
 			<td>Código</td>
-			<td><input class="corto" type="text" id="6" /></td>
+			<td><input class="medio" type="text" id="6" /></td>
 		</tr>
 		
 		<tr>

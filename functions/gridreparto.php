@@ -1,19 +1,24 @@
 <?php
 
 
-function GenerateGrid($id,$dtiendas,$lastid,$dart){
+function GenerateGrid($grid,$lastid,$dart){
 
 global $tiendas;
 global $dbnivel;
 
+$html="";
+
+foreach ($dart as $ida => $vdart) {
+	
+	
+if(array_key_exists($ida,$grid)){$dtiendas=$grid[$ida];}else{$dtiendas=array();};	
+
+
+$codbarras=$dart[$ida]['codbarras'];$refpro=$dart[$ida]['refprov'];$stock=$dart[$ida]['stock'];	
 
 
 
-$codbarras=$dart[$id]['codbarras'];$refpro=$dart[$id]['refprov'];$stock=$dart[$id]['stock'];	
-
-
-
-if($id){
+if($ida){$lastid++;
 	
 $prov="$codbarras / $refpro";
 
@@ -32,7 +37,7 @@ $htmlALM="
 
 <tr id='trA$lastid'>
 <td style=''>												<input type='text' class='camp_REP_art' value='---- Alarma -----'></td>
-<td style='width:28px;'>									<input type='hidden' id='idarti$lastid' value='$id'> </td>
+<td style='width:28px;'>									<input type='hidden' id='idarti$lastid' value='$ida'> </td>
 <td style='width:28px;border-right:2px solid orange;'>		<input type='hidden' id='Stock$lastid' value='$stock'></td>
 
 ";
@@ -42,9 +47,12 @@ $idti=0;
 $numtiendastot=count($tiendas);
 foreach ($tiendas as $id => $nom) {$idti++;
 if(array_key_exists($id, $dtiendas)){
+	
+
+	
 $canttienda=$dtiendas[$id]['cantidad'];
 $alarm=$dtiendas[$id]['alarma'];
-$estado="estRep_" . $dtiendas[$id]['estado'];
+$estado="";#estRep_" . $dtiendas[$id]['estado'];
 $idrep=$dtiendas[$id]['id'];
 }else{
 $canttienda="";
@@ -82,12 +90,13 @@ $selector2
 
 
 
-$html="$htmlART </tr> $htmlALM </tr>";
-$valores['html']=$html;
-}else{
-$valores['error']="Articulo no encontrado";
+$html .="$htmlART </tr> $htmlALM </tr>";
+
 }
 
+}
+
+$valores['html']=$html;$valores['ultfile']=$lastid;
 return $valores;
 	
 }

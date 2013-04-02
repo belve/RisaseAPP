@@ -4,33 +4,51 @@ foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo .
 require_once("../db.php");
 require_once("../variables.php");
 
+$tip=0;$estado="";
+
 if (!$dbnivel->open()){die($dbnivel->error());};
 
 
 $idtiendae=$EQtiendas[$columna];
 
 if(!$iddetr){
-$queryp= "SELECT id from detreparto WHERE id_reparto=$idrept AND id_articulo=$idarti AND id_tienda=$idtiendae;";
-$dbnivel->query($queryp);
-while ($row = $dbnivel->fetchassoc()){$iddetr=$row['id'];};
+$queryp= "SELECT id_articulo from repartir WHERE id_articulo=$idarti AND id_tienda=$idtiendae;";
+$dbnivel->query($queryp); echo $queryp;
+while ($row = $dbnivel->fetchassoc()){$iddetr=$row['id_articulo'];};
 }	
 	
 if($iddetr){
-if($cant){	
-$queryp= "update detreparto set cantidad=$cant, stockmin=$alarma where id=$iddetr";
+	
+$queryp= "SELECT id, tip, estado from pedidos WHERE id_articulo=$idarti AND id_tienda=$idtiendae ORDER by id DESC limit 1;";
 $dbnivel->query($queryp);
-$queryp= "update articulos set stock=$stock where id=$idarti";$dbnivel->query($queryp);echo $queryp;
+while ($row = $dbnivel->fetchassoc()){$tip=$row['tip'];$estado=$row['estado'];$idpedido=$row['id'];};	
+	
+	
+if($cant){	
+$queryp= "update repartir set cantidad=$cant, stockmin=$alarma where id_articulo=$idarti";
+$dbnivel->query($queryp);
+
+
+if($tip==0){
+$queryp= "INSERT INTO pedidos (id_articulo,id_tienda,cantidad,tip) values ($idarti,$idtiendae,$cant,1);";$dbnivel->query($queryp);echo $queryp;	
+}elseif(($tip==1)AND($estado != 'F')){
+$queryp= "UPDATE pedidos set cantidad=$cant where id=$idpedido;";$dbnivel->query($queryp);echo $queryp;	
+}
+
+
 }else{
-$queryp= "update detreparto set stockmin=$alarma where id=$iddetr";
+$queryp= "update repartir set stockmin=$alarma where id_articulo=$idarti";
 $dbnivel->query($queryp);	
 }
 }else{
 
 
 
-$queryp= "INSERT INTO detreparto (id_reparto,id_articulo,id_tienda,cantidad,stockmin,estado) values ($idrept,$idarti,$idtiendae,$cant,$alarma,'');";
+$queryp= "INSERT INTO repartir (id_articulo,id_tienda,cantidad,stockmin) values ($idarti,$idtiendae,$cant,$alarma);";
 $dbnivel->query($queryp);echo $queryp;
-$queryp= "update articulos set stock=$stock where id=$idarti";$dbnivel->query($queryp);	
+$queryp= "INSERT INTO pedidos (id_articulo,id_tienda,cantidad,tip) values ($idarti,$idtiendae,$cant,1);";$dbnivel->query($queryp);echo $queryp;	
+
+
 }
 
 

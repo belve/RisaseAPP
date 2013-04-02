@@ -6,6 +6,43 @@ require_once("../functions/gettiendas.php");
 
 
 
+if (!$dbnivel->open()){die($dbnivel->error());};
+
+$htmlProv="<option value=''></option>";
+$queryp= "select id, nombre from proveedores ORDER BY nombre ASC;";	
+$dbnivel->query($queryp);
+
+while ($row = $dbnivel->fetchassoc()){
+	$id=$row['id'];$nombre=$row['nombre'];
+	$htmlProv .="<option value='$id'>$nombre</option>";	
+}	
+
+
+
+$htmlGrupo="<option value=''></option>";
+$queryp= "select id, nombre from grupos ORDER BY id ASC;";	
+$dbnivel->query($queryp);
+
+while ($row = $dbnivel->fetchassoc()){
+	$id=$row['id'];$nombre=$row['nombre'];
+	$htmlGrupo .="<option value='$id'>$nombre</option>";	
+}
+
+
+
+$htmlCol="<option value=''></option>";
+$queryp= "select id, nombre from colores ORDER BY nombre ASC;";	
+$dbnivel->query($queryp);
+
+while ($row = $dbnivel->fetchassoc()){
+	$id=$row['id'];$nombre=$row['nombre'];
+	$htmlCol .="<option value='$id'>$nombre</option>";	
+}
+
+
+
+
+if (!$dbnivel->close()){die($dbnivel->error());};
 
 ?>
 
@@ -35,27 +72,57 @@ require_once("../functions/gettiendas.php");
 <body>
 
 
-<table style="float: left;">
-		<tbody>
-		
-		<tr><td>Código de Reparto: &nbsp;<input type="text" class="largo" onchange="javascrit:reparto(this.value);" > </td>	</tr>
-		<tr><td>Código de Artículo:&nbsp;&nbsp; <input type="text" id="art" class="medio" onchange="javascrit:addArticulo(this.value);"> Alarma: <input id="alarma" type="text" style="width: 46px;" class="corto" value="70">%   </td></tr>
-		
-		</tbody>
-</table>
-
-
-<div class="eReparto">Estado del Reparto:</div>
-<div class="eREP" id='eREP'></div>
-
-<div class="imprimir">
-<div class="impREP">		<div class='boton' onclick="impREP()">Imprimir Reparto</div></div>
-<div class="impREPtiend">	<div class='boton' onclick="impREPt()">Imprimir por Tiendas</div></div>
+<div style="float: left">
+<div>Código de Artículo:&nbsp;&nbsp; <input type="text" id="art" class="medio" onchange="javascrit:addArticulo(this.value);"></div>
+<div>Alarma: <input id="alarma" type="text" style="width: 46px;" class="corto" value="70">% </div>
 </div>
+
+<div style="float: right; border: 1px solid #888888; padding: 5px; margin-left: 20px;">
+
+<div style="float:left;margin-right: 10px;">
+<div>Proveedor: <select style="margin-left:0px;" id="2" class="medio"><?php echo $htmlProv; ?></select></div>
+<div>Grupo:     <select style="margin-left:22px;" id="3" onchange="cargasubgrupo(this.value);" class="medio">	<?php echo $htmlGrupo; ?></select></div>
+<div>Subgrupo:  <select style="margin-left:2px;" id="4" class="medio"><option value=''></option></select></div>
+</div>	
+
+<div style="float:left;margin-right: 10px;">
+<div>Color: <select style="margin-left:10px;" id="5" class="medio"><?php echo $htmlCol; ?></select></div>
+<div>Código: <input  style="margin-left:0px;"class="medio" type="text" id="6" /></div>
+<div>Precio: <input  style="margin-left:5px;"class="medio" type="text" id="7" /></div>
+</div>	
+
+
+
+<div style="float:left;margin-right: 10px;">
+<div>Desde: <input  style="margin-left:0px;"class="medio" type="text" id="8" /></div>
+<div>Hasta: <input  style="margin-left:4px;"class="medio" type="text" id="9" /></div>
+<div>Temp: <input  style="margin-left:6px;"class="medio" type="text" id="10" /></div>
+</div>	
+
+
 
 
 <div style="clear:both;"></div>
-<div class="cabREP">
+
+
+
+
+
+</div>
+
+<div style="clear:both;"></div>
+
+
+<div id="copiar">							<div onclick="copiarLIN()" 	class="boton" style="width:100px;float:left;margin:5px 5px 0px 0px;">Copiar</div></div>
+<div id="pegar" style="visibility: hidden;"><div onclick="pegarLIN()"	class="boton" style="width:100px;float:left;margin:5px 5px 0px 0px;">Pegar</div></div>
+
+<div style="float: right"><div class="boton"  onclick="addArticulo('listador');">Listar</div></div>
+<div style="float: right"><div style="margin-right: 6px;" class="boton"  onclick="limpiarGRID('');">Limpiar grid</div></div>
+
+
+
+<div style="clear:both;"></div>
+<div class="cabREP" style="margin-top:10px;">
 	<div class="cabtab_REP tab_REP_art">Artículos</div>
 	<div class="cabtab_REP tab_REP_rep">REP</div>
 	<div class="cabtab_REP tab_REP_alm">ALM</div>
@@ -71,11 +138,10 @@ echo "<div onclick='sumatienda($postiendas,\"$nomt\")' class='cabtab_REP tab_REP
 
 	
 </div>
-<iframe id="repartos" src="/ajax/repartos.php" width="970" height="480" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
+<iframe id="repartos" src="/ajax/repartos.php" width="992" height="480" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
 <iframe id="print" src="" width="0" height="0" border="0" frameborder="0" marginheight="0" scrolling="no"></iframe>
 
-<div onclick="cambiEstado('A');" class="boton" style="width:100px;float:left;margin:5px 5px 0px 0px;">Pasar a Almacén</div>
-<div onclick="cambiEstado('T');" class="boton" style="width:100px;float:left;margin:5px 5px 0px 0px;">Enviar a Tienda</div>
+
 
 <div class="timer" id="timer" style="visibility: hidden; left: 47%; top:50%;"><img src="/iconos/loading1.gif"></div>
 

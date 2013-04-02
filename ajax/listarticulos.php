@@ -32,7 +32,7 @@ td		{width: 90px; border: 1px  solid #888888; margin:0px;}
 
 
 <?php
-$id_proveedor="";$id_subgrupo="";$id_color="";$codigo="";$pvp="";$desde="";$hasta="";$temporada="";
+$id_proveedor="";$id_subgrupo="";$id_color="";$codigo="";$pvp="";$desde="";$hasta="";$temporada="";$id_grupo="";
 if(count($_GET)>0){
 	
 
@@ -47,7 +47,7 @@ if (!$dbnivel->open()){die($dbnivel->error());};
 
 $options="";
 
-require_once("../functions/listador.php");### recupera $options
+require_once("../functions/listador.php"); 
 
 $queryp= "select * from articulos where $options;";
 

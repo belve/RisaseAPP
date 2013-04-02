@@ -54,7 +54,7 @@ function focusW(value){
 
 
 
-function owin(value,tit){
+function owin(value,tit,param){
 			var i=1;
 			while (i<25)
 			  {
@@ -73,7 +73,7 @@ function owin(value,tit){
 	document.getElementById("m_"+value).setAttribute("class", "minimi_on");  	
 	}else{
 	var html='<div id="' + value +'" class="'+ value  + '"><div class="contenedor gris2_BG shadow"><div class="cabcontenerdor"><div class="tit_contenedor">'+ tit +
-	'</div><div class="iconos closeW" onclick="javascript:cwin(\'' +	 value + '\')"></div></div><div class="iframe"><iframe src="/ventanas/'+ value +'.php" width="100%" height="100%" border="0" frameborder="0" marginheight="0" scrolling="no"></iframe></div></div></div>';
+	'</div><div class="iconos closeW" onclick="javascript:cwin(\'' +	 value + '\')"></div></div><div class="iframe"><iframe src="/ventanas/'+ value +'.php' + param + '" width="100%" height="100%" border="0" frameborder="0" marginheight="0" scrolling="no"></iframe></div></div></div>';
 	$('#ventanas').append(html);
 	
 	var minhtml='<div class="minimi_on" id="m_' + value +'" onclick="javascript:focusW(\''+ value +'\')">' + tit + '<div class="iconos closeW"  onclick="javascript:cwin(\'' + value + '\')"></div></div>';
@@ -82,12 +82,63 @@ function owin(value,tit){
 	
 }
 
+
+function addSlashes(input) {
+    var v = input.value;
+    if (v.match(/^\d{2}$/) !== null) {
+        input.value = v + '/';
+    } else if (v.match(/^\d{2}\/\d{2}$/) !== null) {
+        input.value = v + '/';
+    }
+}
+
+
+
+
 function timer(w){
 
 if(w==0){document.getElementById("timer").style.visibility = "hidden";};
 if(w==1){document.getElementById("timer").style.visibility = "visible";};	
 	
 }
+
+
+
+function cargasubgrupo (id) {
+ $("#4").load("/ajax/subgruposparalist.php?id=" + id); 
+}
+
+
+
+
+
+function listaArticulos(){
+timer(1);
+var prov=document.getElementById(2).value
+var grup=document.getElementById(3).value
+var subg=document.getElementById(4).value
+var colo=document.getElementById(5).value
+var codi=document.getElementById(6).value
+var pvp=document.getElementById(7).value
+var desd=document.getElementById(8).value
+var hast=document.getElementById(9).value
+var temp=document.getElementById(10).value
+	
+url = "/ajax/listarticulos.php?id_proveedor=" + prov
+ + "&id_grupo=" + grup
+ + "&id_subgrupo=" + subg
+ + "&id_color=" + colo
+ + "&codigo=" + codi
+ + "&pvp=" + pvp
+ + "&desde=" + desd
+ + "&hasta=" + hast
+ + "&temporada=" + temp;
+ 
+ document.getElementById('articulos').src=url;
+ 	
+}
+  
+
 
 
 function example_append() {
