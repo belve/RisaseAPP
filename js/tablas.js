@@ -423,30 +423,56 @@ var filsel=innerDoc.getElementById('filsel').value;
 var columnas=innerDoc.getElementById('columnas').value;
 
 
-
+var idarti_new="";
 var idarti=	innerDoc.getElementById('idarti'+ LinCOP).value;
 var Afilsel=filsel.split(',');
 for (var i = 0; i < Afilsel.length; i++) {var a=0;
-var idarti_new=	innerDoc.getElementById('idarti'+ Afilsel[i]).value;
+var idarti_new=idarti_new +	innerDoc.getElementById('idarti'+ Afilsel[i]).value + ',';
+
+	innerDoc.getElementById('F' + Afilsel[i]).setAttribute("style", "background-color:white;");
+	innerDoc.getElementById('trC' + Afilsel[i]).setAttribute("style", "background-color:white;");
+	innerDoc.getElementById('trA' + Afilsel[i]).setAttribute("style", "background-color:white;");	
+
+
+}
+
 
 var url='/ajax/copiReparto.php?idarticulo=' +idarti + '&idarticulo_new=' + idarti_new;
 $.getJSON(url, function(data) {
 $.each(data, function(key, val) {
+	
+var iframe = document.getElementById('repartos');
+var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+	
+var filaart=innerDoc.getElementById(key).value;
+var newssto=innerDoc.getElementById('Stock' + filaart).value -val;
+innerDoc.getElementById('CA' + filaart).value=newssto;
 
 });
 });
 
 
-
+for (var i = 0; i < Afilsel.length; i++) {var a=0;
+var repartidas=0;	
 while (a < columnas){a++;
 vcopio=innerDoc.getElementById('CI' + LinCOP + 'P' + a).value;
 vacopio=innerDoc.getElementById('AI' + LinCOP + 'P' + a).value;
+repartidas=(repartidas*1)+(vcopio*1);
+
+
 if(vcopio>0){
 innerDoc.getElementById('CI' + Afilsel[i] + 'P' + a).value=vcopio;
 innerDoc.getElementById('AI' + Afilsel[i] + 'P' + a).value=vacopio;
-}	
 }}
 
+innerDoc.getElementById('CR' + Afilsel[i]).value=repartidas;
+}
+
+
+
+innerDoc.getElementById('LinCOP').value="";	
+innerDoc.getElementById('filsel').value="";
+document.getElementById('pegar').setAttribute("style", "visibility:hidden;");
 timer(0);	
 }
 

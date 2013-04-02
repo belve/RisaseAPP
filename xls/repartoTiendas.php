@@ -5,6 +5,7 @@ require_once("../variables.php");
 foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
 
 
+
 if (!$dbnivel->open()){die($dbnivel->error());};
 
 $queryp= "select nomrep, estado, fecha from repartos where id=$id";

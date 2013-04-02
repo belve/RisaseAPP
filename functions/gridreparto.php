@@ -37,7 +37,7 @@ $htmlALM="
 
 <tr id='trA$lastid'>
 <td style=''>												<input type='text' class='camp_REP_art' value='---- Alarma -----'></td>
-<td style='width:28px;'>									<input type='hidden' id='idarti$lastid' value='$ida'> </td>
+<td style='width:28px;'>									<input type='hidden' id='idarti$lastid' value='$ida'><input type='hidden' id='$ida' value='$lastid'> </td>
 <td style='width:28px;border-right:2px solid orange;'>		<input type='hidden' id='Stock$lastid' value='$stock'></td>
 
 ";
