@@ -207,7 +207,7 @@ height:15px; width:96%; padding-left:3px; cursor:pointer;
 .cabtab_PEPEN 		{border-right:1px solid #888888; height:15px; text-align: left; float:left; padding-top:5px; font-size:9px; padding-left:2px;background-color: #cccccc;}
 .tab_PEPEN_art 		{width: 168px; } 								
 .tab_PEPEN_rep 		{width: 28px; }  								
-
+.tab_PEPEN_agr 		{width: 199px; } 
 
 
 .pedPen 	{background-color:white; border-bottom:1px solid #888888; border-right:1px solid #888888;font-size:10px; height: 15px; width:202px;}
@@ -215,8 +215,9 @@ height:15px; width:96%; padding-left:3px; cursor:pointer;
 .pedPen_REP {width: 24px;  float:left; border-left:1px solid #888888;padding:2px;height: 11px}
 
 
-
-
+.agrup {border-left:1px solid #888888;border-right:1px solid #888888;border-bottom:1px solid #888888; height: 16px;padding: 2px;}
+.agrupados {font-size:10px; border:0px; background-color: transparent;width:160px;}
+.agrupados:focus {font-size:10px; border:1px solid #666666; background-color: white;}
 .timer {  
 	height: 25px; 
     visibility: hidden;
