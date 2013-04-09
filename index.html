@@ -22,13 +22,26 @@
 
 </head>
 
+<script>
+
+$(window).keydown(function(evt) {
+  if (evt.which == 17) { // ctrl
+  document.getElementById('crtl').value=1;
+  }
+}).keyup(function(evt) {
+  if (evt.which == 17) { // ctrl
+  document.getElementById('crtl').value=0;
+  }
+});
+
+</script>	
 
 
 
 
 <body class="gris1_BG">
 	
-
+<input style="font-size:10px;" type="hidden" id="crtl" style="position:absolute;top:0px;left:0px; z-index: 999; " value="0">
 	
 <div class="page">
 
@@ -53,7 +66,7 @@
     	<ul class="submenu">
         	<li onclick="javascript:owin('v_10','Artículos Congelados','');"><a>Artículos Congelados</a></li>
         	<li onclick="javascript:owin('v_11','Repartir Artículos','');"><a>Repartir Artículos</a></li>
-            <li onclick="javascript:owin('v_14','Pedido inicial/reparto','');"><a>Pedido inicial/reparto</a></li>
+            <li onclick="javascript:owin('v_14','Repartos','');"><a>Repartos</a></li>
         </ul>
     	
     </li>

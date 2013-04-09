@@ -11,28 +11,15 @@
 
 <body>
 
-<script>
 
-$(window).keydown(function(evt) {
-  if (evt.which == 17) { // ctrl
-  top.document.getElementById('crtl').value=1;
-  }
-}).keyup(function(evt) {
-  if (evt.which == 17) { // ctrl
-  top.document.getElementById('crtl').value=0;
-  }
-});
 
-</script>	
-
-<style>
-body { background-color: white;}
-</style>
 
 
 <input type='hidden' value='' id='agrupSel'>
 
-<div id="agrupaciones">
+<div style="background-color: white;border-left: 1px solid #888888;border-right: 1px solid #888888;height: 100%; position: absolute; width: 96px;"></div>
+
+<div id="agrupaciones" style="position:absolute;">
 
 
 

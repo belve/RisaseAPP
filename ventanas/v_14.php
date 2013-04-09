@@ -1,4 +1,11 @@
-<?php $tip=1;?>
+<?php
+require_once("../db.php");
+require_once("../variables.php");
+
+require_once("../functions/gettiendas.php");
+$tip=1;
+
+?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
@@ -22,10 +29,37 @@
 </head>
 <body>
 
+<script>
+$(window).keydown(function(evt) {
+  if (evt.which == 17) { // ctrl
+  top.document.getElementById('crtl').value=1;
+  }
+}).keyup(function(evt) {
+  if (evt.which == 17) { // ctrl
+  top.document.getElementById('crtl').value=0;
+  }
+});
+
+
+</script>	
+
+
+<!-- pestañas -->
+
+<div class="lado"></div>
+<div class="PestaniaON"  id="P1" onclick="selPEST('P1');">Agrupar</div>
+<div class="PestaniaOFF" id="P2" onclick="selPEST('P2');">Gestionar</div>
+<div class="NOpestania"></div>
+<div style="clear:both;"></div>	
+
+<div style="border-left:1px solid #888888; border-bottom: 1px solid #888888; border-right: 1px solid #888888; height:543px;margin-top:-1px; ">
 
 
 
 
+
+<!-- agrupacion -->
+<div class="VP1" id='VP1'>
 <div style="float:left">
 		
 <div class="cabPEPEN" style="margin-top:10px;">
@@ -42,7 +76,7 @@
 
 
 	
-<div class="boton" onclick="autoagrupar(<?php echo $tip;?>);">Meter en agrupación >></div>
+<div class="boton" onclick="meteAgrup(<?php echo $tip;?>);">Meter en agrupación >></div>
 
 </div>
 
@@ -94,7 +128,7 @@
 
 
 	
-<div class="boton" onclick="autoagrupar(<?php echo $tip;?>);"> << Sacar de agrupación </div>
+<div class="boton" onclick="sacaAgrup(<?php echo $tip;?>);"> << Sacar de agrupación </div>
 
 </div>
 
@@ -105,15 +139,130 @@
 
 
 <iframe id="print" src="" width="0" height="0" border="0" frameborder="0" marginheight="0" scrolling="no"></iframe>
-<div class="timer" id="timer1" style="visibility: hidden; left: 9%; top:17%;"><img src="/iconos/loading1.gif"></div>
-<div class="timer" id="timer2" style="visibility: hidden; left: 34%; top:17%;"><img src="/iconos/loading1.gif"></div>
-<div class="timer" id="timer3" style="visibility: hidden; left: 54%; top:17%;"><img src="/iconos/loading1.gif"></div>
+<div class="timer" id="timer1" style="visibility: hidden; left: 17%; top:17%;"><img src="/iconos/loading1.gif"></div>
+<div class="timer" id="timer2" style="visibility: hidden; left: 46%; top:17%;"><img src="/iconos/loading1.gif"></div>
+<div class="timer" id="timer3" style="visibility: hidden; left: 75%; top:17%;"><img src="/iconos/loading1.gif"></div>
+
+<script>
+
+	
+</script>
+
+
+
+
+</div><!-- agrupacion -->
+
+
+
+
+<div style="clear:both;"></div>	
+
+
+
+
+<!-- GESTIONAR -->
+<div id="VP2" class="VP2">
+<div style="float:left; ">	
+	
+<div style="width:150px;">
+<div class="V2_lado"></div>	
+<div class="V2_PEST_on"  id="V2P1" onclick="selPEST_V2('V2P1');">ACT</div>		
+<div class="V2_PEST_off" id="V2P2" onclick="selPEST_V2('V2P2');">ALM</div>	
+<div class="V2_PEST_off" id="V2P3" onclick="selPEST_V2('V2P3');">TIE</div>	
+<div class="V2_PEST_off" id="V2P4" onclick="selPEST_V2('V2P4');">FIN</div>	
+<div style="clear:both;"></div>	
+<div class="subfranja"></div>
+	
+</div>
+
+<div style="clear:both;"></div>	
+<input type="hidden" id="V2SEL" value="V2P1">
+<div class="agV2" style="" id="DV2P1">					<input type="hidden" id='nfV2PP' value=''>
+<iframe id="FV2P1" src="/ajax/agrupacionesV2.php" width="111" height="380" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
+</div>
+
+<div class="agV2" style="visibility: hidden" id="DV2P2"><input type="hidden" id='nfV2PA' value=''>
+<iframe id="FV2P2" src="/ajax/agrupacionesV2.php" width="111" height="380" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
+</div>
+
+
+<div class="agV2" style="visibility: hidden" id="DV2P3"><input type="hidden" id='nfV2PT' value=''>
+<iframe id="FV2P3" src="/ajax/agrupacionesV2.php" width="111" height="380" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
+</div>
+
+
+<div class="agV2" style="visibility: hidden" id="DV2P4"><input type="hidden" id='nfV2PF' value=''>
+<iframe id="FV2P4" src="/ajax/agrupacionesV2.php" width="111" height="380" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
+</div>
+
+
+
+<div style="clear:both;"></div>	
+
+
+
+
+</div>
+
+
+
+
+<div style="clear:both;"></div>
+
+<div style=" left: 130px;position: absolute;top: 0;">
+	
+<div class="cabREP" style="margin-top:10px;">
+	<div class="cabtab_REP tab_REP_art">Artículos</div>
+	<div class="cabtab_REP tab_REP_rep">REP</div>
+	<div class="cabtab_REP tab_REP_alm">ALM</div>
+
+<?php
+$postiendas=0;
+foreach($tiendas as $idt => $nomt){
+$postiendas++;
+echo "<div onclick='sumatienda($postiendas,\"$nomt\")' class='cabtab_REP tab_REP_tie'>$nomt</div>";	
+}
+
+?>
+
+	
+</div>
+<iframe id="GRID" src="/ajax/grid.php" width="860" height="480" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
+</div>
+
+
+<div class="timer" id="timer4" style="visibility: hidden; left: 520px; top:119px;"><img src="/iconos/loading1.gif"></div>
+
+
+
+
+
+
+
+
+
+
+
 
 <script>
 cargaAgrupados(<?php echo $tip;?>,0);
+cargaAgrupados2(<?php echo $tip;?>,0);
 cargaPendientes(<?php echo $tip;?>);
-	
+
 </script>
+	
+</div><!-- GESTIONAR -->
+
+
+
+
+
+
+
+</div>
+
+
 
 
 </body></html>

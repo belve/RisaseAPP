@@ -227,3 +227,27 @@ height:15px; width:96%; padding-left:3px; cursor:pointer;
     top: 42%;
     width: 25px;
     }
+
+
+.lado {border-left: 1px solid #888888; width:1px; height: 27px;float:left; margin-right:-1px; }
+.PestaniaON  {color:#444444; float:left; text-align:center; border-top:1px solid #888888; border-right:1px solid #888888; padding: 5px 15px 5px 15px;  }
+.PestaniaOFF {color:#444444; float:left; text-align:center;background-color:#b8b8b8; border-top:1px solid #888888; border-right:1px solid #888888; border-bottom:1px solid #888888; padding:  5px 15px 5px 15px;  cursor:pointer;}
+.NOpestania  {float:left;  border-bottom:1px solid #888888; width:831px;height: 25px}
+
+
+.V2_lado { border-left: 1px solid #888888;float: left;height: 16px;margin-right: -1px; width: 1px;}
+
+.V2_PEST_on  	{color:#444444; border-right:1px solid #888888;border-top:1px solid #888888; height:10px; float:left;
+				 font-size:9px; text-align: center; padding: 2px 3px 2px 3px; background-color:orange;}
+.V2_PEST_off {color:#444444; border-right:1px solid #888888;border-top:1px solid #888888;border-bottom:1px solid #888888;
+			 height:10px; float:left; font-size:9px; text-align: center; padding: 2px 3px 2px 3px; background-color:#B8B8B8; cursor:pointer;}
+             
+.subfranja  {border-right:1px solid #888888;border-left:1px solid #888888;border-bottom:1px solid #888888; height:5px;width: 96px; margin-top: -1px; background-color:orange;}
+
+
+.VP1 {padding:10px; position: absolute; }
+.VP2 {padding:10px; position: absolute; visibility: hidden;}
+
+.agrup_V2  {cursor:pointer;color:#666666;border-left:1px solid #888888;border-right:1px solid #888888;border-bottom:1px solid #888888; height: 12px;padding: 2px; font-size:9px; width:92px; background-color:white;}
+.agV2 {position:absolute;}
+
