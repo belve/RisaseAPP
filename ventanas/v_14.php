@@ -180,6 +180,8 @@ $(window).keydown(function(evt) {
 <input type="hidden" id="V2SEL" value="V2P1">
 <div class="agV2" style="" id="DV2P1">					<input type="hidden" id='nfV2PP' value=''>
 <iframe id="FV2P1" src="/ajax/agrupacionesV2.php" width="111" height="380" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
+
+<div class="boton" style="margin-left:1px; width: 76px;">Imp Roturas</div>
 </div>
 
 <div class="agV2" style="visibility: hidden" id="DV2P2"><input type="hidden" id='nfV2PA' value=''>
@@ -205,14 +207,37 @@ $(window).keydown(function(evt) {
 
 </div>
 
-
+<div class="bot_imp">
+	<div class="boton" style=" margin-left: 6px;    margin-top: 6px;    width: 76px;">Imp Tiend</div>
+	<div class="boton" style=" margin-left: 6px;    margin-top: 6px;    width: 76px;">Imp GRID</div>
+	
+</div>
 
 
 <div style="clear:both;"></div>
 
 <div style=" left: 130px;position: absolute;top: 0;">
+
+<div class="contGridAgrup">
+
+
+<div style="float: left" >
+<div class="pg_titAG">AVANT -2100003</div>	
+</div>
+<div class="pg_hueco"></div>	
+<div style="float:right;">
+<div class="pG_estado_off">Activo</div>
+<div class="pG_estado_on">En almacén</div>
+<div class="pG_estado_off">Enviado a tienda</div>
+<div class="pG_estado_off">Finalizado</div>
+</div>
+
+
+
+<div style="clear:both;"></div>
+<div style="height:8px;background-color:orange;border-right: 1px solid #888888;border-left: 1px solid #888888;margin-top:-1px"></div>
 	
-<div class="cabREP" style="margin-top:10px;">
+<div class="cabREP" style="width: 845px;margin-top:0px ">
 	<div class="cabtab_REP tab_REP_art">Artículos</div>
 	<div class="cabtab_REP tab_REP_rep">REP</div>
 	<div class="cabtab_REP tab_REP_alm">ALM</div>
@@ -228,7 +253,10 @@ echo "<div onclick='sumatienda($postiendas,\"$nomt\")' class='cabtab_REP tab_REP
 
 	
 </div>
-<iframe id="GRID" src="/ajax/grid.php" width="860" height="480" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
+<iframe id="GRID" src="/ajax/grid.php" width="847" height="400" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
+
+</div>
+
 </div>
 
 

@@ -251,3 +251,12 @@ height:15px; width:96%; padding-left:3px; cursor:pointer;
 .agrup_V2  {cursor:pointer;color:#666666;border-left:1px solid #888888;border-right:1px solid #888888;border-bottom:1px solid #888888; height: 12px;padding: 2px; font-size:9px; width:92px; background-color:white;}
 .agV2 {position:absolute;}
 
+.contGridAgrup	{ background-color: #D8D8D8; border: 1px solid #888888;    height: 512px;    margin: 10px 0 10px -6px;    padding: 5px;}
+.pG_estado_off {color:#444444; float:left;width:100px;height:15px;padding:5px;text-align:center;  border-bottom: 1px solid #888888;border-right: 1px solid #888888;border-top: 1px solid #888888;background-color:#B8B8B8; }
+.pG_estado_on {color:#444444;float:left;width:100px;height:15px;padding:5px;text-align:center;  border-bottom: 1px solid orange;border-right: 1px solid #888888;border-top: 1px solid #888888;background-color:orange; }
+
+.pg_titAG {color:#444444; float:left;width:200px;height:15px;padding:5px;text-align:center; border-right: 1px solid #888888;border-left: 1px solid #888888;border-top: 1px solid #888888;background-color:orange; }
+
+.pg_hueco {border-bottom: 1px solid #888888;border-right: 1px solid #888888;color: #444444;float: left; height: 16px; padding: 5px;text-align: center; width: 180px;}
+
+.bot_imp { z-index:999; height: 71px;position: absolute;top: 461px; width: 119px;left:4px; border-right:1px solid #d8d8d8;border-left:1px solid #888888;border-top:1px solid #888888;border-bottom:1px solid #888888;background-color: #D8D8D8;}

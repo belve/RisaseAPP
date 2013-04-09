@@ -17,7 +17,7 @@
 
 <input type='hidden' value='' id='agrupSel'>
 
-<div style="background-color: white;border-left: 1px solid #888888;border-right: 1px solid #888888;height: 100%; position: absolute; width: 96px;"></div>
+<div style="background-color: white;border-left: 1px solid #888888;border-right: 1px solid #888888;border-bottom: 1px solid #888888;height: 99%; position: absolute; width: 96px;"></div>
 
 <div id="agrupaciones" style="position:absolute;">
 
