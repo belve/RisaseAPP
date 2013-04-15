@@ -10,7 +10,15 @@ if($oldG){$vieja="agrupar='$oldG'";}else{$vieja="(agrupar='' OR agrupar IS NULL)
 
 if (!$dbnivel->open()){die($dbnivel->error());};
 
+if($selecion=='all'){
+
+$queryp="delete from agrupedidos where id=$oldG;";		
+$dbnivel->query($queryp); echo $queryp;	
+$queryp="update pedidos set agrupar='$newG' WHERE tip=$tip AND estado='-' AND $vieja;";		
+}else{
 $queryp="update pedidos set agrupar='$newG' WHERE tip=$tip AND estado='-' AND $vieja AND id_articulo IN ($selecion);";	
+}
+
 $dbnivel->query($queryp); echo $queryp;
 
 

@@ -66,6 +66,7 @@ height:15px; width:98%; padding-left:3px; cursor:pointer;
 .new_on {cursor:pointer; width:19px; height:18px; background-position:-97px -17px; float:right; margin-right:5px;}
 .save_on {cursor:pointer; width:19px; height:18px; background-position:-77px -17px; float:right;}
 
+.trash {cursor:pointer; width:16px; height:16px; background-position:-17px -0px; float:right;}
 
 .cabemp {height: 25px; width: 559px; background-color: #B8B8B8;  border-right: 1px solid #888888;  border-top: 1px solid #888888;}
 .pieemp {  background-color: #B8B8B8; border: 1px solid #888888; height: 18px; margin-top: -3px; padding: 7px; width: 544px;}
@@ -129,7 +130,11 @@ height:15px; width:98%; padding-left:3px; cursor:pointer;
 
 
 
-.cabREP {height: 20px; width: 991px; background-color: #999999;  border-right: 1px solid #888888;  border-top: 1px solid #888888; margin-top:5px;  border-left: 1px solid #888888; border-bottom: 1px solid #888888; }
+.cabREP {height: 20px; width: 991px; background-color: #999999;  
+		border-right: 1px solid #888888;  
+		border-top: 1px solid #888888; margin-top:5px;  
+		border-left: 1px solid #888888; 
+		}
 
 .cabtab_REP 		{border-right:1px solid #888888; height:15px; text-align: left; float:left; padding-top:5px; font-size:9px; padding-left:2px;background-color: #cccccc;}
 .tab_REP_art 		{width: 148px; } 								.camp_REP_art		{border:0px; width:148px; font-size:9px; height: 15px; background-color: transparent; }
@@ -215,7 +220,7 @@ height:15px; width:96%; padding-left:3px; cursor:pointer;
 .pedPen_REP {width: 24px;  float:left; border-left:1px solid #888888;padding:2px;height: 11px}
 
 
-.agrup {border-left:1px solid #888888;border-right:1px solid #888888;border-bottom:1px solid #888888; height: 16px;padding: 2px;}
+.agrup {border-left:1px solid #888888;border-right:1px solid #888888;border-bottom:1px solid #888888; height: 16px;padding: 2px;color:#444444; font-size:10px;}
 .agrupados {font-size:10px; border:0px; background-color: transparent;width:160px;}
 .agrupados:focus {font-size:10px; border:1px solid #666666; background-color: white;}
 .timer {  
@@ -252,7 +257,7 @@ height:15px; width:96%; padding-left:3px; cursor:pointer;
 .agV2 {position:absolute;}
 
 .contGridAgrup	{ background-color: #D8D8D8; border: 1px solid #888888;    height: 512px;    margin: 10px 0 10px -6px;    padding: 5px;}
-.pG_estado_off {color:#444444; float:left;width:100px;height:15px;padding:5px;text-align:center;  border-bottom: 1px solid #888888;border-right: 1px solid #888888;border-top: 1px solid #888888;background-color:#B8B8B8; }
+.pG_estado_off {cursor:pointer;color:#444444; float:left;width:100px;height:15px;padding:5px;text-align:center;  border-bottom: 1px solid #888888;border-right: 1px solid #888888;border-top: 1px solid #888888;background-color:#B8B8B8; }
 .pG_estado_on {color:#444444;float:left;width:100px;height:15px;padding:5px;text-align:center;  border-bottom: 1px solid orange;border-right: 1px solid #888888;border-top: 1px solid #888888;background-color:orange; }
 
 .pg_titAG {color:#444444; float:left;width:200px;height:15px;padding:5px;text-align:center; border-right: 1px solid #888888;border-left: 1px solid #888888;border-top: 1px solid #888888;background-color:orange; }

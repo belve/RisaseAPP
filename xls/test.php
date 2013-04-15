@@ -65,7 +65,7 @@ $objPHPExcel->getActiveSheet()->getStyle("A2:F2")->getFont()->setSize(7);
 $objPHPExcel->getActiveSheet()->getStyle('D2:F2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 $objPHPExcel->getActiveSheet()->getStyle('A2:C2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
 
-
+$objPHPExcel->getActiveSheet()->setBreak( 'A10' , PHPExcel_Worksheet::BREAK_ROW );
 
 // Rename sheet
 $objPHPExcel->getActiveSheet()->setTitle('MON');

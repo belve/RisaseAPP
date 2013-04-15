@@ -18,9 +18,11 @@ function selectAgrup(id,tip){
 var lastsel=document.getElementById('agrupSel').value;
 if(lastsel!=id){
 if(lastsel!=''){document.getElementById(lastsel).setAttribute("style", "background-color:white;");};	
+if(document.getElementById(id)){
 document.getElementById(id).setAttribute("style", "background-color:#8DC29E;");		
 document.getElementById('agrupSel').value=id;
 detAgrupado(id,tip);
+};
 }}
 
 
@@ -72,7 +74,13 @@ var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
 
 if(key=='id'){
 var lista=innerDoc.getElementById('agrupaciones');	
-$(lista).append("<div class='agrup' id='" + val + "' onclick='selectAgrup(" + val + ")'><input type='text' value='" + nom + "' class='agrupados' onchange='modiAgrup(this.value)'></div>");
+$(lista).append("<div class='agrup' id='" + val + "' onclick='selectAgrup(" + val + ")'>" + nom + "<div class='iconos trash' onclick='borra_agru(" + val + "," + tip + ")'></div> </div>");
+
+var iframe = document.getElementById('FV2P1');
+var V = iframe.contentDocument || iframe.contentWindow.document;
+var addf="<div class='agrup_V2' id='" + val + "' onclick='selV2agrup(\"" + val + "|1\")'>" + nom + "</div>";
+$(V).find('#agrupaciones').append(addf);
+
 }
 
 if(key=='error'){
@@ -98,7 +106,8 @@ function autoagrupar(tip){$.ajaxSetup({'async': false});
 cargaAgrupados(tip,1);
 var iframe = document.getElementById('pedipent');
 var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
-innerDoc.getElementById('pedipent').innerHTML='';	
+innerDoc.getElementById('pedipent').innerHTML='';
+cargaAgrupados2(tip,0);	
 }
 
 
@@ -322,34 +331,6 @@ var estAct=document.getElementById(p).className;
 
 if(estAct=='V2_PEST_off'){
 	
-
-if(p=='V2P1'){
-var iframe = document.getElementById('FV2P1');
-var P = iframe.contentDocument || iframe.contentWindow.document;
-var filas=document.getElementById('nfV2PP').value;
-}
-
-if(p=='V2P2'){
-var iframe = document.getElementById('FV2P2');
-var P = iframe.contentDocument || iframe.contentWindow.document;
-var filas=document.getElementById('nfV2PA').value;
-}
-
-if(p=='V2P3'){
-var iframe = document.getElementById('FV2P3');
-var P = iframe.contentDocument || iframe.contentWindow.document;
-var filas=document.getElementById('nfV2PT').value;
-}
-
-if(p=='V2P4'){
-var iframe = document.getElementById('FV2P4');
-var P = iframe.contentDocument || iframe.contentWindow.document;
-var filas=document.getElementById('nfV2PF').value;
-}
-
-
-for (var i = 1; i <= filas; i++){P.getElementById(i).setAttribute("style", "background-color:white;");}	
-	
 	
 	
 document.getElementById('V2P1').className="V2_PEST_off";	
@@ -363,6 +344,7 @@ document.getElementById('DV2P3').setAttribute("style", "visibility:hidden;");
 document.getElementById('DV2P4').setAttribute("style", "visibility:hidden;");
 
 document.getElementById('V2SEL').value=p;
+
 document.getElementById(p).className="V2_PEST_on";	
 document.getElementById('D' + p).setAttribute("style", "visibility:visible;");	
 	
@@ -410,10 +392,10 @@ if(key=='F'){
 	var F = iframe.contentDocument || iframe.contentWindow.document;
 	F.getElementById('agrupaciones').innerHTML=valu;};	
 
-if(key=='filasP'){document.getElementById('nfV2PP').value=val;};	
-if(key=='filasA'){document.getElementById('nfV2PA').value=val;};
-if(key=='filasT'){document.getElementById('nfV2PT').value=val;};
-if(key=='filasF'){document.getElementById('nfV2PF').value=val;};
+if(key=='filasP'){document.getElementById('nfV2P1').value=val;};	
+if(key=='filasA'){document.getElementById('nfV2P2').value=val;};
+if(key=='filasT'){document.getElementById('nfV2P3').value=val;};
+if(key=='filasF'){document.getElementById('nfV2P4').value=val;};
 
 
 	
@@ -428,14 +410,24 @@ if(key=='filasF'){document.getElementById('nfV2PF').value=val;};
 
 
 function selV2agrup(ida){
-var valo=ida.split('|');var idag=valo[0];	var v=valo[1];
-var id=document.getElementById('IDA-' + idag).value;
-var filas=parent.document.getElementById('nfV2P' + v).value;
-for (var i = 1; i <= filas; i++){document.getElementById(i).setAttribute("style", "background-color:white;");}
-document.getElementById(id).setAttribute("style", "background-color:#8DC29E;");
+var valo=ida.split('|');var ida2=valo[0];	var v=valo[1];
+var idag=parent.document.getElementById('ag_selected').value;	
+if(idag!=ida2){
 
-cargaGRIDagru(idag);
+var lastPsel=parent.document.getElementById('ag_selected_P').value;	
+if(lastPsel && (lastPsel!=parent.document.getElementById('V2SEL').value)){
+var iframe = parent.document.getElementById('F' + lastPsel);
+var V = iframe.contentDocument || iframe.contentWindow.document;
+if(V.getElementById(idag)){V.getElementById(idag).setAttribute("style", "background-color:white;");};
+}else{
+if(idag){document.getElementById(idag).setAttribute("style", "background-color:white;");};	
+}
 
+document.getElementById(ida2).setAttribute("style", "background-color:#8DC29E;");
+parent.document.getElementById('ag_selected').value=ida2;
+parent.document.getElementById('ag_selected_P').value=parent.document.getElementById('V2SEL').value;
+cargaGRIDagru(ida2);
+}
 }
 
 
@@ -446,23 +438,219 @@ timerAD(1,'timer4',1);
 var url='/ajax/listGRID.php?idagrupacion=' + idag;
 $.getJSON(url, function(data) {
 $.each(data, function(key, val) {
-
-if(key=='html'){
 var iframe = parent.document.getElementById('GRID');
-var GRID = iframe.contentDocument || iframe.contentWindow.document;		
-GRID.getElementById('grid').innerHTML=val;
-	
-}
+var GRID = iframe.contentDocument || iframe.contentWindow.document;	
 
+if(key=='cabe'){parent.document.getElementById('optCABE').innerHTML=val;};
+if(key=='html'){GRID.getElementById('grid').innerHTML=val;};
+if(key=='nagru'){parent.document.getElementById('nagru').innerHTML=val;};
+if(key=='estado'){pest_Cestado(val,parent.document);};
 });
 });	
-
+parent.document.getElementById('ag_selected').value=idag;
 timerAD(0,'timer4',1);
 	
 }
 
 
 
+function pest_Cestado(est,donde){
+
+donde.getElementById('bot_imp').setAttribute("style", "visibility:hidden;");
+if(est=='A'){donde.getElementById('bot_imp').setAttribute("style", "visibility:visible;");};
+
+donde.getElementById('P_E_P').className="pG_estado_off";
+donde.getElementById('P_E_A').className="pG_estado_off";
+donde.getElementById('P_E_T').className="pG_estado_off";
+donde.getElementById('P_E_F').className="pG_estado_off";
+
+if(donde.getElementById('P_E_' + est)){
+donde.getElementById('P_E_' + est).className="pG_estado_on";
+}
+
+donde.getElementById('est_sel_act').value=est;
+}
+
+
+function cambiaEst_agru(est,tip){$.ajaxSetup({'async': false});	
+
+
+if(est=='T'){var C=confirm("¿Esta seguro de que desea enviarlo a tiendas?");}else{var C=true;};
+if(C){
+document.getElementById('bot_imp').setAttribute("style", "visibility:hidden;");
+if(est=='A'){document.getElementById('bot_imp').setAttribute("style", "visibility:visible;");};
+
+var oldest=document.getElementById('est_sel_act').value;
+timerAD(1,'timer4',0);
+var idag=document.getElementById('ag_selected').value;	
+if(est=='F'){alert('Los pedidos pasan a estado finalizado de forma automática');}else{
+var url='/ajax/listAgrupV2.php?action=2&idag=' + idag + '&newest=' + est;
+$.getJSON(url, function(data) {
+$.each(data, function(key, val) {
+});
+});	
+pest_Cestado(est,document);
+
+if (oldest=='P'){vo='V2P1';};if (oldest=='A'){vo='V2P2';};if (oldest=='T'){vo='V2P3';};if (oldest=='F'){vo='V2P3';};
+if (est=='P'){vn='V2P1';};if (est=='A'){vn='V2P2';};if (est=='T'){vn='V2P3';};if (est=='F'){vn='V2P3';};
+
+
+borradepest(vo,idag);
+creaenpest(vn,idag,tip);
+
+}
+timerAD(0,'timer4',0);
+
+}}
+
+function creaenpest(v,idag,tip){
+	
+
+if(v=='V2P1'){
+var nagru=document.getElementById('nagru').innerHTML;
+var tip=document.getElementById('tip').value;	
+var iframe = document.getElementById('agrupaciones');
+var V = iframe.contentDocument || iframe.contentWindow.document;
+var addf="<div onclick='selectAgrup(" + idag + "," + tip + ")' id='" + idag + "' class='agrup'>" + nagru + "<div class='iconos trash' onclick='borra_agru(" + idag + "," + tip + ")'> </div>";
+$(V).find('#agrupaciones').append(addf);	
+}		
+	
+	
+var iframe = document.getElementById('F' + v);
+var V = iframe.contentDocument || iframe.contentWindow.document;
+var nagru=document.getElementById('nagru').innerHTML;
+var nf=document.getElementById('nf' + v).value;
+nf++;document.getElementById('nf' + v).value=nf;
+
+document.getElementById('ag_selected_P').value=v;
+var vent=v.replace('V2P', '');
+
+var addf="<div class='agrup_V2' id='" + idag + "' onclick='selV2agrup(\"" + idag + "|" + vent + "\")'>" + nagru + "</div>";
+$(V).find('#agrupaciones').append(addf);
+V.getElementById(idag).setAttribute("style", "background-color:#8DC29E;");
+}
+
+function borradepest(v,idag){
+if(v=='V2P1'){
+var iframe = document.getElementById('agrupaciones');
+var V = iframe.contentDocument || iframe.contentWindow.document;
+if(V.getElementById('agrupSel').value==idag){
+
+var iframe = document.getElementById('pediagrup');
+var V = iframe.contentDocument || iframe.contentWindow.document;
+V.getElementById('pedipent').innerHTML='';	
+}	
+	
+var iframe = document.getElementById('agrupaciones');
+var V = iframe.contentDocument || iframe.contentWindow.document;
+V.getElementById('agrupSel').value='';
+
+$(V).find('#' + idag).remove();		
+}	
+	
+var iframe = document.getElementById('F' + v);
+var V = iframe.contentDocument || iframe.contentWindow.document;
+
+var nf=document.getElementById('nf' + v).value;
+nf--;document.getElementById('nf' + v).value=nf;
+
+fila='#' + idag;
+$(V).find(fila).remove();		
+
+}
+
+
+function borra_agru(idag,tip){v='V2P1';$.ajaxSetup({'async': false});
+var iframe = parent.document.getElementById('agrupaciones');
+var V = iframe.contentDocument || iframe.contentWindow.document;
+if(V.getElementById('agrupSel').value==idag){
+
+var iframe = parent.document.getElementById('pediagrup');
+var V = iframe.contentDocument || iframe.contentWindow.document;
+V.getElementById('pedipent').innerHTML='';	
+}	
+	
+var iframe = parent.document.getElementById('agrupaciones');
+var V = iframe.contentDocument || iframe.contentWindow.document;
+V.getElementById('agrupSel').value='';
+
+$(V).find('#' + idag).remove();	
+
+
+var iframe = parent.document.getElementById('F' + v);
+var V = iframe.contentDocument || iframe.contentWindow.document;
+
+var nf=parent.document.getElementById('nf' + v).value;
+nf--;parent.document.getElementById('nf' + v).value=nf;
+
+fila='#' + idag;
+$(V).find(fila).remove();	
+
+var ag_selected=parent.document.getElementById('ag_selected').value;
+if(ag_selected==idag){
+parent.document.getElementById('ag_selected').value="";	
+var iframe = parent.document.getElementById('GRID');
+var GRID = iframe.contentDocument || iframe.contentWindow.document;	
+GRID.getElementById('grid').innerHTML='';
+parent.document.getElementById('nagru').innerHTML='';
+pest_Cestado('',parent.document);	
+}
+	
+
+timerAD(1,'timer1',1);
+
+var url='/ajax/cambiaagrupa.php?tip=' + tip + '&oldG=' + idag + '&newG=' + '' + '&selecion=all';
+$.getJSON(url, function(data) {
+$.each(data, function(key, val) {
+});
+});		
+	
+
+
+var url='/ajax/actionPedidos.php?tip=' + tip + '&action=1';
+$.getJSON(url, function(data) {
+$.each(data, function(key, val) {
+var iframe = parent.document.getElementById('pedipent');
+var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+innerDoc.getElementById('artselected').value='';
+if(key=='html'){innerDoc.getElementById('pedipent').innerHTML=val;};		
+});
+});	
+
+timerAD(0,'timer1',1);
+
+
+	
+	
+}
+
+
+
+
+
+
+function impREPt(){
+$.ajaxSetup({'async': false});
+var idREP=document.getElementById('ag_selected').value;
+var url="/xls/repartoTiendas.php?id=" + idREP;
+timerAD(1,'timer1',0);
+document.getElementById('print').src=url;	
+setTimeout("timerAD(0,'timer1',0);",6000);
+}
+
+
+	
+function impREP(){
+$.ajaxSetup({'async': false});
+var idREP=document.getElementById('ag_selected').value;
+var url="/xls/reparto.php?id=" + idREP;
+timerAD(1,'timer1',0);
+document.getElementById('print').src=url;	
+
+setTimeout("timerAD(0,'timer1',0);",6000);
+
+
+}
 
 
 

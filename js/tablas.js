@@ -599,38 +599,6 @@ function moveFieldRepart(value){
 
 
 
-function impREPt(){
-$.ajaxSetup({'async': false});
-var iframe = document.getElementById('repartos');
-var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
-var idREP=innerDoc.getElementById('idrep').value;
-
-var url="/xls/repartoTiendas.php?id=" + idREP;
-timer(1);
-document.getElementById('print').src=url;	
-
-setTimeout("timer(0);",6000);
-
-
-}
-
-
-	
-function impREP(){
-$.ajaxSetup({'async': false});
-var iframe = document.getElementById('repartos');
-var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
-var idREP=innerDoc.getElementById('idrep').value;
-
-var url="/xls/reparto.php?id=" + idREP;
-timer(1);
-document.getElementById('print').src=url;	
-
-setTimeout("timer(0);",6000);
-
-
-}
-
 function marcListRep(){
 timer(1);
 document.getElementById('repartos').src='/ajax/ListRep.php';	
@@ -642,6 +610,15 @@ alert(idrep);
 }
 
 
+function ShowDetArt(orig,ida){
+var url='/ajax/ShowDetArt.php?idarticulo=' +ida + '&orig=' + orig;
+$.getJSON(url, function(data) {
+$.each(data, function(key, val) {
+	
+if(key=='datos'){alert(val);};
 
+});
+});	
+}
 
 

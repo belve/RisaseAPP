@@ -51,7 +51,7 @@ td		{width: 90px; border: 1px  solid #888888; margin:0px;}
 <input type="hidden" id="columnas" value="<?php echo $numtiendas; ?>">
 
 
-<input type="hidden" id="LinCOP" value="">
+<input type="hidden" id="LinCOP" value="" >
 
 <table id='grid'>
 
@@ -69,23 +69,23 @@ $(document).keypress(function(e) {
       	
       	 // User pressed "left" arrow
          case 37:
-           moveFieldRepart('left'); break;
+           moveFieldGRID('left'); break;
       	
        // User pressed "right" arrow
          case 39:
-           moveFieldRepart('right');break;
+           moveFieldGRID('right');break;
       	
          // User pressed "up" arrow
          case 38:
-           moveFieldRepart('up'); break;
+           moveFieldGRID('up'); break;
          
          // User pressed "down" arrow
          case 40:
-           moveFieldRepart('down'); break;
+           moveFieldGRID('down'); break;
          
          // User pressed "enter"
          case 13:
-            moveFieldRepart('down'); break;
+            moveFieldGRID('down'); break;
       }
    });
  

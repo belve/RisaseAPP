@@ -3,7 +3,7 @@ require_once("../db.php");
 require_once("../variables.php");
 
 require_once("../functions/gettiendas.php");
-$tip=1;
+$tip=2;
 
 ?>
 
@@ -210,12 +210,9 @@ $(window).keydown(function(evt) {
 
 </div>
 
-<div class="bot_imp" id="bot_imp" style="visibility: hidden;">
-	
-	
-	<div class="boton" style=" margin-left: 6px;    margin-top: 6px;    width: 76px;" onclick="impREPt()">Imp Tiend</div>
-	<div class="boton" style=" margin-left: 6px;    margin-top: 6px;    width: 76px;" onclick="impREP()">Imp GRID</div>
-	
+<div class="bot_imp">
+	<div class="boton" style=" margin-left: 6px;    margin-top: 6px;    width: 76px;">Imp Tiend</div>
+	<div class="boton" style=" margin-left: 6px;    margin-top: 6px;    width: 76px;">Imp GRID</div>
 	
 </div>
 
@@ -250,6 +247,7 @@ $(window).keydown(function(evt) {
 	<div class="cabtab_REP tab_REP_rep">REP</div>
 	<div class="cabtab_REP tab_REP_alm">ALM</div>
 
+<div id="optCABE">
 <?php
 $postiendas=0;
 foreach($tiendas as $idt => $nomt){
@@ -258,7 +256,7 @@ echo "<div onclick='sumatienda($postiendas,\"$nomt\")' class='cabtab_REP tab_REP
 }
 
 ?>
-
+</div>
 	
 </div>
 <iframe id="GRID" src="/ajax/grid.php" width="847" height="400" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>

@@ -17,18 +17,29 @@ function agrupaciones($tip,$agrupar){
 	
 global $dbnivel;$idagrup="";
 
-$fecha=date('Y') . date('m') . date('d');
+$fecha=date('d') . date('m') . date('Y');
 $html="";
 if (!$dbnivel->open()){die($dbnivel->error());};
 
 
 if($agrupar){
 
+if($tip==1){
 $queryp= "SELECT distinct(prov) as nprov, 
 (select nomcorto from proveedores where id=nprov) as nomcorto 
-from pedidos WHERE tip=$tip AND estado='-' GROUP BY id_articulo ORDER BY prov, fecha, grupo, subgrupo, codigo;";
+from pedidos WHERE tip=$tip AND estado='-' GROUP BY id_articulo ORDER BY prov, grupo, subgrupo, codigo;";
 $dbnivel->query($queryp); 
 while ($row = $dbnivel->fetchassoc()){$agrupaciones[$row['nprov']]=$row['nomcorto'] . "-" . $fecha;}
+}
+
+if($tip==2){
+$queryp= "SELECT distinct(id_tienda) as idt, 
+(select id_tienda from tiendas where id=idt) as ntie, 
+(select orden from tiendas where id=idt) as orden  
+from pedidos WHERE tip=$tip AND estado='-' GROUP BY id_tienda ORDER BY orden;";
+$dbnivel->query($queryp); 
+while ($row = $dbnivel->fetchassoc()){$agrupaciones[$row['idt']]=$row['ntie'] . "-" . $fecha;}
+}
 
 if(count($agrupaciones)>0){foreach($agrupaciones as $idpr => $agrupp){
 	
@@ -45,7 +56,12 @@ $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){$idagrup=$row['id'];};
 }
 
+if($tip==1){
 $queryp="update pedidos set agrupar='$idagrup' where prov=$idpr AND tip=$tip AND estado='-';";	
+}
+if($tip==2){
+$queryp="update pedidos set agrupar='$idagrup' where id_tienda=$idpr AND tip=$tip AND estado='-';";	
+}
 $dbnivel->query($queryp); 
 
 
@@ -59,7 +75,9 @@ $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){
 $idagrupado=$row['id'];$nomagrup=$row['nombre'];
 $html.= "
-<div class='agrup' id='$idagrupado' onclick='selectAgrup($idagrupado,$tip)'><input type='text' value='$nomagrup' class='agrupados' onchange='modiAgrup(this.value)'></div>
+<div class='agrup' id='$idagrupado' onclick='selectAgrup($idagrupado,$tip)'>$nomagrup
+<div class='iconos trash' onclick='borra_agru($idagrupado,$tip)'></div>
+</div>
 ";	
 }
 
@@ -86,7 +104,7 @@ if (!$dbnivel->open()){die($dbnivel->error());};
 $queryp= "SELECT id_articulo, sum(cantidad) as rep, 
 (select codbarras from articulos where articulos.id=pedidos.id_articulo) as codbarras, 
 (select refprov from articulos where articulos.id=pedidos.id_articulo) as refprov 
-from pedidos WHERE tip=$tip AND estado='-' AND agrupar='$id' GROUP BY id_articulo ORDER BY prov, fecha;";
+from pedidos WHERE tip=$tip AND estado='-' AND agrupar='$id' GROUP BY id_articulo ORDER BY prov, grupo, subgrupo, codigo;";
 $dbnivel->query($queryp); $fila=0;
 while ($row = $dbnivel->fetchassoc()){
 $ref=$row['codbarras'] . " / " . $row['refprov'];
@@ -122,7 +140,7 @@ if (!$dbnivel->open()){die($dbnivel->error());};
 $queryp= "SELECT id_articulo, sum(cantidad) as rep, 
 (select codbarras from articulos where articulos.id=pedidos.id_articulo) as codbarras, 
 (select refprov from articulos where articulos.id=pedidos.id_articulo) as refprov 
-from pedidos WHERE tip=$tip AND estado='-' AND (agrupar='' or agrupar IS NULL) GROUP BY id_articulo ORDER BY prov, fecha;";
+from pedidos WHERE tip=$tip AND estado='-' AND (agrupar='' or agrupar IS NULL) GROUP BY id_articulo ORDER BY prov, grupo, subgrupo, codigo;";
 $dbnivel->query($queryp);$fila=0; 
 while ($row = $dbnivel->fetchassoc()){
 $ref=$row['codbarras'] . " / " . $row['refprov'];
@@ -148,14 +166,22 @@ global $dbnivel;$html['P']=array();$html['A']=array();$html['T']=array();$html['
 
 $html['filasP']=0;$html['filasA']=0;$html['filasT']=0;$html['filasF']=0;
 
+
+$equiestado['P']='1';
+$equiestado['A']='2';
+$equiestado['T']='3';
+$equiestado['F']='4';
+
 if (!$dbnivel->open()){die($dbnivel->error());};	
 $queryp= "select id, nombre, estado from agrupedidos where tip=$tip order by estado;";
 $dbnivel->query($queryp); 
 
 while ($row = $dbnivel->fetchassoc()){
+	
 $idagrupado=$row['id'];$nomagrup=$row['nombre'];$estado=$row['estado'];$html['filas' . $estado]++;$count=$html['filas' . $estado];
 
-$html[$estado][].="<div class='agrup_V2' id='$count' onclick='selV2agrup(\"$idagrupado|$estado\")'>$nomagrup</div><input type='hidden' id='IDA-$idagrupado' value='$count'>";	
+$estado2=$equiestado[$estado];
+$html[$estado][].="<div class='agrup_V2' id='$idagrupado' onclick='selV2agrup(\"$idagrupado|$estado2\")'>$nomagrup</div>";	
 
 }
 
@@ -167,6 +193,29 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 
 return $html;	
 		
+	
+}
+
+
+function change_estado($idag,$newest){
+
+global $dbnivel;
+
+if (!$dbnivel->open()){die($dbnivel->error());};
+
+$equiestado['P']='-';
+$equiestado['A']='A';
+$equiestado['T']='T';
+$equiestado['F']='F';
+
+$est=$equiestado[$newest];
+$queryp= "UPDATE pedidos SET estado='$est' where agrupar=$idag;";
+$dbnivel->query($queryp);$fila=0; 
+$queryp= "UPDATE agrupedidos SET estado='$newest' where id=$idag;";
+$dbnivel->query($queryp);$fila=0; 
+
+$valores=array();
+return $valores;
 	
 }
 

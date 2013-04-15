@@ -11,5 +11,9 @@ $valores=agrup_estado($tip);
 }
 
 
+if($action==2){
+$valores=change_estado($idag,$newest);	
+}
+
 echo json_encode($valores);
 ?>
