@@ -633,9 +633,9 @@ function impREPt(){
 $.ajaxSetup({'async': false});
 var idREP=document.getElementById('ag_selected').value;
 var url="/xls/repartoTiendas.php?id=" + idREP;
-timerAD(1,'timer1',0);
+timerAD(1,'timer',0);
 document.getElementById('print').src=url;	
-setTimeout("timerAD(0,'timer1',0);",6000);
+setTimeout("timerAD(0,'timer',0);",16000);
 }
 
 
@@ -644,17 +644,38 @@ function impREP(){
 $.ajaxSetup({'async': false});
 var idREP=document.getElementById('ag_selected').value;
 var url="/xls/reparto.php?id=" + idREP;
-timerAD(1,'timer1',0);
+timerAD(1,'timer',0);
 document.getElementById('print').src=url;	
 
-setTimeout("timerAD(0,'timer1',0);",6000);
+setTimeout("timerAD(0,'timer',0);",16000);
 
 
 }
 
 
+function impPED(){
+$.ajaxSetup({'async': false});
+var idREP=document.getElementById('ag_selected').value;
+var url="/xls/pedido.php?id=" + idREP;
+timerAD(1,'timer',0);
+document.getElementById('print').src=url;	
+
+setTimeout("timerAD(0,'timer',0);",16000);
 
 
+}
+
+function roturas(tip){
+$.ajaxSetup({'async': false});
+var idREP=document.getElementById('ag_selected').value;
+var url="/xls/roturas.php?tip=" + tip;
+timerAD(1,'timer',0);
+document.getElementById('print').src=url;	
+
+setTimeout("timerAD(0,'timer',0);",6000);
+
+
+}
 
 
 

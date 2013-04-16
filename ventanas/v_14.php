@@ -184,7 +184,7 @@ $(window).keydown(function(evt) {
 <div class="agV2" style="" id="DV2P1">					<input type="hidden" id='nfV2P1' value=''>
 <iframe id="FV2P1" src="/ajax/agrupacionesV2.php" width="111" height="380" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
 
-<div class="boton" style="margin-left:1px; width: 76px;">Imp Roturas</div>
+<div class="boton" style="margin-left:1px; width: 76px;"  onclick="roturas(<?php echo $tip;?>);">Imp Roturas</div>
 </div>
 
 <div class="agV2" style="visibility: hidden" id="DV2P2"><input type="hidden" id='nfV2P2' value=''>
@@ -269,7 +269,7 @@ echo "<div onclick='sumatienda($postiendas,\"$nomt\")' class='cabtab_REP tab_REP
 
 
 <div class="timer" id="timer4" style="visibility: hidden; left: 520px; top:119px;"><img src="/iconos/loading1.gif"></div>
-
+<div class="timer" id="timer" style="visibility: hidden; left: 520px; top: 200px;"><img src="/iconos/loading1.gif"></div>
 
 
 

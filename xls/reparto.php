@@ -30,10 +30,16 @@ $colu[26]='Z';
 $colores['F']="00CC66";
 $colores['N']="FFFFFF";
 
-$anchos['A']=20;
-$anchos['B']=5;
-$anchos['C']=3;
+$anchos['A']=17;
+$anchos['B']=3;
+$anchos['C']=4;
 
+$anchos['T']=3;
+
+
+$maxfil=1;
+$pag=0;
+global $colu; global $colores; global $anchos; global $pag;
 
 $nomrep="";$id="2";$html="";$grid=array();$estado="";$nomrep2="";
 foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
@@ -42,9 +48,10 @@ foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo .
 
 if (!$dbnivel->open()){die($dbnivel->error());};
 
-$queryp= "select nomrep, estado from repartos where id=$id";
+$queryp= "select nombre, estado  from agrupedidos where id=$id";
 $dbnivel->query($queryp); 
-while ($row = $dbnivel->fetchassoc()){$nomrep=$row['nomrep'];$estado=$row['estado'];};
+while ($row = $dbnivel->fetchassoc()){$nomrep=$row['nombre'];$estado=$row['estado'];};
+
 
 
 $nomrep=strtoupper($nomrep);
@@ -52,13 +59,20 @@ $estado=strtoupper($equiEST[$estado]);
 $reparto="REPARTO NÚMERO: $nomrep / ESTADO: $estado";
 
 $filaXLS=1;
-$queryp= "select id_articulo, cantidad, estado, id_tienda, 
-(select codbarras from articulos where articulos.id=detreparto.id_articulo) as codbarras, 
-(select stock from articulos where articulos.id=detreparto.id_articulo) as stock, 
-(select refprov from articulos where articulos.id=detreparto.id_articulo) as refprov 
-from detreparto where id_reparto=$id;";
+
+
+$queryp= "select 
+(select codbarras from articulos where articulos.id=pedidos.id_articulo) as codbarras,
+(select refprov from articulos where articulos.id=pedidos.id_articulo) as refprov, 
+id_articulo, 
+cantidad, 
+estado, 
+(select stock from articulos where articulos.id=pedidos.id_articulo) as stock, 
+(select pvp from articulos where articulos.id=pedidos.id_articulo) as pvp, 
+id_tienda
+from pedidos where agrupar=$id ORDER BY prov, grupo, subgrupo, codigo;";
 $dbnivel->query($queryp);
-while ($row = $dbnivel->fetchassoc()){$filaXLS++;
+while ($row = $dbnivel->fetchassoc()){
 $datos[$row['id_articulo']]['nom']=$row['codbarras'] . " / " .  $row['refprov'];
 $datos[$row['id_articulo']]['stok']=$row['stock'];
 
@@ -66,8 +80,6 @@ $grid[$row['id_articulo']][$row['id_tienda']]['cantidad']=$row['cantidad'];
 $grid[$row['id_articulo']][$row['id_tienda']]['estado']=$row['estado'];	
 }
 	
-
-
 
 if (!$dbnivel->close()){die($dbnivel->error());};
 
@@ -82,66 +94,121 @@ $objPHPExcel->setActiveSheetIndex(0);
 
 $numti=count($tiendas);
 $ultColu=$colu[$numti+3];
+$minultcolu=$colu[$numti];
+$minultcolu=$colu[$numti+1];
 
+$count=1;
+global $count;
+global $ultColu;
+global $objPHPExcel;
+global $tiendas;
+global $reparto;
+global $numti;
+
+
+
+
+
+function cabecera(){
+global $count;global $numti;
+global $ultColu;
+global $colu; global $colores; global $anchos;
+global $objPHPExcel;
+global $tiendas;global $reparto;global $pag;
+
+$minultcolu=$colu[$numti];
+$minultcolu2=$colu[$numti+1];
 
 $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth($anchos['A']);
 $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth($anchos['B']);
-$objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth($anchos['B']);
+$objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth($anchos['C']);
+
+$objPHPExcel->getActiveSheet()->getRowDimension($count)->setRowHeight(30);
+
+$pag++;
+$rango="A" . $count . ":" . $minultcolu . $count;
+$objPHPExcel->setActiveSheetIndex(0)->mergeCells($rango);
+$objPHPExcel->getActiveSheet()->setCellValue('A' . $count, $reparto);
+
+$pagina="PAG: $pag";
+$rango=$minultcolu2 . $count . ":" . $ultColu . $count;
+$objPHPExcel->setActiveSheetIndex(0)->mergeCells($rango);
+$objPHPExcel->getActiveSheet()->setCellValue($minultcolu2 . $count, $pagina);
 
 
-$objPHPExcel->getActiveSheet()->setCellValue('A2', 'Articulos');
-$objPHPExcel->getActiveSheet()->setCellValue('B2', 'REP');
-$objPHPExcel->getActiveSheet()->setCellValue('C2', 'ALM');
 
-$objPHPExcel->getActiveSheet()->getStyle('A2:C2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+$count++;
+$objPHPExcel->getActiveSheet()->setCellValue('A' . $count, 'Articulos');
+$objPHPExcel->getActiveSheet()->setCellValue('B' . $count, 'REP');
+$objPHPExcel->getActiveSheet()->setCellValue('C' . $count, 'ALM');
+
+$objPHPExcel->getActiveSheet()->getStyle('A' . $count . ':C' . $count)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
 
 
-$rango="A2:" . $ultColu . "2";
+$rango="A"  . $count . ":" . $ultColu  . $count;
+
 $objPHPExcel->getActiveSheet()->getStyle($rango)->applyFromArray(array('fill' => array('type' => PHPExcel_Style_Fill::FILL_SOLID,'color' => array('rgb' => 'CCCCCC')) ));
 $objPHPExcel->getActiveSheet()->getStyle($rango)->getFont()->setSize(7);
 
 
 
-$rango2="D2:" . $ultColu . "2";
+$rango2="D"  . $count . ":" . $ultColu  . $count;
 $objPHPExcel->getActiveSheet()->getStyle($rango2)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
+$count2=3;
 
-
-
-$count=3;
-foreach ($tiendas as $idt => $nomt) {$count++;
-$columna=$colu[$count];	
-$celda=$colu[$count] .  "2";	
-$objPHPExcel->getActiveSheet()->getColumnDimension($columna)->setWidth($anchos['C']);
-$objPHPExcel->getActiveSheet()->setCellValue($celda, $nomt);	
+foreach ($tiendas as $idt => $nomt) {$count2++;
+$columna=$colu[$count2];	
+$celda=$colu[$count2] .  $count;	
+$objPHPExcel->getActiveSheet()->setCellValue($celda, $nomt);
+$objPHPExcel->getActiveSheet()->getColumnDimension($columna)->setWidth($anchos['T']);	
 }
 
-$objPHPExcel->getActiveSheet()->getRowDimension(1)->setRowHeight(30);
-$objPHPExcel->getActiveSheet()->getRowDimension(2)->setRowHeight(15);
+
+$objPHPExcel->getActiveSheet()->getRowDimension($count)->setRowHeight(15);
 
 
 
 
-$filasR=2;
+
+}
+
+
+
+
+
+
+$filasR=2;$first=1;
 if(count($grid)>0){
 foreach ($grid as $idarticulo => $dtiendas) {
 $filasR++;$suma="";
+
+if($maxfil>=35){
+$objPHPExcel->getActiveSheet()->setBreak( 'A' . $count , PHPExcel_Worksheet::BREAK_ROW );	
+$maxfil=1;$first=1;
+$count++;
+}
+
+$maxfil++;
+if($first){cabecera();$first=0;$count++;};
+
 
 $prov=$datos[$idarticulo]['nom'];
 $stock=$datos[$idarticulo]['stok'];
 
 
-$objPHPExcel->getActiveSheet()->setCellValue('A' . $filasR, $prov);
-$objPHPExcel->getActiveSheet()->setCellValue('C' . $filasR, $stock);
-$rango="A" . $filasR . ":C" . $filasR;
+$objPHPExcel->getActiveSheet()->setCellValue('A' . $count, $prov);
+$objPHPExcel->getActiveSheet()->setCellValue('C' . $count, $stock);
+$rango="A" . $count . ":C" . $count;
 $objPHPExcel->getActiveSheet()->getStyle($rango)->getFont()->setSize(7);
 $objPHPExcel->getActiveSheet()->getStyle($rango)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
 
-$count=3;	$estado="";
-foreach ($tiendas as $idt => $nom) {$count++;
+$count2=3;	$estado="";
+foreach ($tiendas as $idt => $nom) {$count2++;
 
-$col=$colu[$count];
-$cell=$col . $filasR;
+$col=$colu[$count2];
+$cell=$col . $count;
+
 
 if(array_key_exists($idt, $dtiendas)){
 $val=$dtiendas[$idt]['cantidad'];$suma=$suma+$val;
@@ -157,17 +224,19 @@ $objPHPExcel->getActiveSheet()->getStyle($cell)->applyFromArray(array('fill' => 
 
 }
 
-$objPHPExcel->getActiveSheet()->setCellValue('B' . $filasR, $suma);
-$objPHPExcel->getActiveSheet()->getRowDimension($filasR)->setRowHeight(18);
+$objPHPExcel->getActiveSheet()->setCellValue('B' . $count, $suma);
+$objPHPExcel->getActiveSheet()->getRowDimension($count)->setRowHeight(18);
+
+
+$count++;
+}
 
 
 
-}}
+}
 
 
-$rango="A1:$ultColu" . "1";
-$objPHPExcel->setActiveSheetIndex(0)->mergeCells($rango);
-$objPHPExcel->getActiveSheet()->setCellValue('A1', $reparto);
+
 
 
 #$objPHPExcel->getActiveSheet()->getStyle("A2:F2")->getFont()->setSize(7);
@@ -177,13 +246,14 @@ $objPHPExcel->getActiveSheet()->setCellValue('A1', $reparto);
 
 
 // Rename sheet
-$objPHPExcel->getActiveSheet()->setTitle('MON');
+$objPHPExcel->getActiveSheet()->setTitle('GRID');
 
 
 
 
 
 // Redirect output to a client’s web browser (Excel5)
+
 header('Content-Type: application/vnd.ms-excel');
 header('Content-Disposition: attachment;filename="reparto.xls"');
 header('Cache-Control: max-age=0');
