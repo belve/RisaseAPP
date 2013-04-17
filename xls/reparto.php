@@ -30,11 +30,11 @@ $colu[26]='Z';
 $colores['F']="00CC66";
 $colores['N']="FFFFFF";
 
-$anchos['A']=17;
+$anchos['A']=19;
 $anchos['B']=3;
 $anchos['C']=4;
 
-$anchos['T']=3;
+$anchos['T']=4;
 
 
 $maxfil=1;
@@ -105,16 +105,22 @@ global $tiendas;
 global $reparto;
 global $numti;
 
+$styleArray = array(
+  'borders' => array(
+    'allborders' => array(
+      'style' => PHPExcel_Style_Border::BORDER_THIN
+    )
+  )
+);
 
-
-
+global $styleArray;
 
 function cabecera(){
 global $count;global $numti;
 global $ultColu;
 global $colu; global $colores; global $anchos;
 global $objPHPExcel;
-global $tiendas;global $reparto;global $pag;
+global $tiendas;global $reparto;global $pag;global $styleArray;
 
 $minultcolu=$colu[$numti];
 $minultcolu2=$colu[$numti+1];
@@ -167,7 +173,7 @@ $objPHPExcel->getActiveSheet()->getColumnDimension($columna)->setWidth($anchos['
 
 $objPHPExcel->getActiveSheet()->getRowDimension($count)->setRowHeight(15);
 
-
+$objPHPExcel->getActiveSheet()->getStyle('A' . $count . ':' . $ultColu . $count)->applyFromArray($styleArray);
 
 
 
@@ -183,7 +189,7 @@ if(count($grid)>0){
 foreach ($grid as $idarticulo => $dtiendas) {
 $filasR++;$suma="";
 
-if($maxfil>=35){
+if($maxfil>=26){
 $objPHPExcel->getActiveSheet()->setBreak( 'A' . $count , PHPExcel_Worksheet::BREAK_ROW );	
 $maxfil=1;$first=1;
 $count++;
@@ -196,6 +202,7 @@ if($first){cabecera();$first=0;$count++;};
 $prov=$datos[$idarticulo]['nom'];
 $stock=$datos[$idarticulo]['stok'];
 
+$objPHPExcel->getActiveSheet()->getStyle('A' . $count . ':' . $ultColu . $count)->applyFromArray($styleArray);
 
 $objPHPExcel->getActiveSheet()->setCellValue('A' . $count, $prov);
 $objPHPExcel->getActiveSheet()->setCellValue('C' . $count, $stock);

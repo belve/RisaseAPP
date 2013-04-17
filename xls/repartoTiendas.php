@@ -70,9 +70,9 @@ $styleArray = array(
 
 
 
-$objPHPExcel->getActiveSheet()->setCellValue('A' . $inifila , "Nº de Reparto: $nomrep");					$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(22);
-$objPHPExcel->getActiveSheet()->setCellValue('E' . $inifila , 'Tienda: ' . $tiendasN[$id_tienda]);		 	$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(22);
-$objPHPExcel->getActiveSheet()->setCellValue('F' . $inifila , 'PAG: ' . $pag);		 	$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(22);
+$objPHPExcel->getActiveSheet()->setCellValue('A' . $inifila , "Nº de Reparto: $nomrep");					$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(29);
+$objPHPExcel->getActiveSheet()->setCellValue('E' . $inifila , 'Tienda: ' . $tiendasN[$id_tienda]);		 	$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(29);
+$objPHPExcel->getActiveSheet()->setCellValue('F' . $inifila , 'PAG: ' . $pag);		 						
 
 $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(8);
 
@@ -86,7 +86,7 @@ $inifila=$inifila+2;
 
 $objPHPExcel->getActiveSheet()->setCellValue('A' . $inifila, 'Artículo');	
 $objPHPExcel->getActiveSheet()->setCellValue('B' . $inifila, 'Cant');	  	$objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(5);
-$objPHPExcel->getActiveSheet()->setCellValue('C' . $inifila, 'PVP');		$objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(5);
+$objPHPExcel->getActiveSheet()->setCellValue('C' . $inifila, 'PVP');		$objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(8);
 $objPHPExcel->getActiveSheet()->getStyle('A' . $inifila . ':C' .$inifila)->applyFromArray(array('fill' => array('type' => PHPExcel_Style_Fill::FILL_SOLID,'color' => array('rgb' => 'CCCCCC')) ));
 $objPHPExcel->getActiveSheet()->getStyle('A' . $inifila . ':C' .$inifila)->getFont()->setSize(7);
 $objPHPExcel->getActiveSheet()->getStyle('A' . $inifila . ':C' .$inifila)->applyFromArray($styleArray);
@@ -98,7 +98,7 @@ $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(3);
 
 $objPHPExcel->getActiveSheet()->setCellValue('A' . $inifila, 'Artículo');	
 $objPHPExcel->getActiveSheet()->setCellValue('F' . $inifila, 'Cant');	  	$objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(5);
-$objPHPExcel->getActiveSheet()->setCellValue('G' . $inifila, 'PVP');		$objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(5);
+$objPHPExcel->getActiveSheet()->setCellValue('G' . $inifila, 'PVP');		$objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(8);
 $objPHPExcel->getActiveSheet()->getStyle('E' . $inifila . ':G' .$inifila)->applyFromArray(array('fill' => array('type' => PHPExcel_Style_Fill::FILL_SOLID,'color' => array('rgb' => 'CCCCCC')) ));
 $objPHPExcel->getActiveSheet()->getStyle('E' . $inifila . ':G' .$inifila)->getFont()->setSize(7);
 $objPHPExcel->getActiveSheet()->getStyle('E' . $inifila . ':G' .$inifila)->applyFromArray($styleArray);
@@ -167,7 +167,7 @@ $objPHPExcel->getActiveSheet()->setCellValue($A[$parimpar] . $inifila, $valores[
 $objPHPExcel->getActiveSheet()->setCellValue($B[$parimpar] . $inifila, $valores['cantidad']);	  
 $objPHPExcel->getActiveSheet()->setCellValue($C[$parimpar] . $inifila, $amount);						
 
-$objPHPExcel->getActiveSheet()->getStyle($A[$parimpar] . $inifila . ":" . $C[$parimpar] . $inifila)->getFont()->setSize(7);
+$objPHPExcel->getActiveSheet()->getStyle($A[$parimpar] . $inifila . ":" . $C[$parimpar] . $inifila)->getFont()->setSize(10);
 $objPHPExcel->getActiveSheet()->getStyle($A[$parimpar] . $inifila . ":" . $C[$parimpar] . $inifila)->applyFromArray($styleArray);
 $objPHPExcel->getActiveSheet()->getStyle($C[$parimpar] . $inifila)->getNumberFormat()->setFormatCode('0.00');
 

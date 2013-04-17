@@ -47,7 +47,19 @@ $styleArray = array(
 
 
 
-$lastgroup="";$lin=1;$cont=1;$pag=1;	
+$lastgroup="";$lin=1;$cont=1;$pag=1;$column=1;	$savelin=$lin;
+
+$cols[1]['A']="A";
+$cols[1]['B']="B";
+$cols[1]['C']="C";
+$cols[1]['D']="D";
+
+$cols[2]['A']="F";
+$cols[2]['B']="G";
+$cols[2]['C']="H";
+$cols[2]['D']="I";
+
+
 $objPHPExcel->createSheet();
 $objPHPExcel->setActiveSheetIndex($count);
 
@@ -57,6 +69,13 @@ $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(4);
 $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(4);
 $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(4);
 
+$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(4);
+
+
+$objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(17);
+$objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(4);
+$objPHPExcel->getActiveSheet()->getColumnDimension('H')->setWidth(4);
+$objPHPExcel->getActiveSheet()->getColumnDimension('I')->setWidth(4);
 
 
 
@@ -65,37 +84,44 @@ if(count($grid)>0){
 
 		
 	foreach ($grid as $grupo => $datos){foreach ($datos as $articulo => $cantidad){
-		if($cont>=40){
-		$cont=1;$lastgroup="";$pag++;
-		$objPHPExcel->getActiveSheet()->setBreak( 'A' . $lin , PHPExcel_Worksheet::BREAK_ROW );	$lin++;
+		if($cont>=20){
+		if($column==2){	
+		$cont=1;$lastgroup="";$pag++;$column=1;
+		$objPHPExcel->getActiveSheet()->setBreak( 'A' . $lin , PHPExcel_Worksheet::BREAK_ROW );	
+		$lin++; 
+		$savelin=$lin;
+		}else{$lin=$savelin;
+		$cont=1;$lastgroup="";$column=2;
+			
+		}
 		}
 			if($grupo != $lastgroup){
-			$rango="A" . $lin . ":D"  . $lin;
+			$rango=$cols[$column]['A'] . $lin . ":" . $cols[$column]['D']  . $lin;
 			$objPHPExcel->setActiveSheetIndex($count)->mergeCells($rango);
-			$objPHPExcel->getActiveSheet()->setCellValue('A' . $lin, $grupo);
+			$objPHPExcel->getActiveSheet()->setCellValue($cols[$column]['A'] . $lin, $grupo);
 			$objPHPExcel->getActiveSheet()->getRowDimension($lin)->setRowHeight(20);
 			$objPHPExcel->getActiveSheet()->getStyle($rango)->applyFromArray(array('fill' => array('type' => PHPExcel_Style_Fill::FILL_SOLID,'color' => array('rgb' => 'CCCCCC')) ));
 			$objPHPExcel->getActiveSheet()->getStyle($rango)->getFont()->setSize(9);
-			$objPHPExcel->getActiveSheet()->getStyle('A' . $lin)->applyFromArray($styleArray);	
+			$objPHPExcel->getActiveSheet()->getStyle($cols[$column]['A'] . $lin)->applyFromArray($styleArray);	
 			$lastgroup=$grupo;$lin++;$cont++;
 			
-			$objPHPExcel->getActiveSheet()->setCellValue('A' . $lin, 'Artículo');
-			$objPHPExcel->getActiveSheet()->setCellValue('B' . $lin, 'Rep');
-			$objPHPExcel->getActiveSheet()->setCellValue('C' . $lin, 'Stock');
-			$objPHPExcel->getActiveSheet()->setCellValue('D' . $lin, 'Real');
-			$objPHPExcel->getActiveSheet()->getStyle('A' . $lin . ":" . 'D' . $lin)->getFont()->setSize(7);
-			$objPHPExcel->getActiveSheet()->getStyle('A' . $lin . ":" . 'D' . $lin)->applyFromArray($styleArray);
+			$objPHPExcel->getActiveSheet()->setCellValue($cols[$column]['A'] . $lin, 'Artículo');
+			$objPHPExcel->getActiveSheet()->setCellValue($cols[$column]['B'] . $lin, 'Rep');
+			$objPHPExcel->getActiveSheet()->setCellValue($cols[$column]['C'] . $lin, 'Stock');
+			$objPHPExcel->getActiveSheet()->setCellValue($cols[$column]['D'] . $lin, 'Real');
+			$objPHPExcel->getActiveSheet()->getStyle($cols[$column]['A'] . $lin . ":" . $cols[$column]['D'] . $lin)->getFont()->setSize(7);
+			$objPHPExcel->getActiveSheet()->getStyle($cols[$column]['A'] . $lin . ":" . $cols[$column]['D'] . $lin)->applyFromArray($styleArray);
 			$lin++;	$cont++;
 				
 			
 			}	
 		
-		$objPHPExcel->getActiveSheet()->setCellValue('A' . $lin, $articulo);
-		$objPHPExcel->getActiveSheet()->setCellValue('B' . $lin, $cantidad['R']);
-		$objPHPExcel->getActiveSheet()->setCellValue('C' . $lin, $cantidad['S']);
-		$objPHPExcel->getActiveSheet()->setCellValue('D' . $lin, '');
-		$objPHPExcel->getActiveSheet()->getStyle('A' . $lin . ":" . 'D' . $lin)->getFont()->setSize(7);
-		$objPHPExcel->getActiveSheet()->getStyle('A' . $lin . ":" . 'D' . $lin)->applyFromArray($styleArray);
+		$objPHPExcel->getActiveSheet()->setCellValue($cols[$column]['A'] . $lin, $articulo);
+		$objPHPExcel->getActiveSheet()->setCellValue($cols[$column]['B'] . $lin, $cantidad['R']);
+		$objPHPExcel->getActiveSheet()->setCellValue($cols[$column]['C'] . $lin, $cantidad['S']);
+		$objPHPExcel->getActiveSheet()->setCellValue($cols[$column]['D'] . $lin, '');
+		$objPHPExcel->getActiveSheet()->getStyle($cols[$column]['A'] . $lin . ":" . $cols[$column]['D'] . $lin)->getFont()->setSize(7);
+		$objPHPExcel->getActiveSheet()->getStyle($cols[$column]['A'] . $lin . ":" . $cols[$column]['D'] . $lin)->applyFromArray($styleArray);
 		$lin++;	$cont++;	
 		}}
 
