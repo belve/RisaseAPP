@@ -31,7 +31,7 @@ $colores['F']="00CC66";
 $colores['N']="FFFFFF";
 
 $anchos['A']=19;
-$anchos['B']=3;
+$anchos['B']=4;
 $anchos['C']=4;
 
 $anchos['T']=4;
@@ -154,7 +154,7 @@ $objPHPExcel->getActiveSheet()->getStyle('A' . $count . ':C' . $count)->getAlign
 $rango="A"  . $count . ":" . $ultColu  . $count;
 
 $objPHPExcel->getActiveSheet()->getStyle($rango)->applyFromArray(array('fill' => array('type' => PHPExcel_Style_Fill::FILL_SOLID,'color' => array('rgb' => 'CCCCCC')) ));
-$objPHPExcel->getActiveSheet()->getStyle($rango)->getFont()->setSize(7);
+$objPHPExcel->getActiveSheet()->getStyle($rango)->getFont()->setSize(10);
 
 
 
@@ -207,8 +207,11 @@ $objPHPExcel->getActiveSheet()->getStyle('A' . $count . ':' . $ultColu . $count)
 $objPHPExcel->getActiveSheet()->setCellValue('A' . $count, $prov);
 $objPHPExcel->getActiveSheet()->setCellValue('C' . $count, $stock);
 $rango="A" . $count . ":C" . $count;
-$objPHPExcel->getActiveSheet()->getStyle($rango)->getFont()->setSize(7);
+
+$objPHPExcel->getActiveSheet()->getStyle($rango)->getFont()->setSize(10);
 $objPHPExcel->getActiveSheet()->getStyle($rango)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+$objPHPExcel->getActiveSheet()->getStyle($rango)->applyFromArray(array('fill' => array('type' => PHPExcel_Style_Fill::FILL_SOLID,'color' => array('rgb' => 'EEEEEE')) ));
+
 
 $count2=3;	$estado="";
 foreach ($tiendas as $idt => $nom) {$count2++;
@@ -224,7 +227,7 @@ $estado=$dtiendas[$idt]['estado'];
 
 $objPHPExcel->getActiveSheet()->setCellValue($cell, $val);
 $objPHPExcel->getActiveSheet()->getStyle($cell)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-$objPHPExcel->getActiveSheet()->getStyle($cell)->getFont()->setSize(7);
+$objPHPExcel->getActiveSheet()->getStyle($cell)->getFont()->setSize(10);
 if($estado=='F'){
 $objPHPExcel->getActiveSheet()->getStyle($cell)->applyFromArray(array('fill' => array('type' => PHPExcel_Style_Fill::FILL_SOLID,'color' => array('rgb' => '00CC66')) ));	
 }

@@ -8,7 +8,7 @@ if (!$dbnivel->open()){die($dbnivel->error());};
 
 $rep=array();$grid=array();$nagru="";
 
-
+$modi=0;
 $queryp= "select id_articulo, id_tienda, cantidad, 
 (select nombre from agrupedidos where id=agrupar) as nagru,
 (select estado from agrupedidos where id=agrupar) as estado,
@@ -21,9 +21,13 @@ from pedidos where agrupar=$idagrupacion order by prov, grupo, subgrupo, codigo;
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){
 	
-$idp=$row['id'];$ida=$row['id_articulo'];$idt=$row['id_tienda'];$cant=$row['cantidad'];$nagru=$row['nagru'];$estado=$row['estado'];
+$idp=$row['id'];$ida=$row['id_articulo'];$idt=$row['id_tienda'];$cant=$row['cantidad'];$nagru=$row['nagru'];$estado=trim($row['estado']);$tip=$row['tip'];
 
 if($row['tip']==1){$todas=1;}else{$todas=0;};
+
+
+if(($tip == '2')&&($estado=='P')){$modi=1;};
+
 
 if(!array_key_exists($ida, $rep)){$rep[$ida]=0;};
 
@@ -38,37 +42,46 @@ $tieacts[$idt]=1;
 
 $html="";$cabe=array();
 
+$fila=0;
 if(count($grid)>0){
 foreach ($grid as $ida => $val){$nomb=$noms[$ida];$re=$rep[$ida];$stock=$stocks[$ida];
-
+$fila++;
 if($re > $stock){$st=" style='background-color:#F8CDD9;'";}else{$st="";};
 
 $html.="
 <tr id='$ida' $st>
 
 <td style='border-bottom: 1px solid #888888;' ondblclick='ShowDetArt(1,$ida);'>
-<input type='text' value='$nomb' class='camp_REP_art' id='z1'>
+<div class='camp_REP_art' id='z1'>$nomb</div>
 </td>
 
 <td style='width:28px;border-bottom: 1px solid #888888;'>
-<input type='text' value='$re' class='camp_REP_rep' id='z2'>
+<div class='camp_REP_rep' id='z2'>$re</div>
 </td>
 
 <td style='width:28px;border-bottom: 1px solid #888888;border-right:2px solid orange;'>
-<input type='text' value='$stock' class='camp_REP_alm' id='z3'>
+<div class='camp_REP_alm' id='z3'>$stock</div>
 </td>
 
 ";
 
-$count=0;
+$count=0;$columna=0;
 foreach ($tiendas as $idt => $nomc) {
-
 if(array_key_exists($idt, $val)){
 $count++;
 $cant=$val[$idt];$idp=$idpeds[$ida][$idt];
+$columna++;
+
+if(!$modi){
 $acciones="
-<input type='text' onfocus='this.select();' value='$cant' class='camp_REP_tie' id='$idp' onchange='updtPed($idp)' tabindex='$count'>
+<div class='camp_REP_tie' id='$idp'>$cant</div>
+";	
+	
+}else{
+$acciones="
+<input type='text' onfocus='this.select();' value='$cant' class='camp_REP_tie' id='$fila-$columna' onchange='updtPed($idp,\"$fila-$columna\")' tabindex='$fila-$columna'>
 ";
+}
 
 $html .="
 

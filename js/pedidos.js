@@ -679,4 +679,59 @@ setTimeout("timerAD(0,'timer',0);",6000);
 
 
 
+function updtPed(idp,field){
+var valor=document.getElementById(field).value;
+var url="/ajax/updatefield.php?tabla=pedidos&campo=cantidad&id=" + idp + '&value=' + valor;
+$.getJSON(url, function(data) {
+$.each(data, function(key, val) {
+});
+});	
+}
+
+
+
+
+function moveFieldGRID(value){
+		
+	var i=$("*:focus").attr("id");
+	
+	
+	
+	var datos = i.split('-');
+	var fila = datos[0]; var columna= datos[1];
+	
+	
+	
+	if(value=='left'){
+		columna--;
+		var nuevo=fila + "-" + columna;
+		};
+	
+	if(value=='right'){
+		columna++;
+		var nuevo=fila + "-" + columna;
+	};
+	
+	
+	if(value=='up'){
+		fila--;
+		var nuevo=fila + "-" + columna;
+	};
+	
+	if(value=='down'){
+		fila++
+		var nuevo=fila + "-" + columna;
+		};	
+	
+	
+	if(document.getElementById(nuevo)){
+	$('#'+ nuevo).focus();
+	}
+
+	
+}
+
+
+
+
 
