@@ -49,6 +49,8 @@ var precioneto=document.getElementById('14').value;
 var preciofran=document.getElementById('15').value;
 var temporada=document.getElementById('12').value;
 var pvp=document.getElementById('16').value;
+var detalles=document.getElementById('18').value;
+var comentarios=document.getElementById('19').value;
 
 
 if(document.getElementById('8').checked==true){var congelado=1;}else{var congelado=0;};
@@ -60,6 +62,8 @@ url = "/ajax/update2.php?tabla=articulos&campos[stock]=" + stock +
 "&campos[preciofran]=" + preciofran  +  
 "&campos[temporada]=" + temporada  + 
 "&campos[pvp]=" + pvp  +  
+"&campos[detalles]=" + detalles  +  
+"&campos[comentarios]=" + comentarios  +  
 "&campos[congelado]=" + congelado  +  
 "&id=" + id;
 $.getJSON(url, function(data) {

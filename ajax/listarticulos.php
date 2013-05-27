@@ -32,12 +32,13 @@ td		{width: 90px; border: 1px  solid #888888; margin:0px;}
 
 
 <?php
-$id_proveedor="";$id_subgrupo="";$id_color="";$codigo="";$pvp="";$desde="";$hasta="";$temporada="";$id_grupo="";
+$id_proveedor="";$id_subgrupo="";$id_color="";$codigo="";$pvp="";$comentarios="";$detalles="";$desde="";$hasta="";$temporada="";$id_grupo="";
 if(count($_GET)>0){
 	
 
 	
 foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
+
 require_once("../db.php");
 require_once("../variables.php");
 
@@ -49,14 +50,14 @@ $options="";
 
 require_once("../functions/listador.php"); 
 
-$queryp= "select * from articulos where $options;";
+$queryp= "select * from articulos where $options ORDER BY id_proveedor, id_subgrupo, codigo;";
 
 $listado="";
 
 $dbnivel->query($queryp);$count=1;
 while ($row = $dbnivel->fetchassoc()){
 $codbarras=$row['codbarras'];$refprov=$row['refprov'];	$stock=$row['stock'];	$pvp=$row['pvp'];	$temporada=$row['temporada'];
-$stockini=$row['stockini']; $congelado=$row['congelado'];	
+$stockini=$row['stockini']; $congelado=$row['congelado'];	$pco=$row['preciocosto'];	
 $ide=$row['id'];
 
 $listado .="
@@ -64,10 +65,14 @@ $listado .="
 <td style='width:79px'><input type='text' class='camp_art_codbar' value='$codbarras'></td>
 <td style='width:114px'><input type='text' class='camp_art_rpro' value='$refprov'></td>
 <td style='width:45px'><input type='text' class='camp_art_stock' value='$stock' onchange=\"modifield('articulos','stock','0V$count','$ide')\" id='0V$count'></td>
+
+
 <td style='width:45px'><input type='text' class='camp_art_pvp'   value='$pvp' onchange=\"modifield('articulos','pvp','1V$count','$ide')\" id='1V$count'></td>
 <td style='width:45px'><input type='text' class='camp_art_temp' value='$temporada' onchange=\"modifield('articulos','temporada','2V$count','$ide')\" id='2V$count'></td>
 <td style='width:45px'><input type='text' class='camp_art_stini' value='$stockini' onchange=\"modifield('articulos','stockini','3V$count','$ide')\" id='3V$count'></td>
 <td style='width:45px'><input type='text' class='camp_art_cong' value='$congelado' onchange=\"modifield('articulos','congelado','4V$count','$ide')\" id='4V$count'></td>
+
+<td style='width:45px'><input type='text' class='camp_art_pco'   value='$pco' onchange=\"modifield('articulos','preciocosto','5V$count','$ide')\" id='5V$count'></td>
 
 </tr>
 	";

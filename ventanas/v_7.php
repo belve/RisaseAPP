@@ -33,6 +33,7 @@
 	<div class="cabtab_art tab_art_temp">Temp</div>
 	<div class="cabtab_art tab_art_stini">Stock Ini</div>
 	<div class="cabtab_art tab_art_cong">Cong</div>
+	<div class="cabtab_art tab_art_pco">P.Co</div>
 </div>
 <iframe id="articulos" src="/ajax/listarticulos.php" width="537" height="500" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
 
@@ -132,7 +133,7 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 		
 		<tr>
 			<td>Precio</td>
-			<td><input class="corto" type="text" id="7" /></td>
+			<td><input class="medio" type="text" id="7" /></td>
 		</tr>
 		
 		<tr>
@@ -147,8 +148,21 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 		
 		<tr>
 			<td>Temporada</td>
-			<td><input class="corto" type="text" id="10" /></td>
+			<td><input class="medio" type="text" id="10" /></td>
 		</tr>
+		
+		
+		<tr>
+			<td>Detalles</td>
+			<td><input class="medio" type="text" id="11" /></td>
+		</tr>
+		
+		<tr>
+			<td>Comentarios</td>
+			<td><input class="medio" type="text" id="12" /></td>
+		</tr>
+		
+		
 		
 	</table>
 	

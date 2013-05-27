@@ -17,7 +17,9 @@ temporada,
 preciocosto, 
 precioneto, 
 preciofran, 
-pvp, 
+pvp,
+detalles,
+comentarios, 
 congelado, 
 codbarras, 
 id, 
@@ -51,7 +53,8 @@ while ($row = $dbnivel->fetchassoc()){
 	$valores[14]=$row['precioneto'];
 	$valores[15]=$row['preciofran'];
 	$valores[16]=$row['pvp'];
-	
+	$valores[18]=$row['detalles'];
+	$valores[19]=$row['comentarios'];
 	
 };
 

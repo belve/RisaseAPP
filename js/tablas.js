@@ -590,9 +590,10 @@ function moveFieldRepart(value){
 		var nuevo=part + "I" + fila + "P" + columna;
 		};	
 	
+		
+		setTimeout("$('#" + nuevo + "').focus();",10);
 	
 	
-	$('#'+ nuevo).focus();
 
 	
 }

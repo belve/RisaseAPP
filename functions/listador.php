@@ -15,6 +15,10 @@ if(($desde)&&($hasta)){$options .=" AND codigo >= $desde AND codigo <= $hasta";}
 if((!$desde)&&($hasta)){$options .="  AND codigo <= $hasta";};
 if(($desde)&&(!$hasta)){$options .=" AND codigo >= $desde";};
 
+if($detalles){$options .=" AND detalles LIKE '%$detalles%'";};
+if($comentarios){$options .=" AND comentarios LIKE '%$comentarios%'";};
+
+
 $options=substr($options, 4,strlen($options));
 
 #echo $options;

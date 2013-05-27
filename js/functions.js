@@ -123,6 +123,8 @@ var pvp=document.getElementById(7).value
 var desd=document.getElementById(8).value
 var hast=document.getElementById(9).value
 var temp=document.getElementById(10).value
+var detalles=document.getElementById(11).value
+var comentarios=document.getElementById(12).value
 	
 url = "/ajax/listarticulos.php?id_proveedor=" + prov
  + "&id_grupo=" + grup
@@ -132,9 +134,12 @@ url = "/ajax/listarticulos.php?id_proveedor=" + prov
  + "&pvp=" + pvp
  + "&desde=" + desd
  + "&hasta=" + hast
+ + "&detalles=" + detalles
+ + "&comentarios=" + comentarios
  + "&temporada=" + temp;
- 
- document.getElementById('articulos').src=url;
+
+
+document.getElementById('articulos').src=url;
  	
 }
   

@@ -67,6 +67,20 @@ require_once("../variables.php");
 			<td><input type="text" name="color" class="medio" style="border:0px;background-color: #C8C8C8;" id="5"></td>
 		</tr>	
 		
+		
+		<tr>
+			<td>Detalles:</td>
+			<td><input type="text" name="color" class="largo"  id="18"></td>
+		</tr>	
+		
+		<tr>
+			<td>Comentarios:</td>
+			<td><input type="text" name="color" class="largo"  id="19"></td>
+		</tr>	
+		
+		
+		
+		
 		<tr height="53">
 			<td>Dto.<input type="text" name="color" class="corto" id="6" onchange="calcosto('<?php echo "1." . $iva;?>');"> </td>
 			<td>2º Dto.<input type="text" name="color" class="corto" id="7" onchange="calcosto('<?php echo "1." . $iva;?>');"> IVA <?php echo $iva;?> %</td>
