@@ -39,8 +39,10 @@ $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){$tip=$row['tip'];$estado=$row['estado'];$idpedido=$row['id'];};	
 	
 	
-if($cant){	
-$queryp= "update repartir set cantidad=$cant, stockmin=$alarma where id_articulo=$idarti";
+#if($cant){
+if ($cant==""){$cant=0;};
+if ($alarma==""){$alarma=0;};	
+$queryp= "update repartir set cantidad=$cant, stockmin=$alarma where id_articulo=$idarti and id_tienda=$iddetr;";
 $dbnivel->query($queryp);
 
 
@@ -55,10 +57,10 @@ $queryp= "UPDATE pedidos set cantidad=$cant where id=$idpedido;";$dbnivel->query
 }
 
 
-}else{
-$queryp= "update repartir set stockmin=$alarma where id_articulo=$idarti";
-$dbnivel->query($queryp);	
-}
+#}else{
+#$queryp= "update repartir set stockmin=$alarma where id_articulo=$idarti and id_tienda=$iddetr;";
+#$dbnivel->query($queryp);	
+#}
 }else{
 
 

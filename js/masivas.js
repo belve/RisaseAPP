@@ -66,11 +66,13 @@ var url='/ajax/crate_art_grid.php?id_proveedor=' + idpro +
 '&temp=' + temp + 
 '&evcache=' + i + new Date();
 
+var aimpr=(c5*1) + 1;
+
 $.getJSON(url, function(data) {
 $.each(data, function(key, val) {
 
 var contenido=innerDoc2.getElementById('codbarras').innerHTML;
-innerDoc2.getElementById('codbarras').innerHTML=contenido + '<li onclick="copiaporta(\'' + key + '\')"  id="' + key + '">' + key + '</li>';	
+innerDoc2.getElementById('codbarras').innerHTML=contenido + '<div style="float:left" onclick="copiaporta(\'' + key + '\')"  id="' + key + '">' + key + '</div> <div style="float:left"> - ' + aimpr + '</div> <div style="clear:both;"></div>';	
   	
  
 });

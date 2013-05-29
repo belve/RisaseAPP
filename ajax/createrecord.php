@@ -19,6 +19,7 @@ $valores['lastid']=$newid;
 
 if (!$dbnivel->close()){die($dbnivel->error());};
 
+if(array_key_exists($tabla, $tab_sync)){SyncModBD($queryp);};
 
 
 echo json_encode($valores);

@@ -26,15 +26,32 @@
 <div style="position:relative; float: left;">
 	
 <div class="cabart">
-	<div class="cabtab_art tab_art_codbar">C.Barras</div>
-	<div class="cabtab_art tab_art_rpro">Ref.Prov</div>
-	<div class="cabtab_art tab_art_stock">Stock</div>
-	<div class="cabtab_art tab_art_pvp">PVP</div>
-	<div class="cabtab_art tab_art_temp">Temp</div>
-	<div class="cabtab_art tab_art_stini">Stock Ini</div>
-	<div class="cabtab_art tab_art_cong">Cong</div>
-	<div class="cabtab_art tab_art_pco">P.Co</div>
+	<div class="cabtab_art tab_art_codbar" onclick="javascript:tbord(1);" >C.Barras</div>	<input type="hidden" id="t1" value="1">
+	<div class="cabtab_art tab_art_rpro" onclick="javascript:tbord(2);" >Ref.Prov</div>		<input type="hidden" id="t2" value="1">
+	<div class="cabtab_art tab_art_stock" onclick="javascript:tbord(3);" >Stock</div>		<input type="hidden" id="t3" value="1">
+	<div class="cabtab_art tab_art_pvp" onclick="javascript:tbord(4);" >PVP</div>			<input type="hidden" id="t4" value="1">
+	<div class="cabtab_art tab_art_pco" onclick="javascript:tbord(5);" >P.Co</div>			<input type="hidden" id="t5" value="1">
+	<div class="cabtab_art tab_art_temp" onclick="javascript:tbord(6);" >Temp</div>			<input type="hidden" id="t6" value="1">
+	<div class="cabtab_art tab_art_stini" onclick="javascript:tbord(7);" >Stock Ini</div>	<input type="hidden" id="t7" value="1">
+	<div class="cabtab_art tab_art_cong" onclick="javascript:tbord(8);" >Cong</div>			<input type="hidden" id="t8" value="1">
+	
 </div>
+
+<script>
+function tbord(tab){
+if(document.getElementById('t' + tab).value==1)
+{
+	var ord=1;document.getElementById('t' + tab).value=2;
+}else{
+	var ord=2;document.getElementById('t' + tab).value=1;
+}		
+
+listaArticulos(tab,ord);		
+		
+}
+</script>
+
+
 <iframe id="articulos" src="/ajax/listarticulos.php" width="537" height="500" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
 
 
@@ -167,7 +184,7 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 	</table>
 	
 	
-	<div onclick="listaArticulos();" class="boton">Listar</div>
+	<div onclick="listaArticulos(1,1);" class="boton">Listar</div>
 	
 </div>	
 

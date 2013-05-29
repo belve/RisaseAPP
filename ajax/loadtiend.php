@@ -7,6 +7,19 @@ require_once("../variables.php");
 if (!$dbnivel->open()){die($dbnivel->error());};
 
 
+$borros=array();
+$queryp= "select id from empleados where (nombre ='' OR nombre IS NULL) and (apellido1='' OR apellido1 IS NULL) and (apellido2='' OR apellido2 IS NULL);";
+$dbnivel->query($queryp);
+while ($row = $dbnivel->fetchassoc()){$borros[]=$row['id'];};
+if(count($borros)>0){foreach($borros as $key => $id){
+$queryp= "delete from empleados where id=$id;";
+$dbnivel->query($queryp);
+SyncModBD($queryp);	
+}}
+
+
+
+
 $queryp= "select * from tiendas where id=$id";
 
 

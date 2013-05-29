@@ -118,7 +118,7 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 
 <div style="float: right"><div class="boton"  onclick="addArticulo('listador');">Listar</div></div>
 <div style="float: right"><div style="margin-right: 6px;" class="boton"  onclick="limpiarGRID('');">Limpiar grid</div></div>
-
+<div style="float: right"><div style="margin-right: 232px;" class="boton"  onclick="art_en_REP('');">Artículos en reparto</div></div>
 
 
 <div style="clear:both;"></div>

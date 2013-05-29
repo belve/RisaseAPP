@@ -18,6 +18,9 @@ while ($row = $dbnivel->fetchassoc()){$tienda=$row['id_tienda'];};
 $queryp= "INSERT INTO empleados (id,id_tienda,trabajando,orden) VALUES ($id,'$tienda','N',0);";
 
 $dbnivel->query($queryp);
+if (!$dbnivel->close()){die($dbnivel->error());};
+
+SyncModBDbytien($queryp,$idt);
 
 
 
@@ -26,8 +29,7 @@ $dbnivel->query($queryp);
 
 
 
-
-
+if (!$dbnivel->open()){die($dbnivel->error());};
 $queryp= "select * from empleados where id_tienda IN (select id_tienda from tiendas where id=$idt) ORDER BY id DESC;";
 
 $listado="";

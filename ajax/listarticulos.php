@@ -32,7 +32,7 @@ td		{width: 90px; border: 1px  solid #888888; margin:0px;}
 
 
 <?php
-$id_proveedor="";$id_subgrupo="";$id_color="";$codigo="";$pvp="";$comentarios="";$detalles="";$desde="";$hasta="";$temporada="";$id_grupo="";
+$id_proveedor="";$id_subgrupo="";$id_color="";$codigo="";$pvp="";$comentarios="";$detalles="";$desde="";$hasta="";$temporada="";$id_grupo="";$tab=1;$ord=1;
 if(count($_GET)>0){
 	
 
@@ -50,7 +50,7 @@ $options="";
 
 require_once("../functions/listador.php"); 
 
-$queryp= "select * from articulos where $options ORDER BY id_proveedor, id_subgrupo, codigo;";
+$queryp= "select * from articulos where $options $campord;";
 
 $listado="";
 
@@ -68,11 +68,14 @@ $listado .="
 
 
 <td style='width:45px'><input type='text' class='camp_art_pvp'   value='$pvp' onchange=\"modifield('articulos','pvp','1V$count','$ide')\" id='1V$count'></td>
-<td style='width:45px'><input type='text' class='camp_art_temp' value='$temporada' onchange=\"modifield('articulos','temporada','2V$count','$ide')\" id='2V$count'></td>
-<td style='width:45px'><input type='text' class='camp_art_stini' value='$stockini' onchange=\"modifield('articulos','stockini','3V$count','$ide')\" id='3V$count'></td>
-<td style='width:45px'><input type='text' class='camp_art_cong' value='$congelado' onchange=\"modifield('articulos','congelado','4V$count','$ide')\" id='4V$count'></td>
 
-<td style='width:45px'><input type='text' class='camp_art_pco'   value='$pco' onchange=\"modifield('articulos','preciocosto','5V$count','$ide')\" id='5V$count'></td>
+<td style='width:45px'><input type='text' class='camp_art_pco'   value='$pco' onchange=\"modifield('articulos','preciocosto','2V$count','$ide')\" id='2V$count'></td>
+
+
+<td style='width:45px'><input type='text' class='camp_art_temp' value='$temporada' onchange=\"modifield('articulos','temporada','3V$count','$ide')\" id='3V$count'></td>
+<td style='width:45px'><input type='text' class='camp_art_stini' value='$stockini' onchange=\"modifield('articulos','stockini','4V$count','$ide')\" id='4V$count'></td>
+<td style='width:45px'><input type='text' class='camp_art_cong' value='$congelado' onchange=\"modifield('articulos','congelado','5V$count','$ide')\" id='5V$count'></td>
+
 
 </tr>
 	";

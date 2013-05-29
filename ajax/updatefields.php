@@ -17,7 +17,7 @@ $compos=explode('V',$composicion);
 	
 $queryp= "update $tabla set " . $equivalencias[$tabla][$compos[0]] . "='$value' where id=$compos[1];";
 $dbnivel->query($queryp);
-	
+$syncsSQL[]=$queryp;	
 }
 
 
@@ -25,6 +25,6 @@ $dbnivel->query($queryp);
 
 if (!$dbnivel->close()){die($dbnivel->error());};
 
-
+if(array_key_exists($tabla, $tab_sync)){SyncModBDARRAY($syncsSQL);};
 
 ?>

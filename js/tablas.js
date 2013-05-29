@@ -206,6 +206,13 @@ innerDoc.getElementById('LinCOP').value="";
 	
 }
 
+function art_en_REP(){
+limpiarGRID();
+addArticulo('enrep');	
+}
+
+
+
 
 
 function addArticulo(codigo){
@@ -250,7 +257,9 @@ url = "/ajax/gridRepart.php?id_proveedor=" + prov
 
 
 
-
+}else if(codigo=='enrep'){ 
+	
+url = "/ajax/gridRepart.php?listador=2&ultifila=" + filas;	
 	
 }else{
 
@@ -324,6 +333,9 @@ var datos2 = point.split('P');
 var fila = datos2[0]; var columna= datos2[1];
 
 var val=document.getElementById(i).value;
+
+
+
 var CR=document.getElementById('CR'+fila);
 var CA=document.getElementById('CA'+fila);
 var stock=document.getElementById('Stock'+fila).value;
@@ -353,6 +365,8 @@ CR.value=rep;
 CA.value=newalmacen;
 document.getElementById('AI'+ fila + 'P' + columna).value=Math.round((val/100)*alarma);
 
+
+
 var alar=	document.getElementById('AI'+ fila + 'P' + columna).value;
 var iddet=	document.getElementById('BI'+ fila + 'P' + columna).value;
 var idrept=	document.getElementById('idrep').value;
@@ -369,8 +383,8 @@ $.each(data, function(key, val) {
 });
 });
 
-
-	
+if(document.getElementById('AI'+ fila + 'P' + columna).value==0){document.getElementById('AI'+ fila + 'P' + columna).value='';};
+if (val==0){document.getElementById(i).value="";};	
 }
 
 

@@ -49,15 +49,14 @@ $precioF= ($precioC - $dto1 -$dto2)  * 1.20;
 $queryp= "INSERT INTO articulos 
 (id,id_proveedor,id_subgrupo,id_color,codigo,refprov,stock,uniminimas,codbarras,temporada,preciocosto,precioneto,preciofran,pvp,congelado,stockini) 
 values 
-($idc,$id_proveedor,$idsubgrupo,$color,$ultimo,'$refprov',$cantidad,'$alarma',$codbarras,'$temp','$precioC','$precioN','$precioF','$pvp',0,'$alarma')";
+($idc,$id_proveedor,$idsubgrupo,$color,$ultimo,'$refprov',$cantidad,'$alarma',$codbarras,'$temp','$precioC','$precioN','$precioF','$pvp',0,'$alarma');";
 
 
 $dbnivel->query($queryp);
 
-
-
-
 if (!$dbnivel->close()){die($dbnivel->error());};
+
+SyncModBD($queryp);
 
 $valores[$codbarras]=$codbarras;
 echo json_encode($valores);

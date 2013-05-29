@@ -104,7 +104,7 @@ function createSubGrupo(){
 url = "/ajax/createrecord.php?tabla=subgrupos";
 $.getJSON(url, function(data) {
 $.each(data, function(key, val) {
-   if(key == 'lastid'){cargaSubGrupos(val);};
+   if(key == 'lastid'){cargaSubGrupos2(val);};
 });
 });
 	
@@ -134,6 +134,33 @@ $.each(data, function(key, val) {
 });
 });
 }
+
+
+function cargaSubGrupos2(pointer){
+var actual=	document.getElementById('1_hid').value;
+
+if (pointer == 'menos'){pointer=(actual*1)-1;};
+if (pointer == 'mas'){pointer=(actual*1)+1;};
+
+url = "/ajax/subgrupos.php?noborro=1&pointer=" + pointer;
+$.getJSON(url, function(data) {
+$.each(data, function(key, val) {
+  
+  if(key == 1){
+  	document.getElementById('1_hid').value=val;
+   	document.getElementById('1').value=val;
+   	}
+   if(key == 2){document.getElementById('2').value=val;};
+   if(key == 3){document.getElementById('3').value=val;};
+   if(key == 4){document.getElementById('4').value=val;};
+  	
+ 
+});
+});
+}
+
+
+
 
 
 function cargaSubGruposS(){
@@ -167,7 +194,7 @@ function createproveedores(){
 url = "/ajax/createrecord.php?tabla=proveedores";
 $.getJSON(url, function(data) {
 $.each(data, function(key, val) {
-   if(key == 'lastid'){cargaproveedores(val);};
+   if(key == 'lastid'){cargaproveedores2(val);};
 });
 });
 	
@@ -180,6 +207,39 @@ if (pointer == 'menos'){pointer=(actual*1)-1;};
 if (pointer == 'mas'){pointer=(actual*1)+1;};
 
 url = "/ajax/proveedores.php?pointer=" + pointer;
+$.getJSON(url, function(data) {
+$.each(data, function(key, val) {
+  
+  if(key == 1){
+  	document.getElementById('1_hid').value=val;
+   	document.getElementById('1').value=val;
+   	}
+   if(key == 2){document.getElementById('2').value=val;};
+   if(key == 3){document.getElementById('3').value=val;};
+   if(key == 4){document.getElementById('4').value=val;};
+   if(key == 5){document.getElementById('5').value=val;};
+   if(key == 6){document.getElementById('6').value=val;};
+   if(key == 7){document.getElementById('7').value=val;};
+   if(key == 8){document.getElementById('8').value=val;};
+   if(key == 9){document.getElementById('9').value=val;};
+   if(key == 10){document.getElementById('10').value=val;};
+   if(key == 11){document.getElementById('11').value=val;};
+   if(key == 12){document.getElementById('12').value=val;};
+   
+  	
+ 
+});
+});
+}
+
+
+function cargaproveedores2(pointer){
+var actual=	document.getElementById('1_hid').value;
+
+if (pointer == 'menos'){pointer=(actual*1)-1;};
+if (pointer == 'mas'){pointer=(actual*1)+1;};
+
+url = "/ajax/proveedores.php?noborro=1&pointer=" + pointer;
 $.getJSON(url, function(data) {
 $.each(data, function(key, val) {
   
@@ -227,6 +287,10 @@ var fax=document.getElementById('10').value;
 var email=document.getElementById('11').value;
 var nomcorto=document.getElementById('12').value;
 
+if(nomcorto.length>6){
+	
+alert('La abreviatura del proveedor debe tener un máximo de 6 caracteres');	
+}else{
 	
 url = "/ajax/update2.php?tabla=proveedores"
 + "&campos[nombre]=" + nombre  
@@ -244,6 +308,10 @@ url = "/ajax/update2.php?tabla=proveedores"
 +  "&id=" + id;
 $.getJSON(url, function(data) {
 });
+
+
+}
+
 }
 
 

@@ -13,10 +13,17 @@ if (!$dbnivel->open()){die($dbnivel->error());};
 
 
 
-if($listador){
+if($listador==1){
 $options="";
+$comentarios="";$detalles="";$tab=1;$ord=1;
 require_once("../functions/listador.php"); 
 $quer2= "select id from articulos where $options";	
+}
+elseif($listador==2)
+{
+	
+$quer2= "select distinct id_articulo as id from pedidos where tip=1 AND (estado='-' or estado='A')";
+
 }else{
 $quer2= "select id from articulos where codbarras=$codbarras";
 }
@@ -28,8 +35,7 @@ $dtiendas=array();
 
 $queryp= "select id, codbarras, refprov, stock, 
 (select sum(cantidad) from pedidos where pedidos.id_articulo=articulos.id AND estado NOT LIKE 'F') as penrepartir
-from articulos where id IN ($quer2);";
-
+from articulos where id IN ($quer2) ORDER BY id_proveedor, id_subgrupo, codigo;";
 
 
 $dbnivel->query($queryp);

@@ -70,7 +70,7 @@ $selector2="<td style='width:13px;border:1px solid #C8C8C8;background-color:#C8C
 }else{$sumatorio="";$selector="";$selector2="";};	
 
 
-
+if($canttienda==0){$canttienda='';};
 $htmlART .="
 <td style='width:24px;border-bottom: 1px solid #dddddd;' class='$estado'>
 $sumatorio
@@ -81,7 +81,7 @@ $selector
 ";	
 
 
-
+if($alarm==0){$alarm='';};
 $htmlALM .="
 <td style='width:24px;' class='$estado'>								<input onchange=\"cambiaFieldRep('AI$lastid" . "P" . "$idti')\" id='AI$lastid" . "P" . "$idti' type='text' class='camp_REP_tie' value='$alarm' onfocus='this.select();'></td>
 $selector2

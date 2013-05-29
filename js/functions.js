@@ -112,7 +112,7 @@ function cargasubgrupo (id) {
 
 
 
-function listaArticulos(){
+function listaArticulos(tab,ord){
 timer(1);
 var prov=document.getElementById(2).value
 var grup=document.getElementById(3).value
@@ -136,6 +136,8 @@ url = "/ajax/listarticulos.php?id_proveedor=" + prov
  + "&hasta=" + hast
  + "&detalles=" + detalles
  + "&comentarios=" + comentarios
+ + "&tab=" + tab
+ + "&ord=" + ord
  + "&temporada=" + temp;
 
 

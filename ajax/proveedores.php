@@ -1,4 +1,5 @@
 <?php
+$noborro="";
 foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
 require_once("../db.php");
 require_once("../variables.php");
@@ -34,8 +35,21 @@ while ($row = $dbnivel->fetchassoc()){
 	
 };
 
+$syncsSQL=array();
+if(!$noborro){
+$borros=array();
+$queryp= "select id from proveedores where nomcorto IS NULL";	
+$dbnivel->query($queryp);
+while ($row = $dbnivel->fetchassoc()){$borros[]=$row['id'];};
+
+if(count($borros)>0){foreach($borros as $key => $idb){
+$queryp= "delete from proveedores where id=$idb;";	
+$dbnivel->query($queryp);	$syncsSQL[]=$queryp;
+}}
+}
+
 if (!$dbnivel->close()){die($dbnivel->error());};
 
-
+if(count($syncsSQL)>0){SyncModBDARRAY($syncsSQL);};
 
 echo json_encode($valores);

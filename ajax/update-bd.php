@@ -11,6 +11,6 @@ $dbnivel->query($queryp);
 
 if (!$dbnivel->close()){die($dbnivel->error());};
 
-
+if(array_key_exists($tabla, $tab_sync)){SyncModBD($queryp);};
 
 ?>
