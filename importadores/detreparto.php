@@ -118,7 +118,7 @@ $valopi=substr($valopi, 0,strlen($valopi)-1);
 
 $queryp= "INSERT INTO $nNtab ($sqlcamps) values $valopi;";
 $dbnivel->query($queryp);
-#echo $queryp . "\n";
+echo $queryp . "\n";
 
 if (!$dbnivel->close()){die($dbnivel->error());};
 
