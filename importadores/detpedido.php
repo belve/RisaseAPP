@@ -1,5 +1,5 @@
 <?php 
-$ultREP=6229;
+$ultREP=6228;
 set_time_limit(0);
 foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
 
@@ -16,7 +16,7 @@ $queryp= "select id,id_tienda from tiendas";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){$T[$row['id_tienda']]=$row['id'];};
 
-$queryp= "select id, nombre, estado from agrupedidos where id > $ultREP AND tip=2 ORDER BY id limit 5;";
+$queryp= "select id, nombre, estado from agrupedidos where id > $ultREP AND tip=2 ORDER BY id limit 10;";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){
 	
@@ -138,7 +138,7 @@ $queryp= "INSERT INTO pedidos (agrupar,tip,$sqlcamps) values $valopi2;";
 
 echo $queryp;
 
-#$dbnivel->query($queryp);
+$dbnivel->query($queryp);
 
 
 
@@ -146,7 +146,7 @@ echo $queryp;
 if (!$dbnivel->close()){die($dbnivel->error());};
 
 $ultREP++;
-$ultREP=$ultREP + 4;
+$ultREP=$ultREP + 9;
 ?>
 
 
