@@ -2,7 +2,7 @@
 $ini=2001;
 set_time_limit(0);
 foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
-
+$valores=array();
 
 ##### datos OLD
 $Ntab='Repartos';
