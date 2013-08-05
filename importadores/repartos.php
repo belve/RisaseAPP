@@ -1,5 +1,5 @@
 <?php 
-$ini=2001;
+$ini=2003;
 set_time_limit(0);
 foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
 
@@ -93,5 +93,8 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 $ini++;
 ?>
 
+<script>
+	 window.location.href = "/importadores/repartos.php?ini=<?php echo $ini;?>";
+</script>
 
 
