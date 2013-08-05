@@ -88,7 +88,7 @@ $dbnivel=new DB('192.168.1.11','edu','admin','risase');
 if (!$dbnivel->open()){die($dbnivel->error());};
 
 
-$valores="";
+$valopi="";
 foreach ($valores as $val1 => $val2) {
 $nval1=$val2[1];$nval2=$val2[2];$nval3=$val2[3];
 
@@ -102,12 +102,12 @@ foreach ($val2 as $nnkey => $valuecamp)	{
 $sqlcamps=substr($sqlcamps, 0,strlen($sqlcamps)-1);	
 $sqlvals=substr($sqlvals, 0,strlen($sqlvals)-1);	
 	
-$valores .= "('$val1',$sqlvals),";
+$valopi .= "('$val1',$sqlvals),";
 
 }
 
-$valores=substr($valores, 0,strlen($valores)-1);
-$queryp= "INSERT INTO $nNtab ($nNid,$sqlcamps) values " . $valores . ";";
+$valopi=substr($valopi, 0,strlen($valopi)-1);
+$queryp= "INSERT INTO $nNtab ($nNid,$sqlcamps) values " . $valopi . ";";
 $dbnivel->query($queryp);
 
 if (!$dbnivel->close()){die($dbnivel->error());};
