@@ -94,7 +94,7 @@ $ini++;
 ?>
 
 <script>
-	 window.location.href = "/importadores/repartos.php?ini=<?php echo $ini;?>";
+	 window.location.href = "/importadores/pedidos.php?ini=<?php echo $ini;?>";
 </script>
 
 
