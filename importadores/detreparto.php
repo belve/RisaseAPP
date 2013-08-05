@@ -140,10 +140,12 @@ $valopi2=substr($valopi2, 0,strlen($valopi2)-1);
 $queryp= "INSERT INTO $nNtab ($sqlcamps) values $valopi;";
 $dbnivel->query($queryp);
 
+echo $queryp;
+
 $queryp= "INSERT INTO pedidos (agrupar,tip,id_articulo,id_tienda,cantidad,estado) values $valopi2;";
 $dbnivel->query($queryp);
 
-echo $queryp . "\n";
+
 
 if (!$dbnivel->close()){die($dbnivel->error());};
 
