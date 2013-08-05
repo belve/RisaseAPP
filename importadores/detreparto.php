@@ -103,15 +103,15 @@ odbc_close($conn);
 
 
 
-$valopi="";
-foreach ($valores as $val1 => $val2a) {foreach($val2a as $cuenta => $val2){
+$valopi="";$valopi2="";
 
+foreach ($valores as $val1 => $val2a) {foreach($val2a as $cuenta => $val2){
 
 $sqlcamps="";$sqlvals="";
 foreach ($val2 as $nnkey => $valuecamp)	{
 	
 if($nnkey==2){$a_idart=$valuecamp;};
-if($nnkey==3){$valuecamp=$T[$valuecamp];$a_idtt=$T[$valuecamp];};
+if($nnkey==3){$valuecamp=$T[$valuecamp];$a_idtt=$valuecamp;};
 if($nnkey==4){$a_cant=$valuecamp;};
 if($nnkey==7){$a_est=$valuecamp;};
 
