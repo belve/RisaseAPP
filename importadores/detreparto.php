@@ -3,7 +3,7 @@ $ultREP=0;
 set_time_limit(0);
 foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
 
-
+$ultREP=$ultREP*1;
 
 
 
@@ -147,7 +147,7 @@ $dbnivel->query($queryp);
 
 if (!$dbnivel->close()){die($dbnivel->error());};
 
-$ultREP=$ultREP+5;
+$ultREP=$ultREP + 5;
 ?>
 
 
