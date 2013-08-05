@@ -1,5 +1,5 @@
 <?php 
-$ultREP=700;
+$ultREP=1;
 set_time_limit(0);
 foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
 
@@ -16,7 +16,7 @@ $queryp= "select id,id_tienda from tiendas";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){$T[$row['id_tienda']]=$row['id'];};
 
-$queryp= "select id, nombre from agrupedidos where id > $ultREP ORDER BY id limit 1;";
+$queryp= "select id, nombre from agrupedidos where id > $ultREP ORDER BY id limit 50;";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){$cuales[$row['id']]=$row['nombre'];};
 
