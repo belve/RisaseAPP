@@ -82,7 +82,7 @@ foreach($cuales as $id => $vales){
 
 $nomr=$vales['n'];
 
-$sql="SELECT * FROM $Ntab where det_idreparto='$nomr';";
+$sql="SELECT * FROM $Ntab where det_idPeparto='$nomr';";
 
 
 $rs=odbc_exec($conn,$sql);
