@@ -16,12 +16,6 @@ $queryp= "select id,id_tienda from tiendas";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){$T[$row['id_tienda']]=$row['id'];};
 
-$queryp= "select max(id_reparto) as ultimo from detreparto;";
-$dbnivel->query($queryp);
-while ($row = $dbnivel->fetchassoc()){$ultREP=$row['ultimo'];};
-
-if(!$ultREP){$ultREP="0";};
-
 $queryp= "select id, nombre from agrupedidos where id > $ultREP ORDER BY id limit 1;";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){$cuales[$row['id']]=$row['nomrep'];};
