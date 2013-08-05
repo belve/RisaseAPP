@@ -18,7 +18,7 @@ while ($row = $dbnivel->fetchassoc()){$T[$row['id_tienda']]=$row['id'];};
 
 $queryp= "select id, nombre from agrupedidos where id > $ultREP ORDER BY id limit 1;";
 $dbnivel->query($queryp);
-while ($row = $dbnivel->fetchassoc()){$cuales[$row['id']]=$row['nomrep'];};
+while ($row = $dbnivel->fetchassoc()){$cuales[$row['id']]=$row['nombre'];};
 
 
 
