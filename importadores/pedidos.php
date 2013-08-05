@@ -33,7 +33,7 @@ if (!$conn)
   {exit("Connection Failed: " . $conn);}
 
 
-$sql="SELECT * FROM $Ntab where rep_fecha <= '31/12/$ini' AND rep_fecha >= '01/01/$ini';";
+$sql="SELECT * FROM $Ntab where pti_FechaPedido <= '31/12/$ini' AND pti_FechaPedido >= '01/01/$ini';";
 
 
 $rs=odbc_exec($conn,$sql);
