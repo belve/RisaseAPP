@@ -1,5 +1,5 @@
 <?php 
-$ultREP=0;
+$ultREP=700;
 set_time_limit(0);
 foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
 
@@ -22,7 +22,7 @@ while ($row = $dbnivel->fetchassoc()){$ultREP=$row['ultimo'];};
 
 if(!$ultREP){$ultREP="0";};
 
-$queryp= "select id, nomrep from repartos where id > $ultREP ORDER BY id limit 1;";
+$queryp= "select id, nombre from agrupedidos where id > $ultREP ORDER BY id limit 1;";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){$cuales[$row['id']]=$row['nomrep'];};
 
@@ -46,14 +46,14 @@ $Ntab='DetalleReparto';
 $camp[2]='det_idarticulo';
 $camp[3]='det_idtienda';
 $camp[4]='det_cantidad';
-$camp[5]='det_recibida';
+
 $camp[6]='det_stockmin';
 $camp[7]='det_estado';
 
 
 
 ##### datos NEW
-$nNtab="detreparto";
+$nNtab="repartir";
 
 $nNid='id';
 
@@ -62,7 +62,7 @@ $nNid='id';
 $ncamp[2]='id_articulo';
 $ncamp[3]='id_tienda';
 $ncamp[4]='cantidad';
-$ncamp[5]='recibida';
+
 $ncamp[6]='stockmin';
 $ncamp[7]='estado';
 
@@ -117,8 +117,8 @@ if($nnkey==3){$valuecamp=$T[$valuecamp];};
 $sqlcamps=substr($sqlcamps, 0,strlen($sqlcamps)-1);	
 $sqlvals=substr($sqlvals, 0,strlen($sqlvals)-1);	
 	
-$queryp= "INSERT INTO $nNtab (id_reparto,$sqlcamps) values ($val1,$sqlvals);";
-$dbnivel->query($queryp);
+$queryp= "INSERT INTO $nNtab ($sqlcamps) values ($val1,$sqlvals);";
+#$dbnivel->query($queryp);
 #echo $queryp . "\n";
 }}
 
@@ -127,9 +127,9 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 
 ?>
 
-
+<!--
 <script>
-	 window.location.href = "/importadores/detreparto.php";
+	window.location.href = "/importadores/detreparto.php"; 
 </script>
-
+-->
 
