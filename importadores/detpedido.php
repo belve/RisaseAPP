@@ -20,12 +20,13 @@ $queryp= "select id, nombre, estado from agrupedidos where id > $ultREP AND tip=
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){
 	
-	$check=substr($row['nombre'],3,1);
-	if(is_numeric($check*1)){
-	$tiend=	substr($row['nombre'],0,3);
-	}else{
+			
+	if(array_key_exists(substr($row['nombre'],0,4), $T)){
 	$tiend=	substr($row['nombre'],0,4);	
+	}else{
+	$tiend=	substr($row['nombre'],0,3);	
 	}
+		
 		
 	$cuales[$row['id']]['n']=$row['nombre'];
 	$cuales[$row['id']]['e']=$row['estado'];
