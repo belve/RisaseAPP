@@ -45,6 +45,12 @@ $camp[6]='det_stockmin';
 $camp[7]='det_estado';
 
 
+$camp2[2]='det_idarticulo';
+$camp2[3]='det_idtienda';
+$camp2[4]='det_cantidad';
+$camp2[7]='det_estado';
+
+
 
 ##### datos NEW
 $nNtab="repartir";
@@ -59,6 +65,8 @@ $ncamp[4]='cantidad';
 
 $ncamp[6]='stockmin';
 $ncamp[7]='estado';
+
+
 
 
 
@@ -101,8 +109,15 @@ foreach ($valores as $val1 => $val2a) {foreach($val2a as $cuenta => $val2){
 
 $sqlcamps="";$sqlvals="";
 foreach ($val2 as $nnkey => $valuecamp)	{
+	
+if($nnkey==2){$a_idart=$valuecamp;};
+if($nnkey==3){$valuecamp=$T[$valuecamp];$a_idtt=$T[$valuecamp];};
+if($nnkey==4){$a_cant=$valuecamp;};
+if($nnkey==7){$a_est=$valuecamp;};
 
-if($nnkey==3){$valuecamp=$T[$valuecamp];};
+
+
+
 		
 	$sqlcamps .= "$ncamp[$nnkey],";
 	$sqlvals .= "'$valuecamp',";
@@ -110,14 +125,24 @@ if($nnkey==3){$valuecamp=$T[$valuecamp];};
 	
 $sqlcamps=substr($sqlcamps, 0,strlen($sqlcamps)-1);	
 $sqlvals=substr($sqlvals, 0,strlen($sqlvals)-1);	
-	
-$valopi .="($val1,$sqlvals),";
+
+$valopi .="($sqlvals),";
+
+
+$valopi2 .="($val1,'1','$a_idart','$a_idtt','$a_cant','$a_est'),";
 }}
 
+
+
 $valopi=substr($valopi, 0,strlen($valopi)-1);
+$valopi2=substr($valopi2, 0,strlen($valopi2)-1);
 
 $queryp= "INSERT INTO $nNtab ($sqlcamps) values $valopi;";
 $dbnivel->query($queryp);
+
+$queryp= "INSERT INTO pedidos (agrupar,tip,id_articulo,id_tienda,cantidad,estado) values $valopi2;";
+$dbnivel->query($queryp);
+
 echo $queryp . "\n";
 
 if (!$dbnivel->close()){die($dbnivel->error());};
