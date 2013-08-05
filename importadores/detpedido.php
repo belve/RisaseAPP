@@ -52,13 +52,12 @@ $Ntab='DetallePedido';
 
 $camp[5]='det_idArticulo';
 $camp[6]='det_Unidades';
-
+$camp[7]='det_PrecioVenta';
 
 
 
 ##### datos NEW
 $nNtab="repartir";
-
 $nNid='id';
 
 
@@ -66,6 +65,7 @@ $ncamp[1]='id_tienda';
 $ncamp[2]='estado';
 $ncamp[5]='id_articulo';
 $ncamp[6]='cantidad';
+$ncamp[7]='pventa';
 
 
 
