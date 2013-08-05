@@ -95,7 +95,7 @@ odbc_close($conn);
 
 
 
-
+$valopi="";
 foreach ($valores as $val1 => $val2a) {foreach($val2a as $cuenta => $val2){
 
 
