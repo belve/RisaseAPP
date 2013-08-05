@@ -33,7 +33,7 @@ if (!$conn)
   {exit("Connection Failed: " . $conn);}
 
 
-$sql="SELECT TOP 50 * FROM $Ntab where control < 1 ;";
+$sql="SELECT * FROM $Ntab where rep_fecha <= '31/12/$ini' AND rep_fecha >= '01/01/$ini';";
 
 
 $rs=odbc_exec($conn,$sql);
@@ -56,7 +56,6 @@ foreach($camp as $nkey => $nomcampo){
 
 odbc_close($conn);
 
-
 print_r ($valores);
 
 require_once("../db.php");
@@ -66,7 +65,9 @@ $dbnivel=new DB('192.168.1.11','edu','admin','risase');
 if (!$dbnivel->open()){die($dbnivel->error());};
 
 
+
 ?>
+
 
 
 
