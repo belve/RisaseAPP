@@ -111,10 +111,14 @@ if($nnkey==3){$valuecamp=$T[$valuecamp];};
 $sqlcamps=substr($sqlcamps, 0,strlen($sqlcamps)-1);	
 $sqlvals=substr($sqlvals, 0,strlen($sqlvals)-1);	
 	
-$queryp= "INSERT INTO $nNtab ($sqlcamps) values ($val1,$sqlvals);";
-#$dbnivel->query($queryp);
-#echo $queryp . "\n";
+$valopi .="($val1,$sqlvals),";
 }}
+
+$valopi=substr($valopi, 0,strlen($valopi)-1);
+
+$queryp= "INSERT INTO $nNtab ($sqlcamps) values $valopi;";
+$dbnivel->query($queryp);
+#echo $queryp . "\n";
 
 if (!$dbnivel->close()){die($dbnivel->error());};
 
