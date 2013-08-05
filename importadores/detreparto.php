@@ -1,5 +1,5 @@
 <?php 
-$ultREP=1;
+$ultREP=0;
 set_time_limit(0);
 foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
 
@@ -16,7 +16,7 @@ $queryp= "select id,id_tienda from tiendas";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){$T[$row['id_tienda']]=$row['id'];};
 
-$queryp= "select id, nombre from agrupedidos where id > $ultREP ORDER BY id limit 50;";
+$queryp= "select id, nombre from agrupedidos where id > $ultREP ORDER BY id limit 10;";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){$cuales[$row['id']]=$row['nombre'];};
 
@@ -140,8 +140,6 @@ $valopi2=substr($valopi2, 0,strlen($valopi2)-1);
 $queryp= "INSERT INTO $nNtab ($sqlcamps) values $valopi;";
 $dbnivel->query($queryp);
 
-echo $queryp;
-
 $queryp= "INSERT INTO pedidos (agrupar,tip,id_articulo,id_tienda,cantidad,estado) values $valopi2;";
 $dbnivel->query($queryp);
 
@@ -149,12 +147,12 @@ $dbnivel->query($queryp);
 
 if (!$dbnivel->close()){die($dbnivel->error());};
 
-
+$ultREP=$ultREP+10;
 ?>
 
-<!--
+
 <script>
-	window.location.href = "/importadores/detreparto.php"; 
+	window.location.href = "/importadores/detreparto.php?ultREP=<?php echo $ultREP; ?>"; 
 </script>
--->
+
 
