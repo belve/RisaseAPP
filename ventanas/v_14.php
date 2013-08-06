@@ -282,9 +282,12 @@ echo "<div onclick='sumatienda($postiendas,\"$nomt\")' class='cabtab_REP tab_REP
 
 
 <script>
-cargaAgrupados(<?php echo $tip;?>,0);
-cargaAgrupados2(<?php echo $tip;?>,0);
-cargaPendientes(<?php echo $tip;?>);
+
+
+setTimeout('cargaAgrupados(<?php echo $tip;?>,0);', 2000); 
+setTimeout('cargaAgrupados2(<?php echo $tip;?>,0);', 2000); 
+setTimeout('cargaPendientes(<?php echo $tip;?>);', 2000); 
+
 
 </script>
 	
