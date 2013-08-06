@@ -7,7 +7,7 @@ if (!$conn)
   {exit("Connection Failed: " . $conn);}
 
 
-$sql="SELECT art_idArticulo, art_UniStock, art_UniMini FROM Articulos;";
+$sql="SELECT * FROM Articulos;";
 
 
 $rs=odbc_exec($conn,$sql);
