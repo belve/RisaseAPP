@@ -32,12 +32,7 @@ body { background-color: white;}
 
 <input type='hidden' value='' id='agrupSel'>
 
-<div id="agrupaciones">
-
-
-
-
-</div>
+<div id="agrupaciones"> </div>
 
 
 </body></html>

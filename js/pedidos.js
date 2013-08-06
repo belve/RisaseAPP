@@ -54,7 +54,7 @@ $.each(data, function(key, val) {
 
 var iframe = document.getElementById('agrupaciones');
 var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
-if(key=='html'){innerDoc.getElementById('agrupaciones').innerHTML=val;};		
+if(key=='html'){innerDoc.getElementById('agrupaciones').innerHTML=val;};			
 	
 });
 });	
