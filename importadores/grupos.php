@@ -12,7 +12,7 @@ $nNtab="grupos";
 $nNid='id';
 $nNnom='nombre';
 
-$conn=odbc_connect('risase','edu','admin');
+$conn=odbc_connect('risasenew','edu','admin');
 
 if (!$conn)
   {exit("Connection Failed: " . $conn);}

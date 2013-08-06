@@ -27,7 +27,7 @@ $ncamp[2]='fecha';
 $ncamp[3]='estado';
 
 
-$conn=odbc_connect('risase','edu','admin');
+$conn=odbc_connect('risasenew','edu','admin');
 
 if (!$conn)
   {exit("Connection Failed: " . $conn);}
