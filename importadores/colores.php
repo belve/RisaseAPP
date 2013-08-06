@@ -2,7 +2,7 @@
 set_time_limit(0);
 
 
-$conn=odbc_connect('risase','edu','admin');
+$conn=odbc_connect('risasenew','edu','admin');
 
 if (!$conn)
   {exit("Connection Failed: " . $conn);}
