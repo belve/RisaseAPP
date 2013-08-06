@@ -22,7 +22,7 @@ while (odbc_fetch_row($rs))
 
 	$art_idArticulo=trim(utf8_encode(odbc_result($rs,'art_idArticulo')));
 	$art_UniStock=trim(utf8_encode(odbc_result($rs,'art_UniStock')));
-	$art_UniMini=trim(utf8_encode(odbc_result($rs,'art_UniMini')));
+	$art_UniMini=trim(utf8_encode(odbc_result($rs,'art_UniMinimas')));
 	
 	$values .="('$art_idArticulo','$art_UniStock','$art_UniMini'),";
   }
