@@ -56,6 +56,9 @@ foreach($camp as $nkey => $nomcampo){
 
 odbc_close($conn);
 
+
+print_r($valores);
+
 require_once("../db.php");
 
 
@@ -91,10 +94,11 @@ if($ini <= 2011){$dbnivel->query($queryp);};
 if (!$dbnivel->close()){die($dbnivel->error());};
 
 $ini++;
-?>
 
+?>
+<!--
 <script>
 	 window.location.href = "/importadores/pedidos.php?ini=<?php echo $ini;?>";
 </script>
-
+-->
 
