@@ -83,7 +83,7 @@ $valopi .="($sqlvals,2),";
 $valopi=substr($valopi, 0,strlen($valopi)-1);	
 
 $queryp= "INSERT INTO $nNtab ($sqlcamps,tip) values $valopi;";
-if($ini <= 2011){$dbnivel->query($queryp);};
+$dbnivel->query($queryp);
 #echo $queryp . "\n";
 
 
