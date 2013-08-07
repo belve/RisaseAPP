@@ -24,7 +24,7 @@ $count=1;
 while (odbc_fetch_row($rs))
 {
 
-print_r($rs);
+echo $rs['pti_FechaPedido'] . "<br>";
 
 }
 
