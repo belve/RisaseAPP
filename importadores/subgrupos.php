@@ -18,7 +18,7 @@ $nNrel='id_grupo';
 $nNnom='nombre';
 $nNclave='clave';
 
-$conn=odbc_connect('risasenew','edu','admin');
+$conn=odbc_connect('risasenew','remoto','azul88');
 
 if (!$conn)
   {exit("Connection Failed: " . $conn);}

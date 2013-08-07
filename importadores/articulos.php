@@ -52,7 +52,7 @@ $ncamp[15]='congelado';
 $ncamp[16]='stockini';
 
 
-$conn=odbc_connect('risasenew','edu','admin');
+$conn=odbc_connect('risasenew','remoto','azul88');
 
 if (!$conn)
   {exit("Connection Failed: " . $conn);}
