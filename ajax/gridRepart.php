@@ -1,4 +1,6 @@
 <?php
+set_time_limit(0);
+
 $listador="";
 foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
 require_once("../db.php");
@@ -38,13 +40,17 @@ $queryp= "select id, codbarras, refprov, stock,
 from articulos where id IN ($quer2) ORDER BY id_proveedor, id_subgrupo, codigo;";
 
 
-$dbnivel->query($queryp); echo $queryp;
+$dbnivel->query($queryp); 
 while ($row = $dbnivel->fetchassoc()){
 $dart[$row['id']]['codbarras']=$row['codbarras'];	
 $dart[$row['id']]['refprov']=$row['refprov'];	
 $dart[$row['id']]['stock']=$row['stock'] -$row['penrepartir']; 			
 }	
-	
+
+echo $queryp;	
+echo "------ <br>";	
+echo $dbnivel->error();
+echo "<br";
 
 
 $queryp= "select 
@@ -62,15 +68,11 @@ $grid[$row['id_articulo']][$row['id_tienda']]['alarma']=$row['stockmin'];
 $grid[$row['id_articulo']][$row['id_tienda']]['id']=$row['id_tienda'];	
 }	
 	
-#print_r($grid);
-	
-#$grid[16872][30]['cantidad']=10;	
-#$grid[16872][30]['alarma']=5;
-#$grid[16872][30]['id']=21;	
+echo $queryp;	
+echo "------ <br>";	
+echo $dbnivel->error();
+echo "<br";
 
-#$dart[16872]['codbarras']=1515151;	
-#$dart[16872]['refprov']=150;	
-#$dart[16872]['stock']=20; 	
 
 
 	
