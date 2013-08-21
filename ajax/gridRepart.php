@@ -50,7 +50,8 @@ $dart[$row['id']]['stock']=$row['stock'] -$row['penrepartir'];
 echo $queryp;	
 echo "------ <br>";	
 echo $dbnivel->error();
-echo "<br";
+echo "------ <br>";	
+echo "<br>";
 
 
 $queryp= "select 
@@ -61,7 +62,7 @@ id_tienda
 from repartir where id_articulo IN ($quer2);";
 
 
-$dbnivel->query($queryp);echo $queryp;
+$dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){
 $grid[$row['id_articulo']][$row['id_tienda']]['cantidad']=$row['cantidad'];	
 $grid[$row['id_articulo']][$row['id_tienda']]['alarma']=$row['stockmin'];
@@ -71,7 +72,8 @@ $grid[$row['id_articulo']][$row['id_tienda']]['id']=$row['id_tienda'];
 echo $queryp;	
 echo "------ <br>";	
 echo $dbnivel->error();
-echo "<br";
+echo "------ <br>";	
+echo "<br>";
 
 
 
