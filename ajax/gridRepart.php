@@ -47,11 +47,7 @@ $dart[$row['id']]['refprov']=$row['refprov'];
 $dart[$row['id']]['stock']=$row['stock'] -$row['penrepartir']; 			
 }	
 
-echo $queryp;	
-echo "------ <br>";	
-echo $dbnivel->error();
-echo "------ <br>";	
-echo "<br>";
+
 
 
 $queryp= "select 
@@ -69,11 +65,7 @@ $grid[$row['id_articulo']][$row['id_tienda']]['alarma']=$row['stockmin'];
 $grid[$row['id_articulo']][$row['id_tienda']]['id']=$row['id_tienda'];	
 }	
 	
-echo $queryp;	
-echo "------ <br>";	
-echo $dbnivel->error();
-echo "------ <br>";	
-echo "<br>";
+
 
 
 
