@@ -19,15 +19,15 @@ if($listador==1){
 $options="";
 $comentarios="";$detalles="";$tab=1;$ord=1;
 require_once("../functions/listador.php"); 
-$quer2= "select id from articulos where $options";	
+$quer2= "select id from articulos where $options;";	
 }
 elseif($listador==2)
 {
 	
-$quer2= "select distinct id_articulo as id from pedidos where tip=1 AND (estado='-' or estado='A')";
+$quer2= "select distinct id_articulo as id from pedidos where tip=1 AND (estado='-' or estado='A');";
 
 }else{
-$quer2= "select id from articulos where codbarras=$codbarras";
+$quer2= "select id from articulos where codbarras=$codbarras;";
 }
 
 
@@ -35,9 +35,15 @@ $quer2= "select id from articulos where codbarras=$codbarras";
 $dtiendas=array();
 
 
+$idsabuscar="";
+$dbnivel->query($quer2); 
+while ($row = $dbnivel->fetchassoc()){$idsabuscar .=$row['id'] . ",";};
+$idsabuscar=substr($idsabuscar,0,strlen($idsabuscar)-1);
+
+
 $queryp= "select id, codbarras, refprov, stock, 
 (select sum(cantidad) from pedidos where pedidos.id_articulo=articulos.id AND estado NOT LIKE 'F') as penrepartir
-from articulos where id IN ($quer2) ORDER BY id_proveedor, id_subgrupo, codigo;";
+from articulos where id IN ($idsabuscar) ORDER BY id_proveedor, id_subgrupo, codigo;";
 
 
 $dbnivel->query($queryp); 
