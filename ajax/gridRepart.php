@@ -46,6 +46,7 @@ $queryp= "select id, codbarras, refprov, stock,
 from articulos where id IN ($idsabuscar) ORDER BY id_proveedor, id_subgrupo, codigo;";
 
 
+
 $dbnivel->query($queryp); 
 while ($row = $dbnivel->fetchassoc()){
 $dart[$row['id']]['codbarras']=$row['codbarras'];	
@@ -61,7 +62,7 @@ id_articulo,
 cantidad, 
 stockmin, 
 id_tienda
-from repartir where id_articulo IN ($quer2);";
+from repartir where id_articulo IN ($idsabuscar);";
 
 
 $dbnivel->query($queryp);
