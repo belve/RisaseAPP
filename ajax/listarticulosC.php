@@ -32,7 +32,13 @@ td		{width: 90px; border: 1px  solid #888888; margin:0px;}
 
 
 <?php
-$id_proveedor="";$id_subgrupo="";$id_color="";$codigo="";$pvp="";$desde="";$hasta="";$temporada="";$hago="";
+$id_proveedor="";$id_grupo="";$id_subgrupo="";$id_color="";$codigo="";$pvp="";$desde="";$hasta="";$temporada="";$hago="";
+
+$detalles="";
+$comentarios="";
+$ord=1;
+$tab=1;
+
 if(count($_GET)>0){
 	
 
@@ -45,19 +51,19 @@ require_once("../variables.php");
 if (!$dbnivel->open()){die($dbnivel->error());};
 
 
-$options="";
+$options="";$forsync="";
 require_once("../functions/listador.php");### recupera $options
 
 
 if($hago=='c'){
 $queryp= "UPDATE articulos set congelado=1 where $options;";
-$dbnivel->query($queryp);	
+$dbnivel->query($queryp);	$forsync=$queryp;
 }
 
 
 if($hago=='d'){
 $queryp= "UPDATE articulos set congelado=0 where $options;";
-$dbnivel->query($queryp);	
+$dbnivel->query($queryp);	$forsync=$queryp;
 }
 
 
@@ -84,7 +90,7 @@ $count++;
 
 if (!$dbnivel->close()){die($dbnivel->error());};
 
-
+if($forsync){SyncModBD($forsync);};
 
 
 

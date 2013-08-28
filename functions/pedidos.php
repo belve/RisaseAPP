@@ -199,7 +199,7 @@ return $html;
 
 function change_estado($idag,$newest){
 
-global $dbnivel;
+global $dbnivel;$restostock=array();
 
 if (!$dbnivel->open()){die($dbnivel->error());};
 
@@ -214,8 +214,34 @@ $dbnivel->query($queryp);$fila=0;
 $queryp= "UPDATE agrupedidos SET estado='$newest' where id=$idag;";
 $dbnivel->query($queryp);$fila=0; 
 
+
+########## aqui hay q actualizar stocks en caso de enviado a tienda
+
+if($est=='T'){
+			
+$queryp= "SELECT id_articulo, cantidad FROM pedidos where agrupar=$idag;";
+$dbnivel->query($queryp);
+while ($row = $dbnivel->fetchassoc()){
+	if(!array_key_exists($row['id_articulo'], $restostock)){
+	$restostock[$row['id_articulo']]=$row['cantidad'];
+	}else{
+	$restostock[$row['id_articulo']]=$restostock[$row['id_articulo']] + $row['cantidad'];	
+	}
+}		
+	
+print_r($restostock);
+
+if(count($restostock)>0){foreach ($restostock as $idaact => $qty){
+$queryp= "UPDATE articulos SET stock=stock - $qty WHERE id=$idaact;";
+$dbnivel->query($queryp);	
+}}
+
+}
+
 $valores=array();
 return $valores;
+
+
 	
 }
 

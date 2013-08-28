@@ -27,7 +27,7 @@ if($row['tip']==1){$todas=1;}else{$todas=0;};
 
 
 if(($tip == '2')&&($estado=='P')){$modi=1;};
-
+if(($tip == '2')&&($estado=='A')){$modi=1;};
 
 if(!array_key_exists($ida, $rep)){$rep[$ida]=0;};
 
