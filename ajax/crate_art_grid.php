@@ -23,7 +23,7 @@ $queryp= "select max(id) as id from articulos";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){$idc=$row['id'] +1;};
 
-$queryp= "select max(codigo) as ultimo from articulos where id_subgrupo=$idsubgrupo and id_color=$color;";
+$queryp= "select max(codigo) as ultimo from articulos where id_subgrupo=$idsubgrupo;";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){$ultimo=$row['ultimo'];};$ultimo++;
 

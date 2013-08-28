@@ -353,8 +353,13 @@ var rep=rep + ((document.getElementById('CI'+ fila + 'P' + a).value) *1);
 
 if(part=='A'){
 var alar=	document.getElementById('AI'+ fila + 'P' + columna).value;
-var iddet=	document.getElementById('BI'+ fila + 'P' + columna).value;	
-var url='/ajax/updatedetreparto.php?iddetr=' +iddet + '&alarma=' + alar;
+var canti=	document.getElementById('CI'+ fila + 'P' + columna).value;
+var iddet=	document.getElementById('BI'+ fila + 'P' + columna).value;
+var idrept=	document.getElementById('idrep').value;
+var idarti=	document.getElementById('idarti'+ fila).value;	
+
+var url='/ajax/updatedetreparto.php?iddetr=' +iddet + '&alarma=' + alar + '&idarti=' + idarti + '&cant=' + canti + '&columna=' + columna;
+
 }
 
 

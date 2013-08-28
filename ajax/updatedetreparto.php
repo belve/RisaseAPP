@@ -35,15 +35,15 @@ while ($row = $dbnivel->fetchassoc()){$iddetr=$row['id_articulo'];};
 if($iddetr){
 	
 $queryp= "SELECT id, tip, estado from pedidos WHERE id_articulo=$idarti AND id_tienda=$idtiendae ORDER by id DESC limit 1;";
-$dbnivel->query($queryp);
+$dbnivel->query($queryp); echo $queryp;
 while ($row = $dbnivel->fetchassoc()){$tip=$row['tip'];$estado=$row['estado'];$idpedido=$row['id'];};	
 	
 	
 #if($cant){
 if ($cant==""){$cant=0;};
 if ($alarma==""){$alarma=0;};	
-$queryp= "update repartir set cantidad=$cant, stockmin=$alarma where id_articulo=$idarti and id_tienda=$iddetr;";
-$dbnivel->query($queryp);
+$queryp= "update repartir set cantidad=$cant, stockmin=$alarma, estado='P' where id_articulo=$idarti and id_tienda=$idtiendae;";
+$dbnivel->query($queryp); echo $queryp;
 
 
 
@@ -65,7 +65,7 @@ $queryp= "UPDATE pedidos set cantidad=$cant where id=$idpedido;";$dbnivel->query
 
 
 
-$queryp= "INSERT INTO repartir (id_articulo,id_tienda,cantidad,stockmin) values ($idarti,$idtiendae,$cant,$alarma);";
+$queryp= "INSERT INTO repartir (id_articulo,id_tienda,cantidad,stockmin,estado) values ($idarti,$idtiendae,$cant,$alarma,'P');";
 $dbnivel->query($queryp);echo $queryp;
 $queryp= "INSERT INTO pedidos (id_articulo,id_tienda,cantidad,tip,fecha,prov,grupo,subgrupo,codigo) values ($idarti,$idtiendae,$cant,1,'$fecha',$prov,$grupo,$subgrupo,$code);";$dbnivel->query($queryp);echo $queryp;	
 
