@@ -31,8 +31,8 @@ while ($row = $dbnivel->fetchassoc()){$ultimo=$row['ultimo'];};$ultimo++;
 $codparabarras=$ultimo;
 if(strlen($ultimo)==1){$codparabarras="000" . $ultimo;};
 if(strlen($ultimo)==2){$codparabarras="00" . $ultimo;};
-if(strlen($ultimo)>=3){$codparabarras="0" . $ultimo;};
-
+if(strlen($ultimo)==3){$codparabarras="0" . $ultimo;};
+if(strlen($ultimo)==4){$codparabarras="0" . $ultimo;};
 
 $refprov=$abrePro . "-" . $repro;
 $color=$color*1;
