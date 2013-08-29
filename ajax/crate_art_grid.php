@@ -44,12 +44,12 @@ if($dto1>0){$dto1=$precioC / (100/$dto1);};
 if($dto2>0){$dto2=$precioC / (100/$dto1);};
 
 $precioN= ($precioC - $dto1 -$dto2) * ('1.' . $iva);
-$precioF= ($precioC - $dto1 -$dto2)  * 1.20;
+$precioF= ($precioC - $dto1 -$dto2)  * 1.20 * ('1.' . $iva);
 
 $queryp= "INSERT INTO articulos 
 (id,id_proveedor,id_subgrupo,id_color,codigo,refprov,stock,uniminimas,codbarras,temporada,preciocosto,precioneto,preciofran,pvp,congelado,stockini) 
 values 
-($idc,$id_proveedor,$idsubgrupo,$color,$ultimo,'$refprov',$cantidad,'$alarma',$codbarras,'$temp','$precioC','$precioN','$precioF','$pvp',0,'$alarma');";
+($idc,$id_proveedor,$idsubgrupo,$color,$ultimo,'$refprov',$cantidad,'$alarma',$codbarras,'$temp','$precioC','$precioN','$precioF','$pvp',0,'$cantidad');";
 
 
 $dbnivel->query($queryp);
