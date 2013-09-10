@@ -57,11 +57,7 @@ $files[]=$codi;
 }}
 
 
-if(array_key_exists(0, $files)){
-echo str_replace($pathimages, $urlimages, $files[0]);
-}else{
-echo $urlimages . "nodisp.jpg";	
-}
+echo json_encode($files);
 
 
 ?>
