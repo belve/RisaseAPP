@@ -23,14 +23,14 @@ while ($row = $dbnivel->fetchassoc()){
 $codigos[$row['codbarras']]=1;
 };
 
-print_r($codigos);
+
 
 $donde=$pathimages . $codbarras . "-*.jpg";
 $list = glob($donde);
 if(count($list)>0){foreach ($list as $point => $codi){
-$cod=str_replace($pathimages, '', $codi);
-$codigs=explode('-', $cod);
-$files[]=$codigs[0];	
+#$cod=str_replace($pathimages, '', $codi);
+#$codigs=explode('-', $cod);
+$files[]=$codi;	
 }}
 
 
@@ -41,15 +41,19 @@ if (count($codigos)>0){foreach($codigos as $codbarras => $point){
 $donde=$pathimages . $codbarras . "-*.jpg";
 $list = glob($donde);
 if(count($list)>0){foreach ($list as $point => $codi){
-$cod=str_replace($pathimages, '', $codi);
-$codigs=explode('-', $cod);
-$files[]=$codigs[0];	
+#$cod=str_replace($pathimages, '', $codi);
+#$codigs=explode('-', $cod);
+$files[]=$codi;	
 }}	
 	
 }}
 
 
-print_r($files);
-#if (file_exists($donde)) {$ruta=$donde;} 
+if(array_key_exists(0, $files)){
+echo $files[0];
+}else{
+echo $pathimages . "nodisp.jpg";	
+}
+
 
 ?>
