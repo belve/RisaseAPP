@@ -50,9 +50,9 @@ $files[]=$codi;
 
 
 if(array_key_exists(0, $files)){
-echo $files[0];
+echo str_replace($pathimages, $urlimages, $files[0]);
 }else{
-echo $pathimages . "nodisp.jpg";	
+echo $urlimages . "nodisp.jpg";	
 }
 
 
