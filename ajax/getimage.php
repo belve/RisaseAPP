@@ -27,6 +27,8 @@ print_r($codigos);
 
 $donde=$pathimages . $codbarras . "-*.jpg";
 
+echo $donde;
+
 $list = glob($donde);
 
 print_r($list);
