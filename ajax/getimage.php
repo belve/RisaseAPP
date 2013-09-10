@@ -31,7 +31,7 @@ $donde=$pathimages . $codbarras . "-*.jpg";
 
 $list = glob($donde);
 
-if(count($list)>0){foreach ($list as $point => $codi){{
+if(count($list)>0){foreach ($list as $point => $codi){
 $cod=str_replace($pathimages, '', $codi);
 $codigs=explode('-', $cod);
 $files[$codigs[0]]=1;	
