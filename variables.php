@@ -25,3 +25,7 @@ require_once("../functions/gettiendas.php");
 require_once("../functions/sync.php");
 
 ?>
+
+
+
+
