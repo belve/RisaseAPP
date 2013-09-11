@@ -6,7 +6,7 @@ require_once("../variables.php");
 $codigos[$codbarras]=1;
 $files=array();
 $list=array();
-$debug=0;
+$debug=1;
 
 if (!$dbnivel->open()){die($dbnivel->error());};
 
