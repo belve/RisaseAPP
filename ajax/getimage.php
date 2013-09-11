@@ -51,12 +51,9 @@ if (count($codigos)>0){foreach($codigos as $codbarras => $point){
 
 																												if($debug){echo "$codbarras <br>";};
 
-$donde=$pathimages . $codbarras . "-*.[jpg][JPG][Jpg]";
-
+$donde=$pathimages . $codbarras . "-*.JPG~";
 $list = glob($donde);
-
 																												if($debug){print_r($list); echo " <br><br>";};
-
 if(count($list)>0){foreach ($list as $point => $codi){
 #$cod=str_replace($pathimages, '', $codi);
 #$codigs=explode('-', $cod);
