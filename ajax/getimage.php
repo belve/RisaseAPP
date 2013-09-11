@@ -5,6 +5,7 @@ require_once("../variables.php");
 
 $codigos[$codbarras]=1;
 $files=array();
+$list=array();
 
 if (!$dbnivel->open()){die($dbnivel->error());};
 
@@ -18,7 +19,8 @@ $id_proveedor=$row['id_proveedor'];
 $refprov=$row['refprov'];
 $proveedor=$row['proveedor'];
 };
-#echo $queryp;
+echo $queryp; echo "<br><br>" ; echo "$id_proveedor $refprov $proveedor <br><br>";
+
 
 
 $provsin=str_replace($proveedor,'',$refprov);
@@ -31,7 +33,7 @@ $codigos[$row['codbarras']]=1;
 $nwc=$row['codbarras'];
 $listcodb .=",$nwc";
 };
-#echo $queryp;
+echo $queryp; echo "<br><br>" ;  print_r($codigos); echo " <br><br>";
 
 
 $queryp= "select codbarras from articulos where refprov like '%$provsin' AND codbarras NOT IN ($listcodb);";
@@ -39,15 +41,17 @@ $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){
 $codigos[$row['codbarras']]=1;
 };
-#echo $queryp;
+echo $queryp; echo "<br><br>" ; print_r($codigos); echo " <br><br>";
 
 
 
 
 if (count($codigos)>0){foreach($codigos as $codbarras => $point){
 
+echo "$codbarras <br>";
+
 $donde=$pathimages . $codbarras . "-*.jpg";
-$list = glob($donde);
+#$list = glob($donde);
 if(count($list)>0){foreach ($list as $point => $codi){
 #$cod=str_replace($pathimages, '', $codi);
 #$codigs=explode('-', $cod);
