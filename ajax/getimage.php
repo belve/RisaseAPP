@@ -54,7 +54,7 @@ if (count($codigos)>0){foreach($codigos as $codbarras => $point){
 $donde=$pathimages . $codbarras . "-*.jpg";
 $list = glob($donde);
 
-																												if($debug){print_r($list); echo " <br><br>";
+																												if($debug){print_r($list); echo " <br><br>";};
 
 if(count($list)>0){foreach ($list as $point => $codi){
 #$cod=str_replace($pathimages, '', $codi);
