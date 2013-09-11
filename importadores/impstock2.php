@@ -58,7 +58,7 @@ $queryp= "CREATE TABLE `stocklocal_$idt` (
 $dbnivelBAK->query($queryp);	
 }
 
-echo $chki;
+
 
 $queryp= "INSERT INTO stocklocal_$idt (cod,stock,alarma) VALUES $values;";
 $dbnivelBAK->query($queryp);
