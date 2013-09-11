@@ -13,7 +13,7 @@ if (!$conn)
 $sql="SELECT * FROM Articulos;";
 
 
-#$rs=odbc_exec($conn,$sql);
+$rs=odbc_exec($conn,$sql);
 if (!$rs)
   {exit("Error in SQL");}
 
