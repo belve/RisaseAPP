@@ -61,7 +61,7 @@ $dbnivelBAK->query($queryp);
 echo $chki;
 
 $queryp= "INSERT INTO stocklocal_$idt (cod,stock,alarma) VALUES $values;";
-#$dbnivelBAK->query($queryp);
+$dbnivelBAK->query($queryp);
 
 
 if (!$dbnivelBAK->close()){die($dbnivelBAK->error());};
