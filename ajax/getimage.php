@@ -27,9 +27,9 @@ $proveedor=$row['proveedor'];
 $provsin=str_replace($proveedor,'',$refprov);
 
 
-
+$grup=substr($codbarras, 0,2);
 $listcodb=$codbarras;
-$queryp= "select codbarras from articulos where refprov like '%$provsin' AND codbarras NOT IN ($codbarras);";
+$queryp= "select codbarras from articulos where refprov like '%$provsin' AND codbarras like '$grup%' AND codbarras NOT IN ($codbarras);";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){
 $codigos[$row['codbarras']]=1;
