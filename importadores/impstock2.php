@@ -34,7 +34,7 @@ odbc_close($conn);
 
 $values=substr($values, 0,strlen($values)-1);	
 
-
+require_once("../db.php");
 $dbnivelBAK=new DB('192.168.1.11','tpv','tpv','tpv_backup');
 
 $queryp= "INSERT INTO stocklocal_$idt (cod,stock,alarma) VALUES $values;";
