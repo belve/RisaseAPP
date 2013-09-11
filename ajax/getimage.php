@@ -34,7 +34,7 @@ $listcodb=$codbarras;
 
 
 
-$queryp= "select codbarras from articulos where id_proveedor=$id_proveedor AND refprov='$refprov' AND codbarras NOT IN ($codbarras);";
+$queryp= "select codbarras from articulos where id_proveedor=$id_proveedor AND refprov='$refprov' AND codbarras like '$grup%' AND codbarras NOT IN ($codbarras);";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){
 $codigos[$row['codbarras']]=1;
