@@ -1,7 +1,7 @@
 <?php
 
 
-$conn=odbc_connect('mdb','local','admin');
+$conn=odbc_connect('LEO','local','admin');
 
 if (!$conn)
   {exit("Connection Failed: " . $conn);}
