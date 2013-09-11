@@ -26,6 +26,20 @@ $proveedor=$row['proveedor'];
 
 $provsin=str_replace($proveedor,'',$refprov);
 
+
+
+
+$queryp= "select codbarras from articulos where refprov like '%$provsin' AND codbarras NOT IN ($listcodb);";
+$dbnivel->query($queryp);
+while ($row = $dbnivel->fetchassoc()){
+$codigos[$row['codbarras']]=1;
+};
+																												if($debug){echo $queryp; echo "<br><br>" ; print_r($codigos); echo " <br><br>";};
+
+
+
+
+
 $listcodb=$codbarras;
 $queryp= "select codbarras from articulos where id_proveedor=$id_proveedor AND refprov='$refprov' AND codbarras != $codbarras;";
 $dbnivel->query($queryp);
@@ -36,13 +50,6 @@ $listcodb .=",$nwc";
 };
 																												if($debug){echo $queryp; echo "<br><br>" ;  print_r($codigos); echo " <br><br>";};
 
-
-$queryp= "select codbarras from articulos where refprov like '%$provsin' AND codbarras NOT IN ($listcodb);";
-$dbnivel->query($queryp);
-while ($row = $dbnivel->fetchassoc()){
-$codigos[$row['codbarras']]=1;
-};
-																												if($debug){echo $queryp; echo "<br><br>" ; print_r($codigos); echo " <br><br>";};
 
 
 
