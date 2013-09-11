@@ -36,11 +36,13 @@ $values=substr($values, 0,strlen($values)-1);
 
 require_once("../db.php");
 $dbnivelBAK=new DB('192.168.1.11','tpv','tpv','tpv_backup');
+if (!$dbnivelBAK->open()){die($dbnivelBAK->error());};
 
 $queryp= "INSERT INTO stocklocal_$idt (cod,stock,alarma) VALUES $values;";
 $dbnivelBAK->query($queryp);
 
-if (!$dbnivel->close()){die($dbnivel->error());};
+
+if (!$dbnivelBAK->close()){die($dbnivelBAK->error());};
 
 
 ?>
