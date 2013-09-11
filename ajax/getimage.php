@@ -51,7 +51,8 @@ if (count($codigos)>0){foreach($codigos as $codbarras => $point){
 
 																												if($debug){echo "$codbarras <br>";};
 
-$donde=$pathimages . $codbarras . "-*.jpg";
+$donde=$pathimages . $codbarras . "-*.[jpg][JPG][Jpg]";
+
 $list = glob($donde);
 
 																												if($debug){print_r($list); echo " <br><br>";};
