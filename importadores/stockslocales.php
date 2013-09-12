@@ -34,19 +34,20 @@ if (!$dbnivelAPP->close()){die($dbnivelAPP->error());};
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-
+<script type="text/javascript" src="/jquery/jquery-1.9.0.min.js"></script>
 
 <title>imptstock</title>
 
 
 
-</head>
-
 
 <script>
-function doimp(id,tie){$.ajaxSetup({'async': false});
 
-var url='importadores/impstock2.php?t=' + tie + '&idt=' + id;
+function doimp(id,tie){
+	
+$.ajaxSetup({'async': false});
+
+var url='/importadores/impstock2.php?t=' + tie + '&idt=' + id;
 
 document.getElementById(tie).value="importando";
 $.getJSON(url, function(data) {
@@ -62,6 +63,12 @@ document.getElementById(tie).value=	val;
 	
 	
 </script>
+
+
+
+</head>
+
+
 
 <body class="gris1_BG">
 	
