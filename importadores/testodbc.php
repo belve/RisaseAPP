@@ -21,10 +21,11 @@
 #odbc_close($conn);
 
 
- include('../adodb5/adodb.inc.php');
+include('../adodb5/adodb.inc.php');
 $db =& ADONewConnection('odbc_mssql');
 $dsn = "Driver={SQL Server};Server=SERVER;Database=Risase;";
 $db->Connect($dsn,'remoto','azul88');
+$db->debug = false;
 
 $rs = $db->Execute('SELECT * FROM Articulos where art_idArticulo <= 50;');
 
