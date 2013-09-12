@@ -51,15 +51,12 @@ $rs = $db->Execute('SELECT * FROM Articulos where art_idArticulo <= 50;');
 
 $rows = $rs->GetRows();
 	
-print_r($rows);	
-foreach ($rows as $key => $row) {
-	
-}
-foreach($camp as $nkey => $nomcampo){
+
+
+foreach ($rows as $key => $row) {foreach($camp as $nkey => $nomcampo){
 	 $valores[trim($row[0])][$nkey]=trim(utf8_encode($row[$nkey]));
-}
 
-
+}}
 
 print_r($valores);
 ?>
