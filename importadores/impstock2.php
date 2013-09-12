@@ -71,7 +71,7 @@ while ($row = $dbnivelBAK->fetchassoc()){$total=$row['total'];};
 
 if (!$dbnivelBAK->close()){die($dbnivelBAK->error());};
 
-$valores[]="Importados $total";
+$valores[1]="Importados $total";
 echo json_encode($valores);
 
 ?>
