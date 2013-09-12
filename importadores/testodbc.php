@@ -49,11 +49,14 @@ $db->Connect($dsn,'remoto','azul88');
 $db->debug = false;
 $rs = $db->Execute('SELECT * FROM Articulos where art_idArticulo <= 50;');
 
-$row = $rs->GetRows();
+$rows = $rs->GetRows();
 	
-print_r($row);	
+print_r($rows);	
+foreach ($rows as $key => $row) {
+	
+}
 foreach($camp as $nkey => $nomcampo){
-	 #$valores[trim($row[0])][$nkey]=trim(utf8_encode($row[$nkey]));
+	 $valores[trim($row[0])][$nkey]=trim(utf8_encode($row[$nkey]));
 }
 
 
