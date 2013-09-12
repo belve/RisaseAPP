@@ -3,7 +3,7 @@ set_time_limit(0);
 foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
 
 if(!$ini){$ini=0;};
-$fin=$ini+5;
+$fin=$ini+50;
 ##### datos OLD
 $Ntab='Articulos';
 
@@ -62,7 +62,7 @@ $db->Connect($dsn,'remoto','azul88');
 $db->debug = false;
 $sql="SELECT * FROM $Ntab where $Nid > $ini AND $Nid <= $fin ORDER BY $Nid ASC;";
 $rs = $db->Execute($sql);
-echo $sql;
+
 
 $rows = $rs->GetRows();
 foreach ($rows as $key => $row) {foreach($camp as $nkey => $nomcampo){
