@@ -29,7 +29,7 @@ or die("Couldn't connect to SQL BD");
 if (!$msconnect) {echo "NO"; }
  
 $result = mssql_query($sql);
-while ($valores = mssql_fetch_array($result)) {};
+while ($valores = mssql_fetch_array($result)) {print_r($valores); };
 
 
 
