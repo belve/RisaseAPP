@@ -3,7 +3,7 @@ set_time_limit(0);
 foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
 
 if(!$ini){$ini=0;};
-$fin=$ini+500;
+$fin=$ini+5;
 ##### datos OLD
 $Ntab='Articulos';
 
@@ -52,34 +52,26 @@ $ncamp[15]='congelado';
 $ncamp[16]='stockini';
 
 
-$conn=odbc_connect('risasenew','remoto','azul88');
-
-if (!$conn)
-  {exit("Connection Failed: " . $conn);}
 
 
+
+include('../adodb5/adodb.inc.php'); $driv="odbc_mssql";
+$db =& ADONewConnection($driv);
+$dsn = "Driver={SQL Server};Server=SERVER;Database=Risase;";
+$db->Connect($dsn,'remoto','azul88');
+$db->debug = false;
 $sql="SELECT * FROM $Ntab where $Nid > $ini AND $Nid <= $fin ORDER BY $Nid ASC;";
+$rs = $db->Execute($sql);
+
+$rows = $rs->GetRows();
+foreach ($rows as $key => $row) {foreach($camp as $nkey => $nomcampo){
+	 $valores[trim($row[0])][$nkey]=trim(utf8_encode($row[$nkey]));
+
+}}
+
+$db->Close();
 
 
-$rs=odbc_exec($conn,$sql);
-if (!$rs)
-  {exit("Error in SQL");}
-
-
-
-
-while (odbc_fetch_row($rs))
-  {
-
-
-foreach($camp as $nkey => $nomcampo){
-	 $valores[trim(odbc_result($rs,$Nid))][$nkey]=trim(utf8_encode(odbc_result($rs,$nomcampo)));
-}
-
-
-  }
-
-odbc_close($conn);
 
 require_once("../db.php");
 
@@ -108,7 +100,8 @@ $valopi .= "('$val1',$sqlvals),";
 
 $valopi=substr($valopi, 0,strlen($valopi)-1);
 $queryp= "INSERT INTO $nNtab ($nNid,$sqlcamps) values " . $valopi . ";";
-$dbnivel->query($queryp);
+#$dbnivel->query($queryp); 
+echo $queryp;
 
 if (!$dbnivel->close()){die($dbnivel->error());};
 
@@ -116,7 +109,7 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 ?>
 
 <script>
-	 window.location.href = "/importadores/articulos.php?ini=<?php echo $fin;?>";
+//	 window.location.href = "/importadores/articulos.php?ini=<?php echo $fin;?>";
 </script>
 
 
