@@ -3,7 +3,7 @@ set_time_limit(0);
 foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
 
 if(!$ini){$ini=0;};
-$fin=$ini+50;
+$fin=$ini+500;
 ##### datos OLD
 $Ntab='Articulos';
 
@@ -101,8 +101,8 @@ $valopi .= "('$val1',$sqlvals),";
 
 $valopi=substr($valopi, 0,strlen($valopi)-1);
 $queryp= "INSERT INTO $nNtab ($nNid,$sqlcamps) values " . $valopi . ";";
-#$dbnivel->query($queryp); 
-echo $queryp;
+$dbnivel->query($queryp); 
+#echo $queryp;
 
 if (!$dbnivel->close()){die($dbnivel->error());};
 
@@ -110,7 +110,7 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 ?>
 
 <script>
-//	 window.location.href = "/importadores/articulos.php?ini=<?php echo $fin;?>";
+	 window.location.href = "/importadores/articulos.php?ini=<?php echo $fin;?>";
 </script>
 
 
