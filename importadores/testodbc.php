@@ -1,7 +1,7 @@
 <?php
 
 
-$conn=odbc_connect("risasenew","","");
+$conn=odbc_connect("risasenew","remoto","azul88");
 if (!$conn)
 {exit("Connection Failed: " . $conn);}
 $sql="SELECT * FROM Articulos where art_idArticulo <= 50 ;";
