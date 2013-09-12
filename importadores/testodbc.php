@@ -21,8 +21,8 @@
 #odbc_close($conn);
 
 
-include('../adodb5/adodb.inc.php');
-$db =& ADONewConnection('odbc_mssql');
+include('../adodb5/adodb.inc.php'); $driv="odbc_mssql";
+$db =& ADONewConnection($driv);
 $dsn = "Driver={SQL Server};Server=SERVER;Database=Risase;";
 $db->Connect($dsn,'remoto','azul88');
 $db->debug = false;
