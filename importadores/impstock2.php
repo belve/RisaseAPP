@@ -63,8 +63,15 @@ $dbnivelBAK->query($queryp);
 $queryp= "INSERT INTO stocklocal_$idt (cod,stock,alarma) VALUES $values;";
 $dbnivelBAK->query($queryp);
 
+$total=0;
+$queryp= "select max(id) as total from stocklocal_$idt;";
+$dbnivelBAK->query($queryp);
+while ($row = $dbnivelBAK->fetchassoc()){$total=$row['total'];};
+
 
 if (!$dbnivelBAK->close()){die($dbnivelBAK->error());};
 
+$valores[]="Importados $total";
+echo json_encode($valores);
 
 ?>
