@@ -9,9 +9,9 @@ $Ntab='Repartos';
 
 $Nid='art_idArticulo';
 
-$camp[1]='rep_NumeroRep';
-$camp[2]='rep_fecha';
-$camp[3]='rep_estado';
+$camp[0]='rep_NumeroRep';
+$camp[1]='rep_fecha';
+$camp[2]='rep_estado';
 
 
 
@@ -22,9 +22,9 @@ $nNtab="agrupedidos";
 $nNid='id';
 
 
-$ncamp[1]='nombre';
-$ncamp[2]='fecha';
-$ncamp[3]='estado';
+$ncamp[0]='nombre';
+$ncamp[1]='fecha';
+$ncamp[2]='estado';
 
 
 
@@ -40,11 +40,11 @@ $rs = $db->Execute($sql);
 
 
 $rows = $rs->GetRows();$count=1;
-print_r($rows);
+#print_r($rows);
 
 foreach ($rows as $key => $row) {$count++;foreach($camp as $nkey => $nomcampo){
 	
-	#$valores[$count][$nkey]=trim(utf8_encode($row[$nkey]));
+$valores[$count][$nkey]=trim(utf8_encode($row[$nkey]));
 
 }}
 
