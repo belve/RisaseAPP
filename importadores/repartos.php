@@ -40,9 +40,11 @@ $rs = $db->Execute($sql);
 
 
 $rows = $rs->GetRows();$count=1;
+print_r($rows);
+
 foreach ($rows as $key => $row) {$count++;foreach($camp as $nkey => $nomcampo){
 	
-	$valores[$count][$nkey]=trim(utf8_encode($row[$nkey]));
+	#$valores[$count][$nkey]=trim(utf8_encode($row[$nkey]));
 
 }}
 
