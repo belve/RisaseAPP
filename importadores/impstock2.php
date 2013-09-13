@@ -25,7 +25,7 @@ if (!$conn)
   {exit("Connection Failed: " . $conn);}
 
 
-$sql="SELECT * FROM Articulos;";
+$sql="SELECT TOP 100 * FROM Articulos;";
 
 
 $rs=odbc_exec($conn,$sql);
