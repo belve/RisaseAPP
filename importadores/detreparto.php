@@ -142,7 +142,7 @@ $dbnivel->query($queryp);
 if (!$dbnivel->close()){die($dbnivel->error());};
 
 $ultREP++;
-$ultREP=$ultREP + 4;
+$ultREP=$ultREP + 9;
 ?>
 
 
