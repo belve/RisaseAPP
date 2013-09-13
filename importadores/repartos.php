@@ -53,7 +53,7 @@ $db->Close();
 
 
 
-print_r($valores);
+
 
 
 
@@ -95,7 +95,7 @@ $ini++;
 ?>
 
 <script>
-	 //window.location.href = "/importadores/repartos.php?ini=<?php echo $ini;?>";
+	window.location.href = "/importadores/repartos.php?ini=<?php echo $ini;?>";
 </script>
 
 
