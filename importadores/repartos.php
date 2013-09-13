@@ -27,34 +27,6 @@ $ncamp[2]='fecha';
 $ncamp[3]='estado';
 
 
-$conn=odbc_connect('risasenew','remoto','azul88'); 
-
-if (!$conn)
-  {exit("Connection Failed: " . $conn);}
-
-
-
-
-
-$rs=odbc_exec($conn,$sql);
-if (!$rs)
-  {exit("Error in SQL");}
-
-
-
-$count=1;
-while (odbc_fetch_row($rs))
-  {$count++;
-
-
-foreach($camp as $nkey => $nomcampo){
-	 $valores[$count][$nkey]=trim(utf8_encode(odbc_result($rs,$nomcampo)));
-}
-
-
-  }
-
-odbc_close($conn);
 
 
 
