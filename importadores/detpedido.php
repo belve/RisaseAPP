@@ -60,9 +60,10 @@ $Ntab='DetallePedido';
 
 
 
-$camp[4]='det_idArticulo';
-$camp[5]='det_Unidades';
-$camp[6]='det_PrecioVenta';
+$camp[1]='det_idArticulo';
+$camp[2]='det_PrecioVenta';
+$camp[3]='det_Unidades';
+
 
 
 
@@ -71,12 +72,11 @@ $nNtab="repartir";
 $nNid='id';
 
 
-$ncamp[1]='id_tienda';
-$ncamp[2]='estado';
-$ncamp[4]='id_articulo';
-$ncamp[5]='cantidad';
-$ncamp[6]='pventa';
-
+$ncamp[1]='id_articulo';
+$ncamp[2]='pventa';
+$ncamp[3]='cantidad';
+$ncamp[4]='id_tienda';
+$ncamp[5]='estado';
 
 
 
@@ -100,8 +100,8 @@ print_r($rows);
 
 foreach ($rows as $key => $row) {
 	$count++;
-	$valores[$id][$count][1]=$T[$vales['t']];
-	$valores[$id][$count][2]=$vales['e'];
+	$valores[$id][$count][4]=$T[$vales['t']];
+	$valores[$id][$count][5]=$vales['e'];
 		foreach($camp as $nkey => $nomcampo){
 		$valores[$id][$count][$nkey]=trim(utf8_encode($row[$nkey]));
 
