@@ -8,7 +8,7 @@ if (!$dbnivel->open()){die($dbnivel->error());};
 
 
 $chki=0;
-$queryp= "select id_articulo, stockmin from repartir where id_tienda=$idt' limit 100;";echo $queryp;
+$queryp= "select id_articulo, stockmin from repartir where id_tienda=$idt limit 100;";echo $queryp;
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){$alar[$row['id_articulo']]=$row['stockmin'];};
 
