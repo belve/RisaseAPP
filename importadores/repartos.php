@@ -33,7 +33,7 @@ if (!$conn)
   {exit("Connection Failed: " . $conn);}
 
 
-$sql="SELECT * FROM $Ntab where rep_fecha <= '31/12/$ini' AND rep_fecha >= '01/01/$ini';";
+
 
 
 $rs=odbc_exec($conn,$sql);
@@ -55,6 +55,33 @@ foreach($camp as $nkey => $nomcampo){
   }
 
 odbc_close($conn);
+
+
+
+include('../adodb5/adodb.inc.php'); $driv="odbc_mssql";
+$db =& ADONewConnection($driv);
+$dsn = "Driver={SQL Server};Server=SERVER;Database=Risase;";
+$db->Connect($dsn,'remoto','azul88');
+$db->debug = false;
+$sql="SELECT * FROM $Ntab where rep_fecha <= '31/12/$ini' AND rep_fecha >= '01/01/$ini';";
+$rs = $db->Execute($sql);
+
+
+$rows = $rs->GetRows();$count=1;
+foreach ($rows as $key => $row) {$count++;foreach($camp as $nkey => $nomcampo){
+	
+	$valores[$count][$nkey]=trim(utf8_encode($row[$nkey]));
+
+}}
+
+$db->Close();
+
+
+
+
+print_r($valores);
+
+
 
 require_once("../db.php");
 
@@ -94,7 +121,7 @@ $ini++;
 ?>
 
 <script>
-	 window.location.href = "/importadores/repartos.php?ini=<?php echo $ini;?>";
+	 //window.location.href = "/importadores/repartos.php?ini=<?php echo $ini;?>";
 </script>
 
 
