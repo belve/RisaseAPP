@@ -9,7 +9,7 @@ if (!$dbnivel->open()){die($dbnivel->error());};
 
 
 $chki=0;
-$queryp= "select id_articulo, stockmin from repartir where id_tienda=$idt limit 100;";echo $queryp;
+$queryp= "select id_articulo, stockmin from repartir where id_tienda=$idt limit 100;";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){$alar[$row['id_articulo']]=$row['stockmin'];};
 
@@ -26,7 +26,7 @@ if (!$conn)
   {exit("Connection Failed: " . $conn);}
 
 
-$sql="SELECT TOP 100 * FROM Articulos;";
+$sql="SELECT * FROM Articulos;";
 
 
 $rs=odbc_exec($conn,$sql);
