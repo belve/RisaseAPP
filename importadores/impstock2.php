@@ -22,12 +22,12 @@ if (!$rs)
 $count=1;$values="";
 while (odbc_fetch_row($rs))
  {
-
+	$art_idArt=trim(utf8_encode(odbc_result($rs,'art_idArticulo')));
 	$art_idArticulo=trim(utf8_encode(odbc_result($rs,'art_CodBarras')));
 	$art_UniStock=trim(utf8_encode(odbc_result($rs,'art_UniStock')));
 	$art_UniMini=trim(utf8_encode(odbc_result($rs,'art_UniMinimas')));
 	
-	$values .="('$art_idArticulo','$art_UniStock','$art_UniMini'),";
+	$values .="('$art_idArt','$art_idArticulo','$art_UniStock','$art_UniMini'),";
   }
 
 odbc_close($conn);
@@ -61,7 +61,7 @@ $dbnivelBAK->query($queryp);
 
 
 
-$queryp= "INSERT INTO stocklocal_$idt (cod,stock,alarma) VALUES $values;";
+$queryp= "INSERT INTO stocklocal_$idt (id_art,cod,stock,alarma) VALUES $values;";
 $dbnivelBAK->query($queryp);
 
 $total=0;
