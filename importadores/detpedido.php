@@ -96,7 +96,7 @@ $rs = $db->Execute($sql);
 
 
 $rows = $rs->GetRows();$count=1;
-print_r($rows);
+#print_r($rows);
 
 foreach ($rows as $key => $row) {
 	$count++;
@@ -112,7 +112,7 @@ foreach ($rows as $key => $row) {
 $db->Close();
 
 
-print_r($valores);
+#print_r($valores);
 
 $valopi="";$valopi2="";
 
@@ -140,9 +140,9 @@ $valopi2=substr($valopi2, 0,strlen($valopi2)-1);
 
 $queryp= "INSERT INTO pedidos (agrupar,tip,$sqlcamps) values $valopi2;";
 
-echo $queryp;
+#echo $queryp;
 
-#$dbnivel->query($queryp);
+$dbnivel->query($queryp);
 
 
 
@@ -155,7 +155,7 @@ $ultREP=$ultREP + 9;
 
 
 <script>
-//	window.location.href = "/importadores/detpedido.php?ultREP=<?php echo $ultREP; ?>"; 
+	window.location.href = "/importadores/detpedido.php?ultREP=<?php echo $ultREP; ?>"; 
 </script>
 
 
