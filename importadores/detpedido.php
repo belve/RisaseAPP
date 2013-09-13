@@ -50,9 +50,9 @@ $Ntab='DetallePedido';
 
 
 
-$camp[5]='det_idArticulo';
-$camp[6]='det_Unidades';
-$camp[7]='det_PrecioVenta';
+$camp[4]='det_idArticulo';
+$camp[5]='det_Unidades';
+$camp[6]='det_PrecioVenta';
 
 
 
@@ -63,9 +63,9 @@ $nNid='id';
 
 $ncamp[1]='id_tienda';
 $ncamp[2]='estado';
-$ncamp[5]='id_articulo';
-$ncamp[6]='cantidad';
-$ncamp[7]='pventa';
+$ncamp[4]='id_articulo';
+$ncamp[5]='cantidad';
+$ncamp[6]='pventa';
 
 
 
@@ -73,43 +73,36 @@ $ncamp[7]='pventa';
 
 
 
-$conn=odbc_connect('risasenew','remoto','azul88');
+include('../adodb5/adodb.inc.php'); $driv="odbc_mssql";
+$db =& ADONewConnection($driv);
+$dsn = "Driver={SQL Server};Server=SERVER;Database=Risase;";
+$db->Connect($dsn,'remoto','azul88');
+$db->debug = false;
 
-if (!$conn)
-  {exit("Connection Failed: " . $conn);}
-
-$count=0;
 foreach($cuales as $id => $vales){
-
 $nomr=$vales['n'];
-
 $sql="SELECT * FROM $Ntab where det_idPedido='$nomr';";
+$rs = $db->Execute($sql);
 
 
-$rs=odbc_exec($conn,$sql);
-if (!$rs)
- {exit("Error in SQL");}
+$rows = $rs->GetRows();$count=1;
+#print_r($rows);
 
+foreach ($rows as $key => $row) {
+	$count++;
+	$valores[$id][$count][1]=$T[$vales['t']];
+	$valores[$id][$count][2]=$vales['e'];
+		foreach($camp as $nkey => $nomcampo){
+		$valores[$id][$count][$nkey]=trim(utf8_encode($row[$nkey]));
 
-
-while (odbc_fetch_row($rs))
-{$count++;
-
-$valores[$id][$count][1]=$T[$vales['t']];
-$valores[$id][$count][2]=$vales['e'];
-foreach($camp as $nkey => $nomcampo){
-$valores[$id][$count][$nkey]=trim(utf8_encode(odbc_result($rs,$nomcampo)));
-}}
-
+	}}
 }
 
-odbc_close($conn);
+
+$db->Close();
 
 
-
-
-
-
+print_r($valores);
 
 $valopi="";$valopi2="";
 
@@ -152,7 +145,7 @@ $ultREP=$ultREP + 9;
 
 
 <script>
-	window.location.href = "/importadores/detpedido.php?ultREP=<?php echo $ultREP; ?>"; 
+//	window.location.href = "/importadores/detpedido.php?ultREP=<?php echo $ultREP; ?>"; 
 </script>
 
 
