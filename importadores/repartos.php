@@ -1,5 +1,5 @@
 <?php 
-$ini=2003;
+$ini=2002;
 set_time_limit(0);
 foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
 
@@ -84,7 +84,7 @@ $valopi .="($sqlvals,1),";
 $valopi=substr($valopi, 0,strlen($valopi)-1);	
 
 $queryp= "INSERT INTO $nNtab ($sqlcamps,tip) values $valopi;";
-if($ini <= 2011){$dbnivel->query($queryp);};
+$dbnivel->query($queryp);
 #echo $queryp . "\n";
 
 
