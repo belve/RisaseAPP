@@ -98,6 +98,24 @@ $valores[$id][$count][$nkey]=trim(utf8_encode(odbc_result($rs,$nomcampo)));
 odbc_close($conn);
 
 
+include('../adodb5/adodb.inc.php'); $driv="odbc_mssql";
+$db =& ADONewConnection($driv);
+$dsn = "Driver={SQL Server};Server=SERVER;Database=Risase;";
+$db->Connect($dsn,'remoto','azul88');
+$db->debug = false;
+$sql="SELECT * FROM $Ntab where det_idreparto='$nomr';";
+$rs = $db->Execute($sql);
+
+
+$rows = $rs->GetRows();$count=1;
+print_r($rows);
+
+foreach ($rows as $key => $row) {$count++;foreach($camp as $nkey => $nomcampo){
+
+#$valores[$id][$count][$nkey]=trim(utf8_encode($row[$nkey]));
+}}
+
+$db->Close();
 
 
 
@@ -138,10 +156,10 @@ $valopi=substr($valopi, 0,strlen($valopi)-1);
 $valopi2=substr($valopi2, 0,strlen($valopi2)-1);
 
 $queryp= "INSERT INTO $nNtab ($sqlcamps) values $valopi;";
-$dbnivel->query($queryp);
+#$dbnivel->query($queryp);
 
 $queryp= "INSERT INTO pedidos (agrupar,tip,id_articulo,id_tienda,cantidad,estado) values $valopi2;";
-$dbnivel->query($queryp);
+#$dbnivel->query($queryp);
 
 
 
@@ -153,7 +171,7 @@ $ultREP=$ultREP + 4;
 
 
 <script>
-	window.location.href = "/importadores/detreparto.php?ultREP=<?php echo $ultREP; ?>"; 
+//	window.location.href = "/importadores/detreparto.php?ultREP=<?php echo $ultREP; ?>"; 
 </script>
 
 
