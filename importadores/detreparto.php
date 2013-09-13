@@ -37,18 +37,18 @@ $Ntab='DetalleReparto';
 
 
 
-$camp[2]='det_idarticulo';
-$camp[3]='det_idtienda';
-$camp[4]='det_cantidad';
+$camp[1]='det_idarticulo';
+$camp[2]='det_idtienda';
+$camp[3]='det_cantidad';
 
-$camp[6]='det_stockmin';
-$camp[7]='det_estado';
+$camp[5]='det_stockmin';
+$camp[6]='det_estado';
 
 
-$camp2[2]='det_idarticulo';
-$camp2[3]='det_idtienda';
-$camp2[4]='det_cantidad';
-$camp2[7]='det_estado';
+$camp2[1]='det_idarticulo';
+$camp2[2]='det_idtienda';
+$camp2[3]='det_cantidad';
+$camp2[6]='det_estado';
 
 
 
@@ -59,12 +59,12 @@ $nNid='id';
 
 
 
-$ncamp[2]='id_articulo';
-$ncamp[3]='id_tienda';
-$ncamp[4]='cantidad';
+$ncamp[1]='id_articulo';
+$ncamp[2]='id_tienda';
+$ncamp[3]='cantidad';
 
-$ncamp[6]='stockmin';
-$ncamp[7]='estado';
+$ncamp[5]='stockmin';
+$ncamp[6]='estado';
 
 
 
@@ -82,18 +82,18 @@ $rs = $db->Execute($sql);
 
 
 $rows = $rs->GetRows();$count=1;
-print_r($rows);
+#print_r($rows);
 
 foreach ($rows as $key => $row) {$count++;foreach($camp as $nkey => $nomcampo){
 
-#$valores[$id][$count][$nkey]=trim(utf8_encode($row[$nkey]));
+$valores[$id][$count][$nkey]=trim(utf8_encode($row[$nkey]));
 }}
 }
 
 
 $db->Close();
 
-
+print_r($valores);
 
 
 
