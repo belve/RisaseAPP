@@ -147,7 +147,7 @@ $ultREP=$ultREP + 4;
 
 
 <script>
-//	window.location.href = "/importadores/detreparto.php?ultREP=<?php echo $ultREP; ?>"; 
+	window.location.href = "/importadores/detreparto.php?ultREP=<?php echo $ultREP; ?>"; 
 </script>
 
 
