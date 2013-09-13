@@ -1,9 +1,7 @@
 <?php 
-$ultREP=6228;
+$ultREP=5000;
 set_time_limit(0);
-foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
 
-$ultREP=$ultREP*1;
 
 
 
@@ -12,6 +10,18 @@ require_once("../db.php");
 
 $dbnivel=new DB('192.168.1.11','edu','admin','risase');
 if (!$dbnivel->open()){die($dbnivel->error());};
+
+
+$queryp= "select max(id) as max from agrupedidos where tip=1;";
+$dbnivel->query($queryp);
+while ($row = $dbnivel->fetchassoc()){$ultREP=$row['max'];};
+
+
+foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
+$ultREP=$ultREP*1;
+
+
+
 $queryp= "select id,id_tienda from tiendas";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){$T[$row['id_tienda']]=$row['id'];};
