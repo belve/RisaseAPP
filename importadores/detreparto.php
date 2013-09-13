@@ -93,7 +93,7 @@ $valores[$id][$count][$nkey]=trim(utf8_encode($row[$nkey]));
 
 $db->Close();
 
-print_r($valores);
+#print_r($valores);
 
 
 
@@ -104,10 +104,10 @@ foreach ($valores as $val1 => $val2a) {foreach($val2a as $cuenta => $val2){
 $sqlcamps="";$sqlvals="";
 foreach ($val2 as $nnkey => $valuecamp)	{
 	
-if($nnkey==2){$a_idart=$valuecamp;};
-if($nnkey==3){$valuecamp=$T[$valuecamp];$a_idtt=$valuecamp;};
-if($nnkey==4){$a_cant=$valuecamp;};
-if($nnkey==7){$a_est=$valuecamp;};
+if($nnkey==1){$a_idart=$valuecamp;};
+if($nnkey==2){$valuecamp=$T[$valuecamp];$a_idtt=$valuecamp;};
+if($nnkey==3){$a_cant=$valuecamp;};
+if($nnkey==6){$a_est=$valuecamp;};
 
 
 
@@ -132,10 +132,10 @@ $valopi=substr($valopi, 0,strlen($valopi)-1);
 $valopi2=substr($valopi2, 0,strlen($valopi2)-1);
 
 $queryp= "INSERT INTO $nNtab ($sqlcamps) values $valopi;";
-#$dbnivel->query($queryp);
+$dbnivel->query($queryp);
 
 $queryp= "INSERT INTO pedidos (agrupar,tip,id_articulo,id_tienda,cantidad,estado) values $valopi2;";
-#$dbnivel->query($queryp);
+$dbnivel->query($queryp);
 
 
 
