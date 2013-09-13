@@ -96,7 +96,7 @@ $rs = $db->Execute($sql);
 
 
 $rows = $rs->GetRows();$count=1;
-#print_r($rows);
+print_r($rows);
 
 foreach ($rows as $key => $row) {
 	$count++;
