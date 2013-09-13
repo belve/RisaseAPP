@@ -132,7 +132,7 @@ $queryp= "INSERT INTO pedidos (agrupar,tip,$sqlcamps) values $valopi2;";
 
 echo $queryp;
 
-$dbnivel->query($queryp);
+#$dbnivel->query($queryp);
 
 
 
