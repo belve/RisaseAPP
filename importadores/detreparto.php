@@ -70,39 +70,13 @@ $ncamp[7]='estado';
 
 
 
-$conn=odbc_connect('risasenew','remoto','azul88');
-
-if (!$conn)
-  {exit("Connection Failed: " . $conn);}
-
-$count=0;
-foreach($cuales as $id => $nomr){
-
-$sql="SELECT * FROM $Ntab where det_idreparto='$nomr';";
-
-
-$rs=odbc_exec($conn,$sql);
-if (!$rs)
- {exit("Error in SQL");}
-
-
-
-while (odbc_fetch_row($rs))
-{$count++;
-foreach($camp as $nkey => $nomcampo){
-$valores[$id][$count][$nkey]=trim(utf8_encode(odbc_result($rs,$nomcampo)));
-}}
-
-}
-
-odbc_close($conn);
-
-
 include('../adodb5/adodb.inc.php'); $driv="odbc_mssql";
 $db =& ADONewConnection($driv);
 $dsn = "Driver={SQL Server};Server=SERVER;Database=Risase;";
 $db->Connect($dsn,'remoto','azul88');
 $db->debug = false;
+
+foreach($cuales as $id => $nomr){
 $sql="SELECT * FROM $Ntab where det_idreparto='$nomr';";
 $rs = $db->Execute($sql);
 
@@ -114,6 +88,8 @@ foreach ($rows as $key => $row) {$count++;foreach($camp as $nkey => $nomcampo){
 
 #$valores[$id][$count][$nkey]=trim(utf8_encode($row[$nkey]));
 }}
+}
+
 
 $db->Close();
 
