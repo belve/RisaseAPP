@@ -46,13 +46,14 @@ while ($row = $dbnivelBAK->fetchassoc()){$chki=1;}
 
 if(!$chki){
 $queryp= "CREATE TABLE `stocklocal_$idt` (                        
-                 `id` bigint(255) unsigned NOT NULL AUTO_INCREMENT,  
-                 `cod` bigint(50) DEFAULT NULL,                      
-                 `stock` int(22) DEFAULT NULL,                       
-                 `alarma` int(22) DEFAULT NULL,                      
-                 `pvp` decimal(8,2) DEFAULT NULL,                    
-                 PRIMARY KEY (`id`),                                 
-                 KEY `cod` (`cod`)                                   
+              `id` bigint(255) unsigned NOT NULL AUTO_INCREMENT,  
+              `id_art` bigint(100) DEFAULT NULL,                  
+              `cod` bigint(50) DEFAULT NULL,                      
+              `stock` int(22) DEFAULT NULL,                       
+              `alarma` int(22) DEFAULT NULL,                      
+              `pvp` decimal(8,2) DEFAULT NULL,                    
+              PRIMARY KEY (`id`),                                 
+              KEY `cod` (`cod`)                                      
                ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ;";
 			   
 $dbnivelBAK->query($queryp);	
