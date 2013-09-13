@@ -15,7 +15,7 @@ while ($row = $dbnivel->fetchassoc()){$alar[$row['id_articulo']]=$row['stockmin'
 
 if (!$dbnivel->close()){die($dbnivel->error());};
 
-echo count($alar);
+
 
 
 
