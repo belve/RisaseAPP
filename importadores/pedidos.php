@@ -27,36 +27,6 @@ $ncamp[1]='fecha';
 $ncamp[2]='estado';
 
 
-$conn=odbc_connect('risasenew','remoto','azul88');
-
-if (!$conn)
-  {exit("Connection Failed: " . $conn);}
-
-
-$sql="SELECT * FROM $Ntab where pti_FechaPedido <= '31/12/$ini' AND pti_FechaPedido >= '01/01/$ini';";
-
-
-$rs=odbc_exec($conn,$sql);
-if (!$rs)
-  {exit("Error in SQL");}
-
-
-
-$count=1;
-while (odbc_fetch_row($rs))
-  {$count++;
-
-
-foreach($camp as $nkey => $nomcampo){
-	 $valores[$count][$nkey]=trim(utf8_encode(odbc_result($rs,$nomcampo)));
-}
-
-
-  }
-
-odbc_close($conn);
-
-
 
 
 
