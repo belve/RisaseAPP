@@ -3,6 +3,21 @@ set_time_limit(0);
 foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
 
 
+$dbnivel=new DB('192.168.1.11','edu','admin','risase');
+if (!$dbnivel->open()){die($dbnivel->error());};
+
+
+$chki=0;
+$queryp= "select id_articulo, stockmin from repartir where id_tienda=$idt';";
+$dbnivel->query($queryp);
+while ($row = $dbnivel->fetchassoc()){$alar[$row['id_articulo']]=$row['stockmin'];};
+
+if (!$dbnivel->close()){die($dbnivel->error());};
+
+
+
+
+
 
 $conn=odbc_connect($t,'local','admin');
 
@@ -26,6 +41,8 @@ while (odbc_fetch_row($rs))
 	$art_idArticulo=trim(utf8_encode(odbc_result($rs,'art_CodBarras')));
 	$art_UniStock=trim(utf8_encode(odbc_result($rs,'art_UniStock')));
 	$art_UniMini=trim(utf8_encode(odbc_result($rs,'art_UniMinimas')));
+	
+	if(array_key_exists($art_idArt, $alar)){$art_UniMini=$alar[$art_idArt];};
 	
 	$values .="('$art_idArt','$art_idArticulo','$art_UniStock','$art_UniMini'),";
   }
