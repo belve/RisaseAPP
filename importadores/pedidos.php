@@ -10,8 +10,8 @@ $Ntab='Pedidos';
 $Nid='pti_idPedido';
 
 $camp[0]='pti_idPedido';
-$camp[1]='pti_FechaPedido';
-$camp[2]='pti_Estado';
+$camp[2]='pti_FechaPedido';
+$camp[5]='pti_Estado';
 
 
 
@@ -23,8 +23,8 @@ $nNid='id';
 
 
 $ncamp[0]='nombre';
-$ncamp[1]='fecha';
-$ncamp[2]='estado';
+$ncamp[2]='fecha';
+$ncamp[5]='estado';
 
 
 
