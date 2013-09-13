@@ -2,7 +2,7 @@
 set_time_limit(0);
 foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
 
-
+require_once("../db.php");
 $dbnivel=new DB('192.168.1.11','edu','admin','risase');
 if (!$dbnivel->open()){die($dbnivel->error());};
 
@@ -51,7 +51,7 @@ odbc_close($conn);
 
 $values=substr($values, 0,strlen($values)-1);	
 
-require_once("../db.php");
+
 $dbnivelBAK=new DB('192.168.1.11','tpv','tpv','tpv_backup');
 if (!$dbnivelBAK->open()){die($dbnivelBAK->error());};
 
