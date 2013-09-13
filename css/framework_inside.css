@@ -217,7 +217,7 @@ height:15px; width:96%; padding-left:3px; cursor:pointer;
 .tab_PEPEN_agr 		{width: 199px; } 
 
 
-.pedPen 	{background-color:white; border-bottom:1px solid #888888; border-right:1px solid #888888;font-size:10px; height: 15px; width:202px;}
+.pedPen 	{background-color:white; border-bottom:1px solid #888888; border-right:1px solid #888888;font-size:8px; height: 15px; width:202px;}
 .pedPen_ART {width: 166px; float:left; border-left:1px solid #888888;padding:2px;height: 11px}
 .pedPen_REP {width: 24px;  float:left; border-left:1px solid #888888;padding:2px;height: 11px}
 

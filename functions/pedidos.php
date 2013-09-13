@@ -170,15 +170,21 @@ $html['filasP']=0;$html['filasA']=0;$html['filasT']=0;$html['filasF']=0;
 $equiestado['P']='1';
 $equiestado['A']='2';
 $equiestado['T']='3';
+
 $equiestado['F']='4';
 
 if (!$dbnivel->open()){die($dbnivel->error());};	
 $queryp= "select id, nombre, estado from agrupedidos where tip=$tip order by estado;";
-$dbnivel->query($queryp); 
+$dbnivel->query($queryp);
 
 while ($row = $dbnivel->fetchassoc()){
 	
-$idagrupado=$row['id'];$nomagrup=$row['nombre'];$estado=$row['estado'];$html['filas' . $estado]++;$count=$html['filas' . $estado];
+$idagrupado=$row['id'];$nomagrup=$row['nombre'];
+
+$estado=$row['estado'];
+if($estado=="E"){$estado="T";};
+
+$html['filas' . $estado]++;$count=$html['filas' . $estado];
 
 $estado2=$equiestado[$estado];
 $html[$estado][].="<div class='agrup_V2' id='$idagrupado' onclick='selV2agrup(\"$idagrupado|$estado2\")'>$nomagrup</div>";	
