@@ -30,12 +30,14 @@ $ncamp[2]='estado';
 
 
 
+
 include('../adodb5/adodb.inc.php'); $driv="odbc_mssql";
 $db =& ADONewConnection($driv);
 $dsn = "Driver={SQL Server};Server=SERVER;Database=Risase;";
 $db->Connect($dsn,'remoto','azul88');
 $db->debug = false;
-$sql="SELECT * FROM $Ntab where rep_fecha <= '31/12/$ini' AND rep_fecha >= '01/01/$ini';";
+$sql="SELECT * FROM $Ntab where pti_FechaPedido <= '31/12/$ini' AND pti_FechaPedido >= '01/01/$ini';";
+
 $rs = $db->Execute($sql);
 
 
