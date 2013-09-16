@@ -139,7 +139,7 @@ height:15px; width:98%; padding-left:3px; cursor:pointer;
 		}
 
 .cabtab_REP 		{border-right:1px solid #888888; height:15px; text-align: left; float:left; padding-top:5px; font-size:9px; padding-left:2px;background-color: #cccccc;}
-.tab_REP_art 		{width: 148px; } 								.camp_REP_art		{border:0px; width:148px; font-size:8px; height: 15px; background-color: transparent; }
+.tab_REP_art 		{width: 248px; } 								.camp_REP_art		{border:0px; width:248px; font-size:9px; height: 15px; background-color: transparent; }
 .tab_REP_rep 		{width: 28px; }  								.camp_REP_rep		{border:0px; width:28px; font-size:9px;  height: 15px; background-color: transparent;}
 .tab_REP_alm 		{width: 28px;border-right:2px solid orange }  	.camp_REP_alm		{border:0px; width:28px; font-size:9px;  height: 15px; background-color: transparent;}
 
