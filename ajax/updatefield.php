@@ -15,7 +15,7 @@ $dbnivel->query($queryp);
 
 echo $queryp;
 
-SyncModBD($queryp);
+
 
 
 if (!$dbnivel->close()){die($dbnivel->error());};
