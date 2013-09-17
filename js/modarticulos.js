@@ -42,6 +42,8 @@ function modiArt(){
 timer(1);
 
 var id=	document.getElementById('1').value;	
+
+var refprov=document.getElementById('9').value;
 var stock=document.getElementById('10').value;
 var uniminimas=document.getElementById('11').value;
 var preciocosto=document.getElementById('13').value;
@@ -56,6 +58,7 @@ var comentarios=document.getElementById('19').value;
 if(document.getElementById('8').checked==true){var congelado=1;}else{var congelado=0;};
 	
 url = "/ajax/update2.php?tabla=articulos&campos[stock]=" + stock + 
+"&campos[refprov]=" + refprov  + 
 "&campos[uniminimas]=" + uniminimas  + 
 "&campos[preciocosto]=" + preciocosto  +  
 "&campos[precioneto]=" + precioneto  +  
