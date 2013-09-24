@@ -1,10 +1,14 @@
 <?php
-$debug=1;
-print_r($_GET);
+$debug=0;
+#print_r($_GET);
 
-foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
+#foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
 
 $arts=$_GET['arts'];
+$id_rebaja=$_GET['id_rebaja'];
+$fini=$_GET['fini'];
+$ffin=$_GET['ffin'];
+
 	
 require_once("../db.php");
 require_once("../variables.php");
