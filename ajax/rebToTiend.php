@@ -8,7 +8,7 @@ $arts=$_GET['arts'];
 $id_rebaja=$_GET['id_rebaja'];
 $fini=$_GET['fini'];
 $ffin=$_GET['ffin'];
-
+$tisel=$_GET['tisel'];
 	
 require_once("../db.php");
 require_once("../variables.php");
