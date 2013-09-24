@@ -1,5 +1,5 @@
 <?php
-$debug=1;
+$debug=0;
 
 
 foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
@@ -38,7 +38,8 @@ $dbnivel->query($queryp); if($debug){echo $queryp . "\n";};
 	
 }
 	
-print_r($_GET);	
+$vals['ok']=$id_rebaja;	
+echo json_encode($vals);
 	
 if (!$dbnivel->close()){die($dbnivel->error());};	
 SyncModBD_T($queryp1,$tisel);	

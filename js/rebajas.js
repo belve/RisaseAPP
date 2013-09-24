@@ -89,7 +89,9 @@ innerDoc.getElementById(i).value=pact;
 }
 
 
-function enviaTiendas(){var detalle="";
+function enviaTiendas(){$.ajaxSetup({'async': false});
+document.getElementById("timer").style.visibility = "visible";	
+var detalle="";
 var fini=document.getElementById('fini').value;	
 var ffin=document.getElementById('ffin').value;	
 var tisel=document.getElementById('tisel').value;
@@ -115,11 +117,22 @@ var url="/ajax/rebToTiend.php?id_rebaja=" + id_rebaja
 
 $.getJSON(url, function(data) {
 $.each(data, function(key, val) {
+if(key=='ok'){
+alert('Enviado');
+document.getElementById('R_nom').value="";
+document.getElementById('R_ini').value="";	
+document.getElementById('R_fin').value="";
+var iframe = document.getElementById('FrebAct');
+var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+total=innerDoc.getElementById('t_' + id_rebaja).value=tisel;
 
+
+	
+}
 });
 });
 }
-
+document.getElementById("timer").style.visibility = "hidden";
 }
 
 
