@@ -16,6 +16,7 @@ $tab_sync['subgrupos']=1;
 $tab_sync['proveedores']=1;
 $tab_sync['tiendas']=1;
 
+
 global $dbnivel; global $tiendas;
 $dbnivel=new DB('192.168.1.11','edu','admin','risase');
 

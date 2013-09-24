@@ -1,5 +1,35 @@
 <?php
 
+function SyncModBD_T($sync_sql,$tiends){global $dbnivel; global $tiendas;
+
+$tie=explode(' ',$tiends);
+
+
+$sync_sql=addslashes($sync_sql);
+
+
+$sql="INSERT INTO syncupdate (id_tiend, syncSql) VALUES ";
+
+foreach ($tie as $point => $idt) {
+$nomt=$tiendas[$idt];	
+	
+$sql .="($idt, '$sync_sql'), ";
+}
+
+$sql=substr($sql, 0, strlen($sql)-2);
+$sql .=";";
+
+if (!$dbnivel->open()){die($dbnivel->error());};
+
+$queryp= $sql; #echo $queryp;
+$dbnivel->query($queryp);
+
+if (!$dbnivel->close()){die($dbnivel->error());};
+
+
+}
+
+
 function SyncModBD($sync_sql){global $dbnivel; global $tiendas;
 
 $sync_sql=addslashes($sync_sql);
@@ -23,8 +53,6 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 
 
 }
-
-
 
 
 
