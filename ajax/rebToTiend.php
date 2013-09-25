@@ -44,7 +44,7 @@ foreach ($arts as $idart => $precio) {$artics .="($id_rebaja,$idart,$precio,'$fi
 $artics=substr($artics, 0, strlen($artics)-1);
 
 $queryp2= "INSERT INTO det_rebaja (id_rebaja,id_articulo,precio,fecha_ini,fecha_fin) VALUES $artics;";
-$dbnivel->query($queryp); if($debug){echo $queryp . "\n";};
+$dbnivel->query($queryp2); if($debug){echo $queryp . "\n";};
 	
 
 	

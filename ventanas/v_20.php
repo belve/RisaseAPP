@@ -59,6 +59,10 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="text/javascript" src="/jquery/jquery-1.9.0.min.js"></script>
 
+<script>
+window.top.listArts =new Array();
+window.top.select   =new Array();	
+</script>
 <link rel='stylesheet' type='text/css' href='/css/framework_inside.css' />
 <script type="text/javascript" src="/js/jquery.tinyscrollbar.min.js"></script>
 <script type="text/javascript" src="/js/focus.js"></script>
@@ -71,7 +75,6 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 
 <script>
 
-setCookieT('reb','',1);
 
 
 function cargasubgrupo (id) {
@@ -151,7 +154,11 @@ addArticREB(url);
 		<div class="boton" style="width:112px; position: absolute; top:59px; "; onclick="creaREB();">Crear</div>
 	</div>
 	
+	
+	
 <div style="clear:both;"></div>	
+
+<div class="boton" style="width:165px;" onclick="javascript:delAgrupReb();">Borrar agrupación seleccionada</div>
 	
 <div class="listReb">
 	
@@ -286,7 +293,7 @@ addArticREB(url);
 <iframe id="articulos" src="/ventanas/blank_reb.htm" width="220" height="470" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
 
 <div style="height: 20px;    position: relative;    width: 248px;">
-<div onclick="seltodsR();" class="boton" style="position:relative;float:left; width:98px; margin-right:10px;">Seleccionar todos</div>
+<div onclick="seltodsR();" class="boton" style="position:relative;float:left; width:98px; margin-right:10px;">Sel todos</div>
 <div onclick="borraselR();" class="boton" style="position:relative;float:left; width:95px;">Borrar selección</div>
 </div>
 <div onclick="enviaTiendas();" class="boton" style="margin-top: 20px;">Enviar a tiendas</div>

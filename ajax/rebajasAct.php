@@ -103,6 +103,9 @@ $tabla .="<div class='tLineR' onclick='javascript:selReb($id,\"$todos\");' id='$
 <input type='hidden' id='i_$id' value='$i'>
 <input type='hidden' id='f_$id' value='$f'>
 <input type='hidden' id='art_$id' value=''>
+<script>
+window.top.listArts[$id]='';
+</script>
 ";	
 
 
