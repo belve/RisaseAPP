@@ -1,7 +1,7 @@
 <?php
 
 function SyncModBD_T($sync_sql,$tiends){global $dbnivel; global $tiendas;
-
+if($tiends){
 $tie=explode(' ',$tiends);
 
 
@@ -26,8 +26,7 @@ $dbnivel->query($queryp);
 
 if (!$dbnivel->close()){die($dbnivel->error());};
 
-
-}
+}}
 
 
 function SyncModBD($sync_sql){global $dbnivel; global $tiendas;

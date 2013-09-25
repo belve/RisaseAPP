@@ -64,14 +64,14 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 <script type="text/javascript" src="/js/focus.js"></script>
 <script type="text/javascript" src="/js/functions.js"></script>
 <script type="text/javascript" src="/js/rebajas.js"></script>
-
+<script type="text/javascript" src="/js/ffecha.js"></script>
 
 </head>
 
 
 <script>
 
-
+setCookieT('reb','',1);
 
 
 function cargasubgrupo (id) {
@@ -120,7 +120,7 @@ url = "/ajax/addartREB.php?hago=" + hago + "&id_proveedor=" + prov
 
 if(idrebaja) {
 timer(1);	
- document.getElementById('articulos').src=url;
+addArticREB(url);
  }	
 }
   
@@ -144,10 +144,10 @@ timer(1);
 	
 	<div class="newReb">
 		
-		<div>Nombre rebaja</div>
+		<div>Agrupación de Rebajas</div>
 		<input type="text" id="R_nom" style="font-size:10px; margin-bottom: 5px;  width:129px;">
-		<input type="text" id="R_ini" style="font-size:10px; float:left; width:60px; margin-right: 3px;">
-		<input type="text" id="R_fin" style="font-size:10px; float:left; width:60px">
+		<input type="text" id="R_ini" class="ffecha rebfini" value="dd/mm/aaaa" onfocus="javascript:dlF(this.id);" onkeyup="javascript:tabF(this.id);">
+		<input type="text" id="R_fin" class="ffecha rebffin" value="dd/mm/aaaa" onfocus="javascript:dlF(this.id);" onkeyup="javascript:tabF(this.id);">
 		<div class="boton" style="width:112px; position: absolute; top:59px; "; onclick="creaREB();">Crear</div>
 	</div>
 	
@@ -283,9 +283,13 @@ timer(1);
 	<div class="cabtab_artC tab_artC_cong" style="width: 52px;">PVP</div>
 	<div class="cabtab_artC tab_artC_cong" style="width: 52px;">REB</div>
 </div>
-<iframe id="articulos" src="/ajax/addartREB.php" width="220" height="500" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
+<iframe id="articulos" src="/ventanas/blank_reb.htm" width="220" height="470" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
 
-<div onclick="enviaTiendas();" class="boton">Enviar a tiendas</div>
+<div style="height: 20px;    position: relative;    width: 248px;">
+<div onclick="seltodsR();" class="boton" style="position:relative;float:left; width:98px; margin-right:10px;">Seleccionar todos</div>
+<div onclick="borraselR();" class="boton" style="position:relative;float:left; width:95px;">Borrar selección</div>
+</div>
+<div onclick="enviaTiendas();" class="boton" style="margin-top: 20px;">Enviar a tiendas</div>
 	
 </div>
 

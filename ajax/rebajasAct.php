@@ -102,7 +102,7 @@ $tabla .="<div class='tLineR' onclick='javascript:selReb($id,\"$todos\");' id='$
 <input type='hidden' id='t_$id' value='$tiendon'>
 <input type='hidden' id='i_$id' value='$i'>
 <input type='hidden' id='f_$id' value='$f'>
-
+<input type='hidden' id='art_$id' value=''>
 ";	
 
 
@@ -112,11 +112,12 @@ $tabla .="<div class='tLineR' onclick='javascript:selReb($id,\"$todos\");' id='$
 echo $tabla;
 if (!$dbnivel->close()){die($dbnivel->error());};
 
-if ($last){echo "<script>selReb($last,\"$todos\");</script>";}
+
 
 ?>
-
-
 <input type="hidden" id="tdt" value="<?php echo $cajt;?>">
+
+
+<?php if ($last){echo "<script>selReb($last,\"$todos\");</script>";} ?>
 
 </body>

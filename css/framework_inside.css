@@ -8,8 +8,9 @@ body {
 
                   
 
-
-
+.ffecha {color:#AAAAAA;}
+.rebfini {font-size:10px; float:left; width:60px; margin-right: 3px;}
+.rebffin {font-size:10px; float:left; width:60px; margin-right: 3px;}
 
 .blnco_limpio{
 	border: 1px solid #888888;
@@ -270,10 +271,14 @@ height:15px; width:96%; padding-left:3px; cursor:pointer;
 
 
 
-
+.camp_REBA_codbar {border:0px; background-color: transparent; font-size: 12px;}
 
 .rebajasAct {width:213px; height: 525px; position:relative; float: left; margin-right: 35px;}
-.newReb {position:relative; border:1px solid #888888; width: 174px; height: 100px; padding:5px; }
+.newReb {border: 1px solid #888888;
+    height: 100px;
+    padding: 5px 5px 5px 19px;
+    position: relative;
+    width: 161px;}
 
 .listReb {position:relative; float: left; top: 10px;  background-color: #B8B8B8;    border-right: 1px solid #888888;    border-top: 1px solid #888888;}
 .cajastiendas	{width:170px;  border:1px solid #888888; margin-top:15px;}
