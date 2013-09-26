@@ -313,7 +313,7 @@ url='/ajax/insFIJstock.php?h=1' + artic + ttss;
 if(window.debug ==1) {console.log('url: ' + url);  };	
 	$.getJSON(url, function(data) {
 	$.each(data, function(key, val) {
-	
+	alert(val);
 	});
 	});	
 

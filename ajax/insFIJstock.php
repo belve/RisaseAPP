@@ -24,12 +24,12 @@ $queryp .=";";
 
 
 if (!$dbnivel->open()){die($dbnivel->error());};
-	$dbnivel->query($queryp); echo $queryp;
+	$dbnivel->query($queryp); 
 if (!$dbnivel->close()){die($dbnivel->error());};	
 
 }}
 
-
+$valst[0]="Stocks enviados correctamente";
 	
-
+echo json_encode($valst);
 ?>
