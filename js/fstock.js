@@ -52,7 +52,7 @@ timer(0);
 
 
 
-function refresh(){
+function refresh(){$.ajaxSetup({'async': false});
 
 var art=window.top.listArts;
 var cod=window.top.codbars;
@@ -279,6 +279,47 @@ for (var i = 0; i < tie.length; i++) {if(document.getElementById('idt_' + i)){
 	
 }
 
+function borratiendas(){
+var tie=window.top.tsel;
+for (var i = 0; i < tie.length; i++) {if(document.getElementById('idt_' + i)){	
+window.top.tsel[i]=0;
+document.getElementById('idt_' + i).setAttribute("style", "background-color:white;");
+}}		
+}
+
+
+function tselALL(){
+if(window.debug ==1) {console.log('window.top.tselALL: ' + window.top.tselALL); };
+if(window.debug ==1) {console.log('window.top.tsel: '); console.info(window.top.tsel); };	
+
+var tie=window.top.tsel;
+
+if (window.top.tselALL==0){
+
+window.top.tselALL=1;
+for (var i = 0; i < tie.length; i++) {if(document.getElementById('idt_' + i)){	
+window.top.tsel[i]=1;
+document.getElementById('idt_' + i).setAttribute("style", "background-color:#8DC29E;");
+}}
+	
+}else{
+
+window.top.tselALL=0;
+for (var i = 0; i < tie.length; i++) {if(document.getElementById('idt_' + i)){	
+window.top.tsel[i]=0;
+document.getElementById('idt_' + i).setAttribute("style", "background-color:white;");
+}}
+	
+}
+
+
+
+
+if(window.debug ==1) {console.log('window.top.tselALL: ' + window.top.tselALL); };
+if(window.debug ==1) {console.log('window.top.tsel: '); console.info(window.top.tsel); };	
+	
+}
+
 
 
 function enviaTiendas(){
@@ -316,13 +357,43 @@ if(window.debug ==1) {console.log('url: ' + url);  };
 	alert(val);
 	});
 	});	
-
+	
+	
+	
+window.top.listArts = new Array();
+window.top.select   = new Array();
+window.top.codbars 	= new Array();
+window.top.fijo 	= new Array();
+window.top.tienda	= new Array();
+borratiendas();		
+refresh();
+limpiaListador();
 }
 
 
 
 
+function moveGrid(mv){
+var i=$("*:focus").attr("id");
+var vals=i.split('_');
+var C=vals[0];
+var F=vals[1];
+F=Number(F);
+if(mv=='up'){F=F-1;};
+if(mv=='dw'){F=F+1;};	
+if(mv=='lf'){C='f';};	
+if(mv=='ri'){C='s';};	
+	
+var i=C + "_" + F;
 
+if(window.debug ==1) {console.log('NewCamp: ' + i); };	
+
+if(document.getElementById(i)){
+$('#'+ i).focus();	
+document.getElementById(i).select();
+}
+	
+}
 
 
 

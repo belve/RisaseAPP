@@ -281,7 +281,7 @@ height:15px; width:96%; padding-left:3px; cursor:pointer;
     width: 161px;}
 
 .listReb {position:relative; float: left; top: 10px;  background-color: #B8B8B8;    border-right: 1px solid #888888;    border-top: 1px solid #888888;}
-.cajastiendas	{width:170px;  border:1px solid #888888; margin-top:15px;}
+.cajastiendas	{width:170px;  border:1px solid #888888; margin-top:15px; -moz-user-select: none;}
 .cajt			{cursor:pointer; position:relative; float:left; width:25px; height: 18px; padding-top:5px; font-size: 8px; text-align: center; background-color:white; border:1px solid #888888; margin:3px;}
 
 .chang {position:relative; float:left; left:33px;}

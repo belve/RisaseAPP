@@ -7,7 +7,7 @@ require_once("../variables.php");
 
 $cajt="";
 foreach ($tiendas as $idt => $nomt) {
-$cajt.="<div class='cajt' id='idt_$idt' onclick='javascript:cajtie($idt);'>$nomt</div> <script>window.top.tsel[$idt]=0;</script> ";	
+$cajt.="<div class='cajt' id='idt_$idt' onclick='javascript:cajtie($idt);' ondblclick='tselALL();' >$nomt</div> <script>window.top.tsel[$idt]=0;</script> ";	
 }
 $cajt.="<div style='clear:both;'></div>";
 
@@ -66,6 +66,7 @@ window.top.codbars 	= new Array();
 window.top.fijo 	= new Array();
 window.top.tienda	= new Array();
 window.top.tsel	= new Array();	
+window.top.tselALL	=0;	
 </script>
 <link rel='stylesheet' type='text/css' href='/css/framework_inside.css' />
 <script type="text/javascript" src="/js/jquery.tinyscrollbar.min.js"></script>
@@ -127,6 +128,30 @@ url=url  + "&yalistados=" + yalist;
 timer(1);	
 
 addArts(url);
+limpiaListador();	
+}
+
+
+function limpiaListador(){
+document.getElementById('h2').value='';
+document.getElementById('h3').value='';
+document.getElementById('h4').value='';
+document.getElementById('h5').value='';
+document.getElementById('h6').value='';
+document.getElementById('h7').value='';
+document.getElementById('h8').value='';
+document.getElementById('h9').value='';
+document.getElementById('h10').value='';
+
+document.getElementById('2').value='';
+document.getElementById('3').value='';
+document.getElementById('4').value='';
+document.getElementById('5').value='';
+document.getElementById('6').value='';
+document.getElementById('7').value='';
+document.getElementById('8').value='';
+document.getElementById('9').value='';
+document.getElementById('10').value='';
 	
 }
   

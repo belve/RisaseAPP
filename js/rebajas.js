@@ -1,4 +1,4 @@
-window.debug =0;
+window.debug =1;
 
 
 $.ajaxSetup({'async': false});
@@ -273,6 +273,44 @@ innerDoc2.getElementById('total').value=innerDoc2.getElementById('total').value 
 ordencodigos(1);
 }
 
+
+function tselALL(){
+if(window.debug ==1) {console.log('L277 :tselALL();');};	
+
+var id=document.getElementById('idrebaja').value;	
+
+var iframe = document.getElementById('FrebAct');
+var innerDoc2 = iframe.contentDocument || iframe.contentWindow.document;
+var ta=innerDoc2.getElementById('ta_' + id).value;	
+var tdt=innerDoc2.getElementById('tdt').value;
+var tdts=tdt.split(' ');
+
+if(ta==0){
+
+for (var i = 0; i < tdts.length; i++){
+document.getElementById('idt_' + tdts[i]).setAttribute("style", "background-color:#8DC29E;");	
+}	
+innerDoc2.getElementById('t_' + id).value=tdt;
+innerDoc2.getElementById('ta_' + id).value=1;	
+
+
+}else{
+	
+for (var i = 0; i < tdts.length; i++){
+document.getElementById('idt_' + tdts[i]).setAttribute("style", "background-color:white;");	
+}	
+innerDoc2.getElementById('t_' + id).value='';
+innerDoc2.getElementById('ta_' + id).value=0;
+	
+}
+
+
+}
+
+
+
+
+
 function refrescaSelTOP(){
 if(window.debug ==1) {console.log('L257 :refrescaSelTOP();');};	
 
@@ -345,9 +383,52 @@ parent.document.getElementById("timer").style.visibility = "hidden";
 }
 
 
+function resetwindow(){
+parent.document.getElementById('idrebaja').value='';	
+parent.document.getElementById('amount').value='';
+
+var iframe = parent.document.getElementById('articulos');
+var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+innerDoc.getElementById('tabReb').innerHTML='';	
+
+
+var tiendst=document.getElementById('tdt').value;
+if(tiendst){
+var ti=tiendst.split(' ');
+for (var i = 0; i < ti.length; i++) {parent.document.getElementById('idt_' + ti[i]).setAttribute("style", "background-color:white;");};
+}
+	
+parent.document.getElementById('h2').value='';
+parent.document.getElementById('h3').value='';
+parent.document.getElementById('h4').value='';
+parent.document.getElementById('h5').value='';
+parent.document.getElementById('h6').value='';
+parent.document.getElementById('h7').value='';
+parent.document.getElementById('h8').value='';
+parent.document.getElementById('h9').value='';
+parent.document.getElementById('h10').value='';
+
+parent.document.getElementById('2').value='';
+parent.document.getElementById('3').value='';
+parent.document.getElementById('4').value='';
+parent.document.getElementById('5').value='';
+parent.document.getElementById('6').value='';
+parent.document.getElementById('7').value='';
+parent.document.getElementById('8').value='';
+parent.document.getElementById('9').value='';
+parent.document.getElementById('10').value='';
+
+
+}
+
+
 function selReb(id,todos){
 if(window.debug ==1) {console.log('L191 :selReb(id,todos);id='+ id + " todos=" + todos);};
 	
+if(parent.document.getElementById('idrebaja').value==id){
+resetwindow();
+document.getElementById(id).setAttribute("style", "background-color:white;");	
+}else{
 	
 var iframe = parent.document.getElementById('articulos');
 var innerDoc = iframe.contentDocument || iframe.contentWindow.document;	
@@ -393,6 +474,8 @@ var tie=tiends.split(' ');
 for (var i = 0; i < tie.length; i++) {parent.document.getElementById('idt_' + tie[i]).setAttribute("style", "background-color:#8DC29E;");};
 }
 parent.document.getElementById("timer").style.visibility = "hidden";
+
+}
 }
 
 
@@ -470,7 +553,7 @@ innerDoc.getElementById(id_rebaja + '_r_' + ida).value=pact;
 
 }
 
-	
+document.getElementById('amount').value='';	
 }
 
 
@@ -528,9 +611,16 @@ document.getElementById("timer").style.visibility = "hidden";
 
 
 
-function creaREB(){$.ajaxSetup({'async': false});
-if(window.debug ==1) {console.log('L507 :creaREB()');};
+function creaREB(){$.ajaxSetup({'async': false});if(window.debug ==1) {console.log('L531 :creaREB()');};
+if(window.debug ==1) {console.log('window.top.agruNames: '); console.info(window.top.agruNames); };	
+
+
 var nombre=document.getElementById('R_nom').value;
+if(window.top.agruNames.indexOf(nombre) >= 0){alert('Ya existe una agrupación activa con ese nombre.');}else{
+
+if(window.top.agruNames.indexOf(nombre)<0){
+window.top.agruNames.push(nombre);
+}
 var fini=document.getElementById('R_ini').value;fini=fini.replace("dd/mm/aaaa","");	
 var ffin=document.getElementById('R_fin').value;ffin=ffin.replace("dd/mm/aaaa","");
 
@@ -549,7 +639,7 @@ document.getElementById('R_ini').value="dd/mm/aaaa";
 document.getElementById('R_fin').value="dd/mm/aaaa";
 }else{alert('formato de fecha erroneo');};
 	
-}
+}}
 
 
 function ordencodigos(w){$.ajaxSetup({'async': false});
@@ -588,6 +678,8 @@ if(window.debug ==1) {console.log('L567 :END JSON ordencodigos(w);');};
 }
 
 function delAgrupReb(){if(window.debug ==1) {console.log('L587 :delAgrupReb();');};
+if(confirm('Esta seguro de borrar la agrupación')){
+
 var id=document.getElementById('idrebaja').value;	
 if(id){
 
@@ -599,10 +691,12 @@ $.getJSON(url, function(data) {
 $.each(data, function(key, val) {
 if(key=='ok'){
 
-
-
 var iframe = document.getElementById('FrebAct');
 var innerDoc = iframe.contentDocument || iframe.contentWindow.document;	
+var nom=innerDoc.getElementById('nom_' + id).value;
+
+var inom=window.top.agruNames.indexOf(nom);
+window.top.agruNames[inom]='';
 
 var tiendst=innerDoc.getElementById('tdt').value;
 if(tiendst){
@@ -630,5 +724,5 @@ document.getElementById('articulos').src='/ventanas/blank_reb.htm';
 }else{alert('Seleccione una agrupacion de rebajas para borrarla');};
 
 	
-}
+}}
 

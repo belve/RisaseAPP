@@ -100,11 +100,14 @@ $tabla .="<div class='tLineR' onclick='javascript:selReb($id,\"$todos\");' id='$
 <div class='tLineR_N'>$nombre</div> <div class='tLineR_p'>$fini $ffin</div>
 </div>
 <input type='hidden' id='t_$id' value='$tiendon'>
+<input type='hidden' id='ta_$id' value='0'>
 <input type='hidden' id='i_$id' value='$i'>
 <input type='hidden' id='f_$id' value='$f'>
+<input type='hidden' id='nom_$id' value='$nombre'>
 <input type='hidden' id='art_$id' value=''>
 <script>
 window.top.listArts[$id]='';
+window.top.agruNames.push('$nombre');
 </script>
 ";	
 

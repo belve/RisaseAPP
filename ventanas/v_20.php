@@ -7,7 +7,7 @@ require_once("../variables.php");
 
 $cajt="";
 foreach ($tiendas as $idt => $nomt) {
-$cajt.="<div class='cajt' id='idt_$idt' onclick='javascript:cajtie($idt);'>$nomt</div>";	
+$cajt.="<div class='cajt' id='idt_$idt' onclick='javascript:cajtie($idt);' ondblclick='tselALL();'>$nomt</div>  ";	
 }
 $cajt.="<div style='clear:both;'></div>";
 
@@ -61,7 +61,10 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 
 <script>
 window.top.listArts =new Array();
-window.top.select   =new Array();	
+window.top.select   =new Array();
+
+window.top.agruNames = new Array();
+	
 </script>
 <link rel='stylesheet' type='text/css' href='/css/framework_inside.css' />
 <script type="text/javascript" src="/js/jquery.tinyscrollbar.min.js"></script>
@@ -124,8 +127,35 @@ url = "/ajax/addartREB.php?hago=" + hago + "&id_proveedor=" + prov
 if(idrebaja) {
 timer(1);	
 addArticREB(url);
+limpiaListador();
  }	
 }
+
+function limpiaListador(){
+document.getElementById('h2').value='';
+document.getElementById('h3').value='';
+document.getElementById('h4').value='';
+document.getElementById('h5').value='';
+document.getElementById('h6').value='';
+document.getElementById('h7').value='';
+document.getElementById('h8').value='';
+document.getElementById('h9').value='';
+document.getElementById('h10').value='';
+
+document.getElementById('2').value='';
+document.getElementById('3').value='';
+document.getElementById('4').value='';
+document.getElementById('5').value='';
+document.getElementById('6').value='';
+document.getElementById('7').value='';
+document.getElementById('8').value='';
+document.getElementById('9').value='';
+document.getElementById('10').value='';
+	
+}
+  
+
+
   
 </script>
 
