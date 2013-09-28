@@ -286,3 +286,19 @@ height:15px; width:96%; padding-left:3px; cursor:pointer;
 
 .chang {position:relative; float:left; left:33px;}
 
+.fpvpTIE {background-color: #8DC29E;
+    font-size: 8px;
+    text-align: center;
+    width: 28px;border-right: 1px solid #888888;
+    float: left;height: 15px;
+    padding-left: 2px;
+    padding-top: 5px;}
+
+.soloFijos { 
+    border: 1px solid #888888;
+    float: left;
+    height: 14px;
+    margin-top: 10px;
+    padding: 4px 4px 4px 6px;
+    position: relative;
+    width: 218px;}

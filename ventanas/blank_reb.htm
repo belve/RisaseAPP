@@ -32,7 +32,37 @@ td		{width: 90px; border: 1px  solid #888888; margin:0px;}
 
 
 
-
+<script>
+	
+	   $(document).keypress(function(e) {
+   	
+   
+      switch(e.keyCode) { 
+        
+         case 38:
+         moveGrid('up');
+         return false;	
+         break;
+      
+		 case 40:
+         moveGrid('dw');
+         return false;	
+         break;
+         
+          case 37:
+         moveGrid('lf');
+         return false;	
+         break;
+         
+          case 39:
+         moveGrid('ri');
+         return false;	
+         break; 
+         
+      }
+   });
+	
+</script>
 
 
 

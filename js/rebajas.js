@@ -726,3 +726,27 @@ document.getElementById('articulos').src='/ventanas/blank_reb.htm';
 	
 }}
 
+
+
+
+
+
+function moveGrid(mv){
+var i=$("*:focus").attr("id");
+
+
+i=Number(i);
+if(mv=='up'){i=i-1;};
+if(mv=='dw'){i=i+1;};	
+
+
+
+if(window.debug ==1) {console.log('NewCamp: ' + i); };	
+
+if(document.getElementById(i)){
+$('#'+ i).focus();	
+document.getElementById(i).select();
+}
+	
+}
+
