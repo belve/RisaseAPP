@@ -1,4 +1,7 @@
 <?php
+set_time_limit(0);
+$debug=0;
+
 foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
 require_once("../db.php");
 require_once("../variables.php");
@@ -11,7 +14,7 @@ $copios=explode(',',$idarticulo_new);
 $insertos=array();$updates=array();
 
 $queryp= "select id_tienda, cantidad, stockmin from repartir where id_articulo=$idarticulo;";
-$dbnivel->query($queryp); 
+$dbnivel->query($queryp); if($debug==1){echo $queryp . "\n\n";};
 while ($row = $dbnivel->fetchassoc()){
 	
 		$repartos[$row['id_tienda']]['cantidad']=$row['cantidad'];
@@ -37,27 +40,56 @@ $borros .=$idarticulo_new . ',';
 
 $borros=substr($borros, 0,strlen($borros)-1);
 $queryp= "delete from repartir where id_articulo IN ($borros);";
-$dbnivel->query($queryp); 
+$dbnivel->query($queryp); if($debug==1){echo $queryp . "\n\n";};
 $valinsert=substr($valinsert, 0,strlen($valinsert)-1);
 $queryp= "INSERT INTO repartir (id_articulo,id_tienda,cantidad,stockmin) values $valinsert;";	
-$dbnivel->query($queryp);
+$dbnivel->query($queryp); if($debug==1){echo $queryp . "\n\n";};
 
 
-$suma=array();;
-$queryp= "select id_articulo, id_tienda, cantidad, stockmin,
-(select id_proveedor from articulos where articulos.id=repartir.id_articulo) as idprov,
-(select codbarras from articulos where articulos.id=repartir.id_articulo) as codbarras,  
-(select id from pedidos where pedidos.id_tienda=repartir.id_tienda AND pedidos.id_articulo=repartir.id_articulo ORDER BY id DESC limit 1) as idp, 
-(select estado from pedidos where pedidos.id_tienda=repartir.id_tienda AND pedidos.id_articulo=repartir.id_articulo ORDER BY id DESC limit 1) as estado, 
-(select tip from pedidos where pedidos.id_tienda=repartir.id_tienda AND pedidos.id_articulo=repartir.id_articulo ORDER BY id DESC limit 1) as tip
- from repartir where id_articulo IN ($articulos);";
- 
-$dbnivel->query($queryp); 
+$suma=array();
+
+$queryp= "select id, id_proveedor, codbarras from articulos where id IN ($articulos);";
+$dbnivel->query($queryp);  if($debug==1){echo $queryp . "\n\n";};
 while ($row = $dbnivel->fetchassoc()){
-$idp=$row['idp'];$estado=$row['estado'];$tip=$row['tip'];$ida=$row['id_articulo'];$provs[$ida]=$row['idprov'];$codbarras[$ida]=$row['codbarras'];
+$provs[$row['id']]=$row['id_proveedor']; $codbarras[$row['id']]=$row['codbarras'];
+}
 
-if(($idp)&&($tip==1)&&($estado!='F')){$updates[$idp]=$row['cantidad'];if(array_key_exists($ida, $suma)){$suma[$ida]=$suma[$ida]+$row['cantidad'];}else{$suma[$ida]=$row['cantidad'];};};
-if(!$idp){$insertos[$ida][$row['id_tienda']]=$row['cantidad'];if(array_key_exists($ida, $suma)){$suma[$ida]=$suma[$ida]+$row['cantidad'];}else{$suma[$ida]=$row['cantidad'];};};
+$queryp= "select id, id_articulo, id_tienda, tip, estado from pedidos where id_articulo IN ($articulos) ORDER BY id DESC;";
+$dbnivel->query($queryp);  if($debug==1){echo $queryp . "\n\n";};
+while ($row = $dbnivel->fetchassoc()){
+$dpedidos[$row['id_articulo']][$row['id_tienda']]['id']=$row['id'];
+$dpedidos[$row['id_articulo']][$row['id_tienda']]['tip']=$row['tip'];
+$dpedidos[$row['id_articulo']][$row['id_tienda']]['estado']=$row['estado'];
+}
+
+
+
+
+
+$queryp= "select id_articulo, id_tienda, cantidad, stockmin from repartir where id_articulo IN ($articulos);";
+$dbnivel->query($queryp);  if($debug==1){echo $queryp . "\n\n";};
+while ($row = $dbnivel->fetchassoc()){
+$ida=$row['id_articulo'];
+$idtt=$row['id_tienda'];
+
+$dpart=$dpedidos[$ida];
+
+if(array_key_exists($idtt, $dpart)){
+$estado=$dpart[$idtt]['estado'];
+$tip=$dpart[$idtt]['tip'];
+$idp=$dpart[$idtt]['id'];
+}else{
+$idp=0;	
+}
+
+if(($idp)&&($tip==1)&&($estado!='F')){
+	$updates[$idp]=$row['cantidad'];
+	if(array_key_exists($ida, $suma)){
+		$suma[$ida]=$suma[$ida]+$row['cantidad'];}else{$suma[$ida]=$row['cantidad'];};};
+if(!$idp){
+	$insertos[$ida][$idtt]=$row['cantidad'];
+	if(array_key_exists($ida, $suma)){
+		$suma[$ida]=$suma[$ida]+$row['cantidad'];}else{$suma[$ida]=$row['cantidad'];};};
 
 };
 
@@ -80,7 +112,7 @@ $valinsert .="($idarticulo,$idtien,$cant,1,'$fecha',$prov,$grupo,$subgrupo,$code
 }}
 $valinsert=substr($valinsert, 0,strlen($valinsert)-1);
 $queryp="INSERT INTO pedidos (id_articulo,id_tienda,cantidad,tip,fecha,prov,grupo,subgrupo,codigo) values $valinsert;";
-$dbnivel->query($queryp); 
+$dbnivel->query($queryp); if($debug==1){echo $queryp . "\n\n";};
 }
 
 $valinsert="";$cuales="";
@@ -91,7 +123,7 @@ $cuales.=$idp . ",";
 }
 $valinsert=substr($valinsert, 0,strlen($valinsert)-1);$cuales=substr($cuales, 0,strlen($cuales)-1);
 $queryp="UPDATE pedidos SET cantidad = CASE id $valinsert END WHERE id IN ($cuales);";
-$dbnivel->query($queryp);
+$dbnivel->query($queryp); if($debug==1){echo $queryp . "\n\n";};
 }
 
 if (!$dbnivel->close()){die($dbnivel->error());};

@@ -69,7 +69,7 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 
 
 </head>
-<body>
+<body onload="foc();">
 
 
 <div style="float: left">
@@ -113,11 +113,16 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 <div style="clear:both;"></div>
 
 
-<div id="copiar">							<div onclick="copiarLIN()" 	class="boton" style="width:100px;float:left;margin:5px 5px 0px 0px;">Copiar</div></div>
-<div id="pegar" style="visibility: hidden;"><div onclick="pegarLIN()"	class="boton" style="width:100px;float:left;margin:5px 5px 0px 0px;">Pegar</div></div>
+<div id="copiar" style="visibility: hidden;" class="copipaste" >							<div onclick="copiarLIN()" 	class="boton" style="width:100px;float:left;margin:5px 5px 0px 0px;">Copiar</div></div>
+
+<div id="pegar"  style="visibility: hidden;">
+	<div onclick="CancelCopy()" 	class="boton" style="width:100px;float:left;margin:5px 5px 0px 0px;">Cancelar copia</div>
+	<div onclick="pegarLIN()"	class="boton" style="width:100px;float:left;margin:5px 5px 0px 0px;">Pegar</div>
+</div>
 
 <div style="float: right"><div class="boton"  onclick="addArticulo('listador');">Listar</div></div>
 <div style="float: right"><div style="margin-right: 6px;" class="boton"  onclick="limpiarGRID('');">Limpiar grid</div></div>
+<div style="visibility: hidden" class="delFSELs" id="dfsel"><div style="margin-right: 6px;" class="boton"  onclick="delFIL();">Eliminar seleccionadas</div></div>
 <div style="float: right"><div style="margin-right: 232px;" class="boton"  onclick="art_en_REP('');">Artículos en reparto</div></div>
 
 
