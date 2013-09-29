@@ -68,7 +68,7 @@ $(window).keydown(function(evt) {
 </div>
 
 <div style="clear:both;"></div>	
-<iframe id="pedipent" src="/ajax/pedipent.php" width="203" height="400" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
+<iframe id="pedipent" src="/ajax/pedipent.php" width="303" height="400" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
 
 <div style="clear:both;"></div>	
 
@@ -76,7 +76,7 @@ $(window).keydown(function(evt) {
 
 
 	
-<div class="boton" onclick="meteAgrup(<?php echo $tip;?>);">Meter en agrupación >></div>
+<div class="boton" onclick="meteAgrup(<?php echo $tip;?>);">Añadir a agrupación >></div>
 
 </div>
 
@@ -84,7 +84,7 @@ $(window).keydown(function(evt) {
 
 <div style="float:left; margin-left:20px;">	
 	
-<div class="cabPEPEN" style="margin-top:10px;">
+<div class="cabPEPEN" style="margin-top:10px;width: 202px">
 <div class="cabtab_PEPEN tab_PEPEN_agr">Agrupaciones</div>	
 </div>
 
@@ -92,7 +92,7 @@ $(window).keydown(function(evt) {
 
 <iframe id="agrupaciones" src="/ajax/agrupaciones.php" width="203" height="380" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
 
-<div class="cabPEPEN" style="height:20px;margin-top: -2px;">
+<div class="cabPEPEN" style="height:20px;margin-top: -2px;width: 202px">
 <input style="font-size:10px;" type="text" id="newgrup"><div class="iconos new_on" onclick="newAgrup(<?php echo $tip;?>);"></div>
 </div>
 
@@ -120,7 +120,7 @@ $(window).keydown(function(evt) {
 </div>
 
 <div style="clear:both;"></div>	
-<iframe id="pediagrup" src="/ajax/pedipent.php" width="203" height="400" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
+<iframe id="pediagrup" src="/ajax/pedipent.php" width="303" height="400" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
 
 <div style="clear:both;"></div>	
 

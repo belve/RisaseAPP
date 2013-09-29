@@ -90,6 +90,7 @@ alert(val);
 });
 });		
 timerAD(0,'timer2',0);
+document.getElementById('newgrup').value="";
 }
 
 function modiAgrup(nom){

@@ -104,7 +104,7 @@ if (!$dbnivel->open()){die($dbnivel->error());};
 $queryp= "SELECT id_articulo, sum(cantidad) as rep, 
 (select codbarras from articulos where articulos.id=pedidos.id_articulo) as codbarras, 
 (select refprov from articulos where articulos.id=pedidos.id_articulo) as refprov 
-from pedidos WHERE tip=$tip AND estado='-' AND agrupar='$id' GROUP BY id_articulo ORDER BY prov, grupo, subgrupo, codigo;";
+from pedidos WHERE agrupar='$id' GROUP BY id_articulo ORDER BY grupo, subgrupo, codigo;";
 $dbnivel->query($queryp); $fila=0;
 while ($row = $dbnivel->fetchassoc()){
 $ref=$row['codbarras'] . " / " . $row['refprov'];
@@ -140,7 +140,7 @@ if (!$dbnivel->open()){die($dbnivel->error());};
 $queryp= "SELECT id_articulo, sum(cantidad) as rep, 
 (select codbarras from articulos where articulos.id=pedidos.id_articulo) as codbarras, 
 (select refprov from articulos where articulos.id=pedidos.id_articulo) as refprov 
-from pedidos WHERE tip=$tip AND estado='-' AND (agrupar='' or agrupar IS NULL) GROUP BY id_articulo ORDER BY prov, grupo, subgrupo, codigo;";
+from pedidos WHERE tip=$tip AND estado='-' AND (agrupar='' or agrupar IS NULL) GROUP BY id_articulo ORDER BY grupo, subgrupo, codigo;";
 $dbnivel->query($queryp);$fila=0; 
 while ($row = $dbnivel->fetchassoc()){
 $ref=$row['codbarras'] . " / " . $row['refprov'];
