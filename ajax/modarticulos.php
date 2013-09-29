@@ -35,13 +35,16 @@ id,
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){
 	
+	if($row['dto1']=".00"){$dto1="";}else{$dto1=$row['dto1'];}
+	if($row['dto1']=".00"){$dto2="";}else{$dto2=$row['dto1'];}
+	
 	$valores[1]=$row['id'];
 	$valores[2]=$row['proveedor'];
 	$valores[3]=$row['gru'];
 	$valores[4]=$row['subgru'];
 	$valores[5]=$row['color'];
-	$valores[6]=$row['dto1'];
-	$valores[7]=$row['dto2'];
+	$valores[6]=$dto1;
+	$valores[7]=$dto2;
 	
 	$valores[8]=$row['congelado'];
 	

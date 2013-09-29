@@ -25,9 +25,4 @@ $urlimages="http://192.168.1.11/photos/";
 
 require_once("../functions/gettiendas.php");
 require_once("../functions/sync.php");
-
 ?>
-
-
-
-

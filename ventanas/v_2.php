@@ -1,3 +1,28 @@
+
+<?php
+require_once("../db.php");
+require_once("../variables.php");
+
+if (!$dbnivel->open()){die($dbnivel->error());};
+
+
+$htmlCol="<option value=''></option>";
+$queryp= "select id, nombre from colores ORDER BY nombre ASC;";	
+$dbnivel->query($queryp);
+
+while ($row = $dbnivel->fetchassoc()){
+	$id=$row['id'];$nombre=$row['nombre'];
+	$htmlCol .="<option value='$id'>$nombre</option>";	
+}
+
+
+
+
+if (!$dbnivel->close()){die($dbnivel->error());};
+
+
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
 <head>
@@ -29,7 +54,12 @@
 	<div class="iconos next_on" onclick="javascrit:cargaColoresMAS();"></div>
 	<div class="iconos fin_on" onclick="javascrit:cargaColoresFIN();"></div>
 	
+	<div style="float: left;    left: 4px;    position: relative;    top: -4px;"> <select onchange="javascrit:cColoresC();" id="ccolor"><?php echo $htmlCol; ?> </select> </div>
+	
 	<div class="iconos save_on" onclick="javascrit:saveColor();"></div>
+	
+	
+	
 </div>
 <div style="clear: both;margin-bottom: 10px; "></div>	
 <table>

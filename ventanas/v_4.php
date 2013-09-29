@@ -5,7 +5,7 @@ require_once("../variables.php");
 
 if (!$dbnivel->open()){die($dbnivel->error());};
 
-$html="";
+$html="";$ocul="";$ocul2="";
 $queryp= "select * from grupos ORDER BY id ASC;";	
 $dbnivel->query($queryp);
 
@@ -13,6 +13,26 @@ while ($row = $dbnivel->fetchassoc()){
 	$id=$row['id'];$nombre=$row['nombre'];
 	$html .="<option value='$id'>$nombre</option>";	
 }	
+
+
+$queryp= "select distinct id_grupo as idg, min(id) as id from subgrupos group by id_grupo ;";	
+$dbnivel->query($queryp);
+
+while ($row = $dbnivel->fetchassoc()){
+	$idg=$row['idg'];$idsg=$row['id'];
+	$ocul .="<input type='hidden' id='oc_$idg' value='$idsg'>";	
+}	
+
+
+$queryp= "select distinct id_grupo as idg, max(clave) as id from subgrupos group by id_grupo;";	
+$dbnivel->query($queryp);
+
+while ($row = $dbnivel->fetchassoc()){
+	$idg=$row['idg']; $idsg=$row['id'];
+	$ocul2 .="<input type='hidden' id='oc2_$idg' value='$idsg'>";	
+}	
+
+
 
 if (!$dbnivel->close()){die($dbnivel->error());};
 
@@ -47,51 +67,74 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 <body>
 <input type="hidden" class="corto" id="1_hid">
 
-
+<div style="border:1px solid #888888; padding: 5px; position: relative;">
 <div class="botonera">
-	<div class="iconos ini_on" 	onclick="javascrit:cargaSubGrupos(1);"></div>
+	<div class="iconos ini_on" 	onclick="javascrit:cargaSubGrupos(0);"></div>
 	<div class="iconos prev_on" onclick="javascrit:cargaSubGrupos('menos');"></div>
 	<div class="iconos next_on" onclick="javascrit:cargaSubGrupos('mas');"></div>
 	<div class="iconos fin_on" 	onclick="javascrit:cargaSubGrupos('fin');"></div>
 	
 	<div class="iconos save_on" onclick="javascrit:saveSubGrupo();"></div>
-	<div class="iconos new_on" onclick="javascrit:createSubGrupo();"></div>
+	
 	
 </div>
-<div style="clear: both;margin-bottom: 10px; "></div>	
+
+<div style="float: left;    left: 4px;    position: relative;    top: -13px;"> 
+<select id="2" onchange="javascrit:cSubGru(this.value);" >
+				<?php echo $html; ?>
+			</select>
+</div>
+
+<div style="clear: both;"></div>	
 <table>
 		<tbody>
 		
 		<tr>
 			<td>Código</td>
-			<td><input type="text" name="idmost" class="corto" id="1" onchange="javascrit:cargaSubGruposS();" ></td>
+			<td><input type="text" style="border:0px; background-color: transparent; width:15px; border-bottom: 1px solid #888888;" name="idmost"  id="1"  readonly>
+				<input type="text" style="border:0px; background-color: transparent; width:15px; border-bottom: 1px solid #888888;" name="color"  id="4"  readonly>
+			</td>
 		</tr>
-		
+				
 		<tr>
-			<td>Grupo</td>
-			<td><select id="2">
-				<?php echo $html; ?>
-			</select></td>
-		</tr>
-
-		<tr>
-			<td>Subgrupo</td>
+			<td>Nombre</td>
 			<td><input type="text" name="color" class="largo" id="3"></td>
 		</tr>
 		
-		<tr>
-			<td>Clave</td>
-			<td><input type="text" name="color" class="corto" id="4"></td>
-		</tr>
+	
 		
 		
 </tbody>
 </table>
+
+</div>
+
+<div style="border:1px solid #888888; padding: 5px; position: relative; margin-top: 10px;">
+<select name="csg" id="GforCreate" onchange="javascrit:CreaSubg(this.value);" >
+<option value=''></option>	
+<?php echo $html; ?>
+</select>	
+
+<input type="text" style="border:0px; background-color: transparent; width:15px; border-bottom: 1px solid #888888;" name="idmost"  id="nG"  readonly>
+<input type="text" style="border:0px; background-color: transparent; width:15px; border-bottom: 1px solid #888888;" name="color"   id="nSG"  readonly>
+<input type="text" name="color" class="medio" id="nName">		
+<div class="iconos new_on" onclick="javascrit:createSubGrupo();"></div>
+	
+</div>
+
+
+
+
+
+<?php echo $ocul;?>
+<?php echo $ocul2;?>
 
 
 </body>
 
 
 <script>
-	cargaSubGrupos(1);
+	window.top.pointer=0;
+	LoadsubG();
+	cargaSubGrupos(0);
 </script>		

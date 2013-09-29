@@ -8,6 +8,13 @@ $grid=array();
 
 if (!$dbnivel->open()){die($dbnivel->error());};
 
+$queryp= "select id_grupo, clave, (select nombre from grupos where id=id_grupo) as ng, nombre as ns from subgrupos;";
+$dbnivel->query($queryp);
+while ($row = $dbnivel->fetchassoc()){
+$g=$row['id_grupo'] . $row['clave'];	
+$equig[$g]=$row['ng'] . "/" . $row['ns'];	
+}
+
 
 $queryp= "select 
 (select codbarras from articulos where articulos.id=pedidos.id_articulo) as codbarras, 
@@ -19,9 +26,12 @@ sum(cantidad) as rep,
  from pedidos where tip=$tip and (estado='-' or estado like null) AND (agrupar !='' or agrupar NOT LIKE NULL) group by id_articulo ORDER BY grupo, subgrupo, codigo;";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){
-if($row['stock'] < $row['rep']){	
-$grid[$row['grupo'] . "/" . $row['sgrupo']][$row['codbarras'] . " / " .  $row['refprov']]['R']=$row['rep'];
-$grid[$row['grupo'] . "/" . $row['sgrupo']][$row['codbarras'] . " / " .  $row['refprov']]['S']=$row['stock'];
+if($row['stock'] < $row['rep']){
+			
+$sg=substr($row['codbarras'], 0,2);		
+		
+$grid[$equig[$sg]][$row['codbarras'] . " / " .  $row['refprov']]['R']=$row['rep'];
+$grid[$equig[$sg]][$row['codbarras'] . " / " .  $row['refprov']]['S']=$row['stock'];
 }	
 }
 	

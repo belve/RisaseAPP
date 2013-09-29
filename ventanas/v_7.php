@@ -30,7 +30,7 @@
 	<div class="cabtab_art tab_art_rpro" onclick="javascript:tbord(2);" >Ref.Prov</div>		<input type="hidden" id="t2" value="1">
 	<div class="cabtab_art tab_art_stock" onclick="javascript:tbord(3);" >Stock</div>		<input type="hidden" id="t3" value="1">
 	<div class="cabtab_art tab_art_pvp" onclick="javascript:tbord(4);" >PVP</div>			<input type="hidden" id="t4" value="1">
-	<div class="cabtab_art tab_art_pco" onclick="javascript:tbord(5);" >P.Co</div>			<input type="hidden" id="t5" value="1">
+	<div class="cabtab_art tab_art_pco" onclick="javascript:tbord(5);" >P.Costo</div>			<input type="hidden" id="t5" value="1">
 	<div class="cabtab_art tab_art_temp" onclick="javascript:tbord(6);" >Temp</div>			<input type="hidden" id="t6" value="1">
 	<div class="cabtab_art tab_art_stini" onclick="javascript:tbord(7);" >Stock Ini</div>	<input type="hidden" id="t7" value="1">
 	<div class="cabtab_art tab_art_cong" onclick="javascript:tbord(8);" >Cong</div>			<input type="hidden" id="t8" value="1">
@@ -185,7 +185,7 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 	
 	
 	<div onclick="listaArticulos(1,1);" class="boton">Listar</div>
-	
+	<div onclick="limpiaAB();" class="boton">Limpiar</div>
 </div>	
 
 

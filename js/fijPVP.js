@@ -52,10 +52,10 @@ getDATA(url);
 
 
 
-function getDATA(url){
+function getDATA(url){timer(1);
 $.ajaxSetup({'async': false});	
 
-timer(1);
+
 
 //var iframe = document.getElementById('repartos');
 //var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
@@ -118,7 +118,7 @@ loadGRID();
 timer(0);
 }
 
-function loadGRID(){
+function loadGRID(){timer(1);
 var htm=''; var htm2='';	
 var arts=window.top.listArts;
 
@@ -169,6 +169,7 @@ htm=htm+htm2; window.top.filas.push(i);
 var iframe = document.getElementById('fijosPVP');
 var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
 innerDoc.getElementById('tfPVP').innerHTML=htm;	
+timer(0);
 }
 
 

@@ -110,7 +110,20 @@ function cargasubgrupo (id) {
 
 
 
-
+function limpiaAB(){
+document.getElementById(2).value="";
+document.getElementById(3).value="";
+document.getElementById(4).value="";
+document.getElementById(5).value="";
+document.getElementById(6).value="";
+document.getElementById(7).value="";
+document.getElementById(8).value="";
+document.getElementById(9).value="";
+document.getElementById(10).value="";
+document.getElementById(11).value="";
+document.getElementById(12).value="";
+document.getElementById('articulos').src='/ajax/listarticulos.php';	
+}
 
 function listaArticulos(tab,ord){
 timer(1);

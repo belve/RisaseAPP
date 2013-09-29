@@ -17,7 +17,7 @@ document.getElementById(key).value=val;
 });
 
 	
-	
+document.getElementById('cod').select();	
 }
 
 
@@ -28,8 +28,8 @@ var costo=document.getElementById('13').value;
 var dto1=document.getElementById('6').value
 var dto2=document.getElementById('7').value
 
-var neto=(costo - (costo / (100/dto1)) - (costo / (100/dto2))) * iva;
-var fran=(costo - (costo / (100/dto1)) - (costo / (100/dto2))) * 1.20;
+var neto=(costo - (costo / (100/dto1)) - (costo / (100/dto2))) ;
+var fran=neto * iva;
 
 var neto=Math.round(neto*100)/100
 var fran=Math.round(fran*100)/100
@@ -41,7 +41,7 @@ function modiArt(){
 
 timer(1);
 
-var id=	document.getElementById('1').value;	
+var id=	document.getElementById('cod').value;	
 
 var refprov=document.getElementById('9').value;
 var stock=document.getElementById('10').value;
@@ -74,3 +74,10 @@ $.getJSON(url, function(data) {
 
 timer(0);
 }
+
+function foc(){
+	
+document.getElementById('cod').focus();
+document.getElementById('cod').select();
+}
+

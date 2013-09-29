@@ -2,9 +2,22 @@
 require_once("../db.php");
 require_once("../variables.php");
 
+if (!$dbnivel->open()){die($dbnivel->error());};
+
+
+$htmlCol="";
+$queryp= "select id, nomcorto from proveedores ORDER BY nomcorto ASC;";	
+$dbnivel->query($queryp);
+
+while ($row = $dbnivel->fetchassoc()){
+	$id=$row['id'];$nombre=$row['nomcorto'];
+	$htmlCol .="<option value='$id'>$nombre</option>";	
+}
 
 
 
+
+if (!$dbnivel->close()){die($dbnivel->error());};
 
 
 ?>
@@ -42,6 +55,8 @@ require_once("../variables.php");
 	<div class="iconos next_on" onclick="javascrit:cargaproveedores('mas');"></div>
 	<div class="iconos fin_on" 	onclick="javascrit:cargaproveedores('fin');"></div>
 	
+	<div style="float: left;left: 4px;position: relative;top: -4px;">
+		 <select onchange="javascrit:cargaproveedores(this.value);" id="ccolor"><?php echo $htmlCol; ?> </select> </div>
 	
 	<div class="iconos save_on" onclick="javascrit:saveproveedores();"></div>
 	<div class="iconos new_on" onclick="javascrit:createproveedores();"></div>

@@ -32,8 +32,7 @@ require_once("../variables.php");
 
 
 </head>
-<body>
-
+<body onload="foc();">
 
 
 <div style="clear: both;margin-bottom: 10px; "></div>	
@@ -43,7 +42,7 @@ require_once("../variables.php");
 		
 		<tr>
 			<td>Código</td>
-			<td><input type="text" name="idmost" class="medio" id="1" onchange="javascrit:cargaArticulo(this.value);" ></td> 
+			<td><input type="text" name="idmost" class="medio" id="cod" onchange="javascrit:cargaArticulo(this.value);" ></td> 
 			
 		</tr>
 		
@@ -83,7 +82,7 @@ require_once("../variables.php");
 		
 		<tr height="53">
 			<td>Dto.<input type="text" name="color" class="corto" id="6" onchange="calcosto('<?php echo "1." . $iva;?>');"> </td>
-			<td>2º Dto.<input type="text" name="color" class="corto" id="7" onchange="calcosto('<?php echo "1." . $iva;?>');"> IVA <?php echo $iva;?> %</td>
+			<td>2º Dto.<input type="text" name="color" class="corto" id="7" style="margin-right: 35px;" onchange="calcosto('<?php echo "1." . $iva;?>');"> IVA <?php echo $iva;?> %</td>
 		
 		</tr>
 		
@@ -158,7 +157,8 @@ require_once("../variables.php");
 
 <div class="timer" id="timer"><img src="/iconos/loading1.gif"></div>
 
-</body>
 
+</body>
+</html>
 
 		

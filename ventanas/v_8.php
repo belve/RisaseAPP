@@ -32,7 +32,7 @@
 	<div class="cabtab_mas tab_mas_color">Color</div>
 	<div class="cabtab_mas tab_mas_cantidad">Cantidad</div>
 	<div class="cabtab_mas tab_mas_alarma">Alarma</div>
-	<div class="cabtab_mas tab_mas_precioC">Precio C</div>
+	<div class="cabtab_mas tab_mas_precioC">P.Costo</div>
 	<div class="cabtab_mas tab_mas_pvp">PVP</div>
 
 
@@ -94,7 +94,7 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 <table>
 		<tr>
 			<td>Dto. <input type="text" id="3" value="" class="corto" /></td>
-			<td>2º Dto. <input type="text" id="4" value="" class="corto" /></td>
+			<td>2º Dto. <input type="text" id="4" value="" style="margin-right: 20px" class="corto" /></td>
 			<td>IVA <?php echo $iva;?> %</td></td>
 		</tr>
 		

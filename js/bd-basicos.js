@@ -9,6 +9,12 @@ $.each(data, function(key, val) {
 });
 }
 
+
+function cColoresC(){
+var actual=	document.getElementById('ccolor').value;
+cargaColores(actual);	
+}
+
 function cargaColoresMENOS(){
 var actual=	document.getElementById('color_hid').value;
 actual--;
@@ -42,7 +48,6 @@ url = "/ajax/update-bd.php?tabla=colores&id=" + id + "&name=" + name;
 $.getJSON(url, function(data) {
 });
 }
-
 
 
 
@@ -98,87 +103,163 @@ $.getJSON(url, function(data) {
 
 
 
+function LoadsubG(){$.ajaxSetup({'async': false});
 
 
-function createSubGrupo(){
-url = "/ajax/createrecord.php?tabla=subgrupos";
+window.top.idsubg=new Array;
+window.top.eqsubg=new Array;
+window.top.subNom=new Array;
+
+url = "/ajax/LoadSubG.php?";
 $.getJSON(url, function(data) {
 $.each(data, function(key, val) {
-   if(key == 'lastid'){cargaSubGrupos2(val);};
+
+var datos=val.split('|');
+window.top.idsubg.push(Number(datos[0]));
+window.top.eqsubg.push(datos[1]);
+window.top.subNom.push(datos[2]);
+
 });
 });
+
+console.info(window.top.idsubg);
 	
 }
 
+function createSubGrupo(){$.ajaxSetup({'async': false});
 
+var g=document.getElementById('nG').value;
+var sg=document.getElementById('nSG').value;	
+var nombre=document.getElementById('nName').value;
+nombre=nombre.replace(/^\s+/g,'').replace(/\s+$/g,'');
 
-function cargaSubGrupos(pointer){
-var actual=	document.getElementById('1_hid').value;
+if((g)&&(sg)&&(nombre)){
 
-if (pointer == 'menos'){pointer=(actual*1)-1;};
-if (pointer == 'mas'){pointer=(actual*1)+1;};
-
-url = "/ajax/subgrupos.php?pointer=" + pointer;
+url = "/ajax/createSubgrupo.php?g=" + g + "&sg=" + sg + "&nombre=" + nombre;
 $.getJSON(url, function(data) {
 $.each(data, function(key, val) {
-  
-  if(key == 1){
-  	document.getElementById('1_hid').value=val;
-   	document.getElementById('1').value=val;
-   	}
-   if(key == 2){document.getElementById('2').value=val;};
-   if(key == 3){document.getElementById('3').value=val;};
-   if(key == 4){document.getElementById('4').value=val;};
-  	
- 
+   if(key == 'lastid'){	window.top.lidd=Number(val);}
+   if(key == 'error'){alert(val);};
 });
 });
+
+
+LoadsubG();
+var lid=Number(window.top.lidd);
+var pointer=window.top.idsubg.indexOf(lid);
+cargaSubGrupos(pointer);
+
+
+document.getElementById('nG').value="";
+document.getElementById('nSG').value="";	
+document.getElementById('nName').value="";
+document.getElementById('GforCreate').value="";
+	
+}}
+
+
+
+function cSubGru(idg){
+var cod=idg + "1";	
+var newi=window.top.eqsubg.indexOf(cod);
+
+console.log('cod:' + cod); 
+console.log('newi:' + newi); 
+
+
+cargaSubGrupos(newi);
+}
+
+function CreaSubg(id){
+var id=Number(id);
+
+var fin=(window.top.eqsubg.length)-1;
+console.log('fin:'+fin);
+var ulGD=window.top.eqsubg[fin]; var ulG=ulGD.substr(0,1); var ulSG=ulGD.substr(1,1);
+ulG=Number(ulG);
+ulSG=Number(ulSG);
+
+if(id==ulG){
+newi=ulSG+1;	
+}else{
+	
+var ulti=Number(id+1) + "1"	;
+
+var newi=window.top.eqsubg.indexOf(ulti);
+var lp=Number(newi-1);
+var last=window.top.eqsubg[lp];
+
+newi=Number(last.substr(1,1));
+newi=newi+1;
+}
+
+console.log('id:'+id);
+console.log('newi:'+newi);
+console.log('lp:'+lp);
+
+
+
+if(newi<10){	
+document.getElementById('nG').value=id;
+document.getElementById('nSG').value=newi;	
+}else{
+alert('No hay codigos disponibles');
+document.getElementById('nG').value='';
+document.getElementById('nSG').value='';
+document.getElementById('GforCreate').value='';	
+
+}
+}
+
+function cargaSubGrupos(pointer){$.ajaxSetup({'async': false});
+
+var actual=	window.top.pointer;
+var fin=(window.top.idsubg.length)-1;
+
+if (pointer == 'menos')		{actual=(actual*1)-1;}
+else if (pointer == 'mas')	{actual=(actual*1)+1;}
+else if (pointer == 'fin')	{actual=fin;}
+else						{actual=pointer;}
+
+if(actual<0){actual=0;}; if (actual > fin){actual=fin;};
+
+document.getElementById('3').value=window.top.subNom[actual];
+var d=window.top.eqsubg[actual];
+var g=d.substr(0,1); var sg=d.substr(1,1);
+
+document.getElementById('1').value=g;
+document.getElementById('2').value=g;
+document.getElementById('4').value=sg;
+
+window.top.pointer=actual;
+
 }
 
 
-function cargaSubGrupos2(pointer){
-var actual=	document.getElementById('1_hid').value;
-
-if (pointer == 'menos'){pointer=(actual*1)-1;};
-if (pointer == 'mas'){pointer=(actual*1)+1;};
-
-url = "/ajax/subgrupos.php?noborro=1&pointer=" + pointer;
-$.getJSON(url, function(data) {
-$.each(data, function(key, val) {
-  
-  if(key == 1){
-  	document.getElementById('1_hid').value=val;
-   	document.getElementById('1').value=val;
-   	}
-   if(key == 2){document.getElementById('2').value=val;};
-   if(key == 3){document.getElementById('3').value=val;};
-   if(key == 4){document.getElementById('4').value=val;};
-  	
- 
-});
-});
-}
 
 
 
 
 
-function cargaSubGruposS(){
+function cargaSubGruposS2(){
 var actual=	document.getElementById('1').value;
 cargaSubGrupos(actual);
 }
 
 
 
-function saveSubGrupo(){
-var id=	document.getElementById('1_hid').value;	
-var grupo=document.getElementById('2').value;
-var subgrupo=document.getElementById('3').value;
-var clave=document.getElementById('4').value;
+function saveSubGrupo(){$.ajaxSetup({'async': false});
+var pointer=window.top.pointer;
+console.log('pointer:' + pointer);
+var id=	window.top.idsubg[pointer];	
+var nombre=document.getElementById('3').value;
+
 	
-url = "/ajax/update2.php?tabla=subgrupos&campos[id_grupo]=" + grupo + "&campos[nombre]=" + subgrupo  + "&campos[clave]=" + clave  +  "&id=" + id;
+url = "/ajax/update2.php?tabla=subgrupos&campos[nombre]=" + nombre  + "&id=" + id;
 $.getJSON(url, function(data) {
+	
 });
+LoadsubG();
 }
 
 
@@ -213,6 +294,7 @@ $.each(data, function(key, val) {
   if(key == 1){
   	document.getElementById('1_hid').value=val;
    	document.getElementById('1').value=val;
+   	document.getElementById('ccolor').value=val;
    	}
    if(key == 2){document.getElementById('2').value=val;};
    if(key == 3){document.getElementById('3').value=val;};

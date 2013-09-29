@@ -56,6 +56,10 @@ $listado="";
 
 $dbnivel->query($queryp);$count=1;
 while ($row = $dbnivel->fetchassoc()){
+				
+			
+		
+	
 $codbarras=$row['codbarras'];$refprov=$row['refprov'];	$stock=$row['stock'];	$pvp=$row['pvp'];	$temporada=$row['temporada'];
 $stockini=$row['stockini']; $congelado=$row['congelado'];	$pco=$row['preciocosto'];	
 $ide=$row['id'];

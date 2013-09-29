@@ -18,16 +18,10 @@ $estado=strtoupper($equiEST[$estado]);
 $reparto="REPARTO NÚMERO: $nomrep / ESTADO: $estado";
 
 
-$queryp= "select id_grupo, clave, (select nombre from grupos where id=id_grupo) as ng, nombre as ns from subgrupos;";
-$dbnivel->query($queryp);
-while ($row = $dbnivel->fetchassoc()){
-$g=$row['id_grupo'] . $row['clave'];	
-$equig[$g]=$row['ng'] . "/" . $row['ns'];	
-}
-
-
 $queryp= "select 
 id_tienda, 
+(select nombre from grupos where grupos.id=pedidos.grupo) as grupo,
+(select nombre from subgrupos where subgrupos.clave=pedidos.subgrupo and subgrupos.id_grupo=pedidos.grupo) as sgrupo,
 (select codbarras from articulos where articulos.id=pedidos.id_articulo) as codbarras,
 (select refprov from articulos where articulos.id=pedidos.id_articulo) as refprov, 
 id_articulo, 
@@ -35,10 +29,7 @@ cantidad
 from pedidos where agrupar=$id ORDER BY  grupo, subgrupo, codigo;";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){
-	
-
-$sg=substr($row['codbarras'], 0,2);
-$grid[$row['id_tienda']][$equig[$sg]][$row['codbarras'] . " / " .  $row['refprov']]=$row['cantidad'];
+$grid[$row['id_tienda']][$row['grupo'] . "/" . $row['sgrupo']][$row['codbarras'] . " / " .  $row['refprov']]=$row['cantidad'];
 
 	
 }
