@@ -174,7 +174,7 @@ $equiestado['T']='3';
 $equiestado['F']='4';
 
 if (!$dbnivel->open()){die($dbnivel->error());};	
-$queryp= "select id, nombre, estado from agrupedidos where tip=$tip AND fecha > '2013-08-10' order by estado;";
+$queryp= "select id, nombre, estado from agrupedidos where tip=$tip order by estado;";
 $dbnivel->query($queryp);
 
 while ($row = $dbnivel->fetchassoc()){
