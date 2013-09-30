@@ -18,6 +18,9 @@ function agrupaciones($tip,$agrupar){
 global $dbnivel;$idagrup="";
 
 $fecha=date('d') . date('m') . date('Y');
+
+$fechaBD=date('Y') . "-" . date('m')  . "-" . date('d');
+
 $html="";
 if (!$dbnivel->open()){die($dbnivel->error());};
 
@@ -49,7 +52,7 @@ $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){$idagrup=$row['id'];};	
 
 if(!$idagrup){
-$queryp="INSERT INTO agrupedidos (nombre,tip) values ('$agrupp',$tip);";
+$queryp="INSERT INTO agrupedidos (nombre,tip,fecha) values ('$agrupp',$tip,'$fechaBD');";
 $dbnivel->query($queryp);
 $queryp="SELECT LAST_INSERT_ID() as id;";	
 $dbnivel->query($queryp);
@@ -161,7 +164,7 @@ return $html;
 
 
 
-function agrup_estado($tip){
+function agrup_estado($tip,$est,$filtro){
 global $dbnivel;$html['P']=array();$html['A']=array();$html['T']=array();$html['F']=array();
 
 $html['filasP']=0;$html['filasA']=0;$html['filasT']=0;$html['filasF']=0;
@@ -170,11 +173,28 @@ $html['filasP']=0;$html['filasA']=0;$html['filasT']=0;$html['filasF']=0;
 $equiestado['P']='1';
 $equiestado['A']='2';
 $equiestado['T']='3';
-
+$equiestado['E']='3';
 $equiestado['F']='4';
 
+
+if($est=='E'){$est='T';};
+
+if($filtro){
+if($est=='T'){
+		
+$filtroQ="AND (estado='T' or estado='E') AND nombre LIKE '%$filtro%' ";	
+	
+}else{
+		
+$filtroQ="AND estado='$est' AND nombre LIKE '%$filtro%' ";	
+
+}}else{
+$filtroQ="";	
+}
+
+
 if (!$dbnivel->open()){die($dbnivel->error());};	
-$queryp= "select id, nombre, estado from agrupedidos where tip=$tip order by estado;";
+$queryp= "select id, nombre, estado from agrupedidos where tip=$tip $filtroQ order by estado;";
 $dbnivel->query($queryp);
 
 while ($row = $dbnivel->fetchassoc()){
@@ -212,6 +232,7 @@ if (!$dbnivel->open()){die($dbnivel->error());};
 $equiestado['P']='-';
 $equiestado['A']='A';
 $equiestado['T']='T';
+$equiestado['E']='T';
 $equiestado['F']='F';
 
 $est=$equiestado[$newest];

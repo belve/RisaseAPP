@@ -7,7 +7,7 @@ foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo .
 
 
 if($action==1){
-$valores=agrup_estado($tip);	
+$valores=agrup_estado($tip,$est,$filtro);	
 }
 
 

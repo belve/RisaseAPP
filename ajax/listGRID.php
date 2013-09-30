@@ -40,13 +40,13 @@ $tieacts[$idt]=1;
 }
 
 
-$html="";$cabe=array();
+$html="";$cabe=array();$rotura=0;
 
 $fila=0;
 if(count($grid)>0){
 foreach ($grid as $ida => $val){$nomb=$noms[$ida];$re=$rep[$ida];$stock=$stocks[$ida];
 $fila++;
-if($re > $stock){$st=" style='background-color:#F8CDD9;'";}else{$st="";};
+if($re > $stock){$st=" style='background-color:#F8CDD9;'";$rotura=1;}else{$st="";};
 
 $html.="
 <tr id='$ida' $st>
@@ -126,7 +126,11 @@ $acciones
 
 
 	
-}}else{
+}
+
+
+
+}else{
 $queryp= "select nombre, estado from agrupedidos where id=$idagrupacion;";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){$html="";$nagru=$row['nombre'];$estado=$row['estado'];}
@@ -143,6 +147,10 @@ $cabe2="";
 if(count($cabe)>0){foreach($cabe as $nc => $cod){$cabe2.=$cod;};};
 
 if(!$todas){$valores['cabe']=$cabe2;};
+
+
+
+$valores['roto']=$rotura;
 $valores['html']=$html;
 $valores['nagru']=$nagru;
 $valores['estado']=$estado;

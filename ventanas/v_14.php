@@ -27,7 +27,7 @@ $tip=1;
 
 
 </head>
-<body>
+<body onload="initP();">
 
 <script>
 $(window).keydown(function(evt) {
@@ -182,26 +182,28 @@ $(window).keydown(function(evt) {
 <input type="hidden" id="est_sel_act" value="">
 
 <div class="agV2" style="" id="DV2P1">					<input type="hidden" id='nfV2P1' value=''>
-<iframe id="FV2P1" src="/ajax/agrupacionesV2.php" width="111" height="380" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
+<iframe id="FV2P1" src="/ajax/agrupacionesV2.php" width="111" height="340" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
 
-<div class="boton" style="margin-left:1px; width: 76px;"  onclick="roturas(<?php echo $tip;?>);">Imp Roturas</div>
+<div class="boton" style="margin-left:1px; width: 76px;margin-top: 27px;"  onclick="roturas(<?php echo $tip;?>);">Imp Roturas</div>
 </div>
 
 <div class="agV2" style="visibility: hidden" id="DV2P2"><input type="hidden" id='nfV2P2' value=''>
-<iframe id="FV2P2" src="/ajax/agrupacionesV2.php" width="111" height="380" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
+<iframe id="FV2P2" src="/ajax/agrupacionesV2.php" width="111" height="340" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
 </div>
 
 
 <div class="agV2" style="visibility: hidden" id="DV2P3"><input type="hidden" id='nfV2P3' value=''>
-<iframe id="FV2P3" src="/ajax/agrupacionesV2.php" width="111" height="380" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
+<iframe id="FV2P3" src="/ajax/agrupacionesV2.php" width="111" height="340" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
 </div>
 
 
 <div class="agV2" style="visibility: hidden" id="DV2P4"><input type="hidden" id='nfV2P4' value=''>
-<iframe id="FV2P4" src="/ajax/agrupacionesV2.php" width="111" height="380" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
+<iframe id="FV2P4" src="/ajax/agrupacionesV2.php" width="111" height="340" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
 </div>
 
-
+<div style="float: left;    left: -1px;    position: relative;    top: 340px;">
+	<input type="text" id="filtro" style="width:94px;" onchange="javascript:filtro(<?php echo $tip;?>)">
+</div>
 
 <div style="clear:both;"></div>	
 
@@ -283,11 +285,13 @@ echo "<div onclick='sumatienda($postiendas,\"$nomt\")' class='cabtab_REP tab_REP
 
 <script>
 
+function initP(){
 
-setTimeout('cargaAgrupados(<?php echo $tip;?>,0);', 2000); 
-setTimeout('cargaAgrupados2(<?php echo $tip;?>,0);', 2000); 
-setTimeout('cargaPendientes(<?php echo $tip;?>);', 2000); 
+cargaAgrupados(<?php echo $tip;?>,0);
+cargaAgrupados2(<?php echo $tip;?>,0,"","");
+cargaPendientes(<?php echo $tip;?>);
 
+}
 
 </script>
 	
