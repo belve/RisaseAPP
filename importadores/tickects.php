@@ -11,7 +11,7 @@ $db =& ADONewConnection($driv);
 $dsn = "Driver={SQL Server};Server=SERVER;Database=Risase;";
 $db->Connect($dsn,'remoto','azul88');
 $db->debug = false;
-$sql="SELECT count(tic_idticket) FROM Tickets where tic_fecha >= '01/01/2008' AND tic_fecha <= '31/12/2008' ;";
+$sql="SELECT count(tic_idticket) FROM Tickets where tic_fecha >= '01/01/2008' AND tic_fecha <= '31/01/2008' ;";
 $rs = $db->Execute($sql);
 
 
