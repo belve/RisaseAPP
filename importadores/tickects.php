@@ -68,7 +68,11 @@ foreach ($rows as $key => $row) {
 $t=trim($row[0]);
 $idem=$row[1];
 $date=$row[2];
+echo "$date \n";
+
 $date=substr($date,0,4) . "-" . substr($date,8,2) . "-" . substr($date,5,2) ;
+
+echo "$date \n";
 $imp=$row[3];
 
 if(is_numeric(substr($t,3,1))){$codt=substr($t, 0,3);}else{$codt=substr($t, 0,4);};
@@ -99,6 +103,6 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 
 
 <script>
-	 window.location.href = "/importadores/tickects.php";
+//	 window.location.href = "/importadores/tickects.php";
 </script>
 
