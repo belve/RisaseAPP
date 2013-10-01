@@ -11,21 +11,25 @@ $db =& ADONewConnection($driv);
 $dsn = "Driver={SQL Server};Server=SERVER;Database=Risase;";
 $db->Connect($dsn,'remoto','azul88');
 $db->debug = false;
-$sql="SELECT count(tic_idticket) FROM Tickets where tic_fecha >= '01/01/2008' AND tic_fecha <= '31/01/2008' ;";
+$sql="SELECT tic_idticket, tic_idEmpleado, tic_fecha, tic_importe FROM Tickets where tic_fecha >= '01/01/2008' AND tic_fecha <= '31/01/2008' ;";
 $rs = $db->Execute($sql);
 
 
 $rows = $rs->GetRows();
-print_r($rows);
 
-//foreach ($rows as $key => $row) {foreach($camp as $nkey => $nomcampo){
+
+foreach ($rows as $key => $row) {
 	
-//$valores[$count][$nkey]=trim(utf8_encode($row[$nkey]));
+$valores[$row[0]]['ie']=$row[1];
+$valores[$row[0]]['dt']=$row[2];
+$valores[$row[0]]['im']=$row[3];
 
-//}}
+}
 
 $db->Close();
 
+
+print_r($valores);
 
 
 ?>
