@@ -80,3 +80,10 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 
 
 ?>
+
+
+
+<script>
+	 window.location.href = "/importadores/tickects.php";
+</script>
+
