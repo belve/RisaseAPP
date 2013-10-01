@@ -4,18 +4,28 @@ require_once("../db.php");
 $dbnivel=new DB('192.168.1.11','edu','admin','risase');
 if (!$dbnivel->open()){die($dbnivel->error());};
 
-$count=0;;
+
 $queryp= "select id, id_tienda from tiendas;";
-
-$listado="";
-
 $dbnivel->query($queryp);
-while ($row = $dbnivel->fetchassoc()){$count++;
-	
+while ($row = $dbnivel->fetchassoc()){	
 	$idttt=$row['id'];$nidtienda=$row['id_tienda'];
 	$tiendas[$nidtienda]=$idttt;
-	
-};
+}
+
+
+
+$queryp= "select max(fecha) as date from tickets;";
+$dbnivel->query($queryp);
+while ($row = $dbnivel->fetchassoc()){$date=$row['date'];};
+
+
+echo "$date \n";
+$days=1;
+$date = strtotime("+".$days." days", strtotime($date));
+echo "$date \n";
+
+
+
 
 if (!$dbnivel->close()){die($dbnivel->error());};
 
@@ -32,7 +42,7 @@ $db =& ADONewConnection($driv);
 $dsn = "Driver={SQL Server};Server=SERVER;Database=Risase;";
 $db->Connect($dsn,'remoto','azul88');
 $db->debug = false;
-$sql="SELECT tic_idticket, tic_idEmpleado, tic_fecha, tic_importe FROM Tickets where tic_fecha = '10/01/2008';";
+$sql="SELECT TOP 1 tic_idticket, tic_idEmpleado, tic_fecha, tic_importe FROM Tickets where tic_fecha = '$date';";
 $rs = $db->Execute($sql);
 
 
