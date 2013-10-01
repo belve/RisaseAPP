@@ -22,6 +22,7 @@ while ($row = $dbnivel->fetchassoc()){$date=$row['date'];};
 echo "$date \n";
 $days=1;
 $date = strtotime("+".$days." days", strtotime($date));
+$date= date("Y-m-d", $date);
 echo "$date \n";
 
 
