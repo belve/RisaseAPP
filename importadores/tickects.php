@@ -74,6 +74,9 @@ $date=substr($date,0,4) . "-" . substr($date,5,2)  . "-" . substr($date,8,2);
 $imp=$row[3];
 
 if(is_numeric(substr($t,3,1))){$codt=substr($t, 0,3);}else{$codt=substr($t, 0,4);};
+$num=str_replace($codt, '', $t);
+$hora=substr($string, $num,6,2);
+$hora=$hora*1;
 $idt=$tiendas[$codt];
 
 $vals .="($idt,'$t',$idem,'$date','$imp'),";
@@ -84,13 +87,13 @@ $vals .="(0,'-',0,'$date','0'),";
 
 $db->Close();
 
-if(!$vals){$vals .="(0,'-',0,'$date','0'),";};
+if(!$vals){$vals .="(0,'-',0,'$date',$hora,'0'),";};
 
 $vals=substr($vals, 0,-1);
 
 if (!$dbnivel->open()){die($dbnivel->error());};
 
-$queryp ="INSERT INTO tickets (id_tienda,id_ticket,id_empleado,fecha,importe) VALUES $vals;";
+$queryp ="INSERT INTO tickets (id_tienda,id_ticket,id_empleado,fecha,hora,importe) VALUES $vals;";
 $dbnivel->query($queryp);echo $queryp;
 if (!$dbnivel->close()){die($dbnivel->error());};
 
