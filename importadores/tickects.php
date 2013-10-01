@@ -26,6 +26,7 @@ function add_days($date, $days) {
 
 
 
+
 require_once("../db.php");$rows=array();
 $dbnivel=new DB('192.168.1.11','edu','admin','risase');
 if (!$dbnivel->open()){die($dbnivel->error());};
@@ -44,7 +45,7 @@ $queryp= "select max(fecha) as date from tickets;";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){$date=$row['date'];};
 
-
+$date=substr($date,0,4) . "/" . substr($date,5,2) . "/" . substr($date,7,2);
 echo "$date \n";
 $date=add_days($date, 1);
 echo "$date \n";
