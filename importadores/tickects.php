@@ -1,13 +1,13 @@
 <?php 
 
-function add_days($date, $days) {
+function add_days($Date1, $days) {
  
 
-$date=date('Y-m-d', strtotime($date. ' + 1 days'));
+$date = new DateTime($Date1);
+$date->add(new DateInterval('P1D')); // P1D means a period of 1 day
+$Date2 = $date->format('Y-m-d');
 
-
-
-    return $date;
+    return $Date2;
 }
 
 
