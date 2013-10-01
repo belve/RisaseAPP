@@ -1,4 +1,25 @@
 <?php 
+
+require_once("../db.php");
+
+if (!$dbnivel->open()){die($dbnivel->error());};
+
+$count=0;;
+$queryp= "select id, id_tienda from tiendas;";
+
+$listado="";
+
+$dbnivel->query($queryp);
+while ($row = $dbnivel->fetchassoc()){$count++;
+	
+	$idttt=$row['id'];$nidtienda=$row['id_tienda'];
+	$tiendas[$nidtienda]=$idttt;
+	
+};
+
+if (!$dbnivel->close()){die($dbnivel->error());};
+
+
 $ini=2013;
 set_time_limit(0);
 foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
@@ -19,17 +40,31 @@ $rows = $rs->GetRows();
 
 
 foreach ($rows as $key => $row) {
-	
-$valores[$row[0]]['ie']=$row[1];
-$valores[$row[0]]['dt']=$row[2];
-$valores[$row[0]]['im']=$row[3];
+
+$t=$row[0];
+$idem=$row[1];
+$date=$row[2];
+$imp=$row[3];
+
+if(is_numeric(substr($t,3,1))){$codt=substr($t, 0,3);}else{$codt=substr($t, 0,3);};
+$idt=$tiendas[$codt];
+
+$vals .="($idt,$t,$idem,'$date','$imp')";
 
 }
 
 $db->Close();
 
 
-print_r($valores);
+
+$vals=substr($vals, 0,-1);
+
+if (!$dbnivel->open()){die($dbnivel->error());};
+
+$sql ="INSERT INTO tickets (id_tienda,id_ticket,id_empleado,fecha,importe) VALUES $vals;";
+$dbnivel->query($queryp);echo $queryp;
+if (!$dbnivel->close()){die($dbnivel->error());};
+
 
 
 ?>
