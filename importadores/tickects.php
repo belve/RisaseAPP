@@ -82,12 +82,12 @@ $idt=$tiendas[$codt];
 $vals .="($idt,'$t',$idem,'$date',$hora,'$imp'),";
 
 }}else{
-$vals .="(0,'-',0,'$date','0'),";	
+$vals .="(0,'-',0,'$date',0,'0'),";	
 }
 
 $db->Close();
 
-if(!$vals){$vals .="(0,'-',0,'$date',$hora,'0'),";};
+if(!$vals){$vals .="(0,'-',0,'$date',0,'0'),";};
 
 $vals=substr($vals, 0,-1);
 
