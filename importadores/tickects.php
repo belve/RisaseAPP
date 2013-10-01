@@ -36,7 +36,7 @@ while ($row = $dbnivel->fetchassoc()){$date=$row['date'];};
 $date=substr($date,0,4) . "-" . substr($date,5,2) . "-" . substr($date,8,2);
 echo "$date \n";
 $date=add_days($date, 1);
-$date=substr($date,0,4) . "-" . substr($date,5,2) . "-" . substr($date,8,2);
+$date2=substr($date,0,4) . "-" . substr($date,5,2) . "-" . substr($date,8,2);
 echo "$date \n";
 
 
@@ -55,7 +55,7 @@ $db =& ADONewConnection($driv);
 $dsn = "Driver={SQL Server};Server=SERVER;Database=Risase;";
 $db->Connect($dsn,'remoto','azul88');
 $db->debug = false;
-$sql="SELECT TOP 1 tic_idticket, tic_idEmpleado, tic_fecha, tic_importe FROM Tickets where tic_fecha = '$date';";
+$sql="SELECT TOP 1 tic_idticket, tic_idEmpleado, tic_fecha, tic_importe FROM Tickets where tic_fecha = '$date2';";
 $rs = $db->Execute($sql);
 
 
@@ -68,6 +68,7 @@ foreach ($rows as $key => $row) {
 $t=trim($row[0]);
 $idem=$row[1];
 $date=$row[2];
+$date=substr($date,0,4) . "-" . substr($date,5,2) . "-" . substr($date,8,2);
 $imp=$row[3];
 
 if(is_numeric(substr($t,3,1))){$codt=substr($t, 0,3);}else{$codt=substr($t, 0,4);};
