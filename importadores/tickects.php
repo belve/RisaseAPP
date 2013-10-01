@@ -43,13 +43,14 @@ $db =& ADONewConnection($driv);
 $dsn = "Driver={SQL Server};Server=SERVER;Database=Risase;";
 $db->Connect($dsn,'remoto','azul88');
 $db->debug = false;
-$sql="SELECT TOP 1 tic_idticket, tic_idEmpleado, tic_fecha, tic_importe FROM Tickets where tic_fecha = '$date';";
+$sql="SELECT tic_idticket, tic_idEmpleado, tic_fecha, tic_importe FROM Tickets where tic_fecha = '$date';";
 $rs = $db->Execute($sql);
 
 
 $rows = $rs->GetRows();
 
 $vals="";
+if(count($rows)>0){
 foreach ($rows as $key => $row) {
 
 $t=trim($row[0]);
@@ -62,6 +63,8 @@ $idt=$tiendas[$codt];
 
 $vals .="($idt,'$t',$idem,'$date','$imp'),";
 
+}}else{
+$vals .="(0,'-',0,'$date','0'),";	
 }
 
 $db->Close();
