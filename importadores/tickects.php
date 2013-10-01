@@ -55,7 +55,7 @@ $db =& ADONewConnection($driv);
 $dsn = "Driver={SQL Server};Server=SERVER;Database=Risase;";
 $db->Connect($dsn,'remoto','azul88');
 $db->debug = false;
-$sql="SELECT TOP 1 tic_idticket, tic_idEmpleado, tic_fecha, tic_importe FROM Tickets where tic_fecha = '$date2';";
+$sql="SELECT tic_idticket, tic_idEmpleado, tic_fecha, tic_importe FROM Tickets where tic_fecha = '$date2';";
 $rs = $db->Execute($sql);
 
 
@@ -105,6 +105,6 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 
 
 <script>
-//	 window.location.href = "/importadores/tickects.php";
+ window.location.href = "/importadores/tickects.php";
 </script>
 
