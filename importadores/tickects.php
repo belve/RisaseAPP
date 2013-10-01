@@ -1,5 +1,30 @@
 <?php 
 
+function add_days($date, $days) {
+    $timeStamp = strtotime(date('Y-m-d',$date));
+    $timeStamp+= 24 * 60 * 60 * $days;
+
+    // ...clock change....
+    if (date("I",$timeStamp) != date("I",$date)) {
+        if (date("I",$date)=="1") { 
+            // summer to winter, add an hour
+            $timeStamp+= 60 * 60; 
+        } else {
+            // summer to winter, deduct an hour
+            $timeStamp-= 60 * 60;           
+        } // if
+    } // if
+    $cur_dat = mktime(0, 0, 0, 
+                      date("n", $timeStamp), 
+                      date("j", $timeStamp), 
+                      date("Y", $timeStamp)
+                     ); 
+    return $cur_dat;
+}
+
+
+
+
 require_once("../db.php");$rows=array();
 $dbnivel=new DB('192.168.1.11','edu','admin','risase');
 if (!$dbnivel->open()){die($dbnivel->error());};
@@ -20,9 +45,7 @@ while ($row = $dbnivel->fetchassoc()){$date=$row['date'];};
 
 
 echo "$date \n";
-$days=1;
-$date = strtotime("+".$days." days", strtotime($date));
-$date= date("Y-m-d", $date);
+$date=add_days($date, 1);
 echo "$date \n";
 
 
@@ -41,7 +64,7 @@ $db =& ADONewConnection($driv);
 $dsn = "Driver={SQL Server};Server=SERVER;Database=Risase;";
 $db->Connect($dsn,'remoto','azul88');
 $db->debug = false;
-$sql="SELECT tic_idticket, tic_idEmpleado, tic_fecha, tic_importe FROM Tickets where tic_fecha = '$date';";
+$sql="SELECT TOP 1 tic_idticket, tic_idEmpleado, tic_fecha, tic_importe FROM Tickets where tic_fecha = '$date';";
 $rs = $db->Execute($sql);
 
 
