@@ -61,6 +61,8 @@ $rs = $db->Execute($sql);
 
 $rows = $rs->GetRows();
 
+print_r($rows);
+
 $vals="";
 if(count($rows)>0){
 foreach ($rows as $key => $row) {
