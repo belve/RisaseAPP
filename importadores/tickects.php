@@ -11,7 +11,7 @@ $db =& ADONewConnection($driv);
 $dsn = "Driver={SQL Server};Server=SERVER;Database=Risase;";
 $db->Connect($dsn,'remoto','azul88');
 $db->debug = false;
-$sql="SELECT count(tic_idticket) FROM Tickets;";
+$sql="SELECT count(tic_idticket) FROM Tickets where tic_fecha LIKE '__/__/2008';";
 $rs = $db->Execute($sql);
 
 
