@@ -75,7 +75,7 @@ $imp=$row[3];
 
 if(is_numeric(substr($t,3,1))){$codt=substr($t, 0,3);}else{$codt=substr($t, 0,4);};
 $num=str_replace($codt, '', $t);
-$hora=substr($string, $num,6,2);
+$hora=substr($num,6,2);
 $hora=$hora*1;
 $idt=$tiendas[$codt];
 
