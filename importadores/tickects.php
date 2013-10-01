@@ -36,7 +36,7 @@ while ($row = $dbnivel->fetchassoc()){$date=$row['date'];};
 $date=substr($date,0,4) . "-" . substr($date,5,2) . "-" . substr($date,8,2);
 echo "$date \n";
 $date=add_days($date, 1);
-$date2=substr($date,0,4) . "-" . substr($date,5,2) . "-" . substr($date,8,2);
+$date2= substr($date,8,2) . "/"  .  substr($date,5,2) . "/" . substr($date,0,4);
 echo "$date \n";
 
 
