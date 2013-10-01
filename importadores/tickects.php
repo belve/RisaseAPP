@@ -41,7 +41,7 @@ $rows = $rs->GetRows();
 $vals="";
 foreach ($rows as $key => $row) {
 
-$t=$row[0];
+$t=trim($row[0]);
 $idem=$row[1];
 $date=$row[2];
 $imp=$row[3];
@@ -49,7 +49,7 @@ $imp=$row[3];
 if(is_numeric(substr($t,3,1))){$codt=substr($t, 0,3);}else{$codt=substr($t, 0,4);};
 $idt=$tiendas[$codt];
 
-$vals .="($idt,$t,$idem,'$date','$imp')";
+$vals .="($idt,'$t',$idem,'$date','$imp')";
 
 }
 
