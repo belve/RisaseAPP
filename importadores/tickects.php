@@ -1,7 +1,7 @@
 <?php 
 
 require_once("../db.php");
-
+$dbnivel=new DB('192.168.1.11','edu','admin','risase');
 if (!$dbnivel->open()){die($dbnivel->error());};
 
 $count=0;;
