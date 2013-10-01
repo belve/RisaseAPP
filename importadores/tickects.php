@@ -1,25 +1,13 @@
 <?php 
 
 function add_days($date, $days) {
-    $timeStamp = strtotime(date('Y-m-d',$date));
-    $timeStamp+= 24 * 60 * 60 * $days;
+ 
 
-    // ...clock change....
-    if (date("I",$timeStamp) != date("I",$date)) {
-        if (date("I",$date)=="1") { 
-            // summer to winter, add an hour
-            $timeStamp+= 60 * 60; 
-        } else {
-            // summer to winter, deduct an hour
-            $timeStamp-= 60 * 60;           
-        } // if
-    } // if
-    $cur_dat = mktime(0, 0, 0, 
-                      date("n", $timeStamp), 
-                      date("j", $timeStamp), 
-                      date("Y", $timeStamp)
-                     ); 
-    return $cur_dat;
+$date=date('Y-m-d', strtotime($date. ' + 1 days'));
+
+
+
+    return $date;
 }
 
 
