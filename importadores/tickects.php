@@ -61,7 +61,7 @@ $vals=substr($vals, 0,-1);
 
 if (!$dbnivel->open()){die($dbnivel->error());};
 
-$sql ="INSERT INTO tickets (id_tienda,id_ticket,id_empleado,fecha,importe) VALUES $vals;";
+$queryp ="INSERT INTO tickets (id_tienda,id_ticket,id_empleado,fecha,importe) VALUES $vals;";
 $dbnivel->query($queryp);echo $queryp;
 if (!$dbnivel->close()){die($dbnivel->error());};
 
