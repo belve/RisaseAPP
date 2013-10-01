@@ -79,7 +79,7 @@ $hora=substr($string, $num,6,2);
 $hora=$hora*1;
 $idt=$tiendas[$codt];
 
-$vals .="($idt,'$t',$idem,'$date','$imp'),";
+$vals .="($idt,'$t',$idem,'$date',$hora,'$imp'),";
 
 }}else{
 $vals .="(0,'-',0,'$date','0'),";	
