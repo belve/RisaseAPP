@@ -72,7 +72,7 @@ $idem=$row[1];
 $date=$row[2];
 echo "$date \n";
 
-$date=substr($date,0,4) . "-" . substr($date,8,2) . "-" . substr($date,5,2) ;
+$date=substr($date,0,4) . "-" . substr($date,5,2)  . "-" . substr($date,8,2);
 
 echo "$date \n";
 $imp=$row[3];
