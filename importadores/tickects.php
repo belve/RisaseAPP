@@ -11,8 +11,7 @@ $db =& ADONewConnection($driv);
 $dsn = "Driver={SQL Server};Server=SERVER;Database=Risase;";
 $db->Connect($dsn,'remoto','azul88');
 $db->debug = false;
-$sql="SELECT count(tic_id_tickket) FROM Tickets;";
-
+$sql="SELECT count(tic_idticket) FROM Tickets;";
 $rs = $db->Execute($sql);
 
 
