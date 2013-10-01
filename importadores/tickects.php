@@ -38,7 +38,7 @@ $rs = $db->Execute($sql);
 
 $rows = $rs->GetRows();
 
-
+$vals="";
 foreach ($rows as $key => $row) {
 
 $t=$row[0];
