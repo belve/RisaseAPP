@@ -1,6 +1,6 @@
 <?php 
 
-require_once("../db.php");
+require_once("../db.php");$rows=array();
 $dbnivel=new DB('192.168.1.11','edu','admin','risase');
 if (!$dbnivel->open()){die($dbnivel->error());};
 
@@ -31,9 +31,7 @@ echo "$date \n";
 if (!$dbnivel->close()){die($dbnivel->error());};
 
 
-$ini=2013;
 set_time_limit(0);
-foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
 
 
 
@@ -69,7 +67,7 @@ $vals .="(0,'-',0,'$date','0'),";
 
 $db->Close();
 
-
+if(!$vals){$vals .="(0,'-',0,'$date','0'),";};
 
 $vals=substr($vals, 0,-1);
 
