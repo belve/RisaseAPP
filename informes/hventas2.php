@@ -122,19 +122,19 @@ $objPHPExcel->getActiveSheet()->setCellValue('A' . $fil, 'Porcentaje');
 	foreach ($tiendas as $idt => $nom) {
 		$col++;
 		
-		$cant="0";
+		$cant="";
 		if(array_key_exists($codbar,$enviados)){
 		if(array_key_exists($idt, $enviados[$codbar])){
 		$cant=$enviados[$codbar][$idt];	
 		}}
-	
+	    
 		$objPHPExcel->getActiveSheet()->getColumnDimension($colu[$col])->setWidth($anchos['B']);
 		$objPHPExcel->getActiveSheet()->getStyle($colu[$col] . $count)->getFont()->setSize($fonts[1]);
 		$objPHPExcel->getActiveSheet()->setCellValue($colu[$col] . $count, $cant);	
 		
 		
 				
-		$ven="0";
+		$ven="";
 		if(array_key_exists($codbar,$vendidos[$idt])){
 		$ven=$vendidos[$idt][$codbar]['c'];	
 		}
@@ -148,7 +148,7 @@ $objPHPExcel->getActiveSheet()->setCellValue('A' . $fil, 'Porcentaje');
 	
 	
 	
-		$sto="0";
+		$sto="";
 		if(array_key_exists($codbar,$stocks[$idt])){
 		$sto=$stocks[$idt][$codbar];	
 		}
@@ -159,8 +159,11 @@ $objPHPExcel->getActiveSheet()->setCellValue('A' . $fil, 'Porcentaje');
 		$objPHPExcel->getActiveSheet()->getStyle($colu[$col] . $fil)->getFont()->setSize($fonts[1]);
 		$objPHPExcel->getActiveSheet()->setCellValue($colu[$col] . $fil, $sto);	
 	
-	
+		if($cant==""){$cant=0;};
+		if($ven==""){$ven=0;};
 		$por=($cant/100)*$ven;
+		if($por==0){$por="";};
+		
 		$fil=$count+3;
 		$objPHPExcel->getActiveSheet()->getColumnDimension($colu[$col])->setWidth($anchos['B']);
 		$objPHPExcel->getActiveSheet()->getStyle($colu[$col] . $fil)->getFont()->setSize($fonts[1]);
