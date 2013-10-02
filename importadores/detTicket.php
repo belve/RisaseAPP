@@ -42,10 +42,11 @@ $vals="";
 if(count($rows)>0){
 foreach ($rows as $key => $row) {
 
-$detalles[$row[0]][idt]=$idsti[$row[0]];	
-$detalles[$row[0]][ida]=$row[1];
-$detalles[$row[0]][can]=$row[2];
-$detalles[$row[0]][pre]=$row[3];	
+$tt=trim($row[0]);
+$detalles[$tt]['idt']=$idsti[$tt];	
+$detalles[$tt]['ida']=$row[1];
+$detalles[$tt]['can']=$row[2];
+$detalles[$tt]['pre']=$row[3];	
 }}
 
 print_r($detalles);
