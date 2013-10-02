@@ -72,7 +72,7 @@ $idti=$values['idt'];
 $id_ti=$ids_ti[$idti];		
 $codbar=$cdbars[$ida]; $g=substr($codbar,0,1);$sg=substr($codbar,1,1);
 $can=$values['can'];
-$pre=$values['pre'];
+$pre=$values['pre'];$pre=(str_replace('-','',$pre))*1
 
 $fecha=$ids_fech[$idti];	
 $hora=$ids_hora[$idti];	
