@@ -83,7 +83,7 @@ $insV .="('$idti','$id_ti','$tnom','$codbar',$g,$sg,'$can','$pre','$fecha','$hor
 }
 $insV=substr($insV, 0,-1);
 
-$queryp="(idt,id_tienda,id_ticket,id_articulo,g,sg,cantidad,importe,fecha,hora) VALUES $insV;";
+$queryp="INSERT INTO ticket_det (idt,id_tienda,id_ticket,id_articulo,g,sg,cantidad,importe,fecha,hora) VALUES $insV;";
 $dbnivel->query($queryp);echo $queryp;
 
 if (!$dbnivel->close()){die($dbnivel->error());};
