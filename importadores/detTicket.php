@@ -11,7 +11,7 @@ while ($row = $dbnivel->fetchassoc()){$idt=$row['midt'];};
 if(!$idt){$idt="0";};
 
 $cnoms="";
-$queryp= "select id, id_ticket, id_tienda, fecha, hora from tickets WHERE id > $idt LIMIT 1000;";
+$queryp= "select id, id_ticket, id_tienda, fecha, hora from tickets WHERE id > $idt LIMIT 3000;";
 $dbnivel->query($queryp); 
 while ($row = $dbnivel->fetchassoc()){
 	$cnoms.="'" . $row['id_ticket'] . "',";
