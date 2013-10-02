@@ -92,5 +92,5 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 
 
 <script>
- window.location.href = "/importadores/detTickect.php";
+ window.location.href = "/importadores/detTicket.php";
 </script>
