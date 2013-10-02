@@ -29,9 +29,9 @@ $db =& ADONewConnection($driv);
 $dsn = "Driver={SQL Server};Server=SERVER;Database=Risase;";
 $db->Connect($dsn,'remoto','azul88');
 $db->debug = false;
-$sql="SELECT det_idarticulo, det_cantidad, det_precio FROM DetalleTicket where det_idTicker IN ($cnoms);";
+$sql="SELECT det_idarticulo, det_cantidad, det_precio FROM DetalleTicket where det_idTicket IN ($cnoms);";
 $rs = $db->Execute($sql);
-
+echo $sql;
 
 $rows = $rs->GetRows();
 
