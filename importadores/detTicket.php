@@ -67,7 +67,7 @@ $queryp= "select id, codbarras from articulos where id IN ($idas);";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){$cdbars[$row['id']]=$row['codbarras'];};
 
-
+$insV="";
 foreach ($detalles as $tnom => $values) {
 $idti=$values['idt'];
 $id_ti=$ids_ti[$idti];		
