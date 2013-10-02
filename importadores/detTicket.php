@@ -13,7 +13,7 @@ if(!$idt){$idt="0";};
 $cnoms="";
 $queryp= "select id_ticket from tickets WHERE id > $idt LIMIT 10;";
 $dbnivel->query($queryp); 
-while ($row = $dbnivel->fetchassoc()){$cnoms.=$row['id_ticket'] . ",";};
+while ($row = $dbnivel->fetchassoc()){$cnoms.="'" . $row['id_ticket'] . "',";};
 $cnoms=substr($cnoms, 0,-1);
 
 
