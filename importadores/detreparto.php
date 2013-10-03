@@ -16,7 +16,7 @@ $queryp= "select id,id_tienda from tiendas";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){$T[$row['id_tienda']]=$row['id'];};
 
-$queryp= "select id, nombre, fecha from agrupedidos where id > $ultREP AND tip=1 ORDER BY id limit 10;";
+$queryp= "select id, nombre, fecha from agrupedidos where id > $ultREP AND tip=1 ORDER BY id limit 50;";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){$cuales[$row['id']]=$row['nombre']; $fechas[$row['id']]=$row['fecha'];};
 
