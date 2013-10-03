@@ -155,7 +155,7 @@ $ultREP=$ultREP + 9;
 
 
 <script>
-	window.location.href = "/importadores/detpedido.php?ultREP=<?php echo $ultREP; ?>"; 
+	//window.location.href = "/importadores/detpedido.php?ultREP=<?php echo $ultREP; ?>"; 
 </script>
 
 
