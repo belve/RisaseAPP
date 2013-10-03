@@ -26,7 +26,7 @@ $queryp= "select id,id_tienda from tiendas";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){$T[$row['id_tienda']]=$row['id'];};
 
-$queryp= "select id, nombre, estado, fecha from agrupedidos where id > $ultREP AND tip=2 ORDER BY id limit 10;";
+$queryp= "select id, nombre, estado, fecha from agrupedidos where id > $ultREP AND tip=2 ORDER BY id limit 30;";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){
 	
@@ -157,7 +157,7 @@ $ultREP=$ultREP + 9;
 
 
 <script>
-	//window.location.href = "/importadores/detpedido.php?ultREP=<?php echo $ultREP; ?>"; 
+	window.location.href = "/importadores/detpedido.php?ultREP=<?php echo $ultREP; ?>"; 
 </script>
 
 
