@@ -14,6 +14,10 @@ var desd=document.getElementById(8).value
 var hast=document.getElementById(9).value
 var temp=document.getElementById(10).value
 
+var fini=document.getElementById('fini').value
+var ffin=document.getElementById('ffin').value
+
+
 document.getElementById(2).value="";
 document.getElementById(3).value="";
 document.getElementById(4).value="";
@@ -37,7 +41,9 @@ url = url
  + "&pvp=" + pvp
  + "&desde=" + desd
  + "&hasta=" + hast
- + "&temporada=" + temp
+ + "&temporada=" + temp 
+ + "&fini=" + fini 
+ + "&ffin=" + ffin 
  + '&listador=1'; 
 
 
@@ -52,12 +58,19 @@ getDATA(url);
 
 
 
-function getDATA(url){
+function getDATA(url){$.ajaxSetup({'async': false});
+
 if(window.debug ==1) {console.log('url: ' + url);};
+document.getElementById('status').innerHTML="CALCULANDO";
+document.getElementById('reloj').setAttribute("style", "visibility:visible;");
 
 	$.getJSON(url, function(data) {
 	$.each(data, function(key, val) {
+	if(key=='ng'){
 	
+	var timeOFF=val*4;
+	loadExcel(timeOFF);
+	}
 	
 	});
 	});	
@@ -65,3 +78,17 @@ if(window.debug ==1) {console.log('url: ' + url);};
 	
 	
 }
+
+function loadExcel(timeOFF){$.ajaxSetup({'async': false});
+document.getElementById('status').innerHTML="RENDERIZANDO";
+document.getElementById('excel').src='/informes/excel.php';
+setTimeout('finCALC()', timeOFF);	
+}
+
+
+function finCALC(){$.ajaxSetup({'async': false});
+
+document.getElementById('status').innerHTML="";
+document.getElementById('reloj').setAttribute("style", "visibility:hidden;");	
+}
+

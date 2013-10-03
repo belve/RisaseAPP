@@ -116,8 +116,8 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 	
 <div style="float: left; position: relative">	
 	
-	<div style="">Desde: <input type="text" class="medio"></div>
-	<div style="">Hasta: <input type="text" class="medio" style="margin-left:4px;"></div>
+	<div style="">Desde: <input type="text" class="medio" id="fini"></div>
+	<div style="">Hasta: <input type="text" class="medio" id="ffin" style="margin-left:4px;"></div>
 
 </div>
 
@@ -130,9 +130,16 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 </div>
 
 
-
+<div style="float: left; position: relative; margin-left: 55px; margin-top: 34px;">
+	 
+	 <div id="reloj" class="relojCalc" style="visibility: hidden;"><img src="/iconos/loading1.gif"></div>
+	 <div id="status" style="font-size: 12px; text-decoration: blink; color: #888888;"></div>
+</div>
 
 <div class="timer" id="timer" style="visibility: hidden; left: 47%; top:50%;"><img src="/iconos/loading1.gif"></div>
+
+<iframe id="excel" src="" width="0" height="0" border="0" frameborder="0" marginheight="0" scrolling="no"></iframe>
+
 
 
 </body>

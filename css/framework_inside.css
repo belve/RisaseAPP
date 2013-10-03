@@ -304,4 +304,5 @@ height:15px; width:96%; padding-left:3px; cursor:pointer;
     width: 218px;}
     
 .copipaste{position:absolute;}
-.delFSELs {float:right};
+.delFSELs {float:right}
+.relojCalc { text-align:center; }
