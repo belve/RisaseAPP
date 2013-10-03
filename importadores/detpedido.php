@@ -26,7 +26,7 @@ $queryp= "select id,id_tienda from tiendas";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){$T[$row['id_tienda']]=$row['id'];};
 
-$queryp= "select id, nombre, estado from agrupedidos where id > $ultREP AND tip=2 ORDER BY id limit 10;";
+$queryp= "select id, nombre, estado, fecha from agrupedidos where id > $ultREP AND tip=2 ORDER BY id limit 10;";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){
 	
@@ -41,6 +41,8 @@ while ($row = $dbnivel->fetchassoc()){
 	$cuales[$row['id']]['n']=$row['nombre'];
 	$cuales[$row['id']]['e']=$row['estado'];
 	$cuales[$row['id']]['t']=$tiend;
+	
+	$fechas[$row['id']]=$row['fecha'];
 };
 
 
@@ -128,8 +130,8 @@ foreach ($val2 as $nnkey => $valuecamp)	{
 	
 $sqlcamps=substr($sqlcamps, 0,strlen($sqlcamps)-1);	
 $sqlvals=substr($sqlvals, 0,strlen($sqlvals)-1);	
-
-$valopi2 .="($val1,'2',$sqlvals),";
+$fecha=$fechas[$val1];
+$valopi2 .="($val1,'2',$sqlvals,$fecha),";
 }}
 
 
@@ -138,7 +140,7 @@ $valopi=substr($valopi, 0,strlen($valopi)-1);
 $valopi2=substr($valopi2, 0,strlen($valopi2)-1);
 
 
-$queryp= "INSERT INTO pedidos (agrupar,tip,$sqlcamps) values $valopi2;";
+$queryp= "INSERT INTO pedidos (agrupar,tip,$sqlcamps,fecha) values $valopi2;";
 
 #echo $queryp;
 
