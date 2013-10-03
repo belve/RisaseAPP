@@ -131,7 +131,7 @@ foreach ($val2 as $nnkey => $valuecamp)	{
 $sqlcamps=substr($sqlcamps, 0,strlen($sqlcamps)-1);	
 $sqlvals=substr($sqlvals, 0,strlen($sqlvals)-1);	
 $fecha=$fechas[$val1];
-$valopi2 .="($val1,'2',$sqlvals,$fecha),";
+$valopi2 .="($val1,'2',$sqlvals,'$fecha'),";
 }}
 
 
