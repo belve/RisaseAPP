@@ -1,7 +1,7 @@
 <?php
 session_start();
 set_time_limit(0);
-
+ini_set("memory_limit", "-1");
 
 require_once("basics.php");
 require_once("../db.php");
@@ -23,6 +23,9 @@ $vals=array();
 $fijos	=array();
 $pvps= array();
 $tiends=array();
+$totcod=array();
+$codVEND=array();
+$codPOR=array();
 
 $fini="";
 $ffin="";
@@ -80,17 +83,19 @@ $stocks[$idt]=array();
 require_once("../functions/listador.php");
 
 $codigosIN="";
-$queryp= "select id from articulos where $options ;"; 
+if($options){
+$queryp= "select id from articulos where $options ;";
 $dbnivel->query($queryp);if($debug){echo "$queryp \n\n";};
 while ($row = $dbnivel->fetchassoc()){
 $id_articulo=$row['id'];
 $codigosIN .=$id_articulo . ",";
 }
 $codigosIN=substr($codigosIN, 0,-1);
-
+$codigosIN="AND id_articulo IN ($codigosIN)";
+}
 
 $agrupaciones="";
-$queryp= "select distinct agrupar from pedidos where id_articulo IN ($codigosIN) AND (fecha >= '$fini' AND fecha <= '$ffin') ;";
+$queryp= "select distinct agrupar from pedidos where (fecha >= '$fini' AND fecha <= '$ffin') $codigosIN ;";
 $dbnivel->query($queryp); if($debug){echo "$queryp \n\n";};
 while ($row = $dbnivel->fetchassoc()){$agrupaciones .=$row['agrupar'] . ",";};
 $agrupaciones=substr($agrupaciones, 0,-1);
@@ -104,7 +109,7 @@ $peds=substr($peds, 0,-1);
 
 $queryp= "select (select codbarras from articulos where id=id_articulo) as codbarras, 
 (select refprov from articulos where id=id_articulo) as refprov, 
-id_tienda, sum(cantidad) as cant from pedidos where agrupar in ($peds) AND id_articulo IN ($codigosIN) group by id_articulo, id_tienda;";
+id_tienda, sum(cantidad) as cant from pedidos where agrupar in ($peds) $codigosIN group by id_articulo, id_tienda;";
 $dbnivel->query($queryp); if($debug){echo "$queryp \n\n";};$enviados=array();
 while ($row = $dbnivel->fetchassoc()){
 	
@@ -116,6 +121,7 @@ $codigos[$cd]="$cd / $refprov";
 $g=substr($cd,0,1);$sg=substr($cd,1,1);$c=substr($cd,4);
 $cord[$g][$sg][$c]=$cd;
 $cods .=$cd . ","; 
+$totcod[$cd]=1;
 }
 
 $tiends[$idt]=1;
@@ -159,11 +165,80 @@ foreach ($tiends as $idt => $value) {
 
 if (!$dbBAK->close()){die($dbBAK->error());};
 
+
+$sumc=array();
+foreach ($enviados as $cdba => $value) { foreach ($value as $idt => $cant){
+if(array_key_exists($cdba, $sumc)){$sumc[$cdba]=$sumc[$cdba] + $cant;}else{$sumc[$cdba]=$cant;};
+}}
+
+$sume=array();
+foreach ($vendidos as $idt => $value) {  foreach ($value as $cdba => $cant){
+if(array_key_exists($cdba, $sume)){$sume[$cdba]=$sume[$cdba] + $cant['c'];}else{$sume[$cdba]=$cant['c'];};
+}}
+
+
+$sumST=array();
+foreach ($stocks as $idt => $value) {  foreach ($value as $cdba => $cant){
+if(array_key_exists($cdba, $sumST)){$sumST[$cdba]=$sumST[$cdba] + $cant;}else{$sumST[$cdba]=$cant;};
+}}
+
+
+
+
+
+foreach ($totcod as $cdba => $point) {
+$cant=0;$evn=0;$stc=0;
+if(array_key_exists($cdba, $sumc)){$cant=$sumc[$cdba];};	
+if(array_key_exists($cdba, $sume)){$evn=$sume[$cdba];};
+if(array_key_exists($cdba, $sumST)){$stc=$sumST[$cdba];};
+	
+if($cant>0){$por=round(($evn/$cant*100),2);  $codPOR[$cdba]=$por;}else{ $codPOR[$cdba]=0;};	
+$codVEND[$cdba]=$evn;
+$codSTOK[$cdba]=$stc;
+}
+
+
+
+if($act==1){
 $cdg=array();
 if(count($cord)>0){
-ksort($cord); foreach ($cord as $gu => $subs) {ksort($subs); foreach ($subs as $sb => $ccs)	{ksort($ccs); foreach ($ccs as $cd => $codbar) {
+if($actO=='A'){ksort($cord);}else{krsort($cord);} 
+foreach ($cord as $gu => $subs) {
+	if($actO=='A'){ksort($subs);}else{krsort($subs);} foreach ($subs as $sb => $ccs)	{
+		if($actO=='A'){ksort($ccs);}else{krsort($ccs);} foreach ($ccs as $cd => $codbar) {
 $cdg[$codbar]=1;
-}}}}
+}}}}}
+
+
+if($act==2){
+$cdg=array();
+if(count($codPOR)>0){
+if($actO=='A'){asort($codPOR);}else{arsort($codPOR);}
+foreach ($codPOR as $codbar => $portc){
+$cdg[$codbar]=1;	
+}}}
+
+
+if($act==3){
+$cdg=array();
+if(count($codVEND)>0){
+if($actO=='A'){asort($codVEND);}else{arsort($codVEND);}
+foreach ($codVEND as $codbar => $portc){
+$cdg[$codbar]=1;	
+}}}
+
+
+
+if($act==4){
+$cdg=array();
+if(count($codSTOK)>0){
+if($actO=='A'){asort($codSTOK);}else{arsort($codSTOK);}
+foreach ($codSTOK as $codbar => $portc){
+$cdg[$codbar]=1;	
+}}}
+
+
+
 
 $totales=array();
 foreach ($tiendas as $idt => $nom) {$totales[$idt]['c']=0;$totales[$idt]['v']=0;$totales[$idt]['s']=0;};

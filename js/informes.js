@@ -30,7 +30,15 @@ document.getElementById(10).value="";
 	
 
 
-if(codigo=='ventas'){var url="/informes/hventas.php?";};
+if(codigo=='ventas'){
+	var url="/informes/hventas.php?";
+	var act=window.top.OrdV;
+	var actO=window.top.OrdVO;
+	
+	};
+
+
+
 	
 url = url 
  + "id_proveedor=" + prov
@@ -44,6 +52,8 @@ url = url
  + "&temporada=" + temp 
  + "&fini=" + fini 
  + "&ffin=" + ffin 
+ + "&act=" + act 
+ + "&actO=" + actO 
  + '&listador=1'; 
 
 
@@ -91,4 +101,38 @@ function finCALC(){$.ajaxSetup({'async': false});
 document.getElementById('status').innerHTML="";
 document.getElementById('reloj').setAttribute("style", "visibility:hidden;");	
 }
+
+
+
+function orDV(id){
+
+document.getElementById('1|A').setAttribute("style", "visibility:hidden;");
+document.getElementById('2|A').setAttribute("style", "visibility:hidden;");
+document.getElementById('3|A').setAttribute("style", "visibility:hidden;");
+document.getElementById('4|A').setAttribute("style", "visibility:hidden;");
+
+document.getElementById('1|D').setAttribute("style", "visibility:hidden;");
+document.getElementById('2|D').setAttribute("style", "visibility:hidden;");
+document.getElementById('3|D').setAttribute("style", "visibility:hidden;");
+document.getElementById('4|D').setAttribute("style", "visibility:hidden;");
+
+var act=window.top.OrdV;
+var actO=window.top.OrdVO;
+
+if(id==act){if(actO=='A'){var nO='D';}else{var nO='A';}}else{var nO='D';};
+
+window.top.OrdV=id;
+window.top.OrdVO=nO;
+document.getElementById(id + '|' + nO).setAttribute("style", "visibility:visible;");
+
+	
+	
+}
+
+
+
+
+
+
+
 

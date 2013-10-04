@@ -122,6 +122,17 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 </div>
 
 </div>
+
+<div style="float: left; position: relative; margin-left: 10px; margin-top: 20px;">
+
+<div class="ordenadores" onclick="javascript:orDV(1);">CB	<div id="1|A" class="icf_up" style="visibility: visible;"></div><div id="1|D" class="icf_dw" style="visibility: hidden;"></div> </div>
+<div class="ordenadores" onclick="javascript:orDV(2);">%	<div id="2|A" class="icf_up" style="visibility: hidden;"></div> <div id="2|D" class="icf_dw" style="visibility: hidden;"></div> </div>
+<div class="ordenadores" onclick="javascript:orDV(3);">VD	<div id="3|A" class="icf_up" style="visibility: hidden;"></div> <div id="3|D" class="icf_dw" style="visibility: hidden;"></div> </div>
+<div class="ordenadores" onclick="javascript:orDV(4);">ST	<div id="4|A" class="icf_up" style="visibility: hidden;"></div> <div id="4|D" class="icf_dw" style="visibility: hidden;"></div> </div>
+
+
+</div>	
+
 <div style="float: left; position: relative; margin-left: 20px; margin-top: 5px;">
 	
 	<div class="boton" onclick="javascript:informe('ventas');" >Ventas >> </div>
@@ -141,7 +152,10 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 <iframe id="excel" src="" width="0" height="0" border="0" frameborder="0" marginheight="0" scrolling="no"></iframe>
 
 
-
+<script>
+	window.top.OrdV=1;
+	window.top.OrdVO='A';
+</script>
 </body>
 </html>
 
