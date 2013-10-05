@@ -1,0 +1,320 @@
+<?php
+session_start();
+set_time_limit(0);
+ini_set("memory_limit", "-1");
+
+require_once("basics.php");
+require_once("../db.php");
+require_once("../variables.php");
+
+$debug=0;
+
+
+
+$options="";
+$id_proveedor="";$id_grupo="";$id_subgrupo="";$id_color="";$codigo="";$pvp="";$desde="";$hasta="";$temporada="";$hago="";
+$yalistados="";
+$detalles="";
+$comentarios="";
+$ord=1;
+$tab=1;
+$arts=array();
+$vals=array();
+$fijos	=array();
+$pvps= array();
+$tiends=array();
+$totcod=array();
+$codVEND=array();
+$codPOR=array();
+
+$fini="";
+$ffin="";
+
+foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
+$fdesde=$fini; $fhasta=$ffin;
+$fini=substr($fini, 6,4) . "-" . substr($fini, 3,2) . "-" . substr($fini, 0,2);
+$ffin=substr($ffin, 6,4) . "-" . substr($ffin, 3,2) . "-" . substr($ffin, 0,2);
+
+
+$peds="";$cods="";$codigos=array();$vendidos=array();$cord=array();
+
+if (!$dbnivel->open()){die($dbnivel->error());};
+$nprov="";
+if($id_proveedor){
+$queryp= "select nomcorto from proveedores where id=$id_proveedor;"; 
+$dbnivel->query($queryp);
+while ($row = $dbnivel->fetchassoc()){$nprov=$row['nomcorto'];};
+}
+
+
+$ngrupo="";
+if($id_grupo){
+$queryp= "select nombre from grupos where id=$id_grupo;"; 
+$dbnivel->query($queryp);
+while ($row = $dbnivel->fetchassoc()){$ngrupo=$row['nombre'];};
+}
+$nsgrupo="";
+if($id_subgrupo){
+$queryp= "select nombre from subgrupos where id=$id_subgrupo;"; 
+$dbnivel->query($queryp);
+while ($row = $dbnivel->fetchassoc()){$nsgrupo=$row['nombre'];};
+}
+
+$ncolor="";
+if($id_color){
+$queryp= "select nombre from colores where id=$id_color;"; 
+$dbnivel->query($queryp);
+while ($row = $dbnivel->fetchassoc()){$ncolor=$row['nombre'];};
+}
+
+
+
+foreach ($tiendas as $idt => $nom) {
+$vendidos[$idt]=array();
+$stocks[$idt]=array();	
+}
+
+
+
+
+
+
+
+require_once("../functions/listador.php");
+
+$codigosIN="";$codigosIN2="";
+if($options){
+$queryp= "select id, codbarras, preciocosto, pvp, stockini, stock, refprov  from articulos where congelado=0 AND $options ;";
+}else{
+$queryp= "select id, codbarras, preciocosto, pvp, stockini, stock, refprov  from articulos where congelado=0;";	
+}
+
+$dbnivel->query($queryp);if($debug){echo "$queryp \n\n";};
+while ($row = $dbnivel->fetchassoc()){
+$cd=$row['codbarras'];$cd2=$row['id'];
+$refprov=$row['refprov'];
+$codigos[$cd]="$cd / $refprov";
+
+$g=substr($cd,0,1);$sg=substr($cd,1,1);$c=substr($cd,4);
+$cord[$g][$sg][$c]=$cd;
+
+$vcods[$cd]['pc']=$row['preciocosto'];
+$vcods[$cd]['pvp']=$row['pvp'];
+$vcods[$cd]['sti']=$row['stockini'];
+$vcods[$cd]['sti_V']=round($row['stockini']*$row['preciocosto'],2);
+
+$vcods[$cd]['stc']=$row['stock'];
+$vcods[$cd]['stc_V']=round($row['stock']*$row['preciocosto'],2);
+if($vcods[$cd]['sti_V']>0){$vcods[$cd]['stc_V_P']=round(($vcods[$cd]['stc_V']/$vcods[$cd]['sti_V'])*100,2);}else{$vcods[$cd]['stc_V_P']="";};
+
+
+
+$codigosIN .=$cd . ",";
+$codigosIN2 .=$cd2 . ",";
+
+
+$vcods[$cd]['vbru']="";
+$vcods[$cd]['vbru_V']="";
+$vcods[$cd]['valv_V']="";	
+$vcods[$cd]['bene_V']="";
+$vcods[$cd]['vbru_V_P']="";
+$vcods[$cd]['vtda']="";
+$vcods[$cd]['vtda_V']="";
+$vcods[$cd]['vtda_V_P']="";
+
+}
+
+$codigosIN=substr($codigosIN, 0,-1);
+$codigosIN="AND id_articulo IN ($codigosIN)";
+
+$codigosIN2=substr($codigosIN2, 0,-1);
+$codigosIN3=$codigosIN2;
+$codigosIN2="AND id_articulo IN ($codigosIN2)";
+
+
+$codv=array();
+$queryp= "select id_articulo, sum(cantidad) as cant from ticket_det where (fecha >= '$fini' AND fecha <= '$ffin')
+ $codigosIN group by id_articulo;";
+$dbnivel->query($queryp); if($debug){echo "$queryp \n\n";};
+$cods2="";
+while ($row = $dbnivel->fetchassoc()){
+$cd=$row['id_articulo']; $cant=$row['cant'];
+
+$vcods[$cd]['vbru']=$cant;
+$vcods[$cd]['vbru_V']=round($cant*$vcods[$cd]['pc'],2);
+if($vcods[$cd]['sti_V']>0){$vcods[$cd]['vbru_V_P']=round(($vcods[$cd]['vbru_V']/$vcods[$cd]['sti_V'])*100,2);}else{$vcods[$cd]['vbru_V_P']="";};
+
+$vcods[$cd]['valv_V']=round($cant*$vcods[$cd]['pvp'],2);
+$vcods[$cd]['bene_V']=round($vcods[$cd]['valv_V'] - $vcods[$cd]['sti_V'],2);
+
+}
+
+
+
+
+
+$agrupaciones="";
+$queryp= "select distinct agrupar from pedidos where ((fecha >= '$fini' AND fecha <= '$ffin') OR tip=1) $codigosIN2 ;";
+$dbnivel->query($queryp); if($debug){echo "$queryp \n\n";};
+while ($row = $dbnivel->fetchassoc()){$agrupaciones .=$row['agrupar'] . ",";};
+$agrupaciones=substr($agrupaciones, 0,-1);
+
+
+$queryp= "select id from agrupedidos where id IN ($agrupaciones) AND (estado='T' OR estado='E' OR estado='F') AND ((fecha >= '$fini' AND fecha <= '$ffin') OR tip=1);";
+$dbnivel->query($queryp); if($debug){echo "$queryp \n\n";};
+while ($row = $dbnivel->fetchassoc()){$peds .=$row['id'] . ",";};
+
+
+$peds=substr($peds, 0,-1);
+
+
+$queryp= "select (select codbarras from articulos where id=id_articulo) as codbarras, 
+sum(cantidad) as cant from pedidos where agrupar in ($peds) $codigosIN2 group by id_articulo;";
+$dbnivel->query($queryp); if($debug){echo "$queryp \n\n";};$enviados=array();
+while ($row = $dbnivel->fetchassoc()){
+$cd=$row['codbarras']; $cant=$row['cant'];
+
+$vcods[$cd]['vtda']=$cant;
+$vcods[$cd]['vtda_V']=round($cant*$vcods[$cd]['pc'],2);
+if($vcods[$cd]['sti_V']>0){$vcods[$cd]['vtda_V_P']=round(($vcods[$cd]['vtda_V']/$vcods[$cd]['sti_V'])*100,2);}else{$vcods[$cd]['vtda_V_P']="";};
+
+		
+	
+}
+
+
+if (!$dbnivel->close()){die($dbnivel->error());};
+
+
+$dbBAK=new DB('192.168.1.11','edu','admin','tpv_backup');
+if (!$dbBAK->open()){die($dbBAK->error());};
+
+$stocks=array();
+if(count($tiendas)>0){
+	
+foreach ($tiendas as $idt => $value) {
+	$queryp= "select cod, stock from stocklocal_$idt where cod IN ($codigosIN3);";
+	$dbBAK->query($queryp); if($debug){echo "$queryp \n\n";};
+	while ($row = $dbBAK->fetchassoc()){
+	$cd=$row['cod']; $cant=$row['stock']; 
+	if(array_key_exists($cd, $stocks)){$stocks[$cd]=$stocks[$cd]+$cant;}else{$stocks[$cd]=$cant;};
+	}
+}}
+
+
+if (!$dbBAK->close()){die($dbBAK->error());};
+
+
+
+foreach ($stocks as $cd => $cant) {
+$vcods[$cd]['vtda']=$cant;
+$vcods[$cd]['vtda_V']=round($cant*$vcods[$cd]['pc'],2);
+if($vcods[$cd]['sti_V']>0){$vcods[$cd]['vtda_V_P']=round(($vcods[$cd]['vtda_V']/$vcods[$cd]['sti_V'])*100,2);}else{$vcods[$cd]['vtda_V_P']="";};
+}
+
+
+
+
+
+
+if($act==1){
+$cdg=array();
+if(count($cord)>0){
+if($actO=='A'){ksort($cord);}else{krsort($cord);} 
+foreach ($cord as $gu => $subs) {
+	if($actO=='A'){ksort($subs);}else{krsort($subs);} foreach ($subs as $sb => $ccs)	{
+		if($actO=='A'){ksort($ccs);}else{krsort($ccs);} foreach ($ccs as $cd => $codbar) {
+$cdg[$codbar]=1;
+}}}}}
+
+
+
+$gridD=array();
+$anchos=array();
+$align=array();
+$crang=array();
+$Mrang=array();
+$BTrang=array();
+
+$fila=6;
+
+$flini=$fila+1;
+
+if(count($cdg)>0){
+foreach ($cdg as $cd => $point) {$fila++;
+
+
+$align['A' . $fila . ':' . 'H' . $fila]='C';
+$grid[$fila]['B']="COSTE/PVP";
+$grid[$fila]['C']="COMPRA"; 
+$grid[$fila]['D']="ALMACEN"; 
+$grid[$fila]['E']="TIENDAS"; 
+$grid[$fila]['F']="BRUTO VEND"; 
+$grid[$fila]['G']="VALOR VENTA"; 
+$grid[$fila]['H']="BENEFICIO"; 
+
+$fila++;
+
+
+
+$align['B' . $fila . ':' . 'H' . $fila]='R';
+$grid[$fila]['A']=$codigos[$cd];
+$grid[$fila]['B']=$vcods[$cd]['pc'];
+
+
+
+$fila++;
+
+$align['B' . $fila . ':' . 'H' . $fila]='R';
+$grid[$fila]['A']="UNIDADES - PVP";
+$grid[$fila]['B']=$vcods[$cd]['pvp']  . "  ";
+$grid[$fila]['C']=$vcods[$cd]['sti']  . "  ";
+$grid[$fila]['D']=$vcods[$cd]['stc']  . "  ";
+$grid[$fila]['E']=$vcods[$cd]['vtda']  . "  ";
+$grid[$fila]['F']=$vcods[$cd]['vbru']  . "  ";
+
+$fila++;
+
+$align['B' . $fila . ':' . 'H' . $fila]='R';
+$grid[$fila]['A']="VALORES";
+$grid[$fila]['C']=$vcods[$cd]['sti_V'] . " €";
+$grid[$fila]['D']=$vcods[$cd]['stc_V'] . " €";
+$grid[$fila]['E']=$vcods[$cd]['vtda_V'] . " €";
+$grid[$fila]['F']=$vcods[$cd]['vbru_V'] . " €";
+$grid[$fila]['G']=$vcods[$cd]['valv_V'] . " €";
+$grid[$fila]['H']=$vcods[$cd]['bene_V'] . " €";
+$fila++;
+
+$align['B' . $fila . ':' . 'H' . $fila]='R';
+$grid[$fila]['A']="PORCENTAJES";
+$grid[$fila]['D']=$vcods[$cd]['stc_V_P'] . " %";
+$grid[$fila]['E']=$vcods[$cd]['vtda_V_P'] . " %";
+$grid[$fila]['F']=$vcods[$cd]['vbru_V_P'] . " %";
+
+
+$fila++;
+
+}}
+
+
+
+$anchos['A']=40;
+$anchos['B']=14;
+$anchos['C']=14;
+$anchos['D']=14;
+$anchos['E']=14;
+$anchos['F']=14;
+$anchos['G']=14;
+$anchos['H']=14;
+
+
+$_SESSION['grid'] = $grid; 
+$_SESSION['anchos'] = $anchos;
+$_SESSION['align'] = $align;
+$_SESSION['crang']=$crang;
+$_SESSION['Mrang']=$Mrang;
+$_SESSION['BTrang']=$BTrang;
+
+$res['ng']=count($grid)+count($anchos)+count($align)+count($crang)+count($Mrang)+count($BTrang);
+echo json_encode($res);
+?>

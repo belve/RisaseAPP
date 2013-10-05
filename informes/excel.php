@@ -39,6 +39,7 @@ $objPHPExcel->getDefaultStyle()->getFont()->setName('Arial')->setSize(7);
 foreach ($anchos as $col => $value) {$sheet->getColumnDimension($col)->setWidth($value);};
 foreach ($align  as $rang => $value) {
 	if($value=="C"){$sheet->getStyle($rang)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);};
+	if($value=="R"){$sheet->getStyle($rang)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);};
 }
 
 foreach ($crang  as $rang => $value){$sheet->getStyle($rang)->applyFromArray(array('fill' => array('type' => PHPExcel_Style_Fill::FILL_SOLID,'color' => array('rgb' => $value)) ));};

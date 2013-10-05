@@ -18,15 +18,15 @@ var fini=document.getElementById('fini').value
 var ffin=document.getElementById('ffin').value
 
 
-document.getElementById(2).value="";
-document.getElementById(3).value="";
-document.getElementById(4).value="";
-document.getElementById(5).value="";
-document.getElementById(6).value="";
-document.getElementById(7).value="";
-document.getElementById(8).value="";
-document.getElementById(9).value="";
-document.getElementById(10).value="";
+//document.getElementById(2).value="";
+//document.getElementById(3).value="";
+//document.getElementById(4).value="";
+//document.getElementById(5).value="";
+//document.getElementById(6).value="";
+//document.getElementById(7).value="";
+//document.getElementById(8).value="";
+//document.getElementById(9).value="";
+//document.getElementById(10).value="";
 	
 
 
@@ -37,6 +37,12 @@ if(codigo=='ventas'){
 	
 	};
 
+if(codigo=='valorado'){
+	var url="/informes/hvalorado.php?";
+	var act=window.top.VOrdV;
+	var actO=window.top.VOrdVO;
+	
+	};
 
 
 	
@@ -104,7 +110,7 @@ document.getElementById('reloj').setAttribute("style", "visibility:hidden;");
 
 
 
-function orDV(id){
+function orD(id){
 
 document.getElementById('1|A').setAttribute("style", "visibility:hidden;");
 document.getElementById('2|A').setAttribute("style", "visibility:hidden;");
@@ -124,6 +130,31 @@ if(id==act){if(actO=='A'){var nO='D';}else{var nO='A';}}else{var nO='D';};
 window.top.OrdV=id;
 window.top.OrdVO=nO;
 document.getElementById(id + '|' + nO).setAttribute("style", "visibility:visible;");
+
+	
+	
+}
+
+function VorD(id){
+
+document.getElementById('V|1|A').setAttribute("style", "visibility:hidden;");
+//document.getElementById('V|2|A').setAttribute("style", "visibility:hidden;");
+//document.getElementById('V|3|A').setAttribute("style", "visibility:hidden;");
+//document.getElementById('V|4|A').setAttribute("style", "visibility:hidden;");
+
+document.getElementById('V|1|D').setAttribute("style", "visibility:hidden;");
+////document.getElementById('V|2|D').setAttribute("style", "visibility:hidden;");
+//document.getElementById('V|3|D').setAttribute("style", "visibility:hidden;");
+//document.getElementById('V|4|D').setAttribute("style", "visibility:hidden;");
+
+var act=window.top.VOrdV;
+var actO=window.top.VOrdVO;
+
+if(id==act){if(actO=='A'){var nO='D';}else{var nO='A';}}else{var nO='D';};
+
+window.top.VOrdV=id;
+window.top.VOrdVO=nO;
+document.getElementById('V|' + id + '|' + nO).setAttribute("style", "visibility:visible;");
 
 	
 	

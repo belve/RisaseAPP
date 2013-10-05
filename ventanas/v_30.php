@@ -123,25 +123,35 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 
 </div>
 
-<div style="float: left; position: relative; margin-left: 10px; margin-top: 20px;">
-
-<div class="ordenadores" onclick="javascript:orDV(1);">CB	<div id="1|A" class="icf_up" style="visibility: visible;"></div><div id="1|D" class="icf_dw" style="visibility: hidden;"></div> </div>
-<div class="ordenadores" onclick="javascript:orDV(2);">%	<div id="2|A" class="icf_up" style="visibility: hidden;"></div> <div id="2|D" class="icf_dw" style="visibility: hidden;"></div> </div>
-<div class="ordenadores" onclick="javascript:orDV(3);">VD	<div id="3|A" class="icf_up" style="visibility: hidden;"></div> <div id="3|D" class="icf_dw" style="visibility: hidden;"></div> </div>
-<div class="ordenadores" onclick="javascript:orDV(4);">ST	<div id="4|A" class="icf_up" style="visibility: hidden;"></div> <div id="4|D" class="icf_dw" style="visibility: hidden;"></div> </div>
-
-
+<div style="position:relative; float:left; width:100px; height: 50px;">
+<div style="position: absolute; left: 10px; top: 16px;">
+<div class="ordenadores" onclick="javascript:orD(1);">CB	<div id="1|A" class="icf_up" style="visibility: visible;"></div><div id="1|D" class="icf_dw" style="visibility: hidden;"></div> </div>
+<div class="ordenadores" onclick="javascript:orD(2);">%	<div id="2|A" class="icf_up" style="visibility: hidden;"></div> <div id="2|D" class="icf_dw" style="visibility: hidden;"></div> </div>
+<div class="ordenadores" onclick="javascript:orD(3);">VD	<div id="3|A" class="icf_up" style="visibility: hidden;"></div> <div id="3|D" class="icf_dw" style="visibility: hidden;"></div> </div>
+<div class="ordenadores" onclick="javascript:orD(4);">ST	<div id="4|A" class="icf_up" style="visibility: hidden;"></div> <div id="4|D" class="icf_dw" style="visibility: hidden;"></div> </div>
 </div>	
 
-<div style="float: left; position: relative; margin-left: 20px; margin-top: 5px;">
-	
-	<div class="boton" onclick="javascript:informe('ventas');" >Ventas >> </div>
-	<div class="boton" style="margin-top: 4px;" >Valorado >> </div>
+<div style="position: absolute; left: 10px; top: 46px;">
+<div class="ordenadores" onclick="javascript:VorD(1);">CB	<div id="V|1|A" class="icf_up" style="visibility: visible;"></div><div id="V|1|D" class="icf_dw" style="visibility: hidden;"></div> </div>
+<!--
+<div class="ordenadores" onclick="javascript:orVDV(2);">%	<div id="2|A" class="icf_up" style="visibility: hidden;"></div> <div id="2|D" class="icf_dw" style="visibility: hidden;"></div> </div>
+<div class="ordenadores" onclick="javascript:orVDV(3);">VD	<div id="3|A" class="icf_up" style="visibility: hidden;"></div> <div id="3|D" class="icf_dw" style="visibility: hidden;"></div> </div>
+<div class="ordenadores" onclick="javascript:orVDV(4);">ST	<div id="4|A" class="icf_up" style="visibility: hidden;"></div> <div id="4|D" class="icf_dw" style="visibility: hidden;"></div> </div>
+-->
+</div>	
 
 </div>
 
 
-<div style="float: left; position: relative; margin-left: 55px; margin-top: 34px;">
+<div style="float: left; position: relative; margin-left: 20px; margin-top: 5px;">
+	
+	<div class="boton" onclick="javascript:informe('ventas');" >Ventas >> </div>
+	<div class="boton" onclick="javascript:informe('valorado');" style="margin-top: 4px;" >Valorado >> </div>
+
+</div>
+
+
+<div style="float: left; position: relative; margin-left: 40px; margin-top: 34px;">
 	 
 	 <div id="reloj" class="relojCalc" style="visibility: hidden;"><img src="/iconos/loading1.gif"></div>
 	 <div id="status" style="font-size: 12px; text-decoration: blink; color: #888888;"></div>
@@ -155,6 +165,9 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 <script>
 	window.top.OrdV=1;
 	window.top.OrdVO='A';
+	
+	window.top.VOrdV=1;
+	window.top.VOrdVO='A';	
 </script>
 </body>
 </html>

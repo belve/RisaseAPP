@@ -84,7 +84,11 @@ require_once("../functions/listador.php");
 
 $codigosIN="";
 if($options){
-$queryp= "select id from articulos where $options ;";
+$queryp= "select id from articulos where congelado=0 AND $options;";
+}else{
+$queryp= "select id from articulos where congelado=0;";
+}	
+		
 $dbnivel->query($queryp);if($debug){echo "$queryp \n\n";};
 while ($row = $dbnivel->fetchassoc()){
 $id_articulo=$row['id'];
@@ -92,18 +96,22 @@ $codigosIN .=$id_articulo . ",";
 }
 $codigosIN=substr($codigosIN, 0,-1);
 $codigosIN="AND id_articulo IN ($codigosIN)";
-}
+
+
+
 
 $agrupaciones="";
-$queryp= "select distinct agrupar from pedidos where (fecha >= '$fini' AND fecha <= '$ffin') $codigosIN ;";
+$queryp= "select distinct agrupar from pedidos where ((fecha >= '$fini' AND fecha <= '$ffin') OR tip=1) $codigosIN ;";
 $dbnivel->query($queryp); if($debug){echo "$queryp \n\n";};
 while ($row = $dbnivel->fetchassoc()){$agrupaciones .=$row['agrupar'] . ",";};
 $agrupaciones=substr($agrupaciones, 0,-1);
 
 
-$queryp= "select id from agrupedidos where id IN ($agrupaciones) AND (estado='T' OR estado='E' OR estado='F') AND (fecha >= '$fini' AND fecha <= '$ffin');";
+$queryp= "select id from agrupedidos where id IN ($agrupaciones) AND (estado='T' OR estado='E' OR estado='F') AND ((fecha >= '$fini' AND fecha <= '$ffin') OR tip=1);";
 $dbnivel->query($queryp); if($debug){echo "$queryp \n\n";};
 while ($row = $dbnivel->fetchassoc()){$peds .=$row['id'] . ",";};
+
+
 $peds=substr($peds, 0,-1);
 
 
