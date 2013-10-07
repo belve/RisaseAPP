@@ -289,8 +289,11 @@ document.getElementById('10').value='';
 <div onclick="seltodsR();" class="boton" style="position:relative;float:left; width:98px; margin-right:10px;">Sel todos</div>
 <div onclick="borraselR();" class="boton" style="position:relative;float:left; width:95px;">Borrar selección</div>
 </div>
-<div onclick="enviaTiendas();" class="boton" style="margin-top: 20px;">Enviar a tiendas</div>
-	
+<div class="boton" style="margin-top: 20px; height: 25px; padding:0px;">
+	<div class="chkFIJ">ALM</div>
+	<div class="chkFIJ">BD</div>
+	<div class="btoENVfij" onclick="enviaTiendas();" >Enviar a tiendas</div></div>
+		<div style="clear:both;"></div>
 </div>
 
 

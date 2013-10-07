@@ -251,7 +251,7 @@ $cdg[$codbar]=1;
 $totales=array();
 foreach ($tiendas as $idt => $nom) {$totales[$idt]['c']=0;$totales[$idt]['v']=0;$totales[$idt]['s']=0;};
 $gridD=array();
-$fila=6;
+$fila=7;
 
 $flini=$fila+1;
 
