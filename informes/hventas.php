@@ -84,7 +84,7 @@ require_once("../functions/listador.php");
 
 $codigosIN="";
 if($options){
-$queryp= "select id from articulos where congelado=0 AND $options;";
+$queryp= "select id from articulos where $options;";
 }else{
 $queryp= "select id from articulos where congelado=0;";
 }	
@@ -135,6 +135,25 @@ $totcod[$cd]=1;
 $tiends[$idt]=1;
 $enviados[$cd][$idt]=$cant;
 }
+
+
+############ aqui debo sumar lo enviado en fijarstock
+$queryp= "select (select codbarras from articulos where id=id_articulo) as codbarras, 
+id_tienda, sum(suma) as cant from fij_stock where bd=2 AND (fecha >= '$fini' AND fecha <= '$ffin') $codigosIN group by id_articulo, id_tienda;";
+$dbnivel->query($queryp); if($debug){echo "$queryp \n\n";};
+while ($row = $dbnivel->fetchassoc()){
+$cd=$row['codbarras']; $idt=$row['id_tienda']; $cant=$row['cant']; 
+if(array_key_exists($cd, $enviados)){
+if(array_key_exists($idt, $enviados[$cd])){	
+$enviados[$cd][$idt]=$enviados[$cd][$idt]+$cant;	
+
+}else{$enviados[$cd][$idt]=$cant;	}
+}else{$enviados[$cd][$idt]=$cant;	}
+}
+########################################################
+
+
+
 
 $cods=substr($cods, 0,-1);
 
