@@ -6,6 +6,7 @@ $tsel=array();
 $arts=$_GET['arts'];
 $tsel=$_GET['tsel'];
 
+
 $alm=$_GET['alm'];
 $bd=$_GET['bd'];
 $fecha=date('Y') . "-" . date('m') . "-" . date('d');
