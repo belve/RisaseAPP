@@ -122,7 +122,7 @@ url = "/ajax/addartFSTOCK.php?hago=" + hago + "&id_proveedor=" + prov
  + "&hasta=" + hast
  + "&temporada=" + temp;
 
-var yalist=window.top.listArts.toString();
+var yalist="";// window.top.listArts.toString();
 url=url  + "&yalistados=" + yalist;
 
 timer(1);	
@@ -213,7 +213,7 @@ document.getElementById('10').value='';
 		
 		<tr>
 			<td>Código</td>
-			<td><input class="corto" type="text" id="6" /></td>
+			<td><input class="medio" type="text" id="6"  style="width:95px";/></td>
 		</tr>
 		
 		<tr>
@@ -254,9 +254,9 @@ document.getElementById('10').value='';
 	
 	<div style="clear:both;"></div>
     
-    <div onclick="res(1);" class="boton" 	style="width:7px; position:relative; float: left;">-</div>
+    <div onclick="res();" class="boton" 	style="width:7px; position:relative; float: left;">-</div>
 	<input class="corto" type="text" id="amount"style="width:32px; position:relative; float: left;top:9px;" /></td>
-	<div onclick="sum(2);" class="boton" 	style="width:7px; position:relative; float: left;">+</div>
+	<div onclick="sum();" class="boton" 	style="width:7px; position:relative; float: left;">+</div>
 	<div style="clear:both;"></div>
 	<div onclick="fix();" class="boton" 	style="width:20px; position:relative; float: left; left:27px; top:-7px;">Fijo</div>
 	<div style="clear:both;"></div>
@@ -290,12 +290,15 @@ document.getElementById('10').value='';
 <div onclick="borraselR();" class="boton" style="position:relative;float:left; width:95px;">Borrar selección</div>
 </div>
 <div class="boton" style="margin-top: 20px; height: 25px; padding:0px;">
-	<div class="chkFIJ">ALM</div>
-	<div class="chkFIJ">BD</div>
+	<div class="chkFIJ" onclick="filtFIJ(1);" id="filt_alm">ALM</div>
+	<div class="chkFIJ" onclick="filtFIJ(2);" id="filt_bd">BD</div>
 	<div class="btoENVfij" onclick="enviaTiendas();" >Enviar a tiendas</div></div>
 		<div style="clear:both;"></div>
 </div>
-
+<script>
+window.top.filtFIj_alm=0;
+window.top.filtFIj_bd=0;	
+</script>
 
 
 

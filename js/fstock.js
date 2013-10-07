@@ -163,12 +163,15 @@ function fix(){
 var val=document.getElementById('amount').value
 val=val.replace('+','');
 val=val.replace('-','');
-var fij=window.top.fijo;	
+var fij=window.top.fijo;
+
+if(fij.length>0){		
 for (var i = 0; i < fij.length; i++) {
 window.top.fijo[i]=val;
 window.top.tienda[i]='';
 }	
 refresh();		
+}
 }
 
 function sum(){
@@ -176,6 +179,8 @@ var val=document.getElementById('amount').value
 val=val.replace('+','');
 val=val.replace('-','');
 var fij=window.top.fijo;	
+
+if((val >0)&&(fij.length>0)){	
 for (var i = 0; i < fij.length; i++) {
 window.top.fijo[i]='';
 window.top.tienda[i]='+' + val;
@@ -184,16 +189,23 @@ refresh();
 }
 
 
+}
+
+
 function res(){
 var val=document.getElementById('amount').value
 val=val.replace('+','');
 val=val.replace('-','');
-var fij=window.top.fijo;	
+var fij=window.top.fijo;
+
+if((val >0)&&(fij.length>0)){	
 for (var i = 0; i < fij.length; i++) {
 window.top.fijo[i]='';
 window.top.tienda[i]='-' + val;
 }	
-refresh();		
+refresh();	
+}
+	
 }
 
 
@@ -330,8 +342,17 @@ var cod=window.top.codbars;
 var fij=window.top.fijo;
 var tie=window.top.tienda;
 var tsel=window.top.tsel;
+
+var tco=0;
+for (var i = 0; i < tsel.length; i++) {if(tsel[i]==1){
+tco++;
+}}
+
 	
 var artic=""; var ttss="";
+
+if(art.length>0){
+if(tco>0){
 
 for (var i = 0; i < art.length; i++) {
 idA=art[i]; 	
@@ -347,9 +368,11 @@ ttss=ttss + '&tsel[]=' + i;
 }}
 
 
+var alm=window.top.filtFIj_alm;
+var bd=window.top.filtFIj_bd;
 
-
-url='/ajax/insFIJstock.php?h=1' + artic + ttss;
+url='/ajax/insFIJstock.php?h=1' 
++ '&alm=' + alm + '&bd=' + bd + artic + ttss;
 
 if(window.debug ==1) {console.log('url: ' + url);  };	
 	$.getJSON(url, function(data) {
@@ -368,6 +391,15 @@ window.top.tienda	= new Array();
 borratiendas();		
 refresh();
 limpiaListador();
+}else{
+alert ('Debe seleccionar alguna tienda');	
+}
+
+}else{
+alert ('No hay articulos para enviar');	
+}
+
+
 }
 
 
@@ -396,7 +428,21 @@ document.getElementById(i).select();
 }
 
 
+function filtFIJ(val){
+var filtFIj_alm=window.top.filtFIj_alm;
+var filtFIj_bd=window.top.filtFIj_bd;	 	
 
+if (val==1){if (filtFIj_alm==0){filtFIj_alm=1;document.getElementById('filt_alm').setAttribute("style", "background-color:orange;");}else{filtFIj_alm=0;document.getElementById('filt_alm').setAttribute("style", "background-color:white;");};};
+if (val==2){if (filtFIj_bd==0){filtFIj_bd=1;document.getElementById('filt_bd').setAttribute("style", "background-color:orange;");}else{filtFIj_bd=0;document.getElementById('filt_bd').setAttribute("style", "background-color:white;");};};
+
+
+
+window.top.filtFIj_alm=filtFIj_alm;
+window.top.filtFIj_bd=filtFIj_bd;	 
+
+
+	
+}
 
 
 
