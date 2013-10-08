@@ -84,7 +84,7 @@ require_once("../functions/listador.php");
 
 $codigosIN="";$codigosIN2="";
 if($options){
-$queryp= "select id, codbarras, preciocosto, pvp, stockini, stock, refprov  from articulos where congelado=0 AND $options ;";
+$queryp= "select id, codbarras, preciocosto, pvp, stockini, stock, refprov  from articulos where $options ;";
 }else{
 $queryp= "select id, codbarras, preciocosto, pvp, stockini, stock, refprov  from articulos where congelado=0;";	
 }
@@ -183,34 +183,41 @@ if($vcods[$cd]['sti_V']>0){$vcods[$cd]['vtda_V_P']=round(($vcods[$cd]['vtda_V']/
 }
 
 
+$stocks=array();
+############ aqui debo sumar lo enviado en fijarstock
+$queryp= "select (select codbarras from articulos where id=id_articulo) as codbarras, 
+sum(suma) as cant from fij_stock where bd=2 AND (fecha >= '$fini' AND fecha <= '$ffin') $codigosIN2 group by id_articulo;";
+$dbnivel->query($queryp); if($debug){echo "$queryp \n\n";};
+while ($row = $dbnivel->fetchassoc()){
+$cd=$row['codbarras']; $cant=$row['cant'];
+
+$vcods[$cd]['vtda'];
+ 
+if(array_key_exists($cd, $vcods)){
+if(array_key_exists('vtda', $vcods[$cd])){				
+$vcods[$cd]['vtda']=$vcods[$cd]['vtda']+$cant;		
+}else{$vcods[$cd]['vtda']=$cant;};	
+}else{$vcods[$cd]['vtda']=$cant;};
+
+$cant=$vcods[$cd]['vtda'];
+$vcods[$cd]['vtda_V']=round($cant*$vcods[$cd]['pc'],2);
+if($vcods[$cd]['sti_V']>0){$vcods[$cd]['vtda_V_P']=round(($vcods[$cd]['vtda_V']/$vcods[$cd]['sti_V'])*100,2);}else{$vcods[$cd]['vtda_V_P']="";};
+
+
+
+
+}
+########################################################
+
+
+
+
+
+
+
 if (!$dbnivel->close()){die($dbnivel->error());};
 
 
-$dbBAK=new DB('192.168.1.11','edu','admin','tpv_backup');
-if (!$dbBAK->open()){die($dbBAK->error());};
-
-$stocks=array();
-if(count($tiendas)>0){
-	
-foreach ($tiendas as $idt => $value) {
-	$queryp= "select cod, stock from stocklocal_$idt where cod IN ($codigosIN3);";
-	$dbBAK->query($queryp); if($debug){echo "$queryp \n\n";};
-	while ($row = $dbBAK->fetchassoc()){
-	$cd=$row['cod']; $cant=$row['stock']; 
-	if(array_key_exists($cd, $stocks)){$stocks[$cd]=$stocks[$cd]+$cant;}else{$stocks[$cd]=$cant;};
-	}
-}}
-
-
-if (!$dbBAK->close()){die($dbBAK->error());};
-
-
-
-foreach ($stocks as $cd => $cant) {
-$vcods[$cd]['vtda']=$cant;
-$vcods[$cd]['vtda_V']=round($cant*$vcods[$cd]['pc'],2);
-if($vcods[$cd]['sti_V']>0){$vcods[$cd]['vtda_V_P']=round(($vcods[$cd]['vtda_V']/$vcods[$cd]['sti_V'])*100,2);}else{$vcods[$cd]['vtda_V_P']="";};
-}
 
 
 
@@ -343,9 +350,9 @@ $fila++;
 $align['B' . $fila . ':' . 'H' . $fila]='R';
 $crang['A' . $fila . ':' . 'H' . $fila]='FFFF80';
 $grid[$fila]['A']="PORCENTAJES";
-$grid[$fila]['D']=round(($sumSTC/$sumSTI*100),2) . " %";
-$grid[$fila]['E']=round(($sumVTDA/$sumSTI*100),2) . " %";
-$grid[$fila]['F']=round(($sumVBRU/$sumSTI*100),2) . " %";
+if($sumSTI>0){$grid[$fila]['D']=round(($sumSTC/$sumSTI*100),2) . " %";};
+if($sumSTI>0){$grid[$fila]['E']=round(($sumVTDA/$sumSTI*100),2) . " %";};
+if($sumSTI>0){$grid[$fila]['F']=round(($sumVBRU/$sumSTI*100),2) . " %";};
 
 
 
