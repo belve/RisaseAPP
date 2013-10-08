@@ -7,6 +7,8 @@ foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo .
 
 
 if($action==1){
+
+$filtro=str_replace('|', '%', $filtro);	
 $valores=agrup_estado($tip,$est,$filtro);	
 }
 

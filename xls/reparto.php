@@ -30,11 +30,11 @@ $colu[26]='Z';
 $colores['F']="00CC66";
 $colores['N']="FFFFFF";
 
-$anchos['A']=19;
+$anchos['A']=25;
 $anchos['B']=4;
 $anchos['C']=4;
 
-$anchos['T']=4;
+$anchos['T']=5;
 
 
 $maxfil=1;
@@ -265,7 +265,7 @@ $objPHPExcel->getActiveSheet()->setTitle('GRID');
 // Redirect output to a client’s web browser (Excel5)
 
 header('Content-Type: application/vnd.ms-excel');
-header('Content-Disposition: attachment;filename="reparto.xls"');
+header('Content-Disposition: attachment;filename="' . $nomrep . '.xls"');
 header('Cache-Control: max-age=0');
 $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
 $objWriter->save('php://output');

@@ -7,6 +7,7 @@ $equiEST['P']="ACTIVO";
 $equiEST['F']="FINALIZADO";
 $equiEST['A']="EN ALMACÉN";
 $equiEST['T']="ENVIADO A TIENDAS";
+$equiEST['E']="ENVIADO A TIENDAS";
 
 $tab_sync['articulos']=1;
 $tab_sync['empleados']=1;

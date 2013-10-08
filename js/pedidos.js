@@ -361,6 +361,7 @@ limpGagru(anti);
 
 function filtro(tip){
 var filtro=document.getElementById('filtro').value;	
+var filtro=filtro.replace('%','|'); 
 var v2p=document.getElementById('V2SEL').value;
 if(v2p=="V2P1"){var est='P';};
 if(v2p=="V2P2"){var est='A';};
@@ -428,6 +429,7 @@ if((key=='filasF')&&(fF>0)){document.getElementById('nfV2P4').value=val;};
 
 
 function selV2agrup(ida){
+	
 var valo=ida.split('|');var ida2=valo[0];	var v=valo[1];
 var idag=parent.document.getElementById('ag_selected').value;	
 if(idag!=ida2){
@@ -446,6 +448,8 @@ parent.document.getElementById('ag_selected').value=ida2;
 parent.document.getElementById('ag_selected_P').value=parent.document.getElementById('V2SEL').value;
 cargaGRIDagru(ida2);
 }
+
+parent.document.getElementById('pestaniasG').setAttribute("style", "visibility:visible;");
 }
 
 
@@ -467,7 +471,8 @@ GRID.getElementById('grid').innerHTML='';
 if(document.getElementById('optCABE')){document.getElementById('optCABE').innerHTML='';};
 pest_Cestado('',document);
 document.getElementById('nagru').innerHTML='';
-document.getElementById('ag_selected').value='';	
+document.getElementById('ag_selected').value='';
+document.getElementById('pestaniasG').setAttribute("style", "visibility:hidden;");	
 }
 
 
@@ -500,6 +505,8 @@ function pest_Cestado(est,donde){
 if(est=='E'){est='T';};
 donde.getElementById('bot_imp').setAttribute("style", "visibility:hidden;");
 if(est=='A'){donde.getElementById('bot_imp').setAttribute("style", "visibility:visible;");};
+if(est=='T'){donde.getElementById('bot_imp').setAttribute("style", "visibility:visible;");};
+if(est=='F'){donde.getElementById('bot_imp').setAttribute("style", "visibility:visible;");};
 
 donde.getElementById('P_E_P').className="pG_estado_off";
 donde.getElementById('P_E_A').className="pG_estado_off";

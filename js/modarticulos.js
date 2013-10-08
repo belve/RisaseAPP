@@ -10,7 +10,7 @@ if(key==8){
 if(val==0){document.getElementById(key).checked=false;};
 if(val==1){document.getElementById(key).checked=true;};	
 }else{
-document.getElementById(key).value=val;
+if(document.getElementById(key)){document.getElementById(key).value=val;};
 }
 
 
@@ -65,7 +65,7 @@ function modiArt(){
 
 timer(1);
 
-var id=	document.getElementById('cod').value;	
+var id=	document.getElementById('1').value;	
 
 var refprov=document.getElementById('9').value;
 var stock=document.getElementById('10').value;
@@ -77,7 +77,7 @@ var temporada=document.getElementById('12').value;
 var pvp=document.getElementById('16').value;
 var detalles=document.getElementById('18').value;
 var comentarios=document.getElementById('19').value;
-
+var stockini=document.getElementById('20').value;
 
 if(document.getElementById('8').checked==true){var congelado=1;}else{var congelado=0;};
 	
@@ -92,6 +92,7 @@ url = "/ajax/update2.php?tabla=articulos&campos[stock]=" + stock +
 "&campos[detalles]=" + detalles  +  
 "&campos[comentarios]=" + comentarios  +  
 "&campos[congelado]=" + congelado  +  
+"&campos[stockini]=" + stockini  +  
 "&id=" + id;
 $.getJSON(url, function(data) {
 });	

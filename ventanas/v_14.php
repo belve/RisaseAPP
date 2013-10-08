@@ -215,8 +215,8 @@ $(window).keydown(function(evt) {
 <div class="bot_imp" id="bot_imp" style="visibility: hidden;">
 	
 	
-	<div class="boton" style=" margin-left: 6px;    margin-top: 6px;    width: 76px;" onclick="impREPt()">Imp Tiend</div>
-	<div class="boton" style=" margin-left: 6px;    margin-top: 6px;    width: 76px;" onclick="impREP()">Imp GRID</div>
+	<div class="boton" style=" margin-left: 6px;    margin-top: 6px;    width: 76px;" onclick="impREPt()">Imp Tienda</div>
+	<div class="boton" style=" margin-left: 6px;    margin-top: 6px;    width: 76px;" onclick="impREP()">Imp Almacén</div>
 	
 	
 </div>
@@ -234,8 +234,9 @@ $(window).keydown(function(evt) {
 <input type="hidden" id="tip" value="<?php echo $tip;?>">
 
 </div>
+	
+<div class="fright" id="pestaniasG" style="visibility: hidden;">
 <div class="pg_hueco"></div>	
-<div style="float:right;">
 <div onclick="cambiaEst_agru('P',<?php echo $tip;?>);" class="pG_estado_off" id="P_E_P">Activo</div>
 <div onclick="cambiaEst_agru('A',<?php echo $tip;?>);" class="pG_estado_off" id="P_E_A">En almacén</div>
 <div onclick="cambiaEst_agru('T',<?php echo $tip;?>);" class="pG_estado_off" id="P_E_T">Enviado a tienda</div>

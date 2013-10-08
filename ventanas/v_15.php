@@ -236,8 +236,9 @@ $(window).keydown(function(evt) {
 <input type="hidden" id="tip" value="<?php echo $tip;?>">
 
 </div>
-<div class="pg_hueco"></div>	
-<div style="float:right;">
+	
+<div class="fright" id="pestaniasG" style="visibility: hidden;">
+<div class="pg_hueco"></div>
 <div onclick="cambiaEst_agru('P',<?php echo $tip;?>);" class="pG_estado_off" id="P_E_P">Activo</div>
 <div onclick="cambiaEst_agru('A',<?php echo $tip;?>);" class="pG_estado_off" id="P_E_A">En almacén</div>
 <div onclick="cambiaEst_agru('T',<?php echo $tip;?>);" class="pG_estado_off" id="P_E_T">Enviado a tienda</div>

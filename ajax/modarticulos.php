@@ -3,7 +3,7 @@ foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo .
 require_once("../db.php");
 require_once("../variables.php");
 $a=1;
-while($a <= 16){$valores[$a]="";$a++;};
+while($a <= 20){$valores[$a]="";$a++;};
 
 if (!$dbnivel->open()){die($dbnivel->error());};
 
@@ -26,7 +26,7 @@ id,
 (select dto1 from proveedores where proveedores.id=articulos.id_proveedor) as dto1, 
 (select dto2 from proveedores where proveedores.id=articulos.id_proveedor) as dto2, 
 (select nombre from subgrupos where subgrupos.id=articulos.id_subgrupo) as subgru, 
-(select nombre from colores where colores.id=articulos.id_color) as color, 
+(select nombre from colores where colores.id=articulos.id_color) as color, stockini,  
 (select nombre from grupos where grupos.id = (select id_grupo from subgrupos where subgrupos.id=articulos.id_subgrupo)) as gru 
  from articulos where codbarras=$codbarras";
 
@@ -58,7 +58,7 @@ while ($row = $dbnivel->fetchassoc()){
 	$valores[16]=$row['pvp'];
 	$valores[18]=$row['detalles'];
 	$valores[19]=$row['comentarios'];
-	
+	$valores[20]=$row['stockini'];
 };
 
 if (!$dbnivel->close()){die($dbnivel->error());};

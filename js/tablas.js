@@ -390,7 +390,9 @@ var newalmacen=newalmacen - rep;
 CR.value=rep;
 CA.value=newalmacen;
 
+if(val==1){newAL=0;}else{
 var newAL=Math.round((val/100)*alarma);
+}
 document.getElementById('AI'+ fila + 'P' + columna).value=newAL;
 console.log('newAL:'+newAL);
 

@@ -18,7 +18,7 @@ if (!$dbnivel->open()){die($dbnivel->error());};
 
 $queryp= "update $tabla set $modificos where id=$id;"; 
 $dbnivel->query($queryp);
-
+echo $queryp;
 if (!$dbnivel->close()){die($dbnivel->error());};
 
 SyncModBD($queryp);

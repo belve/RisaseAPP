@@ -48,22 +48,22 @@ require_once("../variables.php");
 		
 		<tr>
 			<td>Proveedor:</td>
-			<td><input type="text" name="color" class="largo" style="border:0px;background-color: #C8C8C8;" id="2"></td>
+			<td><input type="text" name="color" class="largo" style="border:0px;background-color: #C8C8C8;    font-size: 10px;" id="2"></td>
 		</tr>
 
 		<tr>
 			<td>Grupo:</td>
-			<td><input type="text" name="color" class="medio" style="border:0px;background-color: #C8C8C8;" id="3"></td>
+			<td><input type="text" name="color" class="medio" style="border:0px;background-color: #C8C8C8;    font-size: 10px;" id="3"></td>
 		</tr>
 		
 		<tr>
 			<td>Subgrupo:</td>
-			<td><input type="text" name="color" class="medio" style="border:0px;background-color: #C8C8C8;" id="4"></td>
+			<td><input type="text" name="color" class="medio" style="border:0px;background-color: #C8C8C8;    font-size: 10px;" id="4"></td>
 		</tr>
 		
 		<tr>
 			<td>Color:</td>
-			<td><input type="text" name="color" class="medio" style="border:0px;background-color: #C8C8C8;" id="5"></td>
+			<td><input type="text" name="color" class="medio" style="border:0px;background-color: #C8C8C8;    font-size: 10px;" id="5"></td>
 		</tr>	
 		
 		
@@ -115,6 +115,13 @@ require_once("../variables.php");
 			<td>Stock Min</td>
 			<td><input type="text" name="idmost" class="corto" id="11" ></td>
 		</tr>
+		
+		
+		<tr>
+			<td>Stock Ini</td>
+			<td><input type="text" name="idmost" class="corto" id="20" ></td>
+		</tr>
+		
 		
 		<tr>
 			<td>Temporada</td>

@@ -41,16 +41,30 @@ if(error){
 	alert(error);
 }else{
 var i=1;
+
+
+var d1=innerDoc.getElementById('1V1').value;	  
+var d2=innerDoc.getElementById('1V2').value;	 
+var d3=innerDoc.getElementById('1V3').value;	 
+var d4=innerDoc.getElementById('1V4').value;	 
+var d5=innerDoc.getElementById('1V5').value;	 
+var d6=innerDoc.getElementById('1V6').value;	 
+var d7=innerDoc.getElementById('1V7').value;	 
+var d8=innerDoc.getElementById('1V8').value;	  
+
+
+
+
 while (i <= filas)
   {
-var c1=innerDoc.getElementById(i + 'V1').value;	  
-var c2=innerDoc.getElementById(i + 'V2').value;	 
-var c3=innerDoc.getElementById(i + 'V3').value;	 
-var c4=innerDoc.getElementById(i + 'V4').value;	 
-var c5=innerDoc.getElementById(i + 'V5').value;	 
-var c6=innerDoc.getElementById(i + 'V6').value;	 
-var c7=innerDoc.getElementById(i + 'V7').value;	 
-var c8=innerDoc.getElementById(i + 'V8').value;	   
+var c1=innerDoc.getElementById(i + 'V1').value;	 if(c1==""){c1=d1; innerDoc.getElementById(i + 'V1').value=c1;} 
+var c2=innerDoc.getElementById(i + 'V2').value;	 if(c2==""){c2=d2; innerDoc.getElementById(i + 'V2').value=c2;}
+var c3=innerDoc.getElementById(i + 'V3').value;	 if(c3==""){c3=d3; innerDoc.getElementById(i + 'V3').value=c3;}
+var c4=innerDoc.getElementById(i + 'V4').value;	 if(c4==""){c4=d4; innerDoc.getElementById(i + 'V4').value=c4;}
+var c5=innerDoc.getElementById(i + 'V5').value;	 if(c5==""){c5=d5; innerDoc.getElementById(i + 'V5').value=c5;}
+var c6=innerDoc.getElementById(i + 'V6').value;	 if(c6==""){c6=d6; innerDoc.getElementById(i + 'V6').value=c6;}
+var c7=innerDoc.getElementById(i + 'V7').value;	 if(c7==""){c7=d7; innerDoc.getElementById(i + 'V7').value=c7;}
+var c8=innerDoc.getElementById(i + 'V8').value;	 if(c8==""){c8=d8; innerDoc.getElementById(i + 'V8').value=c8;}
 
 var url='/ajax/crate_art_grid.php?id_proveedor=' + idpro + 
 '&repro=' + c1 + 
