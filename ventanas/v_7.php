@@ -159,7 +159,7 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 		</tr>
 		
 		<tr>
-			<td>hasta</td>
+			<td>Hasta</td>
 			<td><input class="corto" type="text" id="9" /></td>
 		</tr>
 		

@@ -148,7 +148,11 @@ require_once("../variables.php");
     left: 545px;
     position: absolute;
     top: 14px;
-    width: 300px; background-color: #ffffff;"></div>
+    width: 300px; background-color: #ffffff;">
+    
+<img src="" id="foto" style="max-width: 298px; max-height: 239px";>    
+    
+    </div>
 
 <div style="clear: both;margin-bottom: 10px; "></div>
 

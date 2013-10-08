@@ -1,7 +1,7 @@
 $.ajaxSetup({'async': false});
 function cargaArticulo(codbarras){
-	
-
+document.getElementById('foto').src='';	
+window.ok=0;
 url = "/ajax/modarticulos.php?codbarras=" + codbarras;
 $.getJSON(url, function(data) {
 $.each(data, function(key, val) {
@@ -13,12 +13,35 @@ if(val==1){document.getElementById(key).checked=true;};
 document.getElementById(key).value=val;
 }
 
+
+if((key==1)&&(val!='')){
+window.ok=1;
+
+}
+	
+
+
+
 });
 });
 
-	
+if(window.ok==0){alert('Codigo no encontrado');}else{cargafoto(codbarras);	};	
 document.getElementById('cod').select();	
 }
+
+
+function cargafoto(id){
+document.getElementById('foto').src='http://192.168.1.11/photos/nodisp.jpg';	
+url = "/ajax/getimage.php?codbarras=" + id;
+$.getJSON(url, function(data) {
+$.each(data, function(key, val) {
+if(key==0){document.getElementById('foto').src='http://192.168.1.11/photos/' + val;};  
+});
+});	
+
+
+}
+
 
 
 function calcosto(iva){

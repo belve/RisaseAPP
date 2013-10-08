@@ -173,7 +173,7 @@ url = "/ajax/listarticulosC.php?hago=" + hago + "&id_proveedor=" + prov
 		</tr>
 		
 		<tr>
-			<td>hasta</td>
+			<td>Hasta</td>
 			<td><input class="corto" type="text" id="9" /></td>
 		</tr>
 		
