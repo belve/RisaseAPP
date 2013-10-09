@@ -11,7 +11,9 @@ var codi=document.getElementById(6).value
 var pvp=document.getElementById(7).value
 var desd=document.getElementById(8).value
 var hast=document.getElementById(9).value
-var temp=document.getElementById(10).value
+var temp=document.getElementById(10).value;
+
+var fijCHK=window.top.solofij;
 
 document.getElementById(2).value="";
 document.getElementById(3).value="";
@@ -34,6 +36,7 @@ url = "/ajax/addARTfPVP.php?id_proveedor=" + prov
  + "&pvp=" + pvp
  + "&desde=" + desd
  + "&hasta=" + hast
+ + "&fijCHK=" + fijCHK
  + "&temporada=" + temp
 
  + '&listador=1'; 

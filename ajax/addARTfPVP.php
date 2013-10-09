@@ -3,6 +3,7 @@ $id_proveedor="";$id_grupo="";$id_subgrupo="";$id_color="";$codigo="";$pvp="";$d
 $yalistados="";
 $detalles="";
 $comentarios="";
+$fijCHK=0;
 $ord=1;
 $tab=1;
 $arts=array();
@@ -22,8 +23,13 @@ $codigos="";
 require_once("../functions/listador.php");
     if($yalistados){$options .=" OR id IN ($yalistados)"; };
 	
+	if($options){
 	$queryp= "select id, codbarras, pvp from articulos where $options;"; 
-	$dbnivel->query($queryp);
+	}elseif($fijCHK){
+	$queryp= "select distinct id_articulo as id, (select codbarras from articulos where id=id_articulo) as codbarras, (select pvp from articulos where id=id_articulo) as pvp from fij_pvp;";	
+	}
+	
+	$dbnivel->query($queryp); 
 	while ($row = $dbnivel->fetchassoc()){
 		
 	$cd=$row['codbarras']; $id_articulo=$row['id'];
