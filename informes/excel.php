@@ -8,6 +8,7 @@ $crang=$_SESSION['crang'];
 $Mrang=$_SESSION['Mrang'];
 $BTrang=$_SESSION['BTrang'];
 $nomfil=$_SESSION['nomfil'];
+$format=$_SESSION['format'];
 
 $debug=0;
 
@@ -59,7 +60,9 @@ foreach ($BTrang as $rang => $value) {
 	}
 }
 
-
+foreach ($format as $rang => $value) {
+	if($value==1){$sheet->getStyle($rang)->getNumberFormat()->setFormatCode('#.##0,00 [$€-C0A]');};
+}
 
 
 	
