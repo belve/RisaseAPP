@@ -26,6 +26,8 @@ $tiends=array();
 $totcod=array();
 $codVEND=array();
 $codPOR=array();
+$paginas=array();
+$format=array();
 
 $fini="";
 $ffin="";
@@ -270,13 +272,15 @@ $cdg[$codbar]=1;
 $totales=array();
 foreach ($tiendas as $idt => $nom) {$totales[$idt]['c']=0;$totales[$idt]['v']=0;$totales[$idt]['s']=0;};
 $gridD=array();
-$fila=7;
+$fila=5;
 
 $flini=$fila+1;
+$cuenf=0;
 
 if(count($cdg)>0){
-foreach ($cdg as $codbar => $point) {$fila++;
-	
+foreach ($cdg as $codbar => $point) {$fila++;$cuenf++;
+
+if($cuenf >= 8){$cuenf=0;$paginas[$fila+4]=1;}	
 
 
 $col=1;
@@ -477,9 +481,11 @@ $_SESSION['align'] = $align;
 $_SESSION['crang']=$crang;
 $_SESSION['Mrang']=$Mrang;
 $_SESSION['BTrang']=$BTrang;
+$_SESSION['paginas']=$paginas;
+$_SESSION['format']=$format;
 $_SESSION['nomfil']="HVentas";
 
-$res['ng']=count($grid)+count($anchos)+count($align)+count($crang)+count($Mrang)+count($BTrang);
+$res['ng']=count($grid)+count($anchos)+count($align)+count($crang)+count($Mrang)+count($BTrang)+count($paginas)+count($format);
 echo json_encode($res);
 //echo "rows: " . (count($grid)+count($anchos)+count($align)+count($crang));
 

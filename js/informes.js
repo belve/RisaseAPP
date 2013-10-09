@@ -84,7 +84,7 @@ document.getElementById('reloj').setAttribute("style", "visibility:visible;");
 	$.each(data, function(key, val) {
 	if(key=='ng'){
 	
-	var timeOFF=val*4;
+	var timeOFF=val*6;
 	loadExcel(timeOFF);
 	}
 	
@@ -138,14 +138,14 @@ document.getElementById(id + '|' + nO).setAttribute("style", "visibility:visible
 function VorD(id){
 
 document.getElementById('V|1|A').setAttribute("style", "visibility:hidden;");
-//document.getElementById('V|2|A').setAttribute("style", "visibility:hidden;");
-//document.getElementById('V|3|A').setAttribute("style", "visibility:hidden;");
-//document.getElementById('V|4|A').setAttribute("style", "visibility:hidden;");
+document.getElementById('V|2|A').setAttribute("style", "visibility:hidden;");
+document.getElementById('V|3|A').setAttribute("style", "visibility:hidden;");
+document.getElementById('V|4|A').setAttribute("style", "visibility:hidden;");
 
 document.getElementById('V|1|D').setAttribute("style", "visibility:hidden;");
-////document.getElementById('V|2|D').setAttribute("style", "visibility:hidden;");
-//document.getElementById('V|3|D').setAttribute("style", "visibility:hidden;");
-//document.getElementById('V|4|D').setAttribute("style", "visibility:hidden;");
+document.getElementById('V|2|D').setAttribute("style", "visibility:hidden;");
+document.getElementById('V|3|D').setAttribute("style", "visibility:hidden;");
+document.getElementById('V|4|D').setAttribute("style", "visibility:hidden;");
 
 var act=window.top.VOrdV;
 var actO=window.top.VOrdVO;

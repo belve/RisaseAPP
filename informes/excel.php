@@ -9,6 +9,7 @@ $Mrang=$_SESSION['Mrang'];
 $BTrang=$_SESSION['BTrang'];
 $nomfil=$_SESSION['nomfil'];
 $format=$_SESSION['format'];
+$paginas=$_SESSION['paginas'];
 
 $debug=0;
 
@@ -66,11 +67,13 @@ $for= '#,##0.00_-[$EUR ]';
 $for2= '#,##0.00_-[$% ]';
 
 foreach ($format as $rang => $value) {
-	if($value==1){$objPHPExcel->getActiveSheet()->getStyle($rang)->getNumberFormat()->setFormatCode($for);};
-	if($value==2){$objPHPExcel->getActiveSheet()->getStyle($rang)->getNumberFormat()->setFormatCode($for2);};
+	if($value==1){$sheet->getStyle($rang)->getNumberFormat()->setFormatCode($for);};
+	if($value==2){$sheet->getStyle($rang)->getNumberFormat()->setFormatCode($for2);};
 }
 
-
+foreach ($paginas as $lin => $value) {
+$sheet->setBreak( 'A' . $lin , PHPExcel_Worksheet::BREAK_ROW );	
+}
 	
 $sheet->setTitle('GRID');
 

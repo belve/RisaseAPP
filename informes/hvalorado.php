@@ -26,7 +26,10 @@ $tiends=array();
 $totcod=array();
 $codVEND=array();
 $codPOR=array();
-
+$PC=array();
+$VV=array();
+$BE=array();
+$paginas=array();
 $fini="";
 $ffin="";
 
@@ -98,8 +101,8 @@ $codigos[$cd]="$cd / $refprov";
 $g=substr($cd,0,1);$sg=substr($cd,1,1);$c=substr($cd,4);
 $cord[$g][$sg][$c]=$cd;
 
-$vcods[$cd]['pc']=$row['preciocosto'];
-$vcods[$cd]['pvp']=$row['pvp'];
+$vcods[$cd]['pc']=$row['preciocosto']; 	$PC[$cd]=$row['preciocosto'];
+$vcods[$cd]['pvp']=$row['pvp'];			
 $vcods[$cd]['sti']=$row['stockini'];
 $vcods[$cd]['sti_V']=round($row['stockini']*$row['preciocosto'],2);
 
@@ -141,11 +144,11 @@ while ($row = $dbnivel->fetchassoc()){
 $cd=$row['id_articulo']; $cant=$row['cant'];
 
 $vcods[$cd]['vbru']=$cant;
-$vcods[$cd]['vbru_V']=round($cant*$vcods[$cd]['pc'],2);
+$vcods[$cd]['vbru_V']=round($cant*$vcods[$cd]['pc'],2); 
 if($vcods[$cd]['sti_V']>0){$vcods[$cd]['vbru_V_P']=round(($vcods[$cd]['vbru_V']/$vcods[$cd]['sti_V'])*100,2);}else{$vcods[$cd]['vbru_V_P']="";};
 
-$vcods[$cd]['valv_V']=round($cant*$vcods[$cd]['pvp'],2);
-$vcods[$cd]['bene_V']=round($vcods[$cd]['valv_V'] - $vcods[$cd]['sti_V'],2);
+$vcods[$cd]['valv_V']=round($cant*$vcods[$cd]['pvp'],2);$VV[$cd]=$vcods[$cd]['valv_V'];
+$vcods[$cd]['bene_V']=round($vcods[$cd]['valv_V'] - $vcods[$cd]['sti_V'],2);$BE[$cd]=$vcods[$cd]['bene_V'];
 
 }
 
@@ -235,6 +238,31 @@ $cdg[$codbar]=1;
 }}}}}
 
 
+if($act==2){
+$cdg=array();
+if(count($PC)>0){
+if($actO=='A'){asort($PC);}else{arsort($PC);}
+foreach ($PC as $codbar => $portc){
+$cdg[$codbar]=1;	
+}}}
+
+
+if($act==3){
+$cdg=array();
+if(count($VV)>0){
+if($actO=='A'){asort($VV);}else{arsort($VV);}
+foreach ($VV as $codbar => $portc){
+$cdg[$codbar]=1;	
+}}}
+
+if($act==4){
+$cdg=array();
+if(count($BE)>0){
+if($actO=='A'){asort($BE);}else{arsort($BE);}
+foreach ($BE as $codbar => $portc){
+$cdg[$codbar]=1;	
+}}}
+
 
 $gridD=array();
 $anchos=array();
@@ -243,13 +271,13 @@ $crang=array();
 $Mrang=array();
 $BTrang=array();
 
-$fila=1;
+$fila=5;$cuenf=0;
 
 $sumSTI=0;$sumSTC=0;$sumVTDA=0;$sumVBRU=0;
 $sumSTI_V=0;$sumSTC_V=0;$sumVTDA_V=0;$sumVBRU_V=0;$sumVALV_V=0;$sumBENE_V=0;
 if(count($cdg)>0){
-foreach ($cdg as $cd => $point) {$fila++;
-
+foreach ($cdg as $cd => $point) {$fila++;$cuenf++;
+if($cuenf >= 8){$cuenf=0;$paginas[$fila+4]=1;}	
 
 $align['A' . $fila . ':' . 'H' . $fila]='C';
 $grid[$fila]['B']="COSTE/PVP";
@@ -374,6 +402,30 @@ $anchos['G']=14;
 $anchos['H']=14;
 
 
+$hoy=date('d') . "/" . date('m') . "/" . date('Y');
+$grid[1]['A']="FECHA IMPRESION: $hoy";
+$grid[1]['B']="GRUPO: $ngrupo";	$Mrang['B1:C1']=1;
+$grid[1]['D']="SUBGRUPO: $nsgrupo"; $Mrang['D1:E1']=1;
+$grid[1]['F']="COLOR: $ncolor"; 	$Mrang['F1:G1']=1;
+$grid[1]['H']="PRECIO: $pvp";	$Mrang['H1:I1']=1;
+
+
+
+$grid[2]['A']="PROVEEDOR: $nprov";
+$grid[2]['B']="DESDE: $desde";	$Mrang['B2:C2']=1;
+$grid[2]['D']="HASTA: $hasta";	$Mrang['D2:E2']=1;
+$grid[2]['F']="TEMPORADA: $temporada";$Mrang['F2:G2']=1;
+
+$grid[3]['B']="INTERVALO DE FECHAS              DESDE: $fdesde                 HASTA: $fhasta "; $Mrang['B3:G3']=1;
+ 
+$BTrang['A1:I1']=1;
+$BTrang['A2:G2']=1;
+$BTrang['B3:G3']=1;
+
+
+
+
+
 $_SESSION['grid'] = $grid; 
 $_SESSION['anchos'] = $anchos;
 $_SESSION['align'] = $align;
@@ -381,8 +433,9 @@ $_SESSION['crang']=$crang;
 $_SESSION['Mrang']=$Mrang;
 $_SESSION['BTrang']=$BTrang;
 $_SESSION['format']=$format;
+$_SESSION['paginas']=$paginas;
 $_SESSION['nomfil']="HVValorada";
 
-$res['ng']=count($grid)+count($anchos)+count($align)+count($crang)+count($Mrang)+count($BTrang);
+$res['ng']=count($grid)+count($anchos)+count($align)+count($crang)+count($Mrang)+count($BTrang)+count($paginas)+count($format);
 echo json_encode($res);
 ?>
