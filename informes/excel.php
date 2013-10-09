@@ -61,7 +61,7 @@ foreach ($BTrang as $rang => $value) {
 }
 
 foreach ($format as $rang => $value) {
-	if($value==1){$sheet->getStyle($rang)->getNumberFormat()->setFormatCode('#.##0,00 [$€-C0A]');};
+	if($value==1){$sheet->getStyle($rang)->getNumberFormat()->setFormatCode('0,00 [$€-C0A];[RED]-0,00 [$€-C0A]');};
 }
 
 
