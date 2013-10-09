@@ -213,13 +213,13 @@ height:15px; width:96%; padding-left:3px; cursor:pointer;
 .cabPEPEN {height: 20px; width: 302px; background-color: #999999;  border-top: 1px solid #888888; margin-top:5px;  border-left: 1px solid #888888; border-bottom: 1px solid #888888; }
 
 .cabtab_PEPEN 		{border-right:1px solid #888888; height:15px; text-align: left; float:left; padding-top:5px; font-size:9px; padding-left:2px;background-color: #cccccc;}
-.tab_PEPEN_art 		{width: 268px; } 								
-.tab_PEPEN_rep 		{width: 28px; }  								
+.tab_PEPEN_art 		{width: 260px; } 								
+.tab_PEPEN_rep 		{width: 36px; }  								
 .tab_PEPEN_agr 		{width: 199px; } 
 
 
 .pedPen 	{background-color:white; border-bottom:1px solid #888888; border-right:1px solid #888888;font-size:10px; height: 15px; width:302px;}
-.pedPen_ART {width: 266px; float:left; border-left:1px solid #888888;padding:2px;height: 11px}
+.pedPen_ART {width: 258px; float:left; border-left:1px solid #888888;padding:2px;height: 11px}
 .pedPen_REP {width: 24px;  float:left; border-left:1px solid #888888;padding:2px;height: 11px}
 
 

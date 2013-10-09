@@ -62,8 +62,8 @@ $(window).keydown(function(evt) {
 <div class="VP1" id='VP1'>
 <div style="float:left">
 		
-<div class="cabPEPEN" style="margin-top:10px;">
-<div class="cabtab_PEPEN tab_PEPEN_art">Artículo</div>
+<div class="cabPEPEN" style="margin-top:10px;" >
+<div class="cabtab_PEPEN tab_PEPEN_art" ondblclick="selALL('pedipent');">Artículo</div>
 <div class="cabtab_PEPEN tab_PEPEN_rep">REP</div>
 </div>
 
@@ -114,8 +114,8 @@ $(window).keydown(function(evt) {
 
 <div style="float:left;margin-left:20px; ">
 		
-<div class="cabPEPEN" style="margin-top:10px;">
-<div class="cabtab_PEPEN tab_PEPEN_art">Artículo</div>
+<div class="cabPEPEN" style="margin-top:10px;" >
+<div class="cabtab_PEPEN tab_PEPEN_art" ondblclick="selALL('pediagrup');">Artículo</div>
 <div class="cabtab_PEPEN tab_PEPEN_rep">REP</div>
 </div>
 
@@ -294,7 +294,12 @@ cargaPendientes(<?php echo $tip;?>);
 
 }
 
+window.top.dblP=0;
+window.top.dblA=0;
+
 </script>
+
+
 	
 </div><!-- GESTIONAR -->
 

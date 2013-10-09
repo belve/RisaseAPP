@@ -21,6 +21,8 @@ $fecha=date('d') . date('m') . date('Y');
 
 $fechaBD=date('Y') . "-" . date('m')  . "-" . date('d');
 
+$hora=date('H') . date('i') . date('s');
+
 $html="";
 if (!$dbnivel->open()){die($dbnivel->error());};
 
@@ -30,7 +32,7 @@ if($agrupar){
 if($tip==1){
 $queryp= "SELECT distinct(prov) as nprov, 
 (select nomcorto from proveedores where id=nprov) as nomcorto 
-from pedidos WHERE tip=$tip AND estado='-' GROUP BY id_articulo ORDER BY prov, grupo, subgrupo, codigo;";
+from pedidos WHERE tip=$tip AND estado='-' AND (agrupar='' or agrupar IS NULL) GROUP BY id_articulo ORDER BY prov, grupo, subgrupo, codigo;";
 $dbnivel->query($queryp); 
 while ($row = $dbnivel->fetchassoc()){$agrupaciones[$row['nprov']]=$row['nomcorto'] . "-" . $fecha;}
 }
@@ -41,16 +43,30 @@ $queryp= "SELECT distinct(id_tienda) as idt,
 (select orden from tiendas where id=idt) as orden  
 from pedidos WHERE tip=$tip AND estado='-' GROUP BY id_tienda ORDER BY orden;";
 $dbnivel->query($queryp); 
-while ($row = $dbnivel->fetchassoc()){$agrupaciones[$row['idt']]=$row['ntie'] . "-" . $fecha;}
+while ($row = $dbnivel->fetchassoc()){$agrupaciones[$row['idt']]=$row['ntie'] . "-" . $fecha . $hora;}
 }
 
 if(count($agrupaciones)>0){foreach($agrupaciones as $idpr => $agrupp){
 	
 $idagrup="";	
-$queryp="SELECT id FROM agrupedidos WHERE nombre='$agrupp';";	
-$dbnivel->query($queryp);	
-while ($row = $dbnivel->fetchassoc()){$idagrup=$row['id'];};	
-
+$queryp="SELECT id, nombre, estado FROM agrupedidos WHERE nombre like '$agrupp%' ORDER BY nombre;";	
+$dbnivel->query($queryp);$version=0;	
+while ($row = $dbnivel->fetchassoc()){
+	$nombre	=$row['nombre'];
+	$idagrup=$row['id'];	
+	$estado =$row['estado'];
+		
+	if (($estado=='T')||($estado=='F')){
+	$datos=explode('-', $nombre);		
+	if(array_key_exists(2, $datos)){$version=$datos[2];}else{$version=1;};	
+	$version++;
+	}
+	
+	
+	}
+if($version){$idagrup=""; $agrupp=$agrupp . "-" . $version;};
+	
+	
 if(!$idagrup){
 $queryp="INSERT INTO agrupedidos (nombre,tip,fecha) values ('$agrupp',$tip,'$fechaBD');";
 $dbnivel->query($queryp);
@@ -60,7 +76,7 @@ while ($row = $dbnivel->fetchassoc()){$idagrup=$row['id'];};
 }
 
 if($tip==1){
-$queryp="update pedidos set agrupar='$idagrup' where prov=$idpr AND tip=$tip AND estado='-';";	
+$queryp="update pedidos set agrupar='$idagrup' where prov=$idpr AND tip=$tip AND estado='-' AND (agrupar='' or agrupar IS NULL);";	
 }
 if($tip==2){
 $queryp="update pedidos set agrupar='$idagrup' where id_tienda=$idpr AND tip=$tip AND estado='-';";	
@@ -98,7 +114,7 @@ return $html;
 
 function listagrup($tip,$id){
 	
-	
+$count=0;	
 global $dbnivel;
 
 $pendientes=array();$html="";
@@ -109,26 +125,17 @@ $queryp= "SELECT id_articulo, sum(cantidad) as rep,
 (select refprov from articulos where articulos.id=pedidos.id_articulo) as refprov 
 from pedidos WHERE agrupar='$id' GROUP BY id_articulo ORDER BY grupo, subgrupo, codigo;";
 $dbnivel->query($queryp); $fila=0;
-while ($row = $dbnivel->fetchassoc()){
+while ($row = $dbnivel->fetchassoc()){$count++;
 $ref=$row['codbarras'] . " / " . $row['refprov'];
 $rep=$row['rep'];
 $idart=$row['id_articulo'];$fila++;
-
-
 $html .=linAr($idart,$ref,$rep,$fila);
-
-
-
-	
-};
-
-
-
+}
 if (!$dbnivel->close()){die($dbnivel->error());};
 
+$html .="<INPUT id='maxF' type='hidden' value='$count'>";
+
 return $html;		
-	
-	
 }
 
 
@@ -139,13 +146,13 @@ global $dbnivel;
 
 $pendientes=array();$html="";
 
-if (!$dbnivel->open()){die($dbnivel->error());};
+if (!$dbnivel->open()){die($dbnivel->error());};$count=0;
 $queryp= "SELECT id_articulo, sum(cantidad) as rep, 
 (select codbarras from articulos where articulos.id=pedidos.id_articulo) as codbarras, 
 (select refprov from articulos where articulos.id=pedidos.id_articulo) as refprov 
 from pedidos WHERE tip=$tip AND estado='-' AND (agrupar='' or agrupar IS NULL) GROUP BY id_articulo ORDER BY grupo, subgrupo, codigo;";
 $dbnivel->query($queryp);$fila=0; 
-while ($row = $dbnivel->fetchassoc()){
+while ($row = $dbnivel->fetchassoc()){$count++;
 $ref=$row['codbarras'] . " / " . $row['refprov'];
 $rep=$row['rep'];
 $idart=$row['id_articulo'];$fila++;
@@ -155,7 +162,7 @@ $html .=linAr($idart,$ref,$rep,$fila);
 	
 };
 
-
+$html .="<INPUT id='maxF' type='hidden' value='$count'>";
 
 if (!$dbnivel->close()){die($dbnivel->error());};
 
@@ -191,6 +198,7 @@ $filtroQ="AND estado='$est' AND nombre LIKE '%$filtro%' ";
 }}else{
 $filtroQ="";	
 }
+
 
 
 if (!$dbnivel->open()){die($dbnivel->error());};	

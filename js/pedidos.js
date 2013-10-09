@@ -133,7 +133,45 @@ timerAD(0,'timer3',1);
 }	
 
 
+function selALL(f){
+var dblP=window.top.dblP;
+var dblA=window.top.dblA;
 
+if(f=='pediagrup'){
+if(dblA==0){dblA=1;}else{dblA=0;};	
+var doit=dblA;
+}	
+
+if(f=='pedipent'){
+if(dblP==0){dblP=1;}else{dblP=0;};	
+var doit=dblP;
+}	
+
+
+var iframe = document.getElementById(f);
+var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+var maxF=innerDoc.getElementById('maxF').value; 
+
+var sele="";
+for (var a=1; a <= maxF; a++){
+var cod=innerDoc.getElementById('F' + a).value;	
+if(doit==0){
+	innerDoc.getElementById(cod).setAttribute("style", "background-color:white;");sele="";
+	}else{
+	innerDoc.getElementById(cod).setAttribute("style", "background-color:#8DC29E;");
+	sele=sele + cod + ",";		
+	}
+}
+
+var lgth=sele.length;
+if(lgth > 0) {var sele=sele.substr(0,(lgth-1));};
+
+innerDoc.getElementById('artselected').value=sele; 
+
+window.top.dblP=dblP;
+window.top.dblA=dblA;
+	
+}
 
 function selART(idart){
 var filas=[];var nohagas=0;var ini=0; var fin=0;
@@ -283,6 +321,7 @@ timerAD(0,'timer3',0);
 
 
 function selPEST(p){
+document.getElementById('pestaniasG').setAttribute("style", "visibility:hidden;");	
 var estAct=document.getElementById(p).className;
 if(estAct=='PestaniaOFF'){
 
