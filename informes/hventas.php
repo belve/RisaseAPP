@@ -284,7 +284,8 @@ $grid[$fila][$colu[$col]]="REFERENCIAS";$col++; $iniC=$col;
 $grid[$fila][$colu[$col]]="TOT";$col++; 
 foreach ($tiendas as $idt => $nom) {
 	$grid[$fila][$colu[$col]]=$nom;$col++;};
-$align[$colu[$iniC] . $fila . ':' . $colu[$col] . $fila]='C'; 
+$align[$colu[$iniC] . $fila . ':' . $colu[$col] . ($fila+4)]='C'; 
+$BTrang[$colu[$iniC-1] . ($fila+1) . ':' . $colu[$col-1] . ($fila+4)]=2;
 
 $fila++;
 
@@ -476,6 +477,7 @@ $_SESSION['align'] = $align;
 $_SESSION['crang']=$crang;
 $_SESSION['Mrang']=$Mrang;
 $_SESSION['BTrang']=$BTrang;
+$_SESSION['nomfil']="HVentas";
 
 $res['ng']=count($grid)+count($anchos)+count($align)+count($crang)+count($Mrang)+count($BTrang);
 echo json_encode($res);

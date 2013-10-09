@@ -263,8 +263,8 @@ $grid[$fila]['H']="BENEFICIO";
 $fila++;
 
 
-$BTrang['A' . $fila . ':' . 'H' . ($fila+3)]=1;
-$align['B' . $fila . ':' . 'H' . $fila]='R';
+$BTrang['A' . $fila . ':' . 'H' . ($fila+3)]=2;
+$align['B' . $fila . ':' . 'H' . $fila]='C';
 $grid[$fila]['A']=$codigos[$cd];
 $grid[$fila]['B']=$vcods[$cd]['pc']  . " €";;
 
@@ -272,7 +272,7 @@ $grid[$fila]['B']=$vcods[$cd]['pc']  . " €";;
 
 $fila++;
 
-$align['B' . $fila . ':' . 'H' . $fila]='R';
+$align['B' . $fila . ':' . 'H' . $fila]='C';
 $crang['A' . $fila . ':' . 'H' . $fila]='C2E0FF';
 $grid[$fila]['A']="UNIDADES - PVP";
 $grid[$fila]['B']=$vcods[$cd]['pvp']  . " €"; 
@@ -283,7 +283,7 @@ $grid[$fila]['F']=$vcods[$cd]['vbru']  . "  ";$sumVBRU=$sumVBRU+$vcods[$cd]['vbr
 
 $fila++;
 
-$align['B' . $fila . ':' . 'H' . $fila]='R';
+$align['B' . $fila . ':' . 'H' . $fila]='C';
 $crang['A' . $fila . ':' . 'H' . $fila]='ADEBAD';
 $grid[$fila]['A']="VALORES";
 $grid[$fila]['C']=$vcods[$cd]['sti_V'] . " €"; $sumSTI_V=$sumSTI_V+$vcods[$cd]['sti_V'];
@@ -294,7 +294,7 @@ $grid[$fila]['G']=$vcods[$cd]['valv_V'] . " €";$sumVALV_V=$sumVALV_V+$vcods[$c
 $grid[$fila]['H']=$vcods[$cd]['bene_V'] . " €";$sumBENE_V=$sumBENE_V+$vcods[$cd]['bene_V'];
 $fila++;
 
-$align['B' . $fila . ':' . 'H' . $fila]='R';
+$align['B' . $fila . ':' . 'H' . $fila]='C';
 $crang['A' . $fila . ':' . 'H' . $fila]='FFFF80';
 $grid[$fila]['A']="PORCENTAJES";
 $grid[$fila]['D']=$vcods[$cd]['stc_V_P'] . " %";
@@ -372,6 +372,8 @@ $_SESSION['align'] = $align;
 $_SESSION['crang']=$crang;
 $_SESSION['Mrang']=$Mrang;
 $_SESSION['BTrang']=$BTrang;
+
+$_SESSION['nomfil']="HVValorada";
 
 $res['ng']=count($grid)+count($anchos)+count($align)+count($crang)+count($Mrang)+count($BTrang);
 echo json_encode($res);
