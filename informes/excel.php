@@ -61,7 +61,7 @@ foreach ($BTrang as $rang => $value) {
 }
 
 foreach ($format as $rang => $value) {
-	if($value==1){$sheet->getStyle($rang)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_CURRENCY_EUR_SIMPLE);};
+	if($value==1){$objPHPExcel->getActiveSheet()->getStyle($rang)->getNumberFormat()->setFormatCode('#,##0.00 €');};
 }
 
 
