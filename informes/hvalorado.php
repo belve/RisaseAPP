@@ -264,9 +264,12 @@ $fila++;
 
 
 $BTrang['A' . $fila . ':' . 'H' . ($fila+3)]=2;
+$format['B' . $fila . ':' . 'B' . ($fila+1)]=1;
+$format['B' . ($fila+2) . ':' . 'H' . ($fila+3)]=1;
+
 $align['B' . $fila . ':' . 'H' . $fila]='C';
 $grid[$fila]['A']=$codigos[$cd];
-$grid[$fila]['B']='=' . $vcods[$cd]['pc']  . ' & CHAR(128)';;
+$grid[$fila]['B']=$vcods[$cd]['pc'];
 
 
 
@@ -275,23 +278,23 @@ $fila++;
 $align['B' . $fila . ':' . 'H' . $fila]='C';
 $crang['A' . $fila . ':' . 'H' . $fila]='C2E0FF';
 $grid[$fila]['A']="UNIDADES - PVP";
-$grid[$fila]['B']='=' . $vcods[$cd]['pvp']  . ' & CHAR(128)'; 
-$grid[$fila]['C']=$vcods[$cd]['sti']  . "  "; $sumSTI=$sumSTI+$vcods[$cd]['sti'];
-$grid[$fila]['D']=$vcods[$cd]['stc']  . "  "; $sumSTC=$sumSTC+$vcods[$cd]['stc'];
-$grid[$fila]['E']=$vcods[$cd]['vtda']  . "  ";$sumVTDA=$sumVTDA+$vcods[$cd]['vtda'];
-$grid[$fila]['F']=$vcods[$cd]['vbru']  . "  ";$sumVBRU=$sumVBRU+$vcods[$cd]['vbru'];
+$grid[$fila]['B']=$vcods[$cd]['pvp']; 
+$grid[$fila]['C']=$vcods[$cd]['sti']; $sumSTI=$sumSTI+$vcods[$cd]['sti'];
+$grid[$fila]['D']=$vcods[$cd]['stc']; $sumSTC=$sumSTC+$vcods[$cd]['stc'];
+$grid[$fila]['E']=$vcods[$cd]['vtda'];$sumVTDA=$sumVTDA+$vcods[$cd]['vtda'];
+$grid[$fila]['F']=$vcods[$cd]['vbru'];$sumVBRU=$sumVBRU+$vcods[$cd]['vbru'];
 
 $fila++;
 
 $align['B' . $fila . ':' . 'H' . $fila]='C';
 $crang['A' . $fila . ':' . 'H' . $fila]='ADEBAD';
 $grid[$fila]['A']="VALORES";
-$grid[$fila]['C']='=' . $vcods[$cd]['sti_V'] . ' & CHAR(128)'; $sumSTI_V=$sumSTI_V+$vcods[$cd]['sti_V'];
-$grid[$fila]['D']='=' . $vcods[$cd]['stc_V'] . ' & CHAR(128)'; $sumSTC_V=$sumSTC_V+$vcods[$cd]['stc_V'];
-$grid[$fila]['E']='=' . $vcods[$cd]['vtda_V'] . ' & CHAR(128)';$sumVTDA_V=$sumVTDA_V+$vcods[$cd]['vtda_V'];
-$grid[$fila]['F']='=' . $vcods[$cd]['vbru_V'] . ' & CHAR(128)';$sumVBRU_V=$sumVBRU_V+$vcods[$cd]['vbru_V'];
-$grid[$fila]['G']='=' . $vcods[$cd]['valv_V'] . ' & CHAR(128)';$sumVALV_V=$sumVALV_V+$vcods[$cd]['valv_V'];
-$grid[$fila]['H']='=' . $vcods[$cd]['bene_V'] . ' & CHAR(128)';$sumBENE_V=$sumBENE_V+$vcods[$cd]['bene_V'];
+$grid[$fila]['C']=$vcods[$cd]['sti_V']; $sumSTI_V=$sumSTI_V+$vcods[$cd]['sti_V'];
+$grid[$fila]['D']=$vcods[$cd]['stc_V']; $sumSTC_V=$sumSTC_V+$vcods[$cd]['stc_V'];
+$grid[$fila]['E']=$vcods[$cd]['vtda_V'];$sumVTDA_V=$sumVTDA_V+$vcods[$cd]['vtda_V'];
+$grid[$fila]['F']=$vcods[$cd]['vbru_V'];$sumVBRU_V=$sumVBRU_V+$vcods[$cd]['vbru_V'];
+$grid[$fila]['G']=$vcods[$cd]['valv_V'];$sumVALV_V=$sumVALV_V+$vcods[$cd]['valv_V'];
+$grid[$fila]['H']=$vcods[$cd]['bene_V'];$sumBENE_V=$sumBENE_V+$vcods[$cd]['bene_V'];
 $fila++;
 
 $align['B' . $fila . ':' . 'H' . $fila]='C';
@@ -326,22 +329,22 @@ $align['B' . $fila . ':' . 'H' . $fila]='R';
 $crang['A' . $fila . ':' . 'H' . $fila]='C2E0FF';
 $grid[$fila]['A']="UNIDADES";
 
-$grid[$fila]['C']=$sumSTI  . "  ";
-$grid[$fila]['D']=$sumSTC  . "  ";
-$grid[$fila]['E']=$sumVTDA . "  ";
-$grid[$fila]['F']=$sumVBRU  . "  ";
+$grid[$fila]['C']=$sumSTI;
+$grid[$fila]['D']=$sumSTC;
+$grid[$fila]['E']=$sumVTDA;
+$grid[$fila]['F']=$sumVBRU;
 
 $fila++;
 
 $align['B' . $fila . ':' . 'H' . $fila]='R';
 $crang['A' . $fila . ':' . 'H' . $fila]='ADEBAD';
 $grid[$fila]['A']="VALORES";
-$grid[$fila]['C']='=' . $sumSTI_V . ' & CHAR(128)';
-$grid[$fila]['D']='=' . $sumSTC_V . ' & CHAR(128)';
-$grid[$fila]['E']='=' . $sumVTDA_V . ' & CHAR(128)';
-$grid[$fila]['F']='=' . $sumVBRU_V . ' & CHAR(128)';
-$grid[$fila]['G']='=' . $sumVALV_V . ' & CHAR(128)';
-$grid[$fila]['H']='=' . $sumBENE_V . ' & CHAR(128)';
+$grid[$fila]['C']=$sumSTI_V;
+$grid[$fila]['D']=$sumSTC_V;
+$grid[$fila]['E']=$sumVTDA_V;
+$grid[$fila]['F']=$sumVBRU_V;
+$grid[$fila]['G']=$sumVALV_V;
+$grid[$fila]['H']=$sumBENE_V;
 
 
 $fila++;
@@ -372,7 +375,7 @@ $_SESSION['align'] = $align;
 $_SESSION['crang']=$crang;
 $_SESSION['Mrang']=$Mrang;
 $_SESSION['BTrang']=$BTrang;
-
+$_SESSION['format']=$format;
 $_SESSION['nomfil']="HVValorada";
 
 $res['ng']=count($grid)+count($anchos)+count($align)+count($crang)+count($Mrang)+count($BTrang);
