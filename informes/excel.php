@@ -60,8 +60,14 @@ foreach ($BTrang as $rang => $value) {
 	}
 }
 
+
+$for= '#,##0.00_-[$EUR ]';
+
+$for2= '#,##0.00_-[$% ]';
+
 foreach ($format as $rang => $value) {
-	if($value==1){$objPHPExcel->getActiveSheet()->getStyle($rang)->getNumberFormat()->setFormatCode('#,##0.00 $');};
+	if($value==1){$objPHPExcel->getActiveSheet()->getStyle($rang)->getNumberFormat()->setFormatCode($for);};
+	if($value==2){$objPHPExcel->getActiveSheet()->getStyle($rang)->getNumberFormat()->setFormatCode($for2);};
 }
 
 
@@ -72,7 +78,7 @@ $sheet->setTitle('GRID');
 // Redirect output to a client’s web browser (Excel5)
 if($debug==0){
 
-header('Content-Type: application/vnd.ms-excel;  charset=UTF-8');
+header('Content-Type: application/vnd.ms-excel;  ');
 header('Content-Disposition: attachment;filename="' . $nomfil . '.xls"');
 header('Cache-Control: max-age=0');
 

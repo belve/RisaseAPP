@@ -265,7 +265,8 @@ $fila++;
 
 $BTrang['A' . $fila . ':' . 'H' . ($fila+3)]=2;
 $format['B' . $fila . ':' . 'B' . ($fila+1)]=1;
-$format['B' . ($fila+2) . ':' . 'H' . ($fila+3)]=1;
+$format['B' . ($fila+2) . ':' . 'H' . ($fila+2)]=1;
+$format['B' . ($fila+3) . ':' . 'H' . ($fila+3)]=2;
 
 $align['B' . $fila . ':' . 'H' . $fila]='C';
 $grid[$fila]['A']=$codigos[$cd];
@@ -300,9 +301,9 @@ $fila++;
 $align['B' . $fila . ':' . 'H' . $fila]='C';
 $crang['A' . $fila . ':' . 'H' . $fila]='FFFF80';
 $grid[$fila]['A']="PORCENTAJES";
-$grid[$fila]['D']=$vcods[$cd]['stc_V_P'] . " %";
-$grid[$fila]['E']=$vcods[$cd]['vtda_V_P'] . " %";
-$grid[$fila]['F']=$vcods[$cd]['vbru_V_P'] . " %";
+$grid[$fila]['D']=$vcods[$cd]['stc_V_P'];
+$grid[$fila]['E']=$vcods[$cd]['vtda_V_P'];
+$grid[$fila]['F']=$vcods[$cd]['vbru_V_P'];
 
 
 $fila++;
@@ -324,8 +325,12 @@ $grid[$fila]['H']="BENEFICIO";
 
 $fila++;
 
+
+$format['B' . ($fila+1) . ':' . 'H' . ($fila+1)]=1;
+$format['B' . ($fila+2) . ':' . 'H' . ($fila+2)]=2;
+
 $BTrang['A' . $fila . ':' . 'H' . ($fila+2)]=1;
-$align['B' . $fila . ':' . 'H' . $fila]='R';
+$align['B' . $fila . ':' . 'H' . $fila]='C';
 $crang['A' . $fila . ':' . 'H' . $fila]='C2E0FF';
 $grid[$fila]['A']="UNIDADES";
 
@@ -336,7 +341,7 @@ $grid[$fila]['F']=$sumVBRU;
 
 $fila++;
 
-$align['B' . $fila . ':' . 'H' . $fila]='R';
+$align['B' . $fila . ':' . 'H' . $fila]='C';
 $crang['A' . $fila . ':' . 'H' . $fila]='ADEBAD';
 $grid[$fila]['A']="VALORES";
 $grid[$fila]['C']=$sumSTI_V;
@@ -350,12 +355,12 @@ $grid[$fila]['H']=$sumBENE_V;
 $fila++;
 
 
-$align['B' . $fila . ':' . 'H' . $fila]='R';
+$align['B' . $fila . ':' . 'H' . $fila]='C';
 $crang['A' . $fila . ':' . 'H' . $fila]='FFFF80';
 $grid[$fila]['A']="PORCENTAJES";
-if($sumSTI>0){$grid[$fila]['D']=round(($sumSTC/$sumSTI*100),2) . " %";};
-if($sumSTI>0){$grid[$fila]['E']=round(($sumVTDA/$sumSTI*100),2) . " %";};
-if($sumSTI>0){$grid[$fila]['F']=round(($sumVBRU/$sumSTI*100),2) . " %";};
+if($sumSTI>0){$grid[$fila]['D']=round(($sumSTC/$sumSTI*100),2);};
+if($sumSTI>0){$grid[$fila]['E']=round(($sumVTDA/$sumSTI*100),2);};
+if($sumSTI>0){$grid[$fila]['F']=round(($sumVBRU/$sumSTI*100),2);};
 
 
 
