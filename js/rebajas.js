@@ -623,14 +623,30 @@ window.top.agruNames.push(nombre);
 }
 var fini=document.getElementById('R_ini').value;fini=fini.replace("dd/mm/aaaa","");	
 var ffin=document.getElementById('R_fin').value;ffin=ffin.replace("dd/mm/aaaa","");
+var fintoc=ffin.substr(6,4) + ffin.substr(3,2) + ffin.substr(0,2); 
+var fintoc=Number(fintoc);
+
+var currentTime = new Date()
+var month = currentTime.getMonth() + 1;
+var day = currentTime.getDate();
+var year = currentTime.getFullYear();
+if(month.toString().length <=1){month="0" + month.toString();};
+if(day.toString().length <=1){day="0" + day.toString();};
+var today=  year.toString() + month.toString() + day.toString();
+var today=Number(today);
+
+
 
 if((fini.length==10)&&(ffin.length==10)){
+	
+	
 var url="/ajax/rebajasAct.php?action=c&nombre=" + nombre 
 + "&fini=" + fini 
 + "&ffin=" + ffin;
 
+if(fintoc<today){alert('La fecha final es inferior al dia de hoy');}else{
 document.getElementById('FrebAct').src=url; 
-
+}
 
 document.getElementById('R_ini').setAttribute("style", "color:#AAAAAA;");
 document.getElementById('R_fin').setAttribute("style", "color:#AAAAAA;");

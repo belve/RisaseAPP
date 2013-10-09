@@ -69,6 +69,8 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 
 <script type="text/javascript" src="/js/bd-basicos.js"></script>
 <script type="text/javascript" src="/js/informes.js"></script>
+<script src="/js/ffecha.js" type="text/javascript"></script>
+
 
 <link rel='stylesheet' type='text/css' href='/css/framework_inside.css' />
 
@@ -114,10 +116,11 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 <div style="float: left; border: 1px solid #888888; padding: 5px; margin-top: 10px;">
 	
 	
+	
 <div style="float: left; position: relative">	
 	
-	<div style="">Desde: <input type="text" class="medio" id="fini"></div>
-	<div style="">Hasta: <input type="text" class="medio" id="ffin" style="margin-left:4px;"></div>
+	<div style="">Desde: <input value="dd/mm/aaaa" type="text" class="medio" id="fini" onfocus="javascript:dlF(this.id);" onkeyup="javascript:tabF(this.id);"></div>
+	<div style="">Hasta: <input class="contH medio" value="dd/mm/aaaa" type="text" id="ffin" onfocus="javascript:dlF(this.id);" onkeyup="javascript:tabF(this.id);" style="color:#333333;"></div>
 
 </div>
 

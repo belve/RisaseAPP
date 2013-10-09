@@ -56,7 +56,7 @@ function focusW(value){
 
 function owin(value,tit,param){
 			var i=1;
-			while (i<25)
+			while (i<50)
 			  {
 			if(document.getElementById("v_"+i)){
 				document.getElementById("v_"+i).style.display = "none";

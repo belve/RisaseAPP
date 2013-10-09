@@ -63,11 +63,14 @@ url = url
  + '&listador=1'; 
 
 
+fini=fini.replace('dd/mm/aaaa','');
+ffin=ffin.replace('dd/mm/aaaa','');
 
-
-
-
+if((fini=="")||(ffin=="")){
+alert('Debe introducir un rango de fechas');	
+}else{
 getDATA(url);
+}
 
 }
 
