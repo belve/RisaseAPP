@@ -616,6 +616,7 @@ if(window.debug ==1) {console.log('window.top.agruNames: '); console.info(window
 
 
 var nombre=document.getElementById('R_nom').value;
+if(nombre==""){alert('Debe asignar un nombre a la rebaja');}else{
 if(window.top.agruNames.indexOf(nombre) >= 0){alert('Ya existe una agrupación activa con ese nombre.');}else{
 
 if(window.top.agruNames.indexOf(nombre)<0){
@@ -655,7 +656,10 @@ document.getElementById('R_ini').value="dd/mm/aaaa";
 document.getElementById('R_fin').value="dd/mm/aaaa";
 }else{alert('formato de fecha erroneo');};
 	
-}}
+}
+}
+
+}
 
 
 function ordencodigos(w){$.ajaxSetup({'async': false});
