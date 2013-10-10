@@ -41,7 +41,7 @@ if($tip==2){
 $queryp= "SELECT distinct(id_tienda) as idt, 
 (select id_tienda from tiendas where id=idt) as ntie, 
 (select orden from tiendas where id=idt) as orden  
-from pedidos WHERE tip=$tip AND estado='-' GROUP BY id_tienda ORDER BY orden;";
+from pedidos WHERE tip=$tip AND estado='-' AND (agrupar='' or agrupar IS NULL) GROUP BY id_tienda ORDER BY orden;";
 $dbnivel->query($queryp); 
 while ($row = $dbnivel->fetchassoc()){$agrupaciones[$row['idt']]=$row['ntie'] . "-" . $fecha . $hora;}
 }
@@ -79,7 +79,7 @@ if($tip==1){
 $queryp="update pedidos set agrupar='$idagrup' where prov=$idpr AND tip=$tip AND estado='-' AND (agrupar='' or agrupar IS NULL);";	
 }
 if($tip==2){
-$queryp="update pedidos set agrupar='$idagrup' where id_tienda=$idpr AND tip=$tip AND estado='-';";	
+$queryp="update pedidos set agrupar='$idagrup' where id_tienda=$idpr AND tip=$tip AND estado='-' AND (agrupar='' or agrupar IS NULL);";	
 }
 $dbnivel->query($queryp); 
 
