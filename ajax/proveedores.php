@@ -29,8 +29,8 @@ while ($row = $dbnivel->fetchassoc()){
 	$valores[10]=$row['fax'];
 	$valores[11]=$row['email'];
 	$valores[12]=$row['nomcorto'];
-	$valores[13]=$row['dto1'];
-	$valores[14]=$row['dto2'];
+	$valores[13]=str_replace('.00', '', $row['dto1']);
+	$valores[14]=str_replace('.00', '', $row['dto2']);
 	
 	
 };

@@ -12,6 +12,9 @@ $.each(data, function(key, val) {
 if(key==9){
 	if(val==1){document.getElementById(9).checked=true;};
 	if(val==0){document.getElementById(9).checked=false;};
+}else if(key==10){
+	if(val==1){document.getElementById(10).checked=true;};
+	if(val==0){document.getElementById(10).checked=false;};	
 }else{	
 document.getElementById(key).value=val;
 }
@@ -47,8 +50,11 @@ var provincia=document.getElementById('7').value;
 var telefono=document.getElementById('8').value;
 
 
-if(document.getElementById('9').checked==true){$activ=1;};
-if(document.getElementById('9').checked==false){$activ=0;};
+if(document.getElementById('9').checked==true){activ=1;};
+if(document.getElementById('9').checked==false){activ=0;};
+
+if(document.getElementById('10').checked==true){franquicia=1;};
+if(document.getElementById('10').checked==false){franquicia=0;};
 	
 url = "/ajax/update2.php?tabla=tiendas"
 + "&campos[nombre]=" + nombre  
@@ -58,8 +64,8 @@ url = "/ajax/update2.php?tabla=tiendas"
 + "&campos[ciudad]=" + ciudad  
 + "&campos[provincia]=" + provincia  
 + "&campos[telefono]=" + telefono  
-+ "&campos[activa]=" + $activ 
-
++ "&campos[activa]=" + activ 
++ "&campos[franquicia]=" + franquicia 
 +  "&id=" + id;
 $.getJSON(url, function(data) {
 });	

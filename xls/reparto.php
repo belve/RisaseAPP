@@ -1,7 +1,7 @@
 <?php
 require_once("../db.php");
 require_once("../variables.php");
-
+$cb=array();
 
 $colu[4]='D';
 $colu[5]='E';
@@ -76,12 +76,24 @@ while ($row = $dbnivel->fetchassoc()){
 $datos[$row['id_articulo']]['nom']=$row['codbarras'] . " / " .  $row['refprov'];
 $datos[$row['id_articulo']]['stok']=$row['stock'];
 
-$grid[$row['id_articulo']][$row['id_tienda']]['cantidad']=$row['cantidad'];	
-$grid[$row['id_articulo']][$row['id_tienda']]['estado']=$row['estado'];	
+$grid2[$row['id_articulo']][$row['id_tienda']]['cantidad']=$row['cantidad'];	
+$grid2[$row['id_articulo']][$row['id_tienda']]['estado']=$row['estado'];	
+
+$g=substr($row['codbarras'], 0,1); $sg=substr($row['codbarras'], 1,1); $cod=substr($row['codbarras'],4);
+$cb[$row['id_tienda']][$g][$sg][$cod]=$row['id_articulo'];
+
 }
 	
 
 if (!$dbnivel->close()){die($dbnivel->error());};
+
+
+
+ksort($cb);
+foreach ($cb as $idt => $gs) {ksort($gs); foreach ($gs as $g => $sgs) { ksort($sgs); foreach ($sgs as $sg => $cods) {ksort($cods); foreach ($cods as $cod => $codb) {
+if(array_key_exists($idt, $grid2[$codb])){$grid[$codb][$idt]=$grid2[$codb][$idt];};
+}}}}
+
 
 
 require_once '../Classes/PHPExcel.php';
@@ -111,16 +123,37 @@ $styleArray = array(
       'style' => PHPExcel_Style_Border::BORDER_THIN
     )
   )
+  ,
+  'alignment' => array(
+                                      'wrap'       => true,
+                                      
+                                      'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER
+                                        )
 );
 
-global $styleArray;
+$styleArray2 = array(
+    'font'  => array(
+        'bold'  => true,
+        'size'  => 14
+       
+    ),
+	
+	'alignment' => array(
+                                      'wrap'       => true,
+                                      'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                                      'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER
+                                        )
+	
+	);
+
+global $styleArray;global $styleArray2;
 
 function cabecera(){
 global $count;global $numti;
 global $ultColu;
 global $colu; global $colores; global $anchos;
 global $objPHPExcel;
-global $tiendas;global $reparto;global $pag;global $styleArray;
+global $tiendas;global $reparto;global $pag;global $styleArray;global $styleArray2;
 
 $minultcolu=$colu[$numti];
 $minultcolu2=$colu[$numti+1];
@@ -135,11 +168,12 @@ $pag++;
 $rango="A" . $count . ":" . $minultcolu . $count;
 $objPHPExcel->setActiveSheetIndex(0)->mergeCells($rango);
 $objPHPExcel->getActiveSheet()->setCellValue('A' . $count, $reparto);
-
+$objPHPExcel->getActiveSheet()->getStyle($rango)->applyFromArray($styleArray2);
 $pagina="PAG: $pag";
 $rango=$minultcolu2 . $count . ":" . $ultColu . $count;
 $objPHPExcel->setActiveSheetIndex(0)->mergeCells($rango);
 $objPHPExcel->getActiveSheet()->setCellValue($minultcolu2 . $count, $pagina);
+$objPHPExcel->getActiveSheet()->getStyle($rango)->applyFromArray($styleArray2);
 
 
 

@@ -105,6 +105,11 @@
 			<td>Activa</td>
 			<td><input  type="checkbox" id="9" /></td>
 		</tr>
+		
+		<tr>
+			<td>Franquicia</td>
+			<td><input  type="checkbox" id="10" /></td>
+		</tr>
 
 	</table>
 </div>	

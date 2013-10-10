@@ -101,6 +101,7 @@ $html .="$htmlART </tr> $htmlALM </tr>";
 
 }
 
+
 $valores['html']=$html;$valores['ultfile']=$lastid;
 return $valores;
 	

@@ -36,6 +36,7 @@ while ($row = $dbnivel->fetchassoc()){
 	$valores[7]=$row['provincia'];
 	$valores[8]=$row['telefono'];
 	$valores[9]=$row['activa'];
+	$valores[10]=$row['franquicia'];
 	
 	
 	

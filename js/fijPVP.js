@@ -43,7 +43,7 @@ url = "/ajax/addARTfPVP.php?id_proveedor=" + prov
 
 
 var yalist=window.top.listArts.toString();
-url=url  + "&yalistados=" + yalist;
+//url=url  + "&yalistados=" + yalist;
 
 
 getDATA(url);

@@ -1,7 +1,7 @@
 <?php
 require_once("../db.php");
 require_once("../variables.php");
-
+$cb=array();
 foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
 
 
@@ -38,13 +38,26 @@ while ($row = $dbnivel->fetchassoc()){
 	
 
 $sg=substr($row['codbarras'], 0,2);
-$grid[$row['id_tienda']][$equig[$sg]][$row['codbarras'] . " / " .  $row['refprov']]=$row['cantidad'];
 
+
+$equis[$row['id_articulo']]=$equig[$sg];
+$noms[$row['id_articulo']]=$row['codbarras'] . " / " .  $row['refprov'];
+$cants[$row['id_articulo']]=$row['cantidad'];
+
+$g=substr($row['codbarras'], 0,1); $sg=substr($row['codbarras'], 1,1); $cod=substr($row['codbarras'],4);
+$cb[$row['id_tienda']][$g][$sg][$cod]=$row['id_articulo'];
 	
 }
 	
 
 if (!$dbnivel->close()){die($dbnivel->error());};
+
+
+ksort($cb);
+foreach ($cb as $idt => $gs) {ksort($gs); foreach ($gs as $g => $sgs) { ksort($sgs); foreach ($sgs as $sg => $cods) {ksort($cods); foreach ($cods as $cod => $codb) {
+$grid[$idt][$equis[$codb]][$noms[$codb]]=$cants[$codb];
+}}}}
+
 
 
 
@@ -60,8 +73,28 @@ $styleArray = array(
       'style' => PHPExcel_Style_Border::BORDER_THIN
     )
   )
+  ,
+  'alignment' => array(
+                                      'wrap'       => true,
+                                      
+                                      'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER
+                                        )
 );
 
+$styleArray2 = array(
+    'font'  => array(
+        'bold'  => true,
+        'size'  => 12
+       
+    ),
+	
+	'alignment' => array(
+                                      'wrap'       => true,
+                                      'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                                      'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER
+                                        )
+	
+	);
 
 
 
@@ -73,12 +106,12 @@ $objPHPExcel->createSheet();
 $objPHPExcel->setActiveSheetIndex($count);
 $titlesheet=$tiendas[$id_tienda];
 $objPHPExcel->getActiveSheet()->setTitle($titlesheet);
-$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(17);
+$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(35);
 $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(4);
 $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(4);
 $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(4);
 
-$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(17);
+$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(35);
 $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(4);
 $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(4);
 $objPHPExcel->getActiveSheet()->getColumnDimension('H')->setWidth(4);
@@ -93,15 +126,17 @@ $colu=1;
 	if(count($reparto)>0){
 		
 	$objPHPExcel->setActiveSheetIndex($count)->mergeCells('A' . $lin . ':C' .$lin);
+	$objPHPExcel->setActiveSheetIndex($count)->mergeCells('D' . $lin . ':E' .$lin);	
 	$objPHPExcel->setActiveSheetIndex($count)->mergeCells('F' . $lin . ':G' .$lin);
 	
-	$objPHPExcel->getActiveSheet()->setCellValue('A' . $lin , "Nº de Pedido: $nomrep");					$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(22);
-	$objPHPExcel->getActiveSheet()->setCellValue('E' . $lin , 'Tienda: ' . $tiendasN[$id_tienda]);		$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(22);
+	$objPHPExcel->getActiveSheet()->setCellValue('A' . $lin , "Pedido: $nomrep");					$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(22);
+	$objPHPExcel->getActiveSheet()->setCellValue('D' . $lin , 'Tienda: ' . $tiendasN[$id_tienda]);		$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(22);
 	$objPHPExcel->getActiveSheet()->setCellValue('F' . $lin , 'PAG: ' . $pag);					 		$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(22);
 	#$objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(8);
 	$objPHPExcel->getActiveSheet()->getRowDimension($lin)->setRowHeight(28);
-	$objPHPExcel->getActiveSheet()->getStyle('A' . $lin . ':G' .$lin)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::VERTICAL_CENTER);
-	$objPHPExcel->getActiveSheet()->getStyle('A' . $lin . ':G' .$lin)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);	
+	#$objPHPExcel->getActiveSheet()->getStyle('A' . $lin . ':G' .$lin)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+	#$objPHPExcel->getActiveSheet()->getStyle('A' . $lin . ':G' .$lin)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+	$objPHPExcel->getActiveSheet()->getStyle('A' . $lin . ':G' .$lin)->applyFromArray($styleArray2);	
 	$lin++;	
 		
 	foreach ($reparto as $grupo => $datos){foreach ($datos as $articulo => $cantidad){
@@ -121,27 +156,29 @@ $colu=1;
 		$objPHPExcel->getActiveSheet()->setCellValue('E' . $lin , 'Tienda: ' . $tiendasN[$id_tienda]);		$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(22);
 		$objPHPExcel->getActiveSheet()->setCellValue('F' . $lin , 'PAG: ' . $pag);					 		$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(22);
 		#$objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(8);
-		$objPHPExcel->getActiveSheet()->getRowDimension($lin)->setRowHeight(28);
-		$objPHPExcel->getActiveSheet()->getStyle('A' . $lin . ':G' .$lin)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::VERTICAL_CENTER);
-		$objPHPExcel->getActiveSheet()->getStyle('A' . $lin . ':G' .$lin)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);	
+		$objPHPExcel->getActiveSheet()->getRowDimension($lin)->setRowHeight(35);
+		#$objPHPExcel->getActiveSheet()->getStyle('A1')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_TOP);
+		#$objPHPExcel->getActiveSheet()->getStyle('A' . $lin . ':G' .$lin)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);	
 		$lin++;	
 			
-			
+		
 		}
 			if($grupo != $lastgroup){
 			$rango=$cla[$colu] . $lin . ":" . $clb[$colu]  . $lin;
 			$objPHPExcel->setActiveSheetIndex($count)->mergeCells($rango);
 			$objPHPExcel->getActiveSheet()->setCellValue($cla[$colu] . $lin, $grupo);
-			#$objPHPExcel->getActiveSheet()->getRowDimension($lin)->setRowHeight(20);
+			$objPHPExcel->getActiveSheet()->getRowDimension($lin)->setRowHeight(20);
+			$objPHPExcel->getActiveSheet()->getStyle($rango)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 			$objPHPExcel->getActiveSheet()->getStyle($rango)->applyFromArray(array('fill' => array('type' => PHPExcel_Style_Fill::FILL_SOLID,'color' => array('rgb' => 'CCCCCC')) ));
-			$objPHPExcel->getActiveSheet()->getStyle($rango)->getFont()->setSize(9);
+			$objPHPExcel->getActiveSheet()->getStyle($rango)->getFont()->setSize(11);
 			$objPHPExcel->getActiveSheet()->getStyle($cla[$colu] . $lin . ":" . $clb[$colu] . $lin)->applyFromArray($styleArray);	
 			$lastgroup=$grupo;$lin++;$cont++;
 			}	
 		
 		$objPHPExcel->getActiveSheet()->setCellValue($cla[$colu] . $lin, $articulo);
+		$objPHPExcel->getActiveSheet()->getStyle($cla[$colu] . $lin)->getFont()->setSize(9);
 		$objPHPExcel->getActiveSheet()->setCellValue($clb[$colu] . $lin, $cantidad);
-		$objPHPExcel->getActiveSheet()->getStyle($cla[$colu] . $lin . ":" . $clb[$colu] . $lin)->getFont()->setSize(7);
+		$objPHPExcel->getActiveSheet()->getStyle($clb[$colu] . $lin)->getFont()->setSize(11);
 		$objPHPExcel->getActiveSheet()->getStyle($cla[$colu] . $lin . ":" . $clb[$colu] . $lin)->applyFromArray($styleArray);
 		$lin++;	$cont++;	
 		}}}

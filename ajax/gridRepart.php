@@ -41,9 +41,9 @@ while ($row = $dbnivel->fetchassoc()){$idsabuscar .=$row['id'] . ",";};
 $idsabuscar=substr($idsabuscar,0,strlen($idsabuscar)-1);
 
 
-$queryp= "select id, codbarras, refprov, stock, 
+$queryp= "select id, codbarras, refprov, stock, SUBSTRING(codbarras,1,1) as g, SUBSTRING(codbarras,2,1) as sg,
 (select sum(cantidad) from pedidos where pedidos.id_articulo=articulos.id AND estado NOT LIKE 'F') as penrepartir
-from articulos where id IN ($idsabuscar) ORDER BY id_proveedor, id_subgrupo, codigo;";
+from articulos where id IN ($idsabuscar) ORDER BY g, sg, codigo;";
 
 
 

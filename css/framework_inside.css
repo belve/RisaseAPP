@@ -256,7 +256,7 @@ height:15px; width:96%; padding-left:3px; cursor:pointer;
 .VP1 {padding:10px; position: absolute; }
 .VP2 {padding:10px; position: absolute; visibility: hidden;}
 
-.agrup_V2  {cursor:pointer;color:#666666;border-left:1px solid #888888;border-right:1px solid #888888;border-bottom:1px solid #888888; height: 12px;padding: 2px; font-size:9px; width:92px; background-color:white;}
+.agrup_V2  {cursor:pointer;color:#666666;border-left:1px solid #888888;border-right:1px solid #888888;border-bottom:1px solid #888888;overflow: hidden; height: 12px;padding: 2px; font-size:9px; width:92px; background-color:white;}
 .agV2 {position:absolute;}
 
 .contGridAgrup	{ background-color: #D8D8D8; border: 1px solid #888888;    height: 512px;    margin: 10px 0 10px -6px;    padding: 5px;}

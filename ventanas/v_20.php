@@ -115,6 +115,7 @@ var idrebaja=document.getElementById('idrebaja').value;
 
 	
 url = "/ajax/addartREB.php?hago=" + hago + "&id_proveedor=" + prov
+ + "&id_grupo=" + grup
  + "&id_subgrupo=" + subg
  + "&id_color=" + colo
  + "&codigo=" + codi
@@ -244,7 +245,7 @@ document.getElementById('10').value='';
 		
 		<tr>
 			<td>Código</td>
-			<td><input class="corto" type="text" id="6" /></td>
+			<td><input class="corto" type="text" id="6" style="width: 94px;"/></td>
 		</tr>
 		
 		<tr>

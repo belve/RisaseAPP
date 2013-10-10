@@ -37,14 +37,27 @@ $stocks[$ida]=$row['stock'];
 $rep[$ida]=$rep[$ida] + $cant;
 $noms[$ida]=$row['codbarras'] . " / " . $row['nomprov'];
 $tieacts[$idt]=1;	
+
+
+$g=substr($row['codbarras'], 0,1); $sg=substr($row['codbarras'], 1,1); $cod=substr($row['codbarras'],4);
+$cb[$g][$sg][$cod]=$ida;
 }
+
+
+
+
+
+ksort($cb);
+foreach ($cb as $g => $sgs) {ksort($sgs); foreach ($sgs as $sg => $cods) {ksort($cods); foreach ($cods as $cod => $codb) {
+$grid2[$codb]=$grid[$codb];
+}}}
 
 
 $html="";$cabe=array();$rotura=0;
 
 $fila=0;
-if(count($grid)>0){
-foreach ($grid as $ida => $val){$nomb=$noms[$ida];$re=$rep[$ida];$stock=$stocks[$ida];
+if(count($grid2)>0){
+foreach ($grid2 as $ida => $val){$nomb=$noms[$ida];$re=$rep[$ida];$stock=$stocks[$ida];
 $fila++;
 if($re > $stock){$st=" style='background-color:#F8CDD9;'";$rotura=1;}else{$st="";};
 

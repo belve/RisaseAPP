@@ -289,9 +289,9 @@ echo "<div onclick='sumatienda($postiendas,\"$nomt\")' class='cabtab_REP tab_REP
 function initP(){
 
 cargaAgrupados(<?php echo $tip;?>,0);
-cargaAgrupados2(<?php echo $tip;?>,0,"","");
+//cargaAgrupados2(<?php echo $tip;?>,0,"","");
 cargaPendientes(<?php echo $tip;?>);
-
+window.tipi=<?php echo $tip;?>;
 }
 
 window.top.dblP=0;

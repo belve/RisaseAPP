@@ -114,6 +114,7 @@ document.getElementById('h10').value=temp
 
 	
 url = "/ajax/addartFSTOCK.php?hago=" + hago + "&id_proveedor=" + prov
+ + "&id_grupo=" + grup
  + "&id_subgrupo=" + subg
  + "&id_color=" + colo
  + "&codigo=" + codi

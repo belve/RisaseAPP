@@ -334,6 +334,7 @@ document.getElementById('DV2P4').setAttribute("style", "visibility:hidden;");
 }
 
 if(p=='P2'){
+	
 document.getElementById('DV2P1').setAttribute("style", "visibility:hidden;");
 document.getElementById('DV2P2').setAttribute("style", "visibility:hidden;");
 document.getElementById('DV2P3').setAttribute("style", "visibility:hidden;");
@@ -346,6 +347,8 @@ document.getElementById('V2P4').className="V2_PEST_off";
 var V2=document.getElementById('V2SEL').value;
 document.getElementById('D' + V2).setAttribute("style", "visibility:visible;");
 document.getElementById(V2).className="V2_PEST_on";
+
+
 }
 
 
@@ -360,7 +363,12 @@ document.getElementById('V' + p).setAttribute("style", "visibility:visible !impo
 	
 	
 	
-}	
+}
+
+
+
+var tip=window.tipi;	
+cargaAgrupados2(tip,0,"","");	
 }
 
 
@@ -416,8 +424,21 @@ document.getElementById('filtro').select();
 
 function cargaAgrupados2(tip,agrupar,est,filtro){	
 
+var iframe = document.getElementById('FV2P1');
+var A = iframe.contentDocument || iframe.contentWindow.document;
+A.getElementById('agrupaciones').innerHTML='';
 
+var iframe = document.getElementById('FV2P2');
+var A = iframe.contentDocument || iframe.contentWindow.document;
+A.getElementById('agrupaciones').innerHTML='';
 
+var iframe = document.getElementById('FV2P3');
+var A = iframe.contentDocument || iframe.contentWindow.document;
+A.getElementById('agrupaciones').innerHTML='';
+
+var iframe = document.getElementById('FV2P4');
+var A = iframe.contentDocument || iframe.contentWindow.document;
+A.getElementById('agrupaciones').innerHTML='';
 
 
 var fP=0;var fA=0;var fT=0;var fF=0;
@@ -780,7 +801,7 @@ setTimeout("timerAD(0,'timer',0);",16000);
 function roturas(tip){
 $.ajaxSetup({'async': false});
 var idREP=document.getElementById('ag_selected').value;
-var url="/xls/roturas.php?tip=" + tip;
+var url="/xls/roturas.php?tip=" + tip + "&idagru=" + idREP;
 timerAD(1,'timer',0);
 document.getElementById('print').src=url;	
 

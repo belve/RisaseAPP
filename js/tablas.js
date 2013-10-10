@@ -1,3 +1,8 @@
+function scrll(){
+	window.scrollTo(0,0);
+}
+
+
 function paraguardar(tab,value){
 
 var tab;
@@ -320,7 +325,13 @@ innerDoc.getElementById('filas').value=ultfile;
 
 document.getElementById('art').select();
 
+
+
 timer(0);
+
+
+var myIframe = document.getElementById('repartos');
+myIframe.contentWindow.scrollTo(0,0);
 }
 
 

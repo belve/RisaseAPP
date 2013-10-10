@@ -1,7 +1,7 @@
 <?php
 require_once("../db.php");
 require_once("../variables.php");
-
+$cb=array();
 foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
 
 
@@ -30,17 +30,24 @@ id_tienda
 from pedidos where agrupar=$id ORDER BY prov, grupo, subgrupo, codigo;";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){
-$grid[$row['id_tienda']][$row['id_articulo']]['nom']=$row['codbarras'] . " / " .  $row['refprov'];
-$grid[$row['id_tienda']][$row['id_articulo']]['cantidad']=$row['cantidad'];	
-$grid[$row['id_tienda']][$row['id_articulo']]['pvp']=$row['pvp'];	
+$grid2[$row['id_tienda']][$row['id_articulo']]['nom']=$row['codbarras'] . " / " .  $row['refprov'];
+$grid2[$row['id_tienda']][$row['id_articulo']]['cantidad']=$row['cantidad'];	
+$grid2[$row['id_tienda']][$row['id_articulo']]['pvp']=$row['pvp'];	
+
+
+$g=substr($row['codbarras'], 0,1); $sg=substr($row['codbarras'], 1,1); $cod=substr($row['codbarras'],4);
+$cb[$row['id_tienda']][$g][$sg][$cod]=$row['id_articulo'];
+
+
 }
 	
-
-
-
 if (!$dbnivel->close()){die($dbnivel->error());};
 
 
+ksort($cb);
+foreach ($cb as $idt => $gs) {ksort($gs); foreach ($gs as $g => $sgs) { ksort($sgs); foreach ($sgs as $sg => $cods) {ksort($cods); foreach ($cods as $cod => $codb) {
+if(array_key_exists($codb, $grid2[$idt])){$grid[$idt][$codb]=$grid2[$idt][$codb];};
+}}}}
 
 
 function cabecera(){
@@ -64,7 +71,37 @@ $styleArray = array(
       'style' => PHPExcel_Style_Border::BORDER_THIN
     )
   )
+  ,
+  'alignment' => array(
+                                      'wrap'       => true,
+                                      
+                                      'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER
+                                        )
 );
+
+$styleArray2 = array(
+    'font'  => array(
+        'bold'  => true,
+        'size'  => 12
+       
+    ),
+	
+	'alignment' => array(
+                                      'wrap'       => true,
+                                      'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                                      'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER
+                                        )
+	
+	);
+
+
+$styleArray3 = array(
+    'font'  => array(
+        'bold'  => true,
+        'size'  => 10
+       
+    )	
+	);
 
 
 
@@ -73,6 +110,8 @@ $styleArray = array(
 $objPHPExcel->getActiveSheet()->setCellValue('A' . $inifila , "Nº de Reparto: $nomrep");					$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(29);
 $objPHPExcel->getActiveSheet()->setCellValue('E' . $inifila , 'Tienda: ' . $tiendasN[$id_tienda]);		 	$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(29);
 $objPHPExcel->getActiveSheet()->setCellValue('F' . $inifila , 'PAG: ' . $pag);		 						
+$objPHPExcel->getActiveSheet()->getStyle('A' . $inifila . ':G' .$inifila)->applyFromArray($styleArray2);
+
 
 $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(8);
 
@@ -80,7 +119,7 @@ $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(8);
 
 $objPHPExcel->getActiveSheet()->getRowDimension($inifila)->setRowHeight(28);
 $objPHPExcel->getActiveSheet()->getStyle('A' . $inifila . ':G' .$inifila)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::VERTICAL_CENTER);
-$objPHPExcel->getActiveSheet()->getStyle('A' . $inifila . ':G' .$inifila)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+$objPHPExcel->getActiveSheet()->getStyle('A' . $inifila . ':G' .$inifila)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
 $inifila=$inifila+2;
 
@@ -88,7 +127,7 @@ $objPHPExcel->getActiveSheet()->setCellValue('A' . $inifila, 'Artículo');
 $objPHPExcel->getActiveSheet()->setCellValue('B' . $inifila, 'Cant');	  	$objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(5);
 $objPHPExcel->getActiveSheet()->setCellValue('C' . $inifila, 'PVP');		$objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(8);
 $objPHPExcel->getActiveSheet()->getStyle('A' . $inifila . ':C' .$inifila)->applyFromArray(array('fill' => array('type' => PHPExcel_Style_Fill::FILL_SOLID,'color' => array('rgb' => 'CCCCCC')) ));
-$objPHPExcel->getActiveSheet()->getStyle('A' . $inifila . ':C' .$inifila)->getFont()->setSize(7);
+$objPHPExcel->getActiveSheet()->getStyle('A' . $inifila . ':C' .$inifila)->applyFromArray($styleArray3);
 $objPHPExcel->getActiveSheet()->getStyle('A' . $inifila . ':C' .$inifila)->applyFromArray($styleArray);
 
 
@@ -96,11 +135,11 @@ $objPHPExcel->getActiveSheet()->getStyle('A' . $inifila . ':C' .$inifila)->apply
 $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(3);
 
 
-$objPHPExcel->getActiveSheet()->setCellValue('A' . $inifila, 'Artículo');	
+$objPHPExcel->getActiveSheet()->setCellValue('E' . $inifila, 'Artículo');	
 $objPHPExcel->getActiveSheet()->setCellValue('F' . $inifila, 'Cant');	  	$objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(5);
 $objPHPExcel->getActiveSheet()->setCellValue('G' . $inifila, 'PVP');		$objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(8);
 $objPHPExcel->getActiveSheet()->getStyle('E' . $inifila . ':G' .$inifila)->applyFromArray(array('fill' => array('type' => PHPExcel_Style_Fill::FILL_SOLID,'color' => array('rgb' => 'CCCCCC')) ));
-$objPHPExcel->getActiveSheet()->getStyle('E' . $inifila . ':G' .$inifila)->getFont()->setSize(7);
+$objPHPExcel->getActiveSheet()->getStyle('E' . $inifila . ':G' .$inifila)->applyFromArray($styleArray3);
 $objPHPExcel->getActiveSheet()->getStyle('E' . $inifila . ':G' .$inifila)->applyFromArray($styleArray);
 
 

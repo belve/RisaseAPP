@@ -21,7 +21,7 @@ $fecha=date('d') . date('m') . date('Y');
 
 $fechaBD=date('Y') . "-" . date('m')  . "-" . date('d');
 
-$hora=date('H') . date('i') . date('s');
+$hora=date('H') . date('i');
 
 $html="";
 if (!$dbnivel->open()){die($dbnivel->error());};
@@ -114,7 +114,7 @@ return $html;
 
 function listagrup($tip,$id){
 	
-$count=0;	
+$count=0;	$fila=0;
 global $dbnivel;
 
 $pendientes=array();$html="";
@@ -123,15 +123,31 @@ if (!$dbnivel->open()){die($dbnivel->error());};
 $queryp= "SELECT id_articulo, sum(cantidad) as rep, 
 (select codbarras from articulos where articulos.id=pedidos.id_articulo) as codbarras, 
 (select refprov from articulos where articulos.id=pedidos.id_articulo) as refprov 
-from pedidos WHERE agrupar='$id' GROUP BY id_articulo ORDER BY grupo, subgrupo, codigo;";
-$dbnivel->query($queryp); $fila=0;
-while ($row = $dbnivel->fetchassoc()){$count++;
-$ref=$row['codbarras'] . " / " . $row['refprov'];
-$rep=$row['rep'];
-$idart=$row['id_articulo'];$fila++;
-$html .=linAr($idart,$ref,$rep,$fila);
+from pedidos WHERE agrupar='$id' GROUP BY id_articulo;";
+$dbnivel->query($queryp); 
+while ($row = $dbnivel->fetchassoc()){
+	
+$idart=$row['id_articulo'];
+$codb=$row['codbarras'];	
+$ref[$idart]=$codb . " / " . $row['refprov'];
+$rep[$idart]=$row['rep'];
+
+
+$g=substr($codb, 0,1); $sg=substr($codb, 1,1); $cod=substr($codb,4);
+$cb[$g][$sg][$cod]=$idart;
+
 }
+
+
 if (!$dbnivel->close()){die($dbnivel->error());};
+
+ksort($cb);
+foreach ($cb as $g => $sgs) {ksort($sgs); foreach ($sgs as $sg => $cods) {ksort($cods); foreach ($cods as $cod => $codb) {
+$fila++;	
+$html .=linAr($codb,$ref[$codb],$rep[$codb],$fila);	
+}}}
+
+
 
 $html .="<INPUT id='maxF' type='hidden' value='$count'>";
 
@@ -152,15 +168,27 @@ $queryp= "SELECT id_articulo, sum(cantidad) as rep,
 (select refprov from articulos where articulos.id=pedidos.id_articulo) as refprov 
 from pedidos WHERE tip=$tip AND estado='-' AND (agrupar='' or agrupar IS NULL) GROUP BY id_articulo ORDER BY grupo, subgrupo, codigo;";
 $dbnivel->query($queryp);$fila=0; 
-while ($row = $dbnivel->fetchassoc()){$count++;
-$ref=$row['codbarras'] . " / " . $row['refprov'];
-$rep=$row['rep'];
-$idart=$row['id_articulo'];$fila++;
+while ($row = $dbnivel->fetchassoc()){
+	
+$idart=$row['id_articulo'];
+$codb=$row['codbarras'];	
+$ref[$idart]=$codb . " / " . $row['refprov'];
+$rep[$idart]=$row['rep'];
 
-$html .=linAr($idart,$ref,$rep,$fila);
+
+$g=substr($codb, 0,1); $sg=substr($codb, 1,1); $cod=substr($codb,4);
+$cb[$g][$sg][$cod]=$idart;
 
 	
 };
+
+
+ksort($cb);
+foreach ($cb as $g => $sgs) {ksort($sgs); foreach ($sgs as $sg => $cods) {ksort($cods); foreach ($cods as $cod => $codb) {
+$fila++;	
+$html .=linAr($codb,$ref[$codb],$rep[$codb],$fila);	
+}}}
+
 
 $html .="<INPUT id='maxF' type='hidden' value='$count'>";
 
@@ -202,7 +230,19 @@ $filtroQ="";
 
 
 if (!$dbnivel->open()){die($dbnivel->error());};	
+
+
+if($filtroQ){
 $queryp= "select id, nombre, estado from agrupedidos where tip=$tip $filtroQ order by estado;";
+}else{
+$m=date('m') - 1;
+if($m <= 9){$m="0" . $m;};	
+$fecham=date('Y') . "-" . $m . "-" . date('d');	
+$queryp= "select id, nombre, estado from agrupedidos where tip=$tip AND fecha >= '$fecham' order by estado, fecha;";	
+}
+
+
+
 $dbnivel->query($queryp);
 
 while ($row = $dbnivel->fetchassoc()){
@@ -215,7 +255,7 @@ if($estado=="E"){$estado="T";};
 $html['filas' . $estado]++;$count=$html['filas' . $estado];
 
 $estado2=$equiestado[$estado];
-$html[$estado][].="<div class='agrup_V2' id='$idagrupado' onclick='selV2agrup(\"$idagrupado|$estado2\")'>$nomagrup</div>";	
+$html[$estado][].="<div class='agrup_V2' id='$idagrupado' onclick='selV2agrup(\"$idagrupado|$estado2\")'><div style='width:110px;'>$nomagrup</div></div>";	
 
 }
 
