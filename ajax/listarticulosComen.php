@@ -75,8 +75,8 @@ substring(codbarras,1,1) as g, substring(codbarras,2,1) as sg , substring(codbar
 from articulos where $options ORDER BY g, sg, cod;";
 
 $listado="";
-
-$dbnivel->query($queryp);$count=1;
+$alerta2="";
+if($options){$dbnivel->query($queryp);$count=1;}else{$alerta2="alert('Debe seleccionar artículos');";}
 while ($row = $dbnivel->fetchassoc()){
 $codbarras=$row['codbarras'];$refprov=$row['refprov'];	
 $congelado=$row['congelado'];	if($congelado==1){$checked="checked";}else{$checked="";};
@@ -113,7 +113,9 @@ if($forsync){SyncModBD($forsync);};
 	parent.document.getElementById('options').value='<?php echo $options; ?>';
 	parent.document.getElementById("timer").style.visibility = "hidden";
 	
+	
 	<?php
+	echo $alerta2;
 	if($alerta){echo "alert('$alerta enviados correctamente')";};
 	?>
 	
