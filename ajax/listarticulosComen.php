@@ -32,7 +32,7 @@ td		{width: 90px; border: 1px  solid #888888; margin:0px;}
 
 
 <?php
-$id_proveedor="";$id_grupo="";$id_subgrupo="";$id_color="";$codigo="";$pvp="";$desde="";$hasta="";$temporada="";$hago="";
+$id_proveedor="";$id_grupo="";$id_subgrupo="";$id_color="";$codigo="";$pvp="";$desde="";$hasta="";$temporada="";$h="";$optionsdo="";$text="";
 
 $detalles="";
 $comentarios="";
@@ -46,7 +46,7 @@ if(count($_GET)>0){
 foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
 require_once("../db.php");
 require_once("../variables.php");
-
+$text=addslashes($text);
 
 if (!$dbnivel->open()){die($dbnivel->error());};
 
@@ -54,16 +54,18 @@ if (!$dbnivel->open()){die($dbnivel->error());};
 $options="";$forsync="";
 require_once("../functions/listador.php");### recupera $options
 
-
-if($hago=='c'){
-$queryp= "UPDATE articulos set congelado=1 where $options;";
+$alerta="";
+if(($h=='c')&&($optionsdo)){
+$queryp= "UPDATE articulos set comentarios='$text' where $optionsdo;";
 $dbnivel->query($queryp);	$forsync=$queryp;
+$alerta="Comentarios";
 }
 
 
-if($hago=='d'){
-$queryp= "UPDATE articulos set congelado=0 where $options;";
+if(($h=='d')&&($optionsdo)){
+$queryp= "UPDATE articulos set detalles='$text' where $optionsdo;";
 $dbnivel->query($queryp);	$forsync=$queryp;
+$alerta="Detalles";
 }
 
 
@@ -80,11 +82,11 @@ $codbarras=$row['codbarras'];$refprov=$row['refprov'];
 $congelado=$row['congelado'];	if($congelado==1){$checked="checked";}else{$checked="";};
 $ide=$row['id'];
 
+
+
 $listado .="
 <tr>
-<td style='width:140px'><input type='text' class='camp_artC_codbar' value='$codbarras'></td>
-<td style='width:45px'><input type='checkbox' $checked id='$ide' onchange='congeIndi($ide);'></td>
-
+<td style='width:140px'><input type='text' class='camp_artC_codbar' value='$codbarras / $refprov'></td>
 </tr>
 	";
 $count++;
@@ -108,23 +110,15 @@ if($forsync){SyncModBD($forsync);};
 </table>
 
 <script>
-
-function congeIndi(id){
-
-if(document.getElementById(id).checked==true){var check=1;}
-if(document.getElementById(id).checked==false){var check=0;}
-
-url = "/ajax/updatefield.php?tabla=articulos&campo=congelado&value=" + check + "&id=" + id;
-$.getJSON(url, function(data) {
-});
+	parent.document.getElementById('options').value='<?php echo $options; ?>';
+	parent.document.getElementById("timer").style.visibility = "hidden";
 	
-}
-
-
-   
-
-parent.document.getElementById("timer").style.visibility = "hidden";
+	<?php
+	if($alerta){echo "alert('$alerta enviados correctamente')";};
+	?>
+	
 </script>
+
 </body>
 </html>
 
