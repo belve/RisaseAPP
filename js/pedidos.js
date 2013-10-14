@@ -142,6 +142,7 @@ if(dblA==0){dblA=1;}else{dblA=0;};
 var doit=dblA;
 }	
 
+
 if(f=='pedipent'){
 if(dblP==0){dblP=1;}else{dblP=0;};	
 var doit=dblP;
@@ -151,6 +152,9 @@ var doit=dblP;
 var iframe = document.getElementById(f);
 var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
 var maxF=innerDoc.getElementById('maxF').value; 
+
+console.log('doit:' + doit);
+console.log('maxF:' + maxF);
 
 var sele="";
 for (var a=1; a <= maxF; a++){

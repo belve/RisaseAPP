@@ -176,6 +176,15 @@ function changefield_mas(value){
 
 
 function create_grid(){
+	
+var i=1; var a=0;
+while (i <= 8){
+if(document.getElementById('1V' + i).value==""){a++;};	
+i++;
+}
+	
+
+if(a==0){	
 var fil=document.getElementById('fil').value;
 fil++;
 document.getElementById('fil').value=fil;
@@ -190,8 +199,12 @@ var fila='<tr><td style="width:122px"><input type="text" class="camp_mas_rpro" 	
  + 'V7"></td><td style="width:45px">	<input type="text" class="camp_mas_pvp" 	value="" id="' + fil
  + 'V8"></td></tr>';
 
+
+
 $('#grid').append(fila);
-	
+}else{
+alert('Debe rellenar todos los campos de la primera fila');	
+}	
 	
 }
 

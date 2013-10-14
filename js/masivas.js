@@ -56,15 +56,15 @@ var d8=innerDoc.getElementById('1V8').value;
 
 
 while (i <= filas)
-  {
-var c1=innerDoc.getElementById(i + 'V1').value;	 if(c1==""){c1=d1; innerDoc.getElementById(i + 'V1').value=c1;} 
-var c2=innerDoc.getElementById(i + 'V2').value;	 if(c2==""){c2=d2; innerDoc.getElementById(i + 'V2').value=c2;}
-var c3=innerDoc.getElementById(i + 'V3').value;	 if(c3==""){c3=d3; innerDoc.getElementById(i + 'V3').value=c3;}
-var c4=innerDoc.getElementById(i + 'V4').value;	 if(c4==""){c4=d4; innerDoc.getElementById(i + 'V4').value=c4;}
-var c5=innerDoc.getElementById(i + 'V5').value;	 if(c5==""){c5=d5; innerDoc.getElementById(i + 'V5').value=c5;}
-var c6=innerDoc.getElementById(i + 'V6').value;	 if(c6==""){c6=d6; innerDoc.getElementById(i + 'V6').value=c6;}
-var c7=innerDoc.getElementById(i + 'V7').value;	 if(c7==""){c7=d7; innerDoc.getElementById(i + 'V7').value=c7;}
-var c8=innerDoc.getElementById(i + 'V8').value;	 if(c8==""){c8=d8; innerDoc.getElementById(i + 'V8').value=c8;}
+  {var a=0;
+var c1=innerDoc.getElementById(i + 'V1').value;	 if(c1==""){c1=d1; innerDoc.getElementById(i + 'V1').value=c1;a++;} 
+var c2=innerDoc.getElementById(i + 'V2').value;	 if(c2==""){c2=d2; innerDoc.getElementById(i + 'V2').value=c2;a++;}
+var c3=innerDoc.getElementById(i + 'V3').value;	 if(c3==""){c3=d3; innerDoc.getElementById(i + 'V3').value=c3;a++;}
+var c4=innerDoc.getElementById(i + 'V4').value;	 if(c4==""){c4=d4; innerDoc.getElementById(i + 'V4').value=c4;a++;}
+var c5=innerDoc.getElementById(i + 'V5').value;	 if(c5==""){c5=d5; innerDoc.getElementById(i + 'V5').value=c5;a++;}
+var c6=innerDoc.getElementById(i + 'V6').value;	 if(c6==""){c6=d6; innerDoc.getElementById(i + 'V6').value=c6;a++;}
+var c7=innerDoc.getElementById(i + 'V7').value;	 if(c7==""){c7=d7; innerDoc.getElementById(i + 'V7').value=c7;a++;}
+var c8=innerDoc.getElementById(i + 'V8').value;	 if(c8==""){c8=d8; innerDoc.getElementById(i + 'V8').value=c8;a++;}
 
 var url='/ajax/crate_art_grid.php?id_proveedor=' + idpro + 
 '&repro=' + c1 + 
@@ -82,6 +82,7 @@ var url='/ajax/crate_art_grid.php?id_proveedor=' + idpro +
 
 var aimpr=(c5*1) + 1;
 
+if(a < 8){
 $.getJSON(url, function(data) {
 $.each(data, function(key, val) {
 
@@ -91,6 +92,17 @@ innerDoc2.getElementById('codbarras').innerHTML=contenido + '<div style="float:l
  
 });
 });
+}else{
+
+innerDoc.getElementById(i + 'V1').value="";
+innerDoc.getElementById(i + 'V2').value="";
+innerDoc.getElementById(i + 'V3').value="";
+innerDoc.getElementById(i + 'V4').value="";
+innerDoc.getElementById(i + 'V5').value="";
+innerDoc.getElementById(i + 'V6').value="";
+innerDoc.getElementById(i + 'V7').value="";
+innerDoc.getElementById(i + 'V8').value="";	
+}
 
 i++;
   }	
