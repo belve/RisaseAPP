@@ -120,7 +120,7 @@ $objPHPExcel->createSheet();
 $objPHPExcel->setActiveSheetIndex($count);
 
 $objPHPExcel->getActiveSheet()->setTitle('ROTURAS');
-$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(37);
+$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(30);
 $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(4);
 $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(4);
 $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(4);
@@ -128,7 +128,7 @@ $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(4);
 $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(4);
 
 
-$objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(37);
+$objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(30);
 $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(4);
 $objPHPExcel->getActiveSheet()->getColumnDimension('H')->setWidth(4);
 $objPHPExcel->getActiveSheet()->getColumnDimension('I')->setWidth(4);
@@ -168,6 +168,7 @@ if(count($grid)>0){
 			$objPHPExcel->getActiveSheet()->setCellValue($cols[$column]['D'] . $lin, 'Real');
 			$objPHPExcel->getActiveSheet()->getStyle($cols[$column]['A'] . $lin . ":" . $cols[$column]['D'] . $lin)->getFont()->setSize(7);
 			$objPHPExcel->getActiveSheet()->getStyle($cols[$column]['A'] . $lin . ":" . $cols[$column]['D'] . $lin)->applyFromArray($styleArray);
+			
 			$lin++;	$cont++;
 				
 			
@@ -181,6 +182,7 @@ if(count($grid)>0){
 		$objPHPExcel->getActiveSheet()->getStyle($cols[$column]['B'] . $lin . ":" . $cols[$column]['D'] . $lin)->getFont()->setSize(11);
 		$objPHPExcel->getActiveSheet()->getStyle($cols[$column]['A'] . $lin )->getFont()->setSize(9);
 		$objPHPExcel->getActiveSheet()->getStyle($cols[$column]['A'] . $lin . ":" . $cols[$column]['D'] . $lin)->applyFromArray($styleArray);
+		$objPHPExcel->getActiveSheet()->getStyle($cols[$column]['A'] . $lin)->getAlignment()->setWrapText(false); 
 		$lin++;	$cont++;	
 		}}
 

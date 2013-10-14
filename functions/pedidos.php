@@ -30,11 +30,18 @@ if (!$dbnivel->open()){die($dbnivel->error());};
 if($agrupar){
 
 if($tip==1){
-$queryp= "SELECT distinct(prov) as nprov, 
+$idsagrup=array();	
+$queryp= "select id_articulo, 
+(select id_proveedor from articulos where id=id_articulo) as nprov, 
 (select nomcorto from proveedores where id=nprov) as nomcorto 
-from pedidos WHERE tip=$tip AND estado='-' AND (agrupar='' or agrupar IS NULL) GROUP BY id_articulo ORDER BY prov, grupo, subgrupo, codigo;";
+from pedidos WHERE tip=$tip AND estado='-' AND (agrupar='' or agrupar IS NULL) GROUP BY id_articulo;";
 $dbnivel->query($queryp); 
-while ($row = $dbnivel->fetchassoc()){$agrupaciones[$row['nprov']]=$row['nomcorto'] . "-" . $fecha;}
+while ($row = $dbnivel->fetchassoc()){
+	$agrupaciones[$row['nprov']]=$row['nomcorto'] . "-" . $fecha;
+	if(array_key_exists($row['nprov'], $idsagrup)){$idsagrup[$row['nprov']] .=$row['id_articulo'] . ",";}else{$idsagrup[$row['nprov']]=$row['id_articulo'] . ",";};
+}
+
+
 }
 
 if($tip==2){
@@ -76,7 +83,10 @@ while ($row = $dbnivel->fetchassoc()){$idagrup=$row['id'];};
 }
 
 if($tip==1){
-$queryp="update pedidos set agrupar='$idagrup' where prov=$idpr AND tip=$tip AND estado='-' AND (agrupar='' or agrupar IS NULL);";	
+		
+$idsdonde=$idsagrup[$idpr];	
+$idsdonde=substr($idsdonde, 0,-1);
+$queryp="update pedidos set agrupar='$idagrup' where id_articulo IN ($idsdonde) AND tip=$tip AND estado='-' AND (agrupar='' or agrupar IS NULL);";	
 }
 if($tip==2){
 $queryp="update pedidos set agrupar='$idagrup' where id_tienda=$idpr AND tip=$tip AND estado='-' AND (agrupar='' or agrupar IS NULL);";	

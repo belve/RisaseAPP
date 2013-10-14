@@ -202,13 +202,15 @@ $inifila++;$countfil++;
 	
 
 $amount=$valores['pvp'] * 1;
-$objPHPExcel->getActiveSheet()->setCellValue($A[$parimpar] . $inifila, $valores['nom']);	
+$objPHPExcel->getActiveSheet()->setCellValue($A[$parimpar] . $inifila, $valores['nom']);
+	
 $objPHPExcel->getActiveSheet()->setCellValue($B[$parimpar] . $inifila, $valores['cantidad']);	  
 $objPHPExcel->getActiveSheet()->setCellValue($C[$parimpar] . $inifila, $amount);						
 
 $objPHPExcel->getActiveSheet()->getStyle($A[$parimpar] . $inifila . ":" . $C[$parimpar] . $inifila)->getFont()->setSize(10);
 $objPHPExcel->getActiveSheet()->getStyle($A[$parimpar] . $inifila . ":" . $C[$parimpar] . $inifila)->applyFromArray($styleArray);
 $objPHPExcel->getActiveSheet()->getStyle($C[$parimpar] . $inifila)->getNumberFormat()->setFormatCode('0.00');
+$objPHPExcel->getActiveSheet()->getStyle($A[$parimpar] . $inifila)->getAlignment()->setWrapText(false); 
 
 	
 	

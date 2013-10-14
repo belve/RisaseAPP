@@ -80,7 +80,7 @@ $grid2[$row['id_articulo']][$row['id_tienda']]['cantidad']=$row['cantidad'];
 $grid2[$row['id_articulo']][$row['id_tienda']]['estado']=$row['estado'];	
 
 $g=substr($row['codbarras'], 0,1); $sg=substr($row['codbarras'], 1,1); $cod=substr($row['codbarras'],4);
-$cb[$row['id_tienda']][$g][$sg][$cod]=$row['id_articulo'];
+$cb[$g][$sg][$cod][$row['id_tienda']]=$row['id_articulo'];
 
 }
 	
@@ -90,7 +90,7 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 
 
 ksort($cb);
-foreach ($cb as $idt => $gs) {ksort($gs); foreach ($gs as $g => $sgs) { ksort($sgs); foreach ($sgs as $sg => $cods) {ksort($cods); foreach ($cods as $cod => $codb) {
+foreach ($cb as $g => $sgs) { ksort($sgs); foreach ($sgs as $sg => $cods) {ksort($cods); foreach ($cods as $cod => $codbs) {ksort($codbs); foreach ($codbs as $idt => $codb) {
 if(array_key_exists($idt, $grid2[$codb])){$grid[$codb][$idt]=$grid2[$codb][$idt];};
 }}}}
 
@@ -239,6 +239,7 @@ $stock=$datos[$idarticulo]['stok'];
 $objPHPExcel->getActiveSheet()->getStyle('A' . $count . ':' . $ultColu . $count)->applyFromArray($styleArray);
 
 $objPHPExcel->getActiveSheet()->setCellValue('A' . $count, $prov);
+$objPHPExcel->getActiveSheet()->getStyle('A' . $count)->getAlignment()->setWrapText(false); 
 $objPHPExcel->getActiveSheet()->setCellValue('C' . $count, $stock);
 $rango="A" . $count . ":C" . $count;
 
