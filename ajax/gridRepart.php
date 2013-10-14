@@ -1,7 +1,7 @@
 <?php
 set_time_limit(0);
 
-$listador="";
+$listador="";$comentarios="";$detalles="";
 foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
 require_once("../db.php");
 require_once("../variables.php");require_once("../functions/gridreparto.php");
@@ -17,7 +17,7 @@ if (!$dbnivel->open()){die($dbnivel->error());};
 
 if($listador==1){
 $options="";
-$comentarios="";$detalles="";$tab=1;$ord=1;
+$tab=1;$ord=1;
 require_once("../functions/listador.php"); 
 $quer2= "select id from articulos where $options;";	
 }
@@ -29,7 +29,6 @@ $quer2= "select distinct id_articulo as id from pedidos where tip=1 AND (estado=
 }else{
 $quer2= "select id from articulos where codbarras=$codbarras;";
 }
-
 
 
 $dtiendas=array();

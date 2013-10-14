@@ -268,6 +268,8 @@ var pvp=document.getElementById(7).value
 var desd=document.getElementById(8).value
 var hast=document.getElementById(9).value
 var temp=document.getElementById(10).value
+var detalles=document.getElementById(11).value
+var comentarios=document.getElementById(12).value
 	
 url = "/ajax/gridRepart.php?id_proveedor=" + prov
  + "&id_grupo=" + grup
@@ -278,6 +280,8 @@ url = "/ajax/gridRepart.php?id_proveedor=" + prov
  + "&desde=" + desd
  + "&hasta=" + hast
  + "&temporada=" + temp
+ + "&comentarios=" + comentarios
+ + "&detalles=" + detalles
  + '&ultifila=' + filas
  + '&listador=1'; 
 

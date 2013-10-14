@@ -104,7 +104,10 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 <div>Temp: <input  style="margin-left:6px;"class="medio" type="text" id="10" /></div>
 </div>	
 
-
+<div style="float:left;margin-right: 10px;">
+<div>Det: <input  style="margin-left:11px; width: 120px;"class="medio" type="text" id="11" /></div>
+<div>Com: <input  style="margin-left:4px; width: 120px;"class="medio" type="text" id="12" /></div>
+</div>	
 
 
 

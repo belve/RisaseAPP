@@ -98,6 +98,8 @@ var pvp=document.getElementById(h + '7').value
 var desd=document.getElementById(h + '8').value
 var hast=document.getElementById(h + '9').value
 var temp=document.getElementById(h + '10').value
+var detalles=document.getElementById(h + '11').value
+var comentarios=document.getElementById(h + '12').value
 
 if(hago=='l'){
 document.getElementById('h2').value=prov
@@ -109,6 +111,8 @@ document.getElementById('h7').value=pvp
 document.getElementById('h8').value=desd
 document.getElementById('h9').value=hast
 document.getElementById('h10').value=temp
+document.getElementById('h11').value=detalles
+document.getElementById('h12').value=comentarios
 }
 
 
@@ -121,6 +125,8 @@ url = "/ajax/addartFSTOCK.php?hago=" + hago + "&id_proveedor=" + prov
  + "&pvp=" + pvp
  + "&desde=" + desd
  + "&hasta=" + hast
+ + "&comentarios=" + comentarios
+ + "&detalles=" + detalles
  + "&temporada=" + temp;
 
 var yalist="";// window.top.listArts.toString();
@@ -143,6 +149,8 @@ document.getElementById('h7').value='';
 document.getElementById('h8').value='';
 document.getElementById('h9').value='';
 document.getElementById('h10').value='';
+document.getElementById('h11').value='';
+document.getElementById('h12').value='';
 
 document.getElementById('2').value='';
 document.getElementById('3').value='';
@@ -153,6 +161,8 @@ document.getElementById('7').value='';
 document.getElementById('8').value='';
 document.getElementById('9').value='';
 document.getElementById('10').value='';
+document.getElementById('11').value='';
+document.getElementById('12').value='';
 	
 }
   
@@ -170,7 +180,8 @@ document.getElementById('10').value='';
 <input type="hidden" value="" id="h8" />
 <input type="hidden" value="" id="h9" />
 <input type="hidden" value="" id="h10" />
-
+<input type="hidden" value="" id="h11" />
+<input type="hidden" value="" id="h12" />
 
 
 
@@ -237,6 +248,15 @@ document.getElementById('10').value='';
 			<td><input class="corto" type="text" id="10" /></td>
 		</tr>
 		
+		<tr>
+			<td>Detalles</td>
+			<td><input class="medio" type="text" id="11" /></td>
+		</tr>
+		
+		<tr>
+			<td>Comentarios</td>
+			<td><input class="medio" type="text" id="12" /></td>
+		</tr>
 	</table>
 	
 	

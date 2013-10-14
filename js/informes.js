@@ -13,6 +13,8 @@ var pvp=document.getElementById(7).value
 var desd=document.getElementById(8).value
 var hast=document.getElementById(9).value
 var temp=document.getElementById(10).value
+var detalles=document.getElementById(11).value
+var comentarios=document.getElementById(12).value
 
 var fini=document.getElementById('fini').value
 var ffin=document.getElementById('ffin').value
@@ -56,6 +58,8 @@ url = url
  + "&desde=" + desd
  + "&hasta=" + hast
  + "&temporada=" + temp 
+ + "&comentarios=" + comentarios
+ + "&detalles=" + detalles
  + "&fini=" + fini 
  + "&ffin=" + ffin 
  + "&act=" + act 

@@ -12,6 +12,8 @@ var pvp=document.getElementById(7).value
 var desd=document.getElementById(8).value
 var hast=document.getElementById(9).value
 var temp=document.getElementById(10).value;
+var detalles=document.getElementById(11).value
+var comentarios=document.getElementById(12).value
 
 var fijCHK=window.top.solofij;
 
@@ -24,7 +26,8 @@ document.getElementById(7).value="";
 document.getElementById(8).value="";
 document.getElementById(9).value="";
 document.getElementById(10).value="";
-	
+document.getElementById(11).value="";
+document.getElementById(12).value="";	
 
 
 	
@@ -36,6 +39,8 @@ url = "/ajax/addARTfPVP.php?id_proveedor=" + prov
  + "&pvp=" + pvp
  + "&desde=" + desd
  + "&hasta=" + hast
+ + "&comentarios=" + comentarios
+ + "&detalles=" + detalles
  + "&fijCHK=" + fijCHK
  + "&temporada=" + temp
 

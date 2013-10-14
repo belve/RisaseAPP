@@ -66,8 +66,8 @@ $ide=$row['id'];
 
 $listado .="
 <tr>
-<td style='width:79px'><input type='text' class='camp_art_codbar' value='$codbarras'></td>
-<td style='width:114px'><input type='text' class='camp_art_rpro' value='$refprov'></td>
+<td style='width:79px'><input type='text' class='camp_art_codbar' value='$codbarras' readonly></td>
+<td style='width:114px'><input type='text' class='camp_art_rpro' value='$refprov' readonly></td>
 <td style='width:45px'><input type='text' class='camp_art_stock' value='$stock' onchange=\"modifield('articulos','stock','0V$count','$ide')\" id='0V$count'></td>
 
 
