@@ -42,10 +42,10 @@ $precioC=str_replace(',','.',$precioC);
 $pvp=str_replace(',','.',$pvp);
 
 if($dto1>0){$dto1=$precioC / (100/$dto1);};
-if($dto2>0){$dto2=$precioC / (100/$dto1);};
+if($dto2>0){$dto2=$precioC / (100/$dto2);};
 
 $precioN= ($precioC - $dto1 -$dto2) * ('1.' . $iva);
-$precioF= ($precioC - $dto1 -$dto2)  * 1.20 * ('1.' . $iva);
+$precioF= $precioN * 1.20;
 
 $queryp= "INSERT INTO articulos 
 (id,id_proveedor,id_subgrupo,id_color,codigo,refprov,stock,uniminimas,codbarras,temporada,preciocosto,precioneto,preciofran,pvp,congelado,stockini) 

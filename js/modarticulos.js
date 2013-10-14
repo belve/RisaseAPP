@@ -52,8 +52,8 @@ var costo=document.getElementById('13').value;
 var dto1=document.getElementById('6').value
 var dto2=document.getElementById('7').value
 
-var neto=(costo - (costo / (100/dto1)) - (costo / (100/dto2))) ;
-var fran=neto * iva;
+var neto=(costo - (costo / (100/dto1)) - (costo / (100/dto2))) * iva;
+var fran=neto * (1.20);
 
 var neto=Math.round(neto*100)/100
 var fran=Math.round(fran*100)/100
