@@ -159,7 +159,7 @@ $html .=linAr($codb,$ref[$codb],$rep[$codb],$fila);
 
 
 
-$html .="<INPUT id='maxF' type='hidden' value='$count'>";
+$html .="<INPUT id='maxF' type='hidden' value='$fila'>";
 
 return $html;		
 }
@@ -200,7 +200,7 @@ $html .=linAr($codb,$ref[$codb],$rep[$codb],$fila);
 }}}
 
 
-$html .="<INPUT id='maxF' type='hidden' value='$count'>";
+$html .="<INPUT id='maxF' type='hidden' value='$fila'>";
 
 if (!$dbnivel->close()){die($dbnivel->error());};
 
