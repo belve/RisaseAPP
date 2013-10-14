@@ -140,7 +140,7 @@ if(count($grid)>0){
 
 		
 	foreach ($grid as $grupo => $datos){foreach ($datos as $articulo => $cantidad){
-		if($cont>=43){
+		if($cont>=39){
 		if($column==2){	
 		$cont=1;$lastgroup="";$pag++;$column=1;
 		$objPHPExcel->getActiveSheet()->setBreak( 'A' . $lin , PHPExcel_Worksheet::BREAK_ROW );	
