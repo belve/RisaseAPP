@@ -15,6 +15,7 @@ while ($row = $dbnivel->fetchassoc()){$count++;
 	$tiendas[$idttt]=$nidtienda;
 	$tiendasN[$idttt]=$row['nombre'];
 	$EQtiendas[$count]=$idttt;
+	$EQtiendas2[$idttt]=$count;
 };
 
 if (!$dbnivel->close()){die($dbnivel->error());};

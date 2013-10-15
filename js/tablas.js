@@ -220,6 +220,7 @@ innerDoc.getElementById('idrep').value="";
 innerDoc.getElementById('filas').value="";
 innerDoc.getElementById('LinCOP').value="";
 
+
 document.getElementById(2).value='';
 document.getElementById(3).value='';
 document.getElementById(4).value='';
@@ -229,7 +230,7 @@ document.getElementById(7).value='';
 document.getElementById(8).value='';
 document.getElementById(9).value='';
 document.getElementById(10).value='';
-
+document.getElementById('art').value="";
 foc();
 	
 }
@@ -387,15 +388,24 @@ var val=document.getElementById(i).value;
 
 var CR=document.getElementById('CR'+fila);
 var CA=document.getElementById('CA'+fila);
-var stock=document.getElementById('Stock'+fila).value;
-var stock2=CA.value;
+//var stock=document.getElementById('Stock'+fila).value;
+//var stock2=CA.value;
 var ncol=document.getElementById('columnas').value;
 
 var a=0; var rep=0;
+var tsel=document.getElementById('ltsel-'+ fila).value; 	console.log('tsel:'+tsel);
 while (a < ncol){a++;
+	
+var ttti="," + a + ","; 								console.log('ttti:'+ttti);
+var ntsel=tsel.replace(ttti,'');
+
+if(tsel.length == ntsel.length){
 if(document.getElementById('CI'+ fila + 'P' + a)){
 var rep=rep + ((document.getElementById('CI'+ fila + 'P' + a).value) *1);	
-}
+}}
+
+
+
 }
 
 
@@ -413,10 +423,17 @@ var url='/ajax/updatedetreparto.php?iddetr=' +iddet + '&alarma=' + alar + '&idar
 
 
 if(part=='C'){
-var newalmacen=document.getElementById('sumatorio'+ fila).value;
-var newalmacen=newalmacen - rep;	
+
+var newalmacen=document.getElementById('sumatorio'+ fila).value; 
+newalmacen=Number(newalmacen);
+rep=Number(rep);
+console.log('newalmacen:'+newalmacen + ' rep:' + rep);
+var newalmacen=newalmacen - rep;	console.log('newalmacen:'+newalmacen);
 CR.value=rep;
 CA.value=newalmacen;
+//document.getElementById('sumatorio'+ fila).value=newalmacen;
+
+
 
 if(val==1){newAL=0;}else{
 var newAL=Math.round((val/100)*alarma);
@@ -430,7 +447,7 @@ var iddet=	document.getElementById('BI'+ fila + 'P' + columna).value;
 var idrept=	document.getElementById('idrep').value;
 var idarti=	document.getElementById('idarti'+ fila).value;
 
-var url='/ajax/updatedetreparto.php?iddetr=' +iddet + '&cant=' + val + '&alarma=' + alar + '&idrept=' + idrept + '&columna=' + columna + '&idarti=' + idarti + '&stock=' + newalmacen;
+var url='/ajax/updatedetreparto.php?iddetr=' +iddet + '&cant=' + val + '&alarma=' + alar + '&idrept=' + idrept + '&columna=' + columna + '&idarti=' + idarti;
 }
 
 

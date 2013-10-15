@@ -14,8 +14,14 @@ foreach ($dart as $ida => $vdart) {
 if(array_key_exists($ida,$grid)){$dtiendas=$grid[$ida];}else{$dtiendas=array();};	
 
 
-$codbarras=$dart[$ida]['codbarras'];$refpro=$dart[$ida]['refprov'];$stock=$dart[$ida]['stock'];	
+$codbarras=$dart[$ida]['codbarras'];$refpro=$dart[$ida]['refprov'];$stock=$dart[$ida]['stock'];	$rep=$dart[$ida]['rep'];	
+$stock2=$stock-$rep;
+$tsel=array();$ltsel=",";
+$tsel=$dart[$ida]['tsel'];
 
+if(count($tsel)>0){ foreach ($tsel as $idtie => $pont) {
+$ltsel .="$idtie,";	
+}}
 
 
 if($ida){$lastid++;
@@ -27,9 +33,9 @@ $prov="$codbarras / $refpro";
 $htmlART="
 
 <tr id='trC$lastid'>
-<td style='border-bottom: 1px solid #dddddd;'>											<input id='CART$codbarras' value='$codbarras' type='hidden'>	<input type='text' class='camp_REP_art' value='$prov'></td>
-<td style='width:28px;border-bottom: 1px solid #dddddd;'>								<input id='CR$lastid' onfocus='this.select();' type='text' class='camp_REP_rep' value=''></td>
-<td style='width:28px;border-bottom: 1px solid #dddddd;border-right:2px solid orange;'>	<input id='CA$lastid' onfocus='this.select();' type='text' class='camp_REP_alm' value='$stock'></td>
+<td style='border-bottom: 1px solid #dddddd;'>	<input type='hidden' id='ltsel-$lastid' value='$ltsel'>	<input id='CART$codbarras' value='$codbarras' type='hidden'>	<input type='text' class='camp_REP_art' value='$prov'></td>
+<td style='width:28px;border-bottom: 1px solid #dddddd;'>								<input id='CR$lastid' onfocus='this.select();' type='text' class='camp_REP_rep' value='$rep'></td>
+<td style='width:28px;border-bottom: 1px solid #dddddd;border-right:2px solid orange;'>	<input id='CA$lastid' onfocus='this.select();' type='text' class='camp_REP_alm' value='$stock2'></td>
 
 ";
 
@@ -64,7 +70,7 @@ $idrep="";
 $sumcants=$sumcants+$canttienda;
 
 if($idti==$numtiendastot){$suma=$stock+$sumcants; 
-$sumatorio="<input type='hidden' id='sumatorio$lastid' value='$suma'>";
+$sumatorio="<input type='hidden' id='sumatorio$lastid' value='$stock'>";
 $selector="<td style='width:13px;border:1px solid #C8C8C8;background-color:#C8C8C8;'><div id='F$lastid' onclick=\"selectFile('$lastid')\" class='selector'></div></td>";
 $selector2="<td style='width:13px;border:1px solid #C8C8C8;background-color:#C8C8C8;'></td>";
 }else{$sumatorio="";$selector="";$selector2="";};	
