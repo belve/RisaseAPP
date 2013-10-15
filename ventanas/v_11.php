@@ -120,8 +120,11 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 
 <div id="copiar" style="visibility: hidden;" class="copipaste" >							<div onclick="copiarLIN()" 	class="boton" style="width:100px;float:left;margin:5px 5px 0px 0px;">Copiar</div></div>
 
-<div id="pegar"  style="visibility: hidden;">
+<div id="cancelar"  style="visibility: hidden;">
 	<div onclick="CancelCopy()" 	class="boton" style="width:100px;float:left;margin:5px 5px 0px 0px;">Cancelar copia</div>
+</div>
+
+<div id="pegar"  style="visibility: hidden;">
 	<div onclick="pegarLIN()"	class="boton" style="width:100px;float:left;margin:5px 5px 0px 0px;">Pegar</div>
 </div>
 
@@ -145,7 +148,7 @@ echo "<div onclick='sumatienda($postiendas,\"$nomt\")' class='cabtab_REP tab_REP
 }
 
 ?>
-
+<div class="selector2" onclick="sellFilReA()" id="slAll"></div>
 	
 </div>
 <iframe id="repartos" src="/ajax/repartos.php" width="992" height="480" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
@@ -155,6 +158,10 @@ echo "<div onclick='sumatienda($postiendas,\"$nomt\")' class='cabtab_REP tab_REP
 
 <div class="timer" id="timer" style="visibility: hidden; left: 47%; top:50%;"><img src="/iconos/loading1.gif"></div>
 
+<script>
+	window.top.modocopi=0;
+	window.top.sellFilReA=0;
+</script>
 
 </body>
 </html>

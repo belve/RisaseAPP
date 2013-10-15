@@ -575,14 +575,20 @@ innerDoc.getElementById('CR' + Afilsel[i]).value=repartidas;
 innerDoc.getElementById('LinCOP').value="";	
 innerDoc.getElementById('filsel').value="";
 document.getElementById('pegar').setAttribute("style", "visibility:hidden;");
+document.getElementById('cancelar').setAttribute("style", "visibility:hidden;");
 timer(0);	
+window.top.modocopi=0;	window.top.sellFilReA=1;sellFilReA();
+
 }
 
 function CancelCopy(){
+window.top.modocopi=0;	
 var iframe = document.getElementById('repartos');
 var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
 innerDoc.getElementById('LinCOP').value="";	
 document.getElementById('pegar').setAttribute("style", "visibility:hidden;");
+document.getElementById('cancelar').setAttribute("style", "visibility:hidden;");
+document.getElementById('copiar').setAttribute("style", "visibility:hidden;");
 
 var filsel=innerDoc.getElementById('filsel').value;
 var Afilsel=filsel.split(',');	
@@ -615,8 +621,9 @@ innerDoc.getElementById('filsel').value="";
 
 function copiarLIN(){
 
+window.top.modocopi=1;
 document.getElementById('copiar').setAttribute("style", "visibility:hidden;");
-document.getElementById('pegar').setAttribute("style", "visibility:visible;");
+document.getElementById('cancelar').setAttribute("style", "visibility:visible;");
 document.getElementById('dfsel').setAttribute("style", "visibility:hidden;");
 
 var iframe = document.getElementById('repartos');
@@ -630,6 +637,62 @@ innerDoc.getElementById('trA' + LinCOP).setAttribute("style", "background-color:
 innerDoc.getElementById('LinCOP').value=LinCOP;
 innerDoc.getElementById('filsel').value='';		
 }
+
+
+
+
+
+function sellFilReA(){
+
+
+var est=window.top.sellFilReA;
+if(est==0){est=1;}else{est=0;};	window.top.sellFilReA=est;
+
+
+
+var iframe = document.getElementById('repartos');
+var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+var LinCOP=innerDoc.getElementById('filsel').value;	
+var filas=innerDoc.getElementById('filas').value;	
+var filsel="";
+
+
+for (var i = 1; i <= filas; i++) {
+filsel=filsel + i + ',';	
+
+
+
+if(est==1){
+innerDoc.getElementById('F' + i).setAttribute("style", "background-color:#CBE9FE;");
+innerDoc.getElementById('trC' + i).setAttribute("style", "background-color:#CBE9FE;");
+innerDoc.getElementById('trA' + i).setAttribute("style", "background-color:#CBE9FE;");
+}else{
+innerDoc.getElementById('F' + i).setAttribute("style", "background-color:white;");
+innerDoc.getElementById('trC' + i).setAttribute("style", "background-color:white;");
+innerDoc.getElementById('trA' + i).setAttribute("style", "background-color:white;");	
+}
+
+}
+filsel=filsel.substr(0,(filsel.length)-1);
+if(est==0){
+	filsel="";
+	document.getElementById('slAll').setAttribute("style", "background-color:white;");
+	}else{
+	document.getElementById('slAll').setAttribute("style", "background-color:#CBE9FE;");	
+	}
+innerDoc.getElementById('filsel').value=filsel;
+
+
+if ((filsel.length>0) && (window.top.modocopi==1)){document.getElementById('pegar').setAttribute("style", "visibility:visible;");};
+if ((filsel.length==0) && (window.top.modocopi==1)){document.getElementById('pegar').setAttribute("style", "visibility:hidden;");};
+
+	
+}
+
+
+
+
+
 
 function selectFile(file){
 	
@@ -676,7 +739,7 @@ document.getElementById('filsel').value=filsel;
 var Afilsel=new Array;
 var Afilsel=filsel.split(',');	
 var fsN=Afilsel.length;
-
+if (filsel==""){fsN=0;};
 LinCOP=LinCOP.replace(/^\s+/g,'').replace(/\s+$/g,'');
 var LC=LinCOP.length;
 
@@ -684,6 +747,8 @@ console.log('filsel:' + filsel);
 console.log('LC:' + LC);
 console.log('fsN:' + fsN);
 
+if ((fsN>0) && (window.top.modocopi==1)){parent.document.getElementById('pegar').setAttribute("style", "visibility:visible;");};
+if ((fsN==0) && (window.top.modocopi==1)){parent.document.getElementById('pegar').setAttribute("style", "visibility:hidden;");};
 
 if 			((fsN>0)||(LC>0)){parent.document.getElementById('dfsel').setAttribute("style", "visibility:hidden;");};
 if 			((fsN>0)&&(LC==0)){parent.document.getElementById('dfsel').setAttribute("style", "visibility:visible;");};
