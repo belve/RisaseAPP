@@ -1,4 +1,5 @@
 <?php
+$nodet="";
 foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
 require_once("../db.php");
 require_once("../variables.php");
@@ -78,8 +79,13 @@ $files[]=$codi;
 	
 }}
 
+$files2['img']=$files;
+$files2['cod']=$codigos;
 
-echo json_encode($files);
-
+if($nodet){
+echo json_encode($files);	
+}else{
+echo json_encode($files2);
+}
 
 ?>
