@@ -49,14 +49,26 @@ $listcodb .=",$nwc";
 
 
 
-
+$cord=array();
 $queryp= "select codbarras from articulos where refprov like '%$provsin' AND codbarras like '$grup%' AND codbarras NOT IN ($listcodb);";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){
+	
 $codigos[$row['codbarras']]=1;
+
+$cd=$row['codbarras'];
+$g=substr($cd,0,1);$sg=substr($cd,1,1);$c=substr($cd,4);
+$cord[$g][$sg][$c]=$cd;
+
 
 };
 																												if($debug){echo $queryp; echo "<br><br>" ; print_r($codigos); echo " <br><br>";};
+
+
+if(count($cord)>0){
+ksort($cord);foreach ($cord as $gu => $subs) {ksort($subs);foreach ($subs as $sb => $ccs)	{ksort($ccs); foreach ($ccs as $cd => $codbar) {
+$cdg[$codbar]=1;	
+}}}}
 
 
 
@@ -80,7 +92,7 @@ $files[]=$codi;
 }}
 
 $files2['img']=$files;
-$files2['cod']=$codigos;
+$files2['cod']=$cdg;
 
 if($nodet){
 echo json_encode($files);	

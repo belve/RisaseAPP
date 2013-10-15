@@ -32,7 +32,7 @@ document.getElementById('cod').select();
 
 function cargafoto(id){
 document.getElementById('foto').src='http://192.168.1.11/photos/nodisp.jpg';	
-url = "/ajax/getimage.php?codbarras=" + id;
+url = "/ajax/getimage.php?nodet=1&codbarras=" + id;
 $.getJSON(url, function(data) {
 $.each(data, function(key, val) {
 val=val.replace('c:/D/fotos/','');	
