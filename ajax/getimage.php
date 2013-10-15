@@ -64,7 +64,9 @@ $cord[$g][$sg][$c]=$cd;
 };
 																												if($debug){echo $queryp; echo "<br><br>" ; print_r($codigos); echo " <br><br>";};
 
+print_r($cord);
 
+$cdg=array();
 if(count($cord)>0){
 ksort($cord);foreach ($cord as $gu => $subs) {ksort($subs);foreach ($subs as $sb => $ccs)	{ksort($ccs); foreach ($ccs as $cd => $codbar) {
 $cdg[$codbar]=1;	
