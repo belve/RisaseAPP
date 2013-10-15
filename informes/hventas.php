@@ -181,8 +181,8 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 $dbBAK=new DB('192.168.1.11','edu','admin','tpv_backup');
 if (!$dbBAK->open()){die($dbBAK->error());};
 
-if(count($tiends)>0){
-foreach ($tiends as $idt => $value) {
+if(count($tiendas)>0){
+foreach ($tiendas as $idt => $value) {
 	$queryp= "select cod, stock from stocklocal_$idt where cod IN ($cods);";
 	$dbBAK->query($queryp); if($debug){echo "$queryp \n\n";};
 	while ($row = $dbBAK->fetchassoc()){
@@ -196,37 +196,36 @@ if (!$dbBAK->close()){die($dbBAK->error());};
 
 
 $sumc=array();
-foreach ($enviados as $cdba => $value) { foreach ($value as $idt => $cant){
+foreach ($enviados as $cdba => $value) { foreach ($value as $idt => $cant){if(array_key_exists($idt, $tiendas)){
 if(array_key_exists($cdba, $sumc)){$sumc[$cdba]=$sumc[$cdba] + $cant;}else{$sumc[$cdba]=$cant;};
-}}
+}}}
 
 $sume=array();
-foreach ($vendidos as $idt => $value) {  foreach ($value as $cdba => $cant){
+foreach ($vendidos as $idt => $value) {  foreach ($value as $cdba => $cant){if(array_key_exists($idt, $tiendas)){
 if(array_key_exists($cdba, $sume)){$sume[$cdba]=$sume[$cdba] + $cant['c'];}else{$sume[$cdba]=$cant['c'];};
-}}
+}}}
 
 
 $sumST=array();
-foreach ($stocks as $idt => $value) {  foreach ($value as $cdba => $cant){
+foreach ($stocks as $idt => $value) {  foreach ($value as $cdba => $cant){if(array_key_exists($idt, $tiendas)){
 if(array_key_exists($cdba, $sumST)){$sumST[$cdba]=$sumST[$cdba] + $cant;}else{$sumST[$cdba]=$cant;};
-}}
+}}}
 
 
 
 
 
 foreach ($totcod as $cdba => $point) {
-$cant=0;$evn=0;$stc=0;
+$cant=0;$ven=0;$stc=0;
 if(array_key_exists($cdba, $sumc)){$cant=$sumc[$cdba];};	
-if(array_key_exists($cdba, $sume)){$evn=$sume[$cdba];};
+if(array_key_exists($cdba, $sume)){$ven =$sume[$cdba];};
 if(array_key_exists($cdba, $sumST)){$stc=$sumST[$cdba];};
 	
-if($cant>0){$por=round(($evn/$cant*100),2);  $codPOR[$cdba]=$por;}else{ $codPOR[$cdba]=0;};	
-$codVEND[$cdba]=$evn;
+if($cant>0){$por=round(($ven/$cant*100),2); 
+$codPOR[$cdba]=$por;  }else{ $codPOR[$cdba]=0;};	
+$codVEND[$cdba]=$ven;
 $codSTOK[$cdba]=$stc;
 }
-
-
 
 if($act==1){
 $cdg=array();
@@ -246,6 +245,8 @@ if($actO=='A'){asort($codPOR);}else{arsort($codPOR);}
 foreach ($codPOR as $codbar => $portc){
 $cdg[$codbar]=1;	
 }}}
+
+
 
 
 if($act==3){

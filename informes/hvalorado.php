@@ -149,7 +149,7 @@ if($vcods[$cd]['sti_V']>0){$vcods[$cd]['vbru_V_P']=round(($vcods[$cd]['vbru_V']/
 
 $vcods[$cd]['valv_V']=round($cant*$vcods[$cd]['pvp'],2);$VV[$cd]=$vcods[$cd]['valv_V'];
 $vcods[$cd]['bene_V']=round($vcods[$cd]['valv_V'] - $vcods[$cd]['sti_V'],2);$BE[$cd]=$vcods[$cd]['bene_V'];
-
+$BU[$cd]=round($vcods[$cd]['bene_V']/$vcods[$cd]['sti'],2);
 }
 
 
@@ -240,9 +240,9 @@ $cdg[$codbar]=1;
 
 if($act==2){
 $cdg=array();
-if(count($PC)>0){
-if($actO=='A'){asort($PC);}else{arsort($PC);}
-foreach ($PC as $codbar => $portc){
+if(count($BU)>0){
+if($actO=='A'){asort($BU);}else{arsort($BU);}
+foreach ($BU as $codbar => $portc){
 $cdg[$codbar]=1;	
 }}}
 
@@ -279,7 +279,7 @@ if(count($cdg)>0){
 foreach ($cdg as $cd => $point) {$fila++;$cuenf++;
 if($cuenf >= 8){$cuenf=0;$paginas[$fila+4]=1;}	
 
-$align['A' . $fila . ':' . 'H' . $fila]='C';
+$align['A' . $fila . ':' . 'I' . $fila]='C';
 $grid[$fila]['B']="COSTE/PVP";
 $grid[$fila]['C']="COMPRA"; 
 $grid[$fila]['D']="ALMACEN"; 
@@ -287,16 +287,17 @@ $grid[$fila]['E']="TIENDAS";
 $grid[$fila]['F']="BRUTO VEND"; 
 $grid[$fila]['G']="VALOR VENTA"; 
 $grid[$fila]['H']="BENEFICIO"; 
+$grid[$fila]['I']="Bº UNITARIO"; 
 
 $fila++;
 
 
-$BTrang['A' . $fila . ':' . 'H' . ($fila+3)]=2;
+$BTrang['A' . $fila . ':' . 'I' . ($fila+3)]=2;
 $format['B' . $fila . ':' . 'B' . ($fila+1)]=1;
-$format['B' . ($fila+2) . ':' . 'H' . ($fila+2)]=1;
-$format['B' . ($fila+3) . ':' . 'H' . ($fila+3)]=2;
+$format['B' . ($fila+2) . ':' . 'I' . ($fila+2)]=1;
+$format['B' . ($fila+3) . ':' . 'I' . ($fila+3)]=2;
 
-$align['B' . $fila . ':' . 'H' . $fila]='C';
+$align['B' . $fila . ':' . 'I' . $fila]='C';
 $grid[$fila]['A']=$codigos[$cd];
 $grid[$fila]['B']=$vcods[$cd]['pc'];
 
@@ -304,8 +305,8 @@ $grid[$fila]['B']=$vcods[$cd]['pc'];
 
 $fila++;
 
-$align['B' . $fila . ':' . 'H' . $fila]='C';
-$crang['A' . $fila . ':' . 'H' . $fila]='C2E0FF';
+$align['B' . $fila . ':' . 'I' . $fila]='C';
+$crang['A' . $fila . ':' . 'I' . $fila]='C2E0FF';
 $grid[$fila]['A']="UNIDADES - PVP";
 $grid[$fila]['B']=$vcods[$cd]['pvp']; 
 $grid[$fila]['C']=$vcods[$cd]['sti']; $sumSTI=$sumSTI+$vcods[$cd]['sti'];
@@ -315,8 +316,8 @@ $grid[$fila]['F']=$vcods[$cd]['vbru'];$sumVBRU=$sumVBRU+$vcods[$cd]['vbru'];
 
 $fila++;
 
-$align['B' . $fila . ':' . 'H' . $fila]='C';
-$crang['A' . $fila . ':' . 'H' . $fila]='ADEBAD';
+$align['B' . $fila . ':' . 'I' . $fila]='C';
+$crang['A' . $fila . ':' . 'I' . $fila]='ADEBAD';
 $grid[$fila]['A']="VALORES";
 $grid[$fila]['C']=$vcods[$cd]['sti_V']; $sumSTI_V=$sumSTI_V+$vcods[$cd]['sti_V'];
 $grid[$fila]['D']=$vcods[$cd]['stc_V']; $sumSTC_V=$sumSTC_V+$vcods[$cd]['stc_V'];
@@ -324,10 +325,11 @@ $grid[$fila]['E']=$vcods[$cd]['vtda_V'];$sumVTDA_V=$sumVTDA_V+$vcods[$cd]['vtda_
 $grid[$fila]['F']=$vcods[$cd]['vbru_V'];$sumVBRU_V=$sumVBRU_V+$vcods[$cd]['vbru_V'];
 $grid[$fila]['G']=$vcods[$cd]['valv_V'];$sumVALV_V=$sumVALV_V+$vcods[$cd]['valv_V'];
 $grid[$fila]['H']=$vcods[$cd]['bene_V'];$sumBENE_V=$sumBENE_V+$vcods[$cd]['bene_V'];
+$grid[$fila]['I']=round(($vcods[$cd]['bene_V'])/($vcods[$cd]['sti']),2);
 $fila++;
 
-$align['B' . $fila . ':' . 'H' . $fila]='C';
-$crang['A' . $fila . ':' . 'H' . $fila]='FFFF80';
+$align['B' . $fila . ':' . 'I' . $fila]='C';
+$crang['A' . $fila . ':' . 'I' . $fila]='FFFF80';
 $grid[$fila]['A']="PORCENTAJES";
 $grid[$fila]['D']=$vcods[$cd]['stc_V_P'];
 $grid[$fila]['E']=$vcods[$cd]['vtda_V_P'];
@@ -350,16 +352,17 @@ $grid[$fila]['E']="TIENDAS";
 $grid[$fila]['F']="BRUTO VEND"; 
 $grid[$fila]['G']="VALOR VENTA"; 
 $grid[$fila]['H']="BENEFICIO"; 
+$grid[$fila]['I']="Bº UNITARIO"; 
 
 $fila++;
 
 
-$format['B' . ($fila+1) . ':' . 'H' . ($fila+1)]=1;
-$format['B' . ($fila+2) . ':' . 'H' . ($fila+2)]=2;
+$format['B' . ($fila+1) . ':' . 'I' . ($fila+1)]=1;
+$format['B' . ($fila+2) . ':' . 'I' . ($fila+2)]=2;
 
-$BTrang['A' . $fila . ':' . 'H' . ($fila+2)]=1;
-$align['B' . $fila . ':' . 'H' . $fila]='C';
-$crang['A' . $fila . ':' . 'H' . $fila]='C2E0FF';
+$BTrang['A' . $fila . ':' . 'I' . ($fila+2)]=1;
+$align['B' . $fila . ':' . 'I' . $fila]='C';
+$crang['A' . $fila . ':' . 'I' . $fila]='C2E0FF';
 $grid[$fila]['A']="UNIDADES";
 
 $grid[$fila]['C']=$sumSTI;
@@ -369,8 +372,8 @@ $grid[$fila]['F']=$sumVBRU;
 
 $fila++;
 
-$align['B' . $fila . ':' . 'H' . $fila]='C';
-$crang['A' . $fila . ':' . 'H' . $fila]='ADEBAD';
+$align['B' . $fila . ':' . 'I' . $fila]='C';
+$crang['A' . $fila . ':' . 'I' . $fila]='ADEBAD';
 $grid[$fila]['A']="VALORES";
 $grid[$fila]['C']=$sumSTI_V;
 $grid[$fila]['D']=$sumSTC_V;
@@ -378,13 +381,13 @@ $grid[$fila]['E']=$sumVTDA_V;
 $grid[$fila]['F']=$sumVBRU_V;
 $grid[$fila]['G']=$sumVALV_V;
 $grid[$fila]['H']=$sumBENE_V;
-
+$grid[$fila]['I']=round($sumBENE_V/$sumSTI_V,2);
 
 $fila++;
 
 
-$align['B' . $fila . ':' . 'H' . $fila]='C';
-$crang['A' . $fila . ':' . 'H' . $fila]='FFFF80';
+$align['B' . $fila . ':' . 'I' . $fila]='C';
+$crang['A' . $fila . ':' . 'I' . $fila]='FFFF80';
 $grid[$fila]['A']="PORCENTAJES";
 if($sumSTI>0){$grid[$fila]['D']=round(($sumSTC/$sumSTI*100),2);};
 if($sumSTI>0){$grid[$fila]['E']=round(($sumVTDA/$sumSTI*100),2);};
@@ -393,14 +396,14 @@ if($sumSTI>0){$grid[$fila]['F']=round(($sumVBRU/$sumSTI*100),2);};
 
 
 $anchos['A']=40;
-$anchos['B']=14;
-$anchos['C']=14;
-$anchos['D']=14;
-$anchos['E']=14;
-$anchos['F']=14;
+$anchos['B']=13;
+$anchos['C']=13;
+$anchos['D']=13;
+$anchos['E']=13;
+$anchos['F']=13;
 $anchos['G']=14;
-$anchos['H']=14;
-
+$anchos['H']=13;
+$anchos['I']=13;
 
 $hoy=date('d') . "/" . date('m') . "/" . date('Y');
 $grid[1]['A']="FECHA IMPRESION: $hoy";

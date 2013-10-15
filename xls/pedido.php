@@ -106,37 +106,43 @@ $objPHPExcel->createSheet();
 $objPHPExcel->setActiveSheetIndex($count);
 $titlesheet=$tiendas[$id_tienda];
 $objPHPExcel->getActiveSheet()->setTitle($titlesheet);
-$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(35);
+$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(32);
 $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(4);
 $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(4);
 $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(4);
 
-$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(35);
-$objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(4);
+$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(6);
+
+$objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(32);
 $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(4);
 $objPHPExcel->getActiveSheet()->getColumnDimension('H')->setWidth(4);
+$objPHPExcel->getActiveSheet()->getColumnDimension('I')->setWidth(4);
 
 
 $cla[1]='A';
 $clb[1]='B';
-$cla[2]='E';
-$clb[2]='F';
+$cla[2]='F';
+$clb[2]='G';
+
+$clf[1]="D";
+$clf[2]="I";
+
 $colu=1;
 
 	if(count($reparto)>0){
 		
 	$objPHPExcel->setActiveSheetIndex($count)->mergeCells('A' . $lin . ':C' .$lin);
-	$objPHPExcel->setActiveSheetIndex($count)->mergeCells('D' . $lin . ':E' .$lin);	
-	$objPHPExcel->setActiveSheetIndex($count)->mergeCells('F' . $lin . ':G' .$lin);
+	$objPHPExcel->setActiveSheetIndex($count)->mergeCells('D' . $lin . ':F' .$lin);	
+	$objPHPExcel->setActiveSheetIndex($count)->mergeCells('G' . $lin . ':H' .$lin);
 	
 	$objPHPExcel->getActiveSheet()->setCellValue('A' . $lin , "Pedido: $nomrep");						//$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(22);
 	$objPHPExcel->getActiveSheet()->setCellValue('D' . $lin , 'Tienda: ' . $tiendasN[$id_tienda]);		//$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(22);
-	$objPHPExcel->getActiveSheet()->setCellValue('F' . $lin , 'PAG: ' . $pag);					 		//$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(22);
+	$objPHPExcel->getActiveSheet()->setCellValue('G' . $lin , 'PAG: ' . $pag);					 		//$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(22);
 	#$objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(8);
 	$objPHPExcel->getActiveSheet()->getRowDimension($lin)->setRowHeight(28);
 	#$objPHPExcel->getActiveSheet()->getStyle('A' . $lin . ':G' .$lin)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::VERTICAL_CENTER);
 	#$objPHPExcel->getActiveSheet()->getStyle('A' . $lin . ':G' .$lin)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
-	$objPHPExcel->getActiveSheet()->getStyle('A' . $lin . ':G' .$lin)->applyFromArray($styleArray2);	
+	$objPHPExcel->getActiveSheet()->getStyle('A' . $lin . ':H' .$lin)->applyFromArray($styleArray2);	
 	$lin++;	
 		
 	foreach ($reparto as $grupo => $datos){foreach ($datos as $articulo => $cantidad){
@@ -150,30 +156,30 @@ $colu=1;
 		$objPHPExcel->getActiveSheet()->setBreak( 'A' . $lin , PHPExcel_Worksheet::BREAK_ROW );	$lin++;
 		$inipag=$lin;	
 		$objPHPExcel->setActiveSheetIndex($count)->mergeCells('A' . $lin . ':C' .$lin);
-		$objPHPExcel->setActiveSheetIndex($count)->mergeCells('D' . $lin . ':E' .$lin);	
-		$objPHPExcel->setActiveSheetIndex($count)->mergeCells('F' . $lin . ':G' .$lin);
+		$objPHPExcel->setActiveSheetIndex($count)->mergeCells('D' . $lin . ':F' .$lin);	
+		$objPHPExcel->setActiveSheetIndex($count)->mergeCells('G' . $lin . ':H' .$lin);
 	
 		$objPHPExcel->getActiveSheet()->setCellValue('A' . $lin , "Nº de Pedido: $nomrep");					//$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(22);
 		$objPHPExcel->getActiveSheet()->setCellValue('D' . $lin , 'Tienda: ' . $tiendasN[$id_tienda]);		//$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(22);
-		$objPHPExcel->getActiveSheet()->setCellValue('F' . $lin , 'PAG: ' . $pag);					 		//$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(22);
+		$objPHPExcel->getActiveSheet()->setCellValue('G' . $lin , 'PAG: ' . $pag);					 		//$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(22);
 		#$objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(8);
 		$objPHPExcel->getActiveSheet()->getRowDimension($lin)->setRowHeight(35);
 		#$objPHPExcel->getActiveSheet()->getStyle('A1')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_TOP);
 		#$objPHPExcel->getActiveSheet()->getStyle('A' . $lin . ':G' .$lin)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
-		$objPHPExcel->getActiveSheet()->getStyle('A' . $lin . ':G' .$lin)->applyFromArray($styleArray2);	
+		$objPHPExcel->getActiveSheet()->getStyle('A' . $lin . ':H' .$lin)->applyFromArray($styleArray2);	
 		$lin++;	
 			
 		
 		}
 			if($grupo != $lastgroup){
-			$rango=$cla[$colu] . $lin . ":" . $clb[$colu]  . $lin;
+			$rango=$cla[$colu] . $lin . ":" . $clf[$colu]  . $lin;
 			$objPHPExcel->setActiveSheetIndex($count)->mergeCells($rango);
 			$objPHPExcel->getActiveSheet()->setCellValue($cla[$colu] . $lin, $grupo);
 			$objPHPExcel->getActiveSheet()->getRowDimension($lin)->setRowHeight(20);
 			$objPHPExcel->getActiveSheet()->getStyle($rango)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 			$objPHPExcel->getActiveSheet()->getStyle($rango)->applyFromArray(array('fill' => array('type' => PHPExcel_Style_Fill::FILL_SOLID,'color' => array('rgb' => 'CCCCCC')) ));
 			$objPHPExcel->getActiveSheet()->getStyle($rango)->getFont()->setSize(11);
-			$objPHPExcel->getActiveSheet()->getStyle($cla[$colu] . $lin . ":" . $clb[$colu] . $lin)->applyFromArray($styleArray);	
+			$objPHPExcel->getActiveSheet()->getStyle($cla[$colu] . $lin . ":" . $clf[$colu] . $lin)->applyFromArray($styleArray);	
 			$lastgroup=$grupo;$lin++;$cont++;
 			}	
 		
@@ -181,7 +187,7 @@ $colu=1;
 		$objPHPExcel->getActiveSheet()->getStyle($cla[$colu] . $lin)->getFont()->setSize(9);
 		$objPHPExcel->getActiveSheet()->setCellValue($clb[$colu] . $lin, $cantidad);
 		$objPHPExcel->getActiveSheet()->getStyle($clb[$colu] . $lin)->getFont()->setSize(11);
-		$objPHPExcel->getActiveSheet()->getStyle($cla[$colu] . $lin . ":" . $clb[$colu] . $lin)->applyFromArray($styleArray);
+		$objPHPExcel->getActiveSheet()->getStyle($cla[$colu] . $lin . ":" . $clf[$colu] . $lin)->applyFromArray($styleArray);
 		$objPHPExcel->getActiveSheet()->getStyle($cla[$colu] . $lin)->getAlignment()->setWrapText(false); 
 		$lin++;	$cont++;	
 		}}}

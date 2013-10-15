@@ -139,9 +139,9 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 
 <div style="position: absolute; left: 10px; top: 46px;">
 <div class="ordenadores" onclick="javascript:VorD(1);">CB	<div id="V|1|A" class="icf_up" style="visibility: visible;"></div><div id="V|1|D" class="icf_dw" style="visibility: hidden;"></div> </div>
-<div class="ordenadores" onclick="javascript:VorD(2);">PC	<div id="V|2|A" class="icf_up" style="visibility: hidden;"></div><div id="V|2|D" class="icf_dw" style="visibility: hidden;"></div> </div>
 <div class="ordenadores" onclick="javascript:VorD(3);">VV	<div id="V|3|A" class="icf_up" style="visibility: hidden;"></div><div id="V|3|D" class="icf_dw" style="visibility: hidden;"></div> </div>
 <div class="ordenadores" onclick="javascript:VorD(4);">Bº	<div id="V|4|A" class="icf_up" style="visibility: hidden;"></div><div id="V|4|D" class="icf_dw" style="visibility: hidden;"></div> </div>
+<div class="ordenadores" onclick="javascript:VorD(2);">BU	<div id="V|2|A" class="icf_up" style="visibility: hidden;"></div><div id="V|2|D" class="icf_dw" style="visibility: hidden;"></div> </div>
 
 
 </div>	
