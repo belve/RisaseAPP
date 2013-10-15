@@ -244,7 +244,7 @@ function sacaAgrup(tip){
 var iframe = document.getElementById('agrupaciones');
 var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
 var agrupacion=innerDoc.getElementById('agrupSel').value;	
-
+if (agrupacion!=''){
 var iframe = document.getElementById('pediagrup');
 var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
 var seleccionados=innerDoc.getElementById('artselected').value;
@@ -278,6 +278,7 @@ if(key=='html'){innerDoc.getElementById('pedipent').innerHTML=val;};
 timerAD(0,'timer3',0);
 
 selectAgrup(agrupacion,tip);	
+}else{alert('Debe seleccionar una agrupacion');}
 }
 
 
@@ -286,7 +287,7 @@ function meteAgrup(tip){$.ajaxSetup({'async': false});
 var iframe = document.getElementById('agrupaciones');
 var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
 var agrupacion=innerDoc.getElementById('agrupSel').value;	
-
+if (agrupacion!=''){
 var iframe = document.getElementById('pedipent');
 var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
 var seleccionados=innerDoc.getElementById('artselected').value;
@@ -320,6 +321,7 @@ if(key=='html'){innerDoc.getElementById('pedipent').innerHTML=val;};
 timerAD(0,'timer3',0);
 
 cargaPendientes(tip);
+}else{alert('Debe seleccionar una agrupacion');}
 }
 
 
@@ -817,12 +819,42 @@ setTimeout("timerAD(0,'timer',0);",6000);
 
 
 function updtPed(idp,field){
+	
+var dats=field.split('-');
+var fil=dats[0];
+var ida=document.getElementById('fl-' +fil).value;
+var idg=document.getElementById('idgf-' +fil).value;
+var idt=document.getElementById('t-' +field).value;
+var rep=0;	
+	
 var valor=document.getElementById(field).value;
-var url="/ajax/updatefield.php?tabla=pedidos&campo=cantidad&id=" + idp + '&value=' + valor;
+var url="/ajax/updatePedido.php?idp=" + idp 
++ '&idt=' + idt
++ '&ida=' + ida
++ '&idg=' + idg
++ '&cant=' + valor;
+
+
 $.getJSON(url, function(data) {
 $.each(data, function(key, val) {
 });
-});	
+});
+
+
+for (var i = 0; i < 30; i++) {if(document.getElementById(fil + '-' + i)){rep=rep+Number(document.getElementById(fil + '-' + i).value);};}
+
+
+var stck=Number(document.getElementById('stck-' + ida).value);
+var nst=stck-rep;
+document.getElementById('sto-' + ida).innerHTML=nst;
+document.getElementById('rep-' + ida).innerHTML=rep;	
+
+if(nst >= 0){
+document.getElementById(ida).setAttribute("style", "background-color:white;");	
+}else{
+document.getElementById(ida).setAttribute("style", "background-color:#F8CDD9;");	
+}
+
 }
 
 
@@ -862,7 +894,8 @@ function moveFieldGRID(value){
 	
 	
 	if(document.getElementById(nuevo)){
-	$('#'+ nuevo).focus();
+	var func= "$('#" + nuevo + "').focus();";
+	setTimeout(func, 60);
 	}
 
 	

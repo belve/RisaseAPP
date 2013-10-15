@@ -23,6 +23,9 @@ while ($row = $dbnivel->fetchassoc()){
 	
 $idp=$row['id'];$ida=$row['id_articulo'];$idt=$row['id_tienda'];$cant=$row['cantidad'];$nagru=$row['nagru'];$estado=trim($row['estado']);$tip=$row['tip'];
 
+$tindm[$idt]=$tiendas[$idt];
+
+
 if($row['tip']==1){$todas=1;}else{$todas=0;};
 
 
@@ -57,9 +60,12 @@ $html="";$cabe=array();$rotura=0;
 
 $fila=0;
 if(count($grid2)>0){
-foreach ($grid2 as $ida => $val){$nomb=$noms[$ida];$re=$rep[$ida];$stock=$stocks[$ida];
+foreach ($grid2 as $ida => $val){$nomb=$noms[$ida];
+$re=$rep[$ida];
+$stock=$stocks[$ida];
+$stock2=$stock-$re;
 $fila++;
-if($re > $stock){$st=" style='background-color:#F8CDD9;'";$rotura=1;}else{$st="";};
+if($stock2 < 0){$st=" style='background-color:#F8CDD9;'";$rotura=1;}else{$st="";};
 
 $html.="
 <tr id='$ida' $st>
@@ -69,20 +75,26 @@ $html.="
 </td>
 
 <td style='width:28px;border-bottom: 1px solid #888888;'>
-<div class='camp_REP_rep' id='z2'>$re</div>
+<div class='camp_REP_rep' id='rep-$ida'>$re</div>
 </td>
 
 <td style='width:28px;border-bottom: 1px solid #888888;border-right:2px solid orange;'>
-<div class='camp_REP_alm' id='z3'>$stock</div>
+<div class='camp_REP_alm' id='sto-$ida'>$stock2</div>
+<input type='hidden' id='stck-$ida' value='$stock'>
+<input type='hidden' id='fl-$fila' value='$ida'>
+<input type='hidden' id='idgf-$fila' value='$idagrupacion'>
 </td>
 
 ";
 
 $count=0;$columna=0;
-foreach ($tiendas as $idt => $nomc) {
+foreach ($tindm as $idt => $nomc) {
 if(array_key_exists($idt, $val)){
+$cant=$val[$idt];$idp=$idpeds[$ida][$idt];	
+}else{
+$cant="";$idp="";	
+}	
 $count++;
-$cant=$val[$idt];$idp=$idpeds[$ida][$idt];
 $columna++;
 
 if(!$modi){
@@ -92,7 +104,8 @@ $acciones="
 	
 }else{
 $acciones="
-<input type='text' onfocus='this.select();' value='$cant' class='camp_REP_tie' id='$fila-$columna' onchange='updtPed($idp,\"$fila-$columna\")' tabindex='$fila-$columna'>
+<input type='text' onfocus='this.select();' value='$cant' class='camp_REP_tie' id='$fila-$columna' onchange='updtPed(\"$idp\",\"$fila-$columna\")' tabindex='$fila-$columna'>
+<input type='hidden' id='t-$fila-$columna' value='$idt'>
 ";
 }
 
@@ -111,26 +124,6 @@ $acciones
 $cabe[$nomc]= "<div class='cabtab_REP tab_REP_tie'>$nomc</div>";	
 
 
-}else{
-	
-$cant="";$idp="";
-$acciones="";
-
-
-if((array_key_exists($idt, $tieacts))||($todas) ){
-$html .="
-
-<td class='' style='width:24px;border-bottom: 1px solid #888888;'>
-
-<input type='hidden' value='' id='d-$idp'>
-$acciones
-</td>
-
-
-";		
-}
-
-}
 
 
 

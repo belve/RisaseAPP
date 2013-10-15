@@ -17,7 +17,7 @@ function agrupaciones($tip,$agrupar){
 	
 global $dbnivel;$idagrup="";
 
-$fecha=date('d') . date('m') . date('Y');
+$fecha=date('d') . date('m') . date('y');
 
 $fechaBD=date('Y') . "-" . date('m')  . "-" . date('d');
 
@@ -304,6 +304,9 @@ $dbnivel->query($queryp);$fila=0;
 ########## aqui hay q actualizar stocks en caso de enviado a tienda
 
 if($est=='T'){
+
+$queryp= "delete from pedidos where cantidad=0;";
+$dbnivel->query($queryp);
 			
 $queryp= "SELECT id_articulo, cantidad FROM pedidos where agrupar=$idag;";
 $dbnivel->query($queryp);
