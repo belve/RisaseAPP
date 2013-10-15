@@ -211,6 +211,10 @@ alert('Debe rellenar todos los campos de la primera fila');
 
 function limpiarGRID(){
 
+window.top.sellFilReA=0;
+document.getElementById('slAll').setAttribute("style", "background-color:white;");
+
+
 document.getElementById('pegar').setAttribute("style", "visibility:hidden;");
 var iframe = document.getElementById('repartos');
 var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
@@ -252,6 +256,11 @@ function addArticulo(codigo){
 $.ajaxSetup({'async': false});	
 
 timer(1);
+
+window.top.sellFilReA=0;
+document.getElementById('slAll').setAttribute("style", "background-color:white;");
+
+
 
 var iframe = document.getElementById('repartos');
 var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
@@ -296,7 +305,7 @@ url = "/ajax/gridRepart.php?id_proveedor=" + prov
  + "&temporada=" + temp
  + "&comentarios=" + comentarios
  + "&detalles=" + detalles
- + '&ultifila=' + filas
+ + '&ultifila=' + "0"
  + '&listador=1'; 
 
 
@@ -346,6 +355,7 @@ document.getElementById('art').select();
 
 
 timer(0);
+
 
 
 var myIframe = document.getElementById('repartos');
@@ -643,7 +653,6 @@ innerDoc.getElementById('filsel').value='';
 
 
 function sellFilReA(){
-
 
 var est=window.top.sellFilReA;
 if(est==0){est=1;}else{est=0;};	window.top.sellFilReA=est;

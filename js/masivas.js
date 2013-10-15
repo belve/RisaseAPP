@@ -24,6 +24,18 @@ function generar_altas(){
 var iframe = document.getElementById('altasmas');
 var innerDoc = iframe.contentDocument || iframe.contentWindow.document;	
 
+var i=1; var a=0;
+while (i <= 8){
+if(innerDoc.getElementById('1V' + i).value==""){a++;};	
+i++;
+}
+	
+
+
+
+
+
+
 var iframe2 = document.getElementById('codgenerados');
 var innerDoc2 = iframe2.contentDocument || iframe2.contentWindow.document;	
 
@@ -34,8 +46,12 @@ var dto2=document.getElementById('4').value;
 var temp=document.getElementById('5').value;
 
 var error="";
+if(a!=0){var error=error + 'Debe rellenar todos los campos de la primera fila. \n';}
 if(!idpro){var error=error + 'Debe selecionar un proveedor. \n';}
 if(!temp){var error=error + 'Debe especificar una temporada. \n';}
+
+
+
 
 if(error){
 	alert(error);
