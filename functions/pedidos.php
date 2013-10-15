@@ -124,7 +124,7 @@ return $html;
 
 function listagrup($tip,$id){
 	
-$count=0;	$fila=0;
+$count=0;	$fila=0;$cb=array();
 global $dbnivel;
 
 $pendientes=array();$html="";
@@ -151,11 +151,12 @@ $cb[$g][$sg][$cod]=$idart;
 
 if (!$dbnivel->close()){die($dbnivel->error());};
 
+if(count($cb)>0){
 ksort($cb);
 foreach ($cb as $g => $sgs) {ksort($sgs); foreach ($sgs as $sg => $cods) {ksort($cods); foreach ($cods as $cod => $codb) {
 $fila++;	
 $html .=linAr($codb,$ref[$codb],$rep[$codb],$fila);	
-}}}
+}}}}
 
 
 
@@ -170,7 +171,7 @@ function pedipent($tip){
 	
 global $dbnivel;
 
-$pendientes=array();$html="";
+$pendientes=array();$html="";$cb=array();
 
 if (!$dbnivel->open()){die($dbnivel->error());};$count=0;
 $queryp= "SELECT id_articulo, sum(cantidad) as rep, 
@@ -192,12 +193,12 @@ $cb[$g][$sg][$cod]=$idart;
 	
 };
 
-
+if(count($cb)>0){
 ksort($cb);
 foreach ($cb as $g => $sgs) {ksort($sgs); foreach ($sgs as $sg => $cods) {ksort($cods); foreach ($cods as $cod => $codb) {
 $fila++;	
 $html .=linAr($codb,$ref[$codb],$rep[$codb],$fila);	
-}}}
+}}}}
 
 
 $html .="<INPUT id='maxF' type='hidden' value='$fila'>";

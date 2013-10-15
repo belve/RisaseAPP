@@ -33,8 +33,8 @@ while ($row = $dbnivel->fetchassoc()){$iddetr=$row['id_articulo'];};
 	
 	
 if($iddetr){
-	
-$queryp= "SELECT id, tip, estado from pedidos WHERE id_articulo=$idarti AND id_tienda=$idtiendae ORDER by id DESC limit 1;";
+$idpedido="";	
+$queryp= "SELECT id, tip, estado from pedidos WHERE id_articulo=$idarti AND id_tienda=$idtiendae AND tip=1 ORDER by id DESC limit 1;";
 $dbnivel->query($queryp); echo $queryp;
 while ($row = $dbnivel->fetchassoc()){$tip=$row['tip'];$estado=$row['estado'];$idpedido=$row['id'];};	
 	
@@ -47,12 +47,11 @@ $dbnivel->query($queryp); echo $queryp;
 
 
 
-if($tip==0){
-	
+if(!$idpedido){
+$queryp= "INSERT INTO pedidos (id_articulo,id_tienda,cantidad,tip,fecha,prov,grupo,subgrupo,codigo) values ($idarti,$idtiendae,$cant,1,'$fecha',$prov,$grupo,$subgrupo,$code);";
+$dbnivel->query($queryp);echo $queryp;	
 
-	
-$queryp= "INSERT INTO pedidos (id_articulo,id_tienda,cantidad,tip,fecha,prov,grupo,subgrupo,codigo) values ($idarti,$idtiendae,$cant,1,'$fecha',$prov,$grupo,$subgrupo,$code);";$dbnivel->query($queryp);echo $queryp;	
-}elseif(($tip==1)AND($estado != 'F')){
+}elseif(($idpedido)AND($estado != 'F')){
 $queryp= "UPDATE pedidos set cantidad=$cant where id=$idpedido;";$dbnivel->query($queryp);echo $queryp;	
 }
 

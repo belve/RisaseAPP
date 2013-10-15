@@ -5,6 +5,7 @@ foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo .
 require_once("../db.php");
 require_once("../variables.php");
 $idagrup="";
+$fechaBD=date('Y') . "-" . date('m')  . "-" . date('d');
 
 if (!$dbnivel->open()){die($dbnivel->error());};
 
@@ -14,7 +15,7 @@ while ($row = $dbnivel->fetchassoc()){$idagrup=$row['id'];};
 
 
 if(!$idagrup){
-$queryp="INSERT INTO agrupedidos (nombre,tip,estado) values ('$nom',$tip,'P')";	
+$queryp="INSERT INTO agrupedidos (nombre,tip,estado,fecha) values ('$nom',$tip,'P','$fechaBD')";	
 $dbnivel->query($queryp);	
 
 $queryp="SELECT LAST_INSERT_ID() as id;";	

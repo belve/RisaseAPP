@@ -15,7 +15,7 @@ if(w==1){parent.document.getElementById(cual).style.visibility = "visible";docum
 
 
 function selectAgrup(id,tip){
-var lastsel=document.getElementById('agrupSel').value;
+if(document.getElementById('agrupSel')){var lastsel=document.getElementById('agrupSel').value;}else{lastsel=id;};
 if(lastsel!=id){
 if(lastsel!=''){document.getElementById(lastsel).setAttribute("style", "background-color:white;");};	
 if(document.getElementById(id)){
@@ -74,7 +74,7 @@ var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
 
 if(key=='id'){
 var lista=innerDoc.getElementById('agrupaciones');	
-$(lista).append("<div class='agrup' id='" + val + "' onclick='selectAgrup(" + val + ")'>" + nom + "<div class='iconos trash' onclick='borra_agru(" + val + "," + tip + ")'></div> </div>");
+$(lista).append("<div class='agrup' id='" + val + "' onclick='selectAgrup(" + val + "," + tip + ")'>" + nom + "<div class='iconos trash' onclick='borra_agru(" + val + "," + tip + ")'></div> </div>");
 
 var iframe = document.getElementById('FV2P1');
 var V = iframe.contentDocument || iframe.contentWindow.document;
@@ -277,12 +277,12 @@ if(key=='html'){innerDoc.getElementById('pedipent').innerHTML=val;};
 
 timerAD(0,'timer3',0);
 
-	
+selectAgrup(agrupacion,tip);	
 }
 
 
 
-function meteAgrup(tip){
+function meteAgrup(tip){$.ajaxSetup({'async': false});	
 var iframe = document.getElementById('agrupaciones');
 var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
 var agrupacion=innerDoc.getElementById('agrupSel').value;	
@@ -301,7 +301,7 @@ $.each(data, function(key, val) {
 });	
 
 
-cargaPendientes(tip);
+
 
 timerAD(1,'timer3',0);
 
@@ -319,7 +319,7 @@ if(key=='html'){innerDoc.getElementById('pedipent').innerHTML=val;};
 
 timerAD(0,'timer3',0);
 
-	
+cargaPendientes(tip);
 }
 
 

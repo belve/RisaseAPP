@@ -54,7 +54,7 @@ while ($row = $dbnivel->fetchassoc()){
 $provs[$row['id']]=$row['id_proveedor']; $codbarras[$row['id']]=$row['codbarras'];
 }
 
-$queryp= "select id, id_articulo, id_tienda, tip, estado from pedidos where id_articulo IN ($articulos) ORDER BY id DESC;";
+$queryp= "select id, id_articulo, id_tienda, tip, estado from pedidos where id_articulo IN ($articulos) AND tip=1 ORDER BY id DESC;";
 $dbnivel->query($queryp);  if($debug==1){echo $queryp . "\n\n";};
 while ($row = $dbnivel->fetchassoc()){
 $dpedidos[$row['id_articulo']][$row['id_tienda']]['id']=$row['id'];
