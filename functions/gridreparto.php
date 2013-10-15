@@ -17,7 +17,7 @@ if(array_key_exists($ida,$grid)){$dtiendas=$grid[$ida];}else{$dtiendas=array();}
 $codbarras=$dart[$ida]['codbarras'];$refpro=$dart[$ida]['refprov'];$stock=$dart[$ida]['stock'];	$rep=$dart[$ida]['rep'];	
 $stock2=$stock-$rep;
 $tsel=array();$ltsel=",";
-$tsel=$dart[$ida]['tsel'];
+if(array_key_exists('tsel', $dart[$ida])){$tsel=$dart[$ida]['tsel'];}
 
 if(count($tsel)>0){ foreach ($tsel as $idtie => $pont) {
 $ltsel .="$idtie,";	
