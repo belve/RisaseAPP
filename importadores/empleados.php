@@ -31,7 +31,7 @@ $ncamp[5]='trabajando';
 $ncamp[6]='orden';
 
 
-
+/*
 $conn=odbc_connect('risasenew','remoto','azul88');
 
 if (!$conn)
@@ -59,6 +59,31 @@ foreach($camp as $nkey => $nomcampo){
   }
 
 odbc_close($conn);
+
+*/
+
+
+
+include('../adodb5/adodb.inc.php'); $driv="odbc_mssql";
+$db =& ADONewConnection($driv);
+$dsn = "Driver={SQL Server};Server=SERVER;Database=Risase;";
+$db->Connect($dsn,'remoto','azul88');
+$db->debug = false;
+$sql="SELECT * FROM $Ntab ORDER BY $Nid ASC ";
+$rs = $db->Execute($sql);
+
+
+$rows = $rs->GetRows();
+foreach ($rows as $key => $row) {foreach($camp as $nkey => $nomcampo){
+	 $valores[trim($row[0])][$nkey]=trim(utf8_encode($row[$nkey]));
+
+}}
+
+$db->Close();
+
+
+
+
 
 require_once("../db.php");
 
