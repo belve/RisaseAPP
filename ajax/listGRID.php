@@ -23,7 +23,7 @@ while ($row = $dbnivel->fetchassoc()){
 	
 $idp=$row['id'];$ida=$row['id_articulo'];$idt=$row['id_tienda'];$cant=$row['cantidad'];$nagru=$row['nagru'];$estado=trim($row['estado']);$tip=$row['tip'];
 
-$tindm[$idt]=$tiendas[$idt];
+if(array_key_exists($idt, $tiendas)){$tindm[$idt]=$tiendas[$idt];};
 
 
 if($row['tip']==1){$todas=1;}else{$todas=0;};
