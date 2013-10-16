@@ -382,6 +382,11 @@ function selPEST_V2(p){
 var estAct=document.getElementById(p).className;
 var anti=document.getElementById('V2SEL').value;
 
+if(document.getElementById('filtro').value!=''){
+document.getElementById('filtro').value='';
+var tip=document.getElementById('tip').value;
+cargaAgrupados2(tip,0,"","");	
+}
 
 if(estAct=='V2_PEST_off'){
 	

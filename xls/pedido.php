@@ -106,14 +106,14 @@ $objPHPExcel->createSheet();
 $objPHPExcel->setActiveSheetIndex($count);
 $titlesheet=$tiendas[$id_tienda];
 $objPHPExcel->getActiveSheet()->setTitle($titlesheet);
-$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(32);
+$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(28);
 $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(4);
 $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(4);
 $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(4);
 
-$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(6);
+$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(4);
 
-$objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(32);
+$objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(28);
 $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(4);
 $objPHPExcel->getActiveSheet()->getColumnDimension('H')->setWidth(4);
 $objPHPExcel->getActiveSheet()->getColumnDimension('I')->setWidth(4);
@@ -147,11 +147,11 @@ $colu=1;
 		
 	foreach ($reparto as $grupo => $datos){foreach ($datos as $articulo => $cantidad){
 			
-		if(($colu==1)&&($cont>=33)){
+		if(($colu==1)&&($cont>=40)){
 		$cont=1;$colu=2;$lastgroup="";$lin=$inipag+1;	
 		}	
 		
-		if(($colu==2)&&($cont>=33)){$colu=1;
+		if(($colu==2)&&($cont>=40)){$colu=1;
 		$cont=1;$lastgroup="";$pag++;
 		$objPHPExcel->getActiveSheet()->setBreak( 'A' . $lin , PHPExcel_Worksheet::BREAK_ROW );	$lin++;
 		$inipag=$lin;	

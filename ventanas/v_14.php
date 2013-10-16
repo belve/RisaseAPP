@@ -253,15 +253,16 @@ $(window).keydown(function(evt) {
 	<div class="cabtab_REP tab_REP_rep">REP</div>
 	<div class="cabtab_REP tab_REP_alm">ALM</div>
 
+
+<div id="optCABE">
 <?php
 $postiendas=0;
 foreach($tiendas as $idt => $nomt){
 $postiendas++;
 echo "<div onclick='sumatienda($postiendas,\"$nomt\")' class='cabtab_REP tab_REP_tie'>$nomt</div>";	
 }
-
 ?>
-
+</div>
 	
 </div>
 <iframe id="GRID" src="/ajax/grid.php" width="847" height="400" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>

@@ -1,0 +1,53 @@
+http://192.168.1.11/importadores/colores.php Arreglar
+
+http://192.168.1.11/importadores/empleados.php 
+
+http://192.168.1.11/importadores/proveedores.php Arreglar
+
+http://192.168.1.11/importadores/grupos.php Arreglar
+
+http://192.168.1.11/importadores/subgrupos.php Arreglar
+
+http://192.168.1.11/importadores/tiendas.php 
+
+
+http://192.168.1.11/importadores/articulos.php
+
+http://192.168.1.11/importadores/repartos.php
+
+http://192.168.1.11/importadores/detreparto.php
+
+http://192.168.1.11/importadores/pedidos.php 
+
+http://192.168.1.11/importadores/detpedido.php
+
+
+ultimos tickets buenos 2013-10-14
+delete from tickets where fecha >= '2013-10-14';
+delete from ticket_det where fecha >= '2013-10-14';
+
+http://192.168.1.11/importadores/tickects.php
+http://192.168.1.11/importadores/detTicket.php
+Arreglar tickets COR4
+UPDATE tickets set id_tienda=12 where id_tienda=9 and id_ticket like 'COR4%';
+UPDATE ticket_det set id_tienda=12 where id_tienda=9 and id_ticket like 'COR4%';
+
+
+stocklocales
+copiar todos los mdbs
+http://192.168.1.70/importadores/stockslocales.php
+
+
+TPV..
+
+http://192.168.1.44/functions/createDB.php?tienda=COR
+
+
+mysql
+
+SET GLOBAL query_cache_size = 160777216;
+show status like 'Qcache%';
+
+
+backup
+http://chuwiki.chuidiang.org/index.php?title=Volcado_de_seguridad_en_MySQL_con_mysqldump

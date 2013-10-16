@@ -88,47 +88,56 @@ $html.="
 ";
 
 $count=0;$columna=0;
-foreach ($tiendas as $idt => $nomc) {
-if(array_key_exists($idt, $val)){
-$cant=$val[$idt];$idp=$idpeds[$ida][$idt];	
-}else{
-$cant="";$idp="";	
-}	
-$count++;
-$columna++;
 
-if(!$modi){
-$acciones="
-<div class='camp_REP_tie' id='$idp'>$cant</div>
-";	
+
+
+foreach ($tiendas as $idt => $nomc) {if(array_key_exists($idt, $tindm)){
+		
+$cabe[$nomc]= "<div class='cabtab_REP tab_REP_tie'>$nomc</div>";		
+		
+		
+	$count++;
+	$columna++;	
+		
+			if(array_key_exists($idt, $val)){
+			$cant=$val[$idt];$idp=$idpeds[$ida][$idt];	
+			}else{
+			$cant="";$idp="";	
+			}	
+			
+		if(!$modi){
+		$acciones="
+		<div class='camp_REP_tie' id='$idp'>$cant</div>
+		";	
+			
+		}else{
+		$acciones="
+		<input type='text' onfocus='this.select();' value='$cant' class='camp_REP_tie' id='$fila-$columna' onchange='updtPed(\"$idp\",\"$fila-$columna\")' tabindex='$fila-$columna'>
+		<input type='hidden' id='t-$fila-$columna' value='$idt'>
+		";
+		}
+		
+	$html .="
 	
-}else{
-$acciones="
-<input type='text' onfocus='this.select();' value='$cant' class='camp_REP_tie' id='$fila-$columna' onchange='updtPed(\"$idp\",\"$fila-$columna\")' tabindex='$fila-$columna'>
-<input type='hidden' id='t-$fila-$columna' value='$idt'>
-";
-}
-
-$html .="
-
-<td class='' style='width:24px;border-bottom: 1px solid #888888;'>
-
-<input type='hidden' value='' id='d-$idp'>
-$acciones
-</td>
+	<td class='' style='width:24px;border-bottom: 1px solid #888888;'>
+	
+	<input type='hidden' value='' id='d-$idp'>
+	$acciones
+	</td>
+	
+	
+	";	
+	
 
 
-";	
 
-
-$cabe[$nomc]= "<div class='cabtab_REP tab_REP_tie'>$nomc</div>";	
 
 
 
 
 
 	
-}
+}}
 
 
 	
@@ -155,7 +164,7 @@ if(count($cabe)>0){foreach($cabe as $nc => $cod){$cabe2.=$cod;};};
 if(!$todas){$valores['cabe']=$cabe2;};
 
 
-
+$valores['cabe']=$cabe2;
 $valores['roto']=$rotura;
 $valores['html']=$html;
 $valores['nagru']=$nagru;

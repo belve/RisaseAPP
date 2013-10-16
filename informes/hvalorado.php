@@ -396,14 +396,14 @@ if($sumSTI>0){$grid[$fila]['F']=round(($sumVBRU/$sumSTI*100),2);};
 
 
 $anchos['A']=40;
-$anchos['B']=13;
-$anchos['C']=13;
-$anchos['D']=13;
-$anchos['E']=13;
-$anchos['F']=13;
+$anchos['B']=14;
+$anchos['C']=14;
+$anchos['D']=14;
+$anchos['E']=14;
+$anchos['F']=14;
 $anchos['G']=14;
-$anchos['H']=13;
-$anchos['I']=13;
+$anchos['H']=14;
+$anchos['I']=14;
 
 $hoy=date('d') . "/" . date('m') . "/" . date('Y');
 $grid[1]['A']="FECHA IMPRESION: $hoy";
