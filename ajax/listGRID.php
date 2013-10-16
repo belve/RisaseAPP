@@ -88,7 +88,7 @@ $html.="
 ";
 
 $count=0;$columna=0;
-foreach ($tindm as $idt => $nomc) {
+foreach ($tiendas as $idt => $nomc) {
 if(array_key_exists($idt, $val)){
 $cant=$val[$idt];$idp=$idpeds[$ida][$idt];	
 }else{
