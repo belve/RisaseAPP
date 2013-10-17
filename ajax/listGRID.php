@@ -14,6 +14,8 @@ $dbnivel->query($queryp);
 $rep=array();$grid=array();$nagru="";
 
 $modi=0;
+
+if($idagrupacion=='GRID'){
 $queryp= "select id_articulo, id_tienda, cantidad, 
 (select nombre from agrupedidos where id=agrupar) as nagru,
 (select estado from agrupedidos where id=agrupar) as estado,
@@ -21,7 +23,19 @@ $queryp= "select id_articulo, id_tienda, cantidad,
 (select codbarras from articulos where id=id_articulo) as codbarras, 
 (select refprov from articulos where id=id_articulo) as nomprov, 
 id, tip 
-from pedidos where agrupar=$idagrupacion order by prov, grupo, subgrupo, codigo;";
+from pedidos where estado='A' AND tip=2;";
+	
+}else{
+$queryp= "select id_articulo, id_tienda, cantidad, 
+(select nombre from agrupedidos where id=agrupar) as nagru,
+(select estado from agrupedidos where id=agrupar) as estado,
+(select stock from articulos where id=id_articulo) as stock, 
+(select codbarras from articulos where id=id_articulo) as codbarras, 
+(select refprov from articulos where id=id_articulo) as nomprov, 
+id, tip 
+from pedidos where agrupar=$idagrupacion;";
+}
+
 
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){
@@ -29,6 +43,7 @@ while ($row = $dbnivel->fetchassoc()){
 $idp=$row['id'];$ida=$row['id_articulo'];$idt=$row['id_tienda'];$cant=$row['cantidad'];$nagru=$row['nagru'];$estado=trim($row['estado']);$tip=$row['tip'];
 
 if(array_key_exists($idt, $tiendas)){$tindm[$idt]=$tiendas[$idt];};
+
 
 
 if($row['tip']==1){$todas=1;}else{$todas=0;};
@@ -100,7 +115,7 @@ $html.="
 $count=0;$columna=0;
 
 
-
+if($idagrupacion=='GRID'){$tindm=$tiendas;};
 foreach ($tiendas as $idt => $nomc) {if(array_key_exists($idt, $tindm)){
 		
 $cabe[$nomc]= "<div class='cabtab_REP tab_REP_tie'>$nomc</div>";		

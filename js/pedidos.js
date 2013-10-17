@@ -571,6 +571,34 @@ timerAD(0,'timer4',1);
 }
 
 
+function cargaPedGRID(){$.ajaxSetup({'async': false});	
+
+timerAD(1,'timer4',0);
+
+var url='/ajax/listGRID.php?idagrupacion=GRID';
+$.getJSON(url, function(data) {
+$.each(data, function(key, val) {
+var iframe = document.getElementById('GRID');
+var GRID = iframe.contentDocument || iframe.contentWindow.document;	
+
+if(key=='cabe'){document.getElementById('optCABE').innerHTML=val;};
+//if(key=='roto'){roto(val);};
+if(key=='html'){GRID.getElementById('grid').innerHTML=val;};
+//if(key=='nagru'){document.getElementById('nagru').innerHTML=val;};
+
+});
+});	
+
+timerAD(0,'timer4',0);
+	
+}
+
+
+
+
+
+
+
 
 function pest_Cestado(est,donde){
 if(est=='E'){est='T';};
