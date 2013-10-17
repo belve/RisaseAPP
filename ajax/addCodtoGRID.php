@@ -9,7 +9,7 @@ if (!$dbnivel->open()){die($dbnivel->error());};
 
 $id="";
 #############3 saco lo que se esta repartiendo de ese articulo no finalizado este en reparto o pedido
-$queryp="select id, stock, refprov, (select sum(cantidad) from pedidos where estado != 'F' AND pedidos.id_articulo=articulos.id) as rep from articulos where codbarras=$cod;";
+$queryp="select id, stock, refprov, (select sum(cantidad) from pedidos where (estado != 'F' AND estado !='T') AND pedidos.id_articulo=articulos.id) as rep from articulos where codbarras=$cod;";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){
 $valores['ida']=$row['id'];$id=$row['id'];
