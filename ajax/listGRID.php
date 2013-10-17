@@ -68,9 +68,14 @@ if(count($grid2)>0){
 foreach ($grid2 as $ida => $val){$nomb=$noms[$ida];
 $re=$rep[$ida];
 $stock=$stocks[$ida];
-$stock2=$stock-$re;
+
+if($tip==1){$stock2=$stock;};
+if($tip==2){$stock2=$stock-$re;};	
+
+$stock3=$stock-$re;
+
 $fila++;
-if($stock2 < 0){$st=" style='background-color:#F8CDD9;'";$rotura=1;}else{$st="";};
+if($stock3 < 0){$st=" style='background-color:#F8CDD9;'";$rotura=1;}else{$st="";};
 
 $html.="
 <tr id='$ida' $st>

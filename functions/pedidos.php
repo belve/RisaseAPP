@@ -102,7 +102,7 @@ $dbnivel->query($queryp);
 }
 
 
-$queryp= "select id, nombre from agrupedidos where estado='P' AND tip=$tip;";
+$queryp= "select id, nombre from agrupedidos where estado='P' AND tip=$tip ORDER BY nombre;";
 $dbnivel->query($queryp); 
 while ($row = $dbnivel->fetchassoc()){
 $idagrupado=$row['id'];$nomagrup=$row['nombre'];
@@ -257,12 +257,12 @@ $queryp= "delete from pedidos where cantidad=0;";
 $dbnivel->query($queryp);
 
 if($filtroQ){
-$queryp= "select id, nombre, estado from agrupedidos where tip=$tip $filtroQ order by estado;";
+$queryp= "select id, nombre, estado from agrupedidos where tip=$tip $filtroQ order by estado, nombre;";
 }else{
 $m=date('m') - 1;
 if($m <= 9){$m="0" . $m;};	
 $fecham=date('Y') . "-" . $m . "-" . date('d');	
-$queryp= "select id, nombre, estado from agrupedidos where tip=$tip AND fecha >= '$fecham' order by estado, fecha;";	
+$queryp= "select id, nombre, estado from agrupedidos where tip=$tip AND fecha >= '$fecham' order by estado, nombre;";	
 }
 
 
