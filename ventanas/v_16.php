@@ -62,7 +62,7 @@ $(window).keydown(function(evt) {
 
 	
 <div class="cabREP" style="width: 845px;margin-top:0px ">
-	<div class="cabtab_REP tab_REP_art" onclick="addfGrid();">Artículos</div>
+	<div class="cabtab_REP tab_REP_art">Artículos</div>
 	<div class="cabtab_REP tab_REP_rep">REP</div>
 	<div class="cabtab_REP tab_REP_alm">ALM</div>
 
@@ -78,8 +78,9 @@ echo "<div onclick='sumatienda($postiendas,\"$nomt\")' class='cabtab_REP tab_REP
 </div>
 	
 </div>
-<iframe id="GRID" src="/ajax/grid.php" width="847" height="540" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
+<iframe id="GRID" src="/ajax/grid.php" width="847" height="520" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
 
+<input type="text" class="medio" id="cod" onchange="addfGrid();"  />
 
 
 

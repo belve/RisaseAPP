@@ -600,25 +600,48 @@ timerAD(0,'timer4',0);
 
 
 function addfGrid(){
-var iframe = document.getElementById('GRID');
-var GRID = iframe.contentDocument || iframe.contentWindow.document;	
+
+var cod=document.getElementById('cod').value;	
+
+var url='/ajax/addCodtoGRID.php?cod=' + cod;
+
+window.top.GnewfilHTM_2=window.top.GnewfilHTM;
+
+$.getJSON(url, function(data) {
+$.each(data, function(key, val) {
+
+if(key=='error'){alert(val);};
+if(key=='ida'){window.top.GnewfilHTM=window.top.GnewfilHTM.replace(/%ida%/g,val);window.top.idachk=val;};
+if(key=='sto'){window.top.GnewfilHTM=window.top.GnewfilHTM.replace(/%sto%/g,val);};
+if(key=='nom'){window.top.GnewfilHTM=window.top.GnewfilHTM.replace(/%nom%/g,val);};
+if(key=='dr'){window.top.GnewfilHTM=window.top.GnewfilHTM.replace(/%dr%/g,val);};
+if(key=='sto2'){window.top.GnewfilHTM=window.top.GnewfilHTM.replace(/%sto2%/g,val);};
+
+});
+});	
 
 var fil=Number(window.top.Gmaxfil);
 fil++;
+window.top.GnewfilHTM=window.top.GnewfilHTM.replace(/%fil%/g,fil);
+
+	
+var iframe = document.getElementById('GRID');
+var GRID = iframe.contentDocument || iframe.contentWindow.document;	
+
+
 var cont=window.top.GnewfilHTM;
 
-cont=cont.replace(/%fil%/g,fil);
-cont=cont.replace(/%ida%/g,'122222');
-cont=cont.replace(/%sto%/g,'20');
-cont=cont.replace(/%nom%/g,'ijijijijij');
 
+if(GRID.getElementById(window.top.idachk)){
+alert ('Codigo ya listado en el grid');	
+}else{
 GRID.getElementById('grid').innerHTML=GRID.getElementById('grid').innerHTML + cont;
 GRID.getElementById(fil + '-1').focus();
+}
 
-console.log('ggg:' + window.top.Gmaxfil);
-console.log('fil:' + fil);
-//console.log(window.top.GnewfilHTM);	
-	
+window.top.GnewfilHTM=window.top.GnewfilHTM_2;	
+document.getElementById('cod').value="";
+document.getElementById('cod').focus();	
 }
 
 

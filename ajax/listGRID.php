@@ -148,10 +148,10 @@ $NFhtml="
 
 <td style='width:28px;border-bottom: 1px solid #888888;border-right:2px solid orange;'>
 <div class='camp_REP_alm' id='sto-%ida%'> %sto% </div>
-<input type='hidden' id='stck-%ida%' value='%sto%'>
+<input type='hidden' id='stck-%ida%' value='%sto2%'>
 <input type='hidden' id='fl-%fil%' value='%ida%'>
 <input type='hidden' id='dr-%fil%' value='%dr%'>
-<input type='hidden' id='idgf-fil' value=''>
+<input type='hidden' id='idgf-%fil%' value='$idagrupacion'>
 </td>
 
 
