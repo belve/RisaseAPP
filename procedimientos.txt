@@ -21,6 +21,18 @@ http://192.168.1.11/importadores/pedidos.php
 
 http://192.168.1.11/importadores/detpedido.php
 
+____________________________________________________
+update repartir set estado='P' where estado='A';
+update repartir set estado='T' where estado='E';
+
+update agrupedidos set estado='P' where estado='A';
+update agrupedidos set estado='T' where estado='E';
+
+update pedidos set estado='-' where estado='A';
+update pedidos set estado='T' where estado='E';
+_______________________________________________________
+
+
 
 ultimos tickets buenos 2013-10-14
 delete from tickets where fecha >= '2013-10-14';
@@ -28,10 +40,12 @@ delete from ticket_det where fecha >= '2013-10-14';
 
 http://192.168.1.11/importadores/tickects.php
 http://192.168.1.11/importadores/detTicket.php
+
+___________________________________________________ arreglar de codigo tambien FER2
 Arreglar tickets COR4
 UPDATE tickets set id_tienda=12 where id_tienda=9 and id_ticket like 'COR4%';
 UPDATE ticket_det set id_tienda=12 where id_tienda=9 and id_ticket like 'COR4%';
-
+_______________________________________________________________________
 
 stocklocales
 copiar todos los mdbs
