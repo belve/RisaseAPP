@@ -584,17 +584,42 @@ var GRID = iframe.contentDocument || iframe.contentWindow.document;
 if(key=='cabe'){document.getElementById('optCABE').innerHTML=val;};
 //if(key=='roto'){roto(val);};
 if(key=='html'){GRID.getElementById('grid').innerHTML=val;};
+if(key=='new_fil'){window.top.GnewfilHTM=val;};
+if(key=='maxfil'){window.top.Gmaxfil=val;};
 //if(key=='nagru'){document.getElementById('nagru').innerHTML=val;};
 
 });
 });	
 
 timerAD(0,'timer4',0);
-	
+
+
+
+
 }
 
 
+function addfGrid(){
+var iframe = document.getElementById('GRID');
+var GRID = iframe.contentDocument || iframe.contentWindow.document;	
 
+var fil=Number(window.top.Gmaxfil);
+fil++;
+var cont=window.top.GnewfilHTM;
+
+cont=cont.replace(/%fil%/g,fil);
+cont=cont.replace(/%ida%/g,'122222');
+cont=cont.replace(/%sto%/g,'20');
+cont=cont.replace(/%nom%/g,'ijijijijij');
+
+GRID.getElementById('grid').innerHTML=GRID.getElementById('grid').innerHTML + cont;
+GRID.getElementById(fil + '-1').focus();
+
+console.log('ggg:' + window.top.Gmaxfil);
+console.log('fil:' + fil);
+//console.log(window.top.GnewfilHTM);	
+	
+}
 
 
 
@@ -858,6 +883,7 @@ var fil=dats[0];
 var ida=document.getElementById('fl-' +fil).value;
 var idg=document.getElementById('idgf-' +fil).value;
 var idt=document.getElementById('t-' +field).value;
+var dr=document.getElementById('dr-' +fil).value;
 var rep=0;	
 	
 var valor=document.getElementById(field).value;
@@ -878,7 +904,7 @@ for (var i = 0; i < 30; i++) {if(document.getElementById(fil + '-' + i)){rep=rep
 
 
 var stck=Number(document.getElementById('stck-' + ida).value);
-var nst=stck-rep;
+var nst=stck-rep-dr;
 document.getElementById('sto-' + ida).innerHTML=nst;
 document.getElementById('rep-' + ida).innerHTML=rep;	
 

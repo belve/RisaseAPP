@@ -9,8 +9,22 @@ foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo .
 
 if (!$dbnivel->open()){die($dbnivel->error());};
 
+$idgs=array();$borr=array();
+if($idg=='GRID'){
+$queryp= "select agrupar from pedidos where id_tienda=$idt AND tip=2 AND estado='A';;";
+$dbnivel->query($queryp);echo "\n" . $queryp;
+while ($row = $dbnivel->fetchassoc()){$idg=$row['agrupar'];};
 
+$queryp= "select id, agrupar from pedidos where id_tienda=$idt AND tip=2 AND estado='A' AND id_articulo='$ida';";
+$dbnivel->query($queryp);echo "\n" . $queryp;
+while ($row = $dbnivel->fetchassoc()){$idgs[$row['id']]=$row['agrupar']; if(count($idgs)>1){$borr[$row['id']]=1;}else{ $idp=$row['id']; };   };	
 
+if(count($borr)>0){foreach ($borr as $idpb => $pp){
+$queryp= "delete from pedidos where id=$idpb;";
+$dbnivel->query($queryp);echo "\n" . $queryp;		
+}}
+	
+}
 
 
 if(!$idp){

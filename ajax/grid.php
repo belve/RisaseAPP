@@ -54,10 +54,12 @@ td		{width: 90px; border: 1px  solid #888888; margin:0px;}
 <input type="hidden" id="LinCOP" value="" >
 
 <table id='grid'>
-
-
-
 </table>
+
+<table id='grid2'>
+</table>
+
+
 
 <script>
 

@@ -15,15 +15,18 @@ $rep=array();$grid=array();$nagru="";
 
 $modi=0;
 
+
+
+
 if($idagrupacion=='GRID'){
-$queryp= "select id_articulo, id_tienda, cantidad, 
+$queryp= "select id_articulo, id_tienda, sum(cantidad) as cantidad, 
 (select nombre from agrupedidos where id=agrupar) as nagru,
 (select estado from agrupedidos where id=agrupar) as estado,
 (select stock from articulos where id=id_articulo) as stock, 
 (select codbarras from articulos where id=id_articulo) as codbarras, 
 (select refprov from articulos where id=id_articulo) as nomprov, 
 id, tip 
-from pedidos where estado='A' AND tip=2;";
+from pedidos where estado='A' AND tip=2 GROUP BY id_articulo, id_tienda;";
 	
 }else{
 $queryp= "select id_articulo, id_tienda, cantidad, 
@@ -67,6 +70,14 @@ $cb[$g][$sg][$cod]=$ida;
 }
 
 
+#############3 saco lo que se esta repartiendo de ese articulo no finalizado este en reparto o pedido
+$queryp="select id_articulo, sum(cantidad) as rep from pedidos where estado != 'F' GROUP BY id_articulo;";
+$dbnivel->query($queryp);
+while ($row = $dbnivel->fetchassoc()){
+$rep2[$row['id_articulo']]=$row['rep'];
+}
+
+
 
 
 
@@ -76,18 +87,25 @@ $grid2[$codb]=$grid[$codb];
 }}}
 
 
-$html="";$cabe=array();$rotura=0;
+$html="";$cabe=array();$rotura=0; 
 
 $fila=0;
 if(count($grid2)>0){
 foreach ($grid2 as $ida => $val){$nomb=$noms[$ida];
 $re=$rep[$ida];
+if(array_key_exists($ida, $rep2)){
+$re2=$rep2[$ida];
+}else{
+$re2=0;	
+}
 $stock=$stocks[$ida];
 
 if($tip==1){$stock2=$stock;};
-if($tip==2){$stock2=$stock-$re;};	
+if($tip==2){$stock2=$stock-$re2;};	
 
-$stock3=$stock-$re;
+$stock3=$stock-$re2;
+
+$dr=$re2-$re;
 
 $fila++;
 if($stock3 < 0){$st=" style='background-color:#F8CDD9;'";$rotura=1;}else{$st="";};
@@ -107,15 +125,44 @@ $html.="
 <div class='camp_REP_alm' id='sto-$ida'>$stock2</div>
 <input type='hidden' id='stck-$ida' value='$stock'>
 <input type='hidden' id='fl-$fila' value='$ida'>
+<input type='hidden' id='dr-$fila' value='$dr'>
 <input type='hidden' id='idgf-$fila' value='$idagrupacion'>
 </td>
 
 ";
 
+
+
+$NFhtml="
+
+
+<tr id='%ida%'>
+
+<td style='border-bottom: 1px solid #888888;' ondblclick='ShowDetArt(1,%ida%);'>
+<div class='camp_REP_art' id='z1'> %nom% </div>
+</td>
+
+<td style='width:28px;border-bottom: 1px solid #888888;'>
+<div class='camp_REP_rep' id='rep-%ida%'> </div>
+</td>
+
+<td style='width:28px;border-bottom: 1px solid #888888;border-right:2px solid orange;'>
+<div class='camp_REP_alm' id='sto-%ida%'> %sto% </div>
+<input type='hidden' id='stck-%ida%' value='%sto%'>
+<input type='hidden' id='fl-%fil%' value='%ida%'>
+<input type='hidden' id='dr-%fil%' value='%dr%'>
+<input type='hidden' id='idgf-fil' value=''>
+</td>
+
+
+";
+
+
+
 $count=0;$columna=0;
 
 
-if($idagrupacion=='GRID'){$tindm=$tiendas;};
+//if($idagrupacion=='GRID'){$tindm=$tiendas;};
 foreach ($tiendas as $idt => $nomc) {if(array_key_exists($idt, $tindm)){
 		
 $cabe[$nomc]= "<div class='cabtab_REP tab_REP_tie'>$nomc</div>";		
@@ -131,6 +178,7 @@ $cabe[$nomc]= "<div class='cabtab_REP tab_REP_tie'>$nomc</div>";
 			}	
 			
 		if(!$modi){
+		$acciones2="";	
 		$acciones="
 		<div class='camp_REP_tie' id='$idp'>$cant</div>
 		";	
@@ -140,12 +188,17 @@ $cabe[$nomc]= "<div class='cabtab_REP tab_REP_tie'>$nomc</div>";
 		<input type='text' onfocus='this.select();' value='$cant' class='camp_REP_tie' id='$fila-$columna' onchange='updtPed(\"$idp\",\"$fila-$columna\")' tabindex='$fila-$columna'>
 		<input type='hidden' id='t-$fila-$columna' value='$idt'>
 		";
+		
+		$acciones2="
+		<input type='text' onfocus='this.select();' value='' class='camp_REP_tie' id='%fil%-$columna' onchange='updtPed(\"\",\"%fil%-$columna\")' tabindex='%fil%-$columna'>
+		<input type='hidden' id='t-%fil%-$columna' value='$idt'>
+		";
+		
 		}
 		
 	$html .="
 	
 	<td class='' style='width:24px;border-bottom: 1px solid #888888;'>
-	
 	<input type='hidden' value='' id='d-$idp'>
 	$acciones
 	</td>
@@ -153,7 +206,16 @@ $cabe[$nomc]= "<div class='cabtab_REP tab_REP_tie'>$nomc</div>";
 	
 	";	
 	
-
+  $NFhtml .="
+  
+ 	<td class='' style='width:24px;border-bottom: 1px solid #888888;'>
+	<input type='hidden' value='' id='d-'>
+	$acciones2
+	</td>
+	
+	
+  
+  ";
 
 
 
@@ -194,6 +256,9 @@ $valores['roto']=$rotura;
 $valores['html']=$html;
 $valores['nagru']=$nagru;
 $valores['estado']=$estado;
+$valores['maxfil']=$fila;
+$valores['new_fil']=$NFhtml;
+
 echo json_encode($valores);
 
 ?>
