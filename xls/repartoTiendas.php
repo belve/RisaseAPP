@@ -8,6 +8,9 @@ foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo .
 
 if (!$dbnivel->open()){die($dbnivel->error());};
 
+$queryp= "delete from pedidos where cantidad=0;";
+$dbnivel->query($queryp);
+
 $queryp= "select nombre, estado  from agrupedidos where id=$id";
 $dbnivel->query($queryp); 
 while ($row = $dbnivel->fetchassoc()){$nomrep=$row['nombre'];$estado=$row['estado'];};

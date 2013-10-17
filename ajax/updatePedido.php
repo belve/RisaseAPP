@@ -2,12 +2,15 @@
 require_once("../db.php");
 require_once("../variables.php");
 
-$idp="";$ida="";$idg="";$ida="";$cant="";
+$idp="";$ida="";$idg="";$ida="";$cant=0;
 foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
 
 
 
 if (!$dbnivel->open()){die($dbnivel->error());};
+
+
+
 
 
 if(!$idp){
@@ -25,11 +28,11 @@ $dbnivel->query($queryp);echo "\n" . $queryp;
 while ($row = $dbnivel->fetchassoc()){$estado=$row['estado'];$fecha=$row['fecha']; $tip=$row['tip'];};
 if($estado=='P'){$estado='-';};
 	
+if($cant>0){
 $queryp= "INSERT INTO pedidos (id_articulo,id_tienda,cantidad,estado,tip,agrupar,fecha) values ('$ida','$idt','$cant','$estado','$tip','$idg','$fecha');";
 $dbnivel->query($queryp);echo "\n" . $queryp;	
-	
 }	
-
+}	
 
 
 

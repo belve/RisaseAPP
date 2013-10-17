@@ -8,6 +8,10 @@ $grid=array();$cb=array();
 
 if (!$dbnivel->open()){die($dbnivel->error());};
 
+$queryp= "delete from pedidos where cantidad=0;";
+$dbnivel->query($queryp);
+
+
 $queryp= "select id_grupo, clave, (select nombre from grupos where id=id_grupo) as ng, nombre as ns from subgrupos;";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){

@@ -26,6 +26,9 @@ $hora=date('H') . date('i');
 $html="";
 if (!$dbnivel->open()){die($dbnivel->error());};
 
+$queryp= "delete from pedidos where cantidad=0;";
+$dbnivel->query($queryp);
+
 
 if($agrupar){
 
@@ -130,6 +133,10 @@ global $dbnivel;
 $pendientes=array();$html="";
 
 if (!$dbnivel->open()){die($dbnivel->error());};
+
+$queryp= "delete from pedidos where cantidad=0;";
+$dbnivel->query($queryp);
+
 $queryp= "SELECT id_articulo, sum(cantidad) as rep, 
 (select codbarras from articulos where articulos.id=pedidos.id_articulo) as codbarras, 
 (select refprov from articulos where articulos.id=pedidos.id_articulo) as refprov 
@@ -174,6 +181,11 @@ global $dbnivel;
 $pendientes=array();$html="";$cb=array();
 
 if (!$dbnivel->open()){die($dbnivel->error());};$count=0;
+
+$queryp= "delete from pedidos where cantidad=0;";
+$dbnivel->query($queryp);
+
+
 $queryp= "SELECT id_articulo, sum(cantidad) as rep, 
 (select codbarras from articulos where articulos.id=pedidos.id_articulo) as codbarras, 
 (select refprov from articulos where articulos.id=pedidos.id_articulo) as refprov 
@@ -241,7 +253,8 @@ $filtroQ="";
 
 
 if (!$dbnivel->open()){die($dbnivel->error());};	
-
+$queryp= "delete from pedidos where cantidad=0;";
+$dbnivel->query($queryp);
 
 if($filtroQ){
 $queryp= "select id, nombre, estado from agrupedidos where tip=$tip $filtroQ order by estado;";

@@ -6,6 +6,11 @@ require_once("../variables.php");require_once("../functions/gridreparto.php");
 
 if (!$dbnivel->open()){die($dbnivel->error());};
 
+
+$queryp= "delete from pedidos where cantidad=0;";
+$dbnivel->query($queryp);
+
+
 $rep=array();$grid=array();$nagru="";
 
 $modi=0;

@@ -13,7 +13,8 @@ $grid=array();
 
 if (!$dbnivel->open()){die($dbnivel->error());};
 
-
+$queryp= "delete from pedidos where cantidad=0;";
+$dbnivel->query($queryp);
 
 if($listador==1){
 $options="";
