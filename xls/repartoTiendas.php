@@ -168,7 +168,7 @@ global $id_tienda;
 global $styleArray;
 
 
-$maxlin=44;
+$maxlin=42;
 
 
 

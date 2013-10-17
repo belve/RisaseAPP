@@ -23,12 +23,15 @@ http://192.168.1.11/importadores/detpedido.php
 
 ____________________________________________________
 update repartir set estado='P' where estado='A';
+update repartir set estado='A' where estado='T';
 update repartir set estado='T' where estado='E';
 
 update agrupedidos set estado='P' where estado='A';
+update agrupedidos set estado='A' where estado='T';
 update agrupedidos set estado='T' where estado='E';
 
 update pedidos set estado='-' where estado='A';
+update pedidos set estado='A' where estado='T';
 update pedidos set estado='T' where estado='E';
 _______________________________________________________
 

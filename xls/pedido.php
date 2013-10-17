@@ -147,11 +147,11 @@ $colu=1;
 		
 	foreach ($reparto as $grupo => $datos){foreach ($datos as $articulo => $cantidad){
 			
-		if(($colu==1)&&($cont>=40)){
+		if(($colu==1)&&($cont>=38)){
 		$cont=1;$colu=2;$lastgroup="";$lin=$inipag+1;	
 		}	
 		
-		if(($colu==2)&&($cont>=40)){$colu=1;
+		if(($colu==2)&&($cont>=38)){$colu=1;
 		$cont=1;$lastgroup="";$pag++;
 		$objPHPExcel->getActiveSheet()->setBreak( 'A' . $lin , PHPExcel_Worksheet::BREAK_ROW );	$lin++;
 		$inipag=$lin;	
