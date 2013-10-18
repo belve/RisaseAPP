@@ -31,6 +31,8 @@ margin: 0px;
 height:15px; width:98%; padding-left:3px; cursor:pointer;
 }
 
+.mphotos {position:absolute; top: 95px; left:400px; cursor: pointer;}
+
 .blnco_limpio li:hover{background-color:#8DC29E;}
 .blnco_limpio li:pointed{background-color:#8DC29E;}
 

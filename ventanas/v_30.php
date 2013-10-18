@@ -161,12 +161,16 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 	 
 	 <div id="reloj" class="relojCalc" style="visibility: hidden;"><img src="/iconos/loading1.gif"></div>
 	 <div id="status" style="font-size: 12px; text-decoration: blink; color: #888888;"></div>
+	 
+
 </div>
+
+<div id="mphotos" class="mphotos" style="visibility: hidden;"><img style="height: 62px;" src="/iconos/iphoto.png" / onclick="popupPhotos();"></div>
 
 <div class="timer" id="timer" style="visibility: hidden; left: 47%; top:50%;"><img src="/iconos/loading1.gif"></div>
 
 <iframe id="excel" src="" width="0" height="0" border="0" frameborder="0" marginheight="0" scrolling="no"></iframe>
-
+<iframe id="photos" src="" width="0" height="0" border="0" frameborder="0" marginheight="0" scrolling="no"></iframe>
 
 <script>
 	window.top.OrdV=1;

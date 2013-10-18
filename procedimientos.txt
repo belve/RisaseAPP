@@ -35,6 +35,7 @@ update pedidos set estado='A' where estado='T';
 update pedidos set estado='T' where estado='E';
 _______________________________________________________
 
+Reparar stock de repartos
 
 
 ultimos tickets buenos 2013-10-14

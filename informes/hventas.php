@@ -476,6 +476,7 @@ $BTrang['A1:S1']=1;
 $BTrang['A2:O2']=1;
 $BTrang['B3:O3']=1;
 
+$_SESSION['cgd'] = $cdg; 
 $_SESSION['grid'] = $grid; 
 $_SESSION['anchos'] = $anchos;
 $_SESSION['align'] = $align;

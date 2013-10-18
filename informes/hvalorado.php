@@ -429,6 +429,7 @@ $BTrang['B3:G3']=1;
 
 
 
+$_SESSION['cgd'] = $cdg; 
 $_SESSION['grid'] = $grid; 
 $_SESSION['anchos'] = $anchos;
 $_SESSION['align'] = $align;

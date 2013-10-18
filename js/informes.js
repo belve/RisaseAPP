@@ -82,7 +82,7 @@ getDATA(url);
 
 
 function getDATA(url){$.ajaxSetup({'async': false});
-
+document.getElementById('mphotos').setAttribute("style", "visibility:hidden;");
 if(window.debug ==1) {console.log('url: ' + url);};
 document.getElementById('status').innerHTML="CALCULANDO";
 document.getElementById('reloj').setAttribute("style", "visibility:visible;");
@@ -112,7 +112,19 @@ setTimeout('finCALC()', timeOFF);
 function finCALC(){$.ajaxSetup({'async': false});
 
 document.getElementById('status').innerHTML="";
-document.getElementById('reloj').setAttribute("style", "visibility:hidden;");	
+document.getElementById('reloj').setAttribute("style", "visibility:hidden;");
+document.getElementById('mphotos').setAttribute("style", "visibility:visible;");
+
+	
+}
+
+
+function popupPhotos(){
+
+window.open('/informes/photos.php','1382091219155','width=300,height=700,toolbar=0,menubar=0,location=0,status=0,scrollbars=1,resizable=1,left=0,top=0');
+
+
+	
 }
 
 
