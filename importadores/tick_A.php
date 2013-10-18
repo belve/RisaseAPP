@@ -1,5 +1,5 @@
 <?php 
-$date="2007-12-31";
+
 function add_days($Date1, $days) {
  
 
@@ -56,7 +56,7 @@ $dsn = "Driver={SQL Server};Server=SERVER;Database=Risasa;";
 $db->Connect($dsn,'remoto','azul88');
 $db->debug = false;
 $sql="SELECT tic_idticket, tic_idEmpleado, tic_fecha, tic_importe FROM Tickets where tic_fecha = '$date2';";
-$rs = $db->Execute($sql);
+$rs = $db->Execute($sql); echo "\n" . $sql;
 
 
 $rows = $rs->GetRows();
