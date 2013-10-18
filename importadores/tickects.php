@@ -73,7 +73,13 @@ $date=$row[2];
 $date=substr($date,0,4) . "-" . substr($date,5,2)  . "-" . substr($date,8,2);
 $imp=$row[3];
 
-if(is_numeric(substr($t,3,1))){$codt=substr($t, 0,3);}else{$codt=substr($t, 0,4);};
+
+if(strlen($t)==14){$tpt=3;};
+if(strlen($t)==15){$tpt=3; if(!is_numeric(substr($t,3,1))){$tpt=3;};  };
+if(strlen($t)==16){$tpt=4;};
+$codt=substr($t, 0,$tpt);
+
+
 $num=str_replace($codt, '', $t);
 $hora=substr($num,6,2);
 $hora=$hora*1;
