@@ -113,6 +113,6 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 
 
 <script>
- window.location.href = "/importadores/tickects.php";
+ window.location.href = "/importadores/tick_A.php";
 </script>
 
