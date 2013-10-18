@@ -16,7 +16,7 @@ $Date2 = $date->format('Y-m-d');
 
 
 require_once("../db.php");$rows=array();
-$dbnivel=new DB('192.168.1.11','edu','admin','risase');
+$dbnivel=new DB('192.168.1.11','edu','admin','risasa');
 if (!$dbnivel->open()){die($dbnivel->error());};
 
 
