@@ -1,7 +1,7 @@
 <?php
 set_time_limit(0);
 
-
+/*
 ##### datos OLD
 $Ntab='Subgrupos';
 
@@ -17,6 +17,33 @@ $nNid='id';
 $nNrel='id_grupo';
 $nNnom='nombre';
 $nNclave='clave';
+*/
+
+
+##### datos OLD
+$Ntab='Subgrupos';
+
+$Nid='sub_IdSubgrupo';
+
+$camp[1]='sub_IdGrupo';
+$camp[2]='sub_Subgrupo';
+$camp[3]='sub_numero';
+
+
+
+##### datos NEW
+$nNtab="subgrupos";
+
+$nNid='id';
+
+
+$ncamp[1]='id_grupo';
+$ncamp[2]='nombre';
+$ncamp[3]='clave';
+
+
+
+
 
 
 
