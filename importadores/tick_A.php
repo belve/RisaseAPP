@@ -16,7 +16,7 @@ $Date2 = $date->format('Y-m-d');
 
 
 require_once("../db.php");$rows=array();
-$dbnivel=new DB('192.168.1.11','edu','admin','risasa');
+$dbnivel=new DB('192.168.1.11','edu','admin','risase');
 if (!$dbnivel->open()){die($dbnivel->error());};
 
 
@@ -26,7 +26,15 @@ while ($row = $dbnivel->fetchassoc()){
 	$idttt=$row['id'];$nidtienda=$row['id_tienda'];
 	$tiendas[$nidtienda]=$idttt;
 }
+if (!$dbnivel->close()){die($dbnivel->error());};
 
+
+
+
+
+require_once("../db.php");$rows=array();
+$dbnivel=new DB('192.168.1.11','edu','admin','risasa');
+if (!$dbnivel->open()){die($dbnivel->error());};
 
 
 $queryp= "select max(fecha) as date from tickets;";
