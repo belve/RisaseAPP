@@ -57,6 +57,7 @@ $db->debug = false;
 $sql="SELECT * FROM $Ntab ORDER BY $Nid ASC ";
 $rs = $db->Execute($sql);
 
+print_r($rows);
 
 $rows = $rs->GetRows();
 foreach ($rows as $key => $row) {foreach($camp as $nkey => $nomcampo){
