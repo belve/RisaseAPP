@@ -149,7 +149,7 @@ if($vcods[$cd]['sti_V']>0){$vcods[$cd]['vbru_V_P']=round(($vcods[$cd]['vbru_V']/
 
 $vcods[$cd]['valv_V']=round($cant*$vcods[$cd]['pvp'],2);$VV[$cd]=$vcods[$cd]['valv_V'];
 $vcods[$cd]['bene_V']=round($vcods[$cd]['valv_V'] - $vcods[$cd]['sti_V'],2);$BE[$cd]=$vcods[$cd]['bene_V'];
-$BU[$cd]=round($vcods[$cd]['bene_V']/$vcods[$cd]['sti'],2);
+if($vcods[$cd]['sti']>0){$BU[$cd]=round($vcods[$cd]['bene_V']/$vcods[$cd]['sti'],2);}else{$BU[$cd]="";};
 }
 
 

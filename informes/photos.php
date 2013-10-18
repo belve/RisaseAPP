@@ -70,11 +70,15 @@ $valores[$codbarras]= $urlimages . "nodisp.jpg";
 <body>
 <div style="margin-left: 15px;">	
 <?php
-
+$lastu="";
 foreach ($valores as $cod => $url) {
 
 echo "<div style='margin-top:10px; font-size:15px; font-weight:bold; text-align:center; width:130px;'> $cod </div>";
+
+if($lastu!=$url){
 echo "<div> <img src='$url' style='height:100px;'> </div>";  		
+$lastu=$url;
+}
 	
 }
 
