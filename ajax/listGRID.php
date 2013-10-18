@@ -29,14 +29,14 @@ id, tip
 from pedidos where estado='A' AND tip=2 GROUP BY id_articulo, id_tienda;";
 	
 }else{
-$queryp= "select id_articulo, id_tienda, cantidad, 
+$queryp= "select id_articulo, id_tienda, sum(cantidad) as cantidad, 
 (select nombre from agrupedidos where id=agrupar) as nagru,
 (select estado from agrupedidos where id=agrupar) as estado,
 (select stock from articulos where id=id_articulo) as stock, 
 (select codbarras from articulos where id=id_articulo) as codbarras, 
 (select refprov from articulos where id=id_articulo) as nomprov, 
 id, tip 
-from pedidos where agrupar=$idagrupacion;";
+from pedidos where agrupar=$idagrupacion GROUP BY id_articulo, id_tienda;";
 }
 
 
