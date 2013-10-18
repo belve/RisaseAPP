@@ -121,7 +121,7 @@ document.getElementById('mphotos').setAttribute("style", "visibility:visible;");
 
 function popupPhotos(){
 
-window.open('/informes/photos.php','1382091219155','width=300,height=700,toolbar=0,menubar=0,location=0,status=0,scrollbars=1,resizable=1,left=0,top=0');
+window.open('/informes/photos.php','1382091219155','width=500,height=700,toolbar=0,menubar=0,location=0,status=0,scrollbars=1,resizable=1,left=0,top=0');
 
 
 	

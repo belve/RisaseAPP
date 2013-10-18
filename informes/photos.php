@@ -70,14 +70,23 @@ $valores[$codbarras]= $urlimages . "nodisp.jpg";
 <body>
 <div style="margin-left: 15px;">	
 <?php
-$lastu="";
+$lastu="";$sumcods="";$lasti="";
 foreach ($valores as $cod => $url) {
 
-echo "<div style='margin-top:10px; font-size:15px; font-weight:bold; text-align:center; width:130px;'> $cod </div>";
+
 
 if($lastu!=$url){
-echo "<div> <img src='$url' style='height:100px;'> </div>";  		
+if($lasti) {		$sumcods=substr($sumcods, 0,-1);
+				 	echo "<div style='margin-top:10px; font-size:13px; font-weight:bold;  width:130px;'> $sumcods </div>"; 
+				 	echo $lasti; $lasti="";$sumcods="";};
+						
+$lasti= "<div> <img src='$url' style='height:100px;'> </div>";  		
 $lastu=$url;
+$sumcods.=$cod . ",";	
+
+}else{
+
+$sumcods.=$cod . ",";	
 }
 	
 }
