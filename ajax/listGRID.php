@@ -11,10 +11,9 @@ $queryp= "delete from pedidos where cantidad=0;";
 $dbnivel->query($queryp);
 
 
-$rep=array();$grid=array();$nagru="";
+$rep=array();$grid=array();$nagru="";$NFhtml="";
 
-$modi=0;
-
+$modi=0;$todas="";
 
 
 
@@ -27,8 +26,18 @@ $queryp= "select id_articulo, id_tienda, sum(cantidad) as cantidad,
 (select refprov from articulos where id=id_articulo) as nomprov, 
 id, tip 
 from pedidos where estado='A' AND tip=2 GROUP BY id_articulo, id_tienda;";
+
+$todas=0;
 	
 }else{
+	
+$queryp= "select tip from agrupedidos where id=$idagrupacion;";
+$dbnivel->query($queryp);$cb=array();
+while ($row = $dbnivel->fetchassoc()){
+if($row['tip']==1){$todas=1;}else{$todas=0;};
+}	
+	
+	
 $queryp= "select id_articulo, id_tienda, sum(cantidad) as cantidad, 
 (select nombre from agrupedidos where id=agrupar) as nagru,
 (select estado from agrupedidos where id=agrupar) as estado,
@@ -40,7 +49,7 @@ from pedidos where agrupar=$idagrupacion GROUP BY id_articulo, id_tienda;";
 }
 
 
-$dbnivel->query($queryp);
+$dbnivel->query($queryp);$cb=array();
 while ($row = $dbnivel->fetchassoc()){
 	
 $idp=$row['id'];$ida=$row['id_articulo'];$idt=$row['id_tienda'];$cant=$row['cantidad'];$nagru=$row['nagru'];$estado=trim($row['estado']);$tip=$row['tip'];
@@ -49,7 +58,7 @@ if(array_key_exists($idt, $tiendas)){$tindm[$idt]=$tiendas[$idt];};
 
 
 
-if($row['tip']==1){$todas=1;}else{$todas=0;};
+
 
 
 if(($tip == '2')&&($estado=='P')){$modi=1;};
@@ -79,12 +88,12 @@ $rep2[$row['id_articulo']]=$row['rep'];
 
 
 
-
-
+$grid2=array();
+if(count($cb)>0){
 ksort($cb);
 foreach ($cb as $g => $sgs) {ksort($sgs); foreach ($sgs as $sg => $cods) {ksort($cods); foreach ($cods as $cod => $codb) {
 $grid2[$codb]=$grid[$codb];
-}}}
+}}}}
 
 
 $html="";$cabe=array();$rotura=0; 

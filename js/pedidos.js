@@ -563,6 +563,8 @@ if(key=='roto'){roto(val);};
 if(key=='html'){GRID.getElementById('grid').innerHTML=val;};
 if(key=='nagru'){parent.document.getElementById('nagru').innerHTML=val;};
 if(key=='estado'){pest_Cestado(val,parent.document);};
+if(key=='maxfil'){GRID.getElementById('filas').value=val;};
+
 });
 });	
 parent.document.getElementById('ag_selected').value=idag;
@@ -675,6 +677,12 @@ console.log('roto: ' + window.top.roto);
 
 function cambiaEst_agru(est,tip){$.ajaxSetup({'async': false});	
 
+var iframe = document.getElementById('GRID');
+var GRID = iframe.contentDocument || iframe.contentWindow.document;	
+var filasg=GRID.getElementById('filas').value;
+
+if((filasg==0)&&(est=='T')){alert('No es posible enviar a tienda agrupaciones vacias');}else{
+
 var oldest=document.getElementById('est_sel_act').value;
 
 if((oldest=='T')||(oldest=='F')){
@@ -720,6 +728,8 @@ timerAD(0,'timer4',0);
 }
 
 }}
+cargaAgrupados2(tip,0,"","");
+}
 
 }
 
