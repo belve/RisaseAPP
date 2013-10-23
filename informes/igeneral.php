@@ -224,7 +224,7 @@ $BTrang['B' . $fila . ':' . 'I' . $fila]=1;
 
 $anchos['A']=15;
 $anchos['B']=12;
-$anchos['C']=28;
+$anchos['C']=35;
 $anchos['D']=15;
 $anchos['E']=15;
 $anchos['F']=15;
