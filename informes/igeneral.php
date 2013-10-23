@@ -32,7 +32,7 @@ $BE=array();
 $paginas=array();
 $fini="";
 $ffin="";
-$format=array();
+$format=array(); $BOLDrang=array();
 
 foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
 

@@ -32,7 +32,7 @@ $BE=array();
 $paginas=array();
 $fini="";
 $ffin="";
-
+$BOLDrang=array();
 foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
 $fdesde=$fini; $fhasta=$ffin;
 $fini=substr($fini, 6,4) . "-" . substr($fini, 3,2) . "-" . substr($fini, 0,2);

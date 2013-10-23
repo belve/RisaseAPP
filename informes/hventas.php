@@ -28,7 +28,7 @@ $codVEND=array();
 $codPOR=array();
 $paginas=array();
 $format=array();
-
+$BOLDrang=array();
 $fini="";
 $ffin="";
 
