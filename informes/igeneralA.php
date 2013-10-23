@@ -172,7 +172,7 @@ foreach ($cdg as $cd => $point) {
 
 
 
-if($count > 42){
+if($count > 49){
 $lg=""; $lsg=""; $first=1;	$count=0;
 if ($c < 4){$c++; $fila=$lastfil;}else{ $c=1; $paginas[$fila]=1; $lastfil=$fila;};
 }
@@ -217,8 +217,8 @@ if($sg!=$lsg){
 }
 
 
-$align[$A . $fila]='L';
-$align[$B . $fila]='R';
+$align[$A . $fila]='C';
+$align[$B . $fila]='C';
 
 $grid[$fila][$A]=$cd;
 $grid[$fila][$B]=$datos[$cd]['stock']; 
