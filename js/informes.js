@@ -1,6 +1,75 @@
 window.debug =1;
 
 
+
+
+
+
+function informeG(){
+
+
+var prov=document.getElementById(2).value
+var grup=document.getElementById(3).value
+var subg=document.getElementById(4).value
+var colo=document.getElementById(5).value
+var codi=document.getElementById(6).value
+var pvp=document.getElementById(7).value
+var desd=document.getElementById(8).value
+var hast=document.getElementById(9).value
+var temp=document.getElementById(10).value
+var detalles=document.getElementById(11).value
+var comentarios=document.getElementById(12).value
+
+
+
+	var url="/informes/igeneral.php?";
+	var act=window.top.OrdV;
+	var actO=window.top.OrdVO;
+	
+
+
+
+	
+url = url 
+ + "id_proveedor=" + prov
+ + "&id_grupo=" + grup
+ + "&id_subgrupo=" + subg
+ + "&id_color=" + colo
+ + "&codigo=" + codi
+ + "&pvp=" + pvp
+ + "&desde=" + desd
+ + "&hasta=" + hast
+ + "&temporada=" + temp 
+ + "&comentarios=" + comentarios
+ + "&detalles=" + detalles
+ + "&act=" + act 
+ + "&actO=" + actO 
+ + '&listador=1'; 
+
+
+
+
+getDATA(url);
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function informe(codigo){
 
 
@@ -82,7 +151,7 @@ getDATA(url);
 
 
 function getDATA(url){$.ajaxSetup({'async': false});
-document.getElementById('mphotos').setAttribute("style", "visibility:hidden;");
+if(document.getElementById('mphotos')){document.getElementById('mphotos').setAttribute("style", "visibility:hidden;");};
 if(window.debug ==1) {console.log('url: ' + url);};
 document.getElementById('status').innerHTML="CALCULANDO";
 document.getElementById('reloj').setAttribute("style", "visibility:visible;");
@@ -113,7 +182,7 @@ function finCALC(){$.ajaxSetup({'async': false});
 
 document.getElementById('status').innerHTML="";
 document.getElementById('reloj').setAttribute("style", "visibility:hidden;");
-document.getElementById('mphotos').setAttribute("style", "visibility:visible;");
+if(document.getElementById('mphotos')){document.getElementById('mphotos').setAttribute("style", "visibility:visible;");};
 
 	
 }
