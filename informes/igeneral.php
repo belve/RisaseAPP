@@ -231,12 +231,12 @@ $BOLDrang['A' . $fila . ':' . 'I' . $fila]=2;
 $anchos['A']=15;
 $anchos['B']=17;
 $anchos['C']=33;
-$anchos['D']=12;
-$anchos['E']=12;
-$anchos['F']=12;
-$anchos['G']=12;
-$anchos['H']=12;
-$anchos['I']=12;
+$anchos['D']=11;
+$anchos['E']=11;
+$anchos['F']=11;
+$anchos['G']=11;
+$anchos['H']=11;
+$anchos['I']=11;
 
 
 

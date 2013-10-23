@@ -486,7 +486,7 @@ $_SESSION['BTrang']=$BTrang;
 $_SESSION['paginas']=$paginas;
 $_SESSION['format']=$format;
 $_SESSION['nomfil']="HVentas";
-
+$_SESSION['BOLDrang']=$BOLDrang;
 $res['ng']=count($grid)+count($anchos)+count($align)+count($crang)+count($Mrang)+count($BTrang)+count($paginas)+count($format);
 echo json_encode($res);
 //echo "rows: " . (count($grid)+count($anchos)+count($align)+count($crang));
