@@ -172,7 +172,7 @@ foreach ($cdg as $cd => $point) {
 
 
 
-if($count > 39){
+if($count > 42){
 $lg=""; $lsg=""; $first=1;	$count=0;
 if ($c < 4){$c++; $fila=$lastfil;}else{ $c=1; $paginas[$fila]=1; $lastfil=$fila;};
 }
@@ -229,16 +229,16 @@ $BOLDrang	[$A . $fila . ':' . $B . $fila]=2;
 
 }}
 
-$anchos['A']=19;
+$anchos['A']=18;
 $anchos['B']=13;
 $anchos['C']=2;
-$anchos['D']=19;
+$anchos['D']=18;
 $anchos['E']=13;
 $anchos['F']=2;
-$anchos['G']=19;
+$anchos['G']=18;
 $anchos['H']=13;
 $anchos['I']=2;
-$anchos['J']=19;
+$anchos['J']=18;
 $anchos['K']=13;
 
 $_SESSION['BOLDrang']=$BOLDrang;
