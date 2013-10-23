@@ -183,6 +183,7 @@ $fila++; $count++;
 $A=$cols[$c]['A'];
 $B=$cols[$c]['B'];
 
+
 if ($first) {
 $grid[$fila][$A]="CODIGO";
 $grid[$fila][$B]="STOCK."; 
