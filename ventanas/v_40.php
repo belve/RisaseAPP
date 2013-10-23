@@ -116,14 +116,20 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 
 <div style="clear:both;"></div>
 
+<div style="float: left; position: relative; margin-top: 15px; border: 1px solid #888888; height: 50px; width: 130px; text-align: center; padding-top:7px;">
 
+<input type="checkbox" id="cong" /> <br>
+Ocultar congelados	
+	
+
+</div>
 
 
 
 <div style="float: left; position: relative; margin-left: 20px; margin-top: 5px;">
 	
-	<div class="boton" onclick="javascript:informeG();" >Informe >> </div>
-	
+	<div class="boton" onclick="javascript:informeG('I');" >Informe >> </div>
+	<div class="boton" onclick="javascript:informeG('A');" >Informe Almacen >> </div>
 
 </div>
 

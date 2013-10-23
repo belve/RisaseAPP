@@ -5,7 +5,7 @@ window.debug =1;
 
 
 
-function informeG(){
+function informeG(d){
 
 
 var prov=document.getElementById(2).value
@@ -20,9 +20,19 @@ var temp=document.getElementById(10).value
 var detalles=document.getElementById(11).value
 var comentarios=document.getElementById(12).value
 
+if(document.getElementById('cong').checked){
+var cong=1;	
+}else{
+var cong=0;	
+}
 
 
+
+if(d=='I'){
 	var url="/informes/igeneral.php?";
+}else{
+	var url="/informes/igeneralA.php?";	
+}
 	var act=window.top.OrdV;
 	var actO=window.top.OrdVO;
 	
@@ -44,6 +54,7 @@ url = url
  + "&detalles=" + detalles
  + "&act=" + act 
  + "&actO=" + actO 
+ + "&cong=" + cong 
  + '&listador=1'; 
 
 
