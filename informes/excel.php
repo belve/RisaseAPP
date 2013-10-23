@@ -10,7 +10,7 @@ $BTrang=$_SESSION['BTrang'];
 $nomfil=$_SESSION['nomfil'];
 $format=$_SESSION['format'];
 $paginas=$_SESSION['paginas'];
-
+$BOLDrang=$_SESSION['BOLDrang'];
 $debug=0;
 
 require_once '../Classes/PHPExcel.php';
@@ -34,6 +34,23 @@ $styleArray2 = array(
     )
   )
 );
+
+
+$bold1 = array(
+    'font'  => array(
+        'bold'  => true,
+        'size'  => 10
+        )
+	);
+
+$bold0 = array(
+    'font'  => array(
+        'bold'  => false,
+        'size'  => 10
+        )
+	);
+
+
 
 
 foreach ($grid as $fil => $colums) { foreach ($colums as $col => $val){ 
@@ -60,6 +77,13 @@ foreach ($BTrang as $rang => $value) {
 	$sheet->getStyle($rang)->applyFromArray($styleArray2);	
 	}
 }
+
+foreach ($BOLDrang as $rang => $value) {
+	if($value==1){$sheet->getStyle($rang)->applyFromArray($bold1);}else{$sheet->getStyle($rang)->applyFromArray($bold0);};};
+
+
+
+
 
 
 $for= '#,##0.00_-[$EUR ]';

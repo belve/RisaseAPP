@@ -162,15 +162,17 @@ foreach ($cdg as $cd => $point) {$fila++; //$cuenf++;
 
 if ($first) {
 $grid[$fila]['B']="CODIGO";
-$grid[$fila]['C']="REFERENCIA PROV"; 
+$grid[$fila]['C']="REF. PROV."; 
 $grid[$fila]['D']="STOCK"; 
 $grid[$fila]['E']="INICIAL"; 
-$grid[$fila]['F']="TEMPORADA"; 
+$grid[$fila]['F']="TEMP"; 
 $grid[$fila]['G']="CONG"; 
 $grid[$fila]['H']="PVP"; 
 $grid[$fila]['I']="NETO"; 
 
 $align['A' . $fila . ':' . 'I' . $fila]='C';
+$BOLDrang['A' . $fila . ':' . 'I' . $fila]=1;
+$BTrang['B' . $fila . ':' . 'I' . $fila]=1;
 $fila++;$fila++;$first=0;
 
 }
@@ -189,7 +191,8 @@ $sg=substr($cd,0,2);
 
 if($g!=$lg){
 	$grid[$fila]['A']=$grupos[$g]; $lg=$g;
-	$align['A' . $fila . ':' . 'I' . $fila]='R';
+	$align['A' . $fila . ':' . 'I' . $fila]='C';
+	$BOLDrang['A' . $fila . ':' . 'I' . $fila]=1;
 	}
 
 if(!array_key_exists($sg, $subgrupos)){$subgrupos[$sg]="GENERICO";};
@@ -198,11 +201,14 @@ $sng=$subgrupos[$sg];
 if($sg!=$lsg){$fila++;
 	 $grid[$fila]['B']=$sng; 
 	 $lsg=$sg; 
-	 $align['A' . $fila . ':' . 'I' . $fila]='L';
+	 $align['A' . $fila . ':' . 'I' . $fila]='C';
+	 $BOLDrang['A' . $fila . ':' . 'I' . $fila]=1;
 	 $fila++;}
 
 
-$align['A' . $fila . ':' . 'I' . $fila]='C';
+$align['A' . $fila . ':' . 'B' . $fila]='C';
+$align['C' . $fila]='L';
+$align['D' . $fila . ':' . 'I' . $fila]='C';
 $grid[$fila]['B']=$cd;
 $grid[$fila]['C']=$datos[$cd]['refprov']; 
 $grid[$fila]['D']=$datos[$cd]['stock']; 
@@ -212,7 +218,7 @@ $grid[$fila]['G']=$datos[$cd]['congelado'];
 $grid[$fila]['H']=$datos[$cd]['pvp']; 
 $grid[$fila]['I']=$datos[$cd]['precioneto']; 
 $BTrang['B' . $fila . ':' . 'I' . $fila]=1;
-
+$BOLDrang['A' . $fila . ':' . 'I' . $fila]=2;
 
 
 
@@ -223,20 +229,20 @@ $BTrang['B' . $fila . ':' . 'I' . $fila]=1;
 
 
 $anchos['A']=15;
-$anchos['B']=12;
-$anchos['C']=35;
-$anchos['D']=15;
-$anchos['E']=15;
-$anchos['F']=15;
-$anchos['G']=15;
-$anchos['H']=15;
-$anchos['I']=15;
+$anchos['B']=17;
+$anchos['C']=33;
+$anchos['D']=12;
+$anchos['E']=12;
+$anchos['F']=12;
+$anchos['G']=12;
+$anchos['H']=12;
+$anchos['I']=12;
 
 
 
 
 
-
+$_SESSION['BOLDrang']=$BOLDrang;
 $_SESSION['cgd'] = $cdg; 
 $_SESSION['grid'] = $grid; 
 $_SESSION['anchos'] = $anchos;
