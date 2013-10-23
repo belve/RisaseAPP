@@ -129,7 +129,17 @@ $subgrupos[$row['id_grupo'] . $row['clave']]=$row['SG'];
 if (!$dbnivel->close()){die($dbnivel->error());};
 
 
+$cols[1]['A']='A';
+$cols[1]['B']='B';
 
+$cols[2]['A']='D';
+$cols[2]['B']='E';
+
+$cols[3]['A']='G';
+$cols[3]['B']='H';
+
+$cols[4]['A']='J';
+$cols[4]['B']='K';
 
 
 $act=1;$actO='A';
@@ -154,86 +164,82 @@ $crang=array();
 $Mrang=array();
 $BTrang=array();
 
-$fila=0;$cuenf=0; $first=1; $lg=""; $lsg="";
+$fila=0;$cuenf=0; $first=1; $lg=""; $lsg=""; $c=1; $count=0; $lastfil=$fila;
 
 if(count($cdg)>0){
-foreach ($cdg as $cd => $point) {$fila++; //$cuenf++;
+foreach ($cdg as $cd => $point) {
 //if($cuenf >= 8){$cuenf=0;$paginas[$fila+4]=1;}	
 
-if ($first) {
-$grid[$fila]['B']="CODIGO";
-$grid[$fila]['C']="REF. PROV."; 
-$grid[$fila]['D']="STOCK"; 
-$grid[$fila]['E']="INICIAL"; 
-$grid[$fila]['F']="TEMP"; 
-$grid[$fila]['G']="CONG"; 
-$grid[$fila]['H']="PVP"; 
-$grid[$fila]['I']="NETO"; 
 
-$align['A' . $fila . ':' . 'I' . $fila]='C';
-$BOLDrang['A' . $fila . ':' . 'I' . $fila]=1;
-$BTrang['B' . $fila . ':' . 'I' . $fila]=1;
-$fila++;$fila++;$first=0;
+
+if($count > 39){
+$lg=""; $lsg=""; $first=1;	$count=0;
+if ($c < 4){$c++; $fila=$lastfil;}else{ $c=1; $paginas[$fila]=1; $lastfil=$fila;};
+}
+
+
+$fila++; $count++;
+
+$A=$cols[$c]['A'];
+$B=$cols[$c]['B'];
+
+if ($first) {
+$grid[$fila][$A]="CODIGO";
+$grid[$fila][$B]="STOCK."; 
+
+
+$align		[$A . $fila . ':' . $B . $fila]='C';
+$BOLDrang	[$A . $fila . ':' . $B . $fila]=1;
+$BTrang		[$A . $fila . ':' . $B . $fila]=1;
+$fila++;$count++; $first=0;
 
 }
 
 
-//$BTrang['A' . $fila . ':' . 'I' . ($fila+3)]=2;
-//$format['B' . $fila . ':' . 'B' . ($fila+1)]=1;
-//$format['B' . ($fila+2) . ':' . 'I' . ($fila+2)]=1;
-//$format['B' . ($fila+3) . ':' . 'I' . ($fila+3)]=2;
-
-//$align['B' . $fila . ':' . 'I' . $fila]='C';
 
 $g=substr($cd,0,1);
 $sg=substr($cd,0,2);
 
 
-if($g!=$lg){
-	$grid[$fila]['A']=$grupos[$g]; $lg=$g;
-	$align['A' . $fila . ':' . 'I' . $fila]='C';
-	$BOLDrang['A' . $fila . ':' . 'I' . $fila]=1;
-	}
 
 if(!array_key_exists($sg, $subgrupos)){$subgrupos[$sg]="GENERICO";};
-$sng=$subgrupos[$sg];
 
-if($sg!=$lsg){$fila++;
-	 $grid[$fila]['B']=$sng; 
-	 $lsg=$sg; 
-	 $align['A' . $fila . ':' . 'I' . $fila]='C';
-	 $BOLDrang['A' . $fila . ':' . 'I' . $fila]=1;
-	 $fila++;}
+$sng=$grupos[$g] . " / " . $subgrupos[$sg];
+
+if($sg!=$lsg){
+	 $fila++; $count++; $lsg=$sg; 
+	 $grid[$fila][$A]=$sng; 
+	 $align		[$A . $fila . ':' . $B . $fila]='C';
+	 $BOLDrang	[$A . $fila . ':' . $B . $fila]=1;
+	 $Mrang		[$A . $fila . ':' . $B . $fila]=1;
+	 $fila++; $count++;
+}
 
 
-$align['A' . $fila . ':' . 'B' . $fila]='C';
-$align['C' . $fila]='L';
-$align['D' . $fila . ':' . 'I' . $fila]='C';
-$grid[$fila]['B']=$cd;
-$grid[$fila]['C']=$datos[$cd]['refprov']; 
-$grid[$fila]['D']=$datos[$cd]['stock']; 
-$grid[$fila]['E']=$datos[$cd]['stockini']; 
-$grid[$fila]['F']=$datos[$cd]['temporada']; 
-$grid[$fila]['G']=$datos[$cd]['congelado']; 
-$grid[$fila]['H']=$datos[$cd]['pvp']; 
-$grid[$fila]['I']=$datos[$cd]['precioneto']; 
-$BTrang['B' . $fila . ':' . 'I' . $fila]=1;
-$BOLDrang['A' . $fila . ':' . 'I' . $fila]=2;
+$align[$A . $fila]='L';
+$align[$B . $fila]='R';
+
+$grid[$fila][$A]=$cd;
+$grid[$fila][$B]=$datos[$cd]['stock']; 
+
+$BTrang		[$A . $fila . ':' . $B . $fila]=1;
+$BOLDrang	[$A . $fila . ':' . $B . $fila]=2;
 
 
 
 }}
 
-$anchos['A']=15;
-$anchos['B']=17;
-$anchos['C']=33;
-$anchos['D']=11;
-$anchos['E']=11;
-$anchos['F']=11;
-$anchos['G']=11;
-$anchos['H']=11;
-$anchos['I']=11;
-
+$anchos['A']=19;
+$anchos['B']=13;
+$anchos['C']=2;
+$anchos['D']=19;
+$anchos['E']=13;
+$anchos['F']=2;
+$anchos['G']=19;
+$anchos['H']=13;
+$anchos['I']=2;
+$anchos['J']=19;
+$anchos['K']=13;
 
 $_SESSION['BOLDrang']=$BOLDrang;
 $_SESSION['cgd'] = $cdg; 
