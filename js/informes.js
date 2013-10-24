@@ -300,8 +300,15 @@ document.getElementById('reloj').setAttribute("style", "visibility:visible;");
 	$.each(data, function(key, val) {
 	if(key=='ng'){
 	
+	if(val>0){
 	var timeOFF=val*6;
 	loadExcel(timeOFF);
+	}else{
+	alert('Los datos seleccionados, no generan resultados');
+	document.getElementById('status').innerHTML="";
+	document.getElementById('reloj').setAttribute("style", "visibility:hidden;");	
+	}
+	
 	}
 	
 	});

@@ -29,7 +29,7 @@ $codPOR=array();
 $PC=array();
 $VV=array();
 $BE=array();
-$paginas=array();$grid=array();
+$paginas=array();$grid=array();$cord=array();
 $fini="";
 $ffin="";
 $format=array(); $BOLDrang=array();
@@ -216,7 +216,7 @@ $BOLDrang	[$A . $fila . ':' . $C . $fila]=2;
 
 
 
-}}}
+}}
 
 $anchos['A']=18;
 $anchos['B']=10;
@@ -240,5 +240,11 @@ $_SESSION['paginas']=$paginas;
 $_SESSION['nomfil']="Inventario-" . date('Y') . date('m') . date('d');
 
 $res['ng']=count($grid)+count($anchos)+count($align)+count($crang)+count($Mrang)+count($BTrang)+count($paginas)+count($format);
+
+}else{
+$res['ng']=0;	
+}
+
+
 echo json_encode($res);
 ?>

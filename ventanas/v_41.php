@@ -58,12 +58,12 @@ window.top.tselALL	=0;
 		<?php echo $cajt; ?>		
 </div>
 
-<div style="float: left; position: relative; margin-left: 10px;   margin-top: 15px;">	
+<div style="float: left; position: relative; margin-left: 20px;   margin-top: 14px;">	
 	
 	<div style=""> <input value="dd/mm/aaaa" type="text" class="medio" id="fini" onfocus="javascript:dlF(this.id);" onkeyup="javascript:tabF(this.id);"></div>
 	<div style=""> <input class="medio" value="dd/mm/aaaa" type="text" id="ffin" onfocus="javascript:dlF(this.id);" onkeyup="javascript:tabF(this.id);" style="color:#333333;"></div>
 	
-	<div >
+	<div style="margin-top:7px; margin-bottom: 14px;">
 		<div id="BotR" class="BotRD" style="background-color:#8DC29E;" onclick="botRD('rot');">ROT</div> <div id="BotD" class="BotRD" onclick="botRD('dev');">DEV</div>
 		<div style="clear:both;"></div>
 	</div>
@@ -71,7 +71,7 @@ window.top.tselALL	=0;
 		window.top.brot=1;
 		window.top.bdev=0;
 	</script>
-	<div class="boton" onclick="javascript:informeR();" >Informe >> </div>
+	<div class="boton" style=" margin-left: 2px; width: 81px;"; onclick="javascript:informeR();" >Informe >> </div>
 </div>
 
 
