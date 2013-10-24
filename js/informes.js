@@ -2,6 +2,135 @@ window.debug =1;
 
 
 
+function botRD(b){
+
+if(b=='rot'){
+
+if((window.top.brot==1)&&(window.top.bdev==1)){window.top.brot=0;}else if(window.top.brot==0){window.top.brot=1;}	
+
+}	
+
+if(b=='dev'){
+if((window.top.bdev==1)&&(window.top.brot==1)){window.top.bdev=0;}else if(window.top.bdev==0){window.top.bdev=1;}	
+
+}
+
+
+if(window.top.bdev==0){
+document.getElementById('BotD').setAttribute("style", "background-color:none;");
+}else{
+document.getElementById('BotD').setAttribute("style", "background-color:#8DC29E;");	
+}	
+
+
+if(window.top.brot==0){
+document.getElementById('BotR').setAttribute("style", "background-color:none;");
+}else{
+document.getElementById('BotR').setAttribute("style", "background-color:#8DC29E;");	
+}	
+}
+
+
+function cajtie(idt){
+	
+if(window.top.tsel[idt]==0){window.top.tsel[idt]=1;}else{window.top.tsel[idt]=0;};	
+
+var tie=window.top.tsel;
+for (var i = 0; i < tie.length; i++) {if(document.getElementById('idt_' + i)){	
+	
+	if(tie[i]==0){
+		document.getElementById('idt_' + i).setAttribute("style", "background-color:white;");
+		}else{
+		document.getElementById('idt_' + i).setAttribute("style", "background-color:#8DC29E;");	
+		}
+
+	
+}}	
+	
+}
+
+
+
+
+
+function tselALL(){
+if(window.debug ==1) {console.log('window.top.tselALL: ' + window.top.tselALL); };
+if(window.debug ==1) {console.log('window.top.tsel: '); console.info(window.top.tsel); };	
+
+var tie=window.top.tsel;
+
+if (window.top.tselALL==0){
+
+window.top.tselALL=1;
+for (var i = 0; i < tie.length; i++) {if(document.getElementById('idt_' + i)){	
+window.top.tsel[i]=1;
+document.getElementById('idt_' + i).setAttribute("style", "background-color:#8DC29E;");
+}}
+	
+}else{
+
+window.top.tselALL=0;
+for (var i = 0; i < tie.length; i++) {if(document.getElementById('idt_' + i)){	
+window.top.tsel[i]=0;
+document.getElementById('idt_' + i).setAttribute("style", "background-color:white;");
+}}
+	
+}
+
+
+
+
+if(window.debug ==1) {console.log('window.top.tselALL: ' + window.top.tselALL); };
+if(window.debug ==1) {console.log('window.top.tsel: '); console.info(window.top.tsel); };	
+	
+}
+
+
+
+
+
+function informeR(){
+
+var ttss=""; var tn=0;
+var tsel=window.top.tsel;
+for (var i = 0; i < tsel.length; i++) {if(tsel[i]==1){
+ttss=ttss + i + ','; tn++;
+}}
+
+if(tn==0){alert('Debe seleccionar alguna tienda.');}else{
+
+var fini=document.getElementById('fini').value
+var ffin=document.getElementById('ffin').value
+fini=fini.replace('dd/mm/aaaa','');
+ffin=ffin.replace('dd/mm/aaaa','');
+
+if((fini=="")||(ffin=="")){
+alert('Debe introducir un rango de fechas');	
+}else{
+
+var url="/informes/iRoturas.php?";	
+	
+url = url 
+
+ + "&fini=" + fini 
+ + "&ffin=" + ffin 
+ + "&ttss=" + ttss 
+ + "&rot=" + window.top.brot  
+ + "&dev=" + window.top.bdev  
+ + '&listador=1'; 
+
+getDATA(url);
+
+
+}}
+
+}
+
+
+
+
+
+
 
 
 
