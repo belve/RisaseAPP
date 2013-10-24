@@ -102,6 +102,10 @@ $cols[2]['A']='E';
 $cols[2]['B']='F';
 $cols[2]['C']='G';
 
+$cols[3]['A']='I';
+$cols[3]['B']='J';
+$cols[3]['C']='K';
+
 
 
 $act=1;$actO='A';
@@ -139,7 +143,7 @@ foreach ($cdgs as $cd => $point) {
 
 if($count > 49){
 $lg=""; $lsg=""; $first=1;	$count=0; $lidt="";
-if ($c < 4){$c++; $fila=$lastfil;}else{ $c=1; $paginas[$fila]=1; $lastfil=$fila;};
+if ($c < 3){$c++; $fila=$lastfil;}else{ $c=1; $paginas[$fila]=1; $lastfil=$fila;};
 }
 
 
@@ -225,7 +229,10 @@ $anchos['D']=4;
 $anchos['E']=18;
 $anchos['F']=10;
 $anchos['G']=10;
-
+$anchos['H']=4;
+$anchos['I']=18;
+$anchos['J']=10;
+$anchos['K']=10;
 
 $_SESSION['BOLDrang']=$BOLDrang;
 $_SESSION['cgd'] = $cdg; 
