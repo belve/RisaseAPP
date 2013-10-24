@@ -143,7 +143,7 @@ foreach ($cdgs as $cd => $point) {
 
 if($count > 49){
 $lg=""; $lsg=""; $first=1;	$count=0; $lidt="";
-if ($c < 3){$c++; $fila=$lastfil;}else{ $c=1; $paginas[$fila]=1; $lastfil=$fila;};
+if ($c < 2){$c++; $fila=$lastfil;}else{ $c=1; $paginas[$fila]=1; $lastfil=$fila;};
 }
 
 
