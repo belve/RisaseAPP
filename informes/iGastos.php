@@ -70,17 +70,17 @@ $subgrupos[$row['id_grupo'] . $row['clave']]=$row['SG'];
 if (!$dbnivel->close()){die($dbnivel->error());};
 
 
-$cols[1]['A']='A';
-$cols[1]['B']='B';
-$cols[1]['C']='C';
+$cols[1]['A']='B';
+$cols[1]['B']='C';
+$cols[1]['C']='D';
 
-$cols[2]['A']='E';
-$cols[2]['B']='F';
-$cols[2]['C']='G';
+$cols[2]['A']='F';
+$cols[2]['B']='G';
+$cols[2]['C']='H';
 
-$cols[3]['A']='I';
-$cols[3]['B']='J';
-$cols[3]['C']='K';
+$cols[3]['A']='J';
+$cols[3]['B']='K';
+$cols[3]['C']='L';
 
 
 
@@ -102,8 +102,8 @@ $titu['C']="LISTADO PRECIO DE COSTO DE MERCANCÍA";
 $titu['S']="LISTADO PRECIO DE COSTO DE MERCANCÍA EN ALMACÉN";
 
 $fila=1;
-$Mrang		['A' . $fila . ':' . 'G' . $fila]=1;
-$align		['A' . $fila . ':' . 'G' . $fila]='C';
+$Mrang		['A' . $fila . ':' . 'H' . $fila]=1;
+$align		['A' . $fila . ':' . 'H' . $fila]='C';
 $grid[$fila]['A']=$titu[$tipo]; 
 $BOLDrang	['A' . $fila ]=1;
 $fila++; $fila++;
@@ -156,7 +156,7 @@ $sng=$subgrupos[$sg];
 	 $grid[$fila][$B]=$sng; 
 	 $align		[$B . $fila]='L';
 	 
-	 $grid[$fila][$C]=$dat[$tipo]; $sum=$sum+$dat[$tipo]; $total=$total+$dat[$tipo];
+	 $grid[$fila][$C]=number_format($dat[$tipo],2,',','.'); $sum=$sum+$dat[$tipo]; $total=$total+$dat[$tipo];
 	 $align		[$C . $fila]='R';
 	 $BOLDrang	[$A . $fila . ':' . $C . $fila]=2; $subc++;
 	 $fila++; $count++;
@@ -182,23 +182,23 @@ $sng=$subgrupos[$sg];
 
 $fila=48;
 
-$grid[$fila]['F']='TOTAL:'; 
-$align		['F' . $fila]='L';
+$grid[$fila]['G']='TOTAL:'; 
+$align		['G' . $fila]='L';
 
-$grid[$fila]['G']=$total; 
-$align		['G' . $fila]='R';
-$BOLDrang	['A' . $fila . ':' . 'G' . $fila]=1;
+$grid[$fila]['H']=$total; 
+$align		['H' . $fila]='R';
+$BOLDrang	['G' . $fila . ':' . 'H' . $fila]=1;
 
 
-
-$anchos['A']=4;
-$anchos['B']=22;
-$anchos['C']=15;
+$anchos['A']=10;
+$anchos['B']=4;
+$anchos['C']=22;
 $anchos['D']=15;
-$anchos['E']=4;
-$anchos['F']=22;
-$anchos['G']=15;
+$anchos['E']=15;
+$anchos['F']=4;
+$anchos['G']=22;
 $anchos['H']=15;
+$anchos['I']=15;
 
 
 $_SESSION['BOLDrang']=$BOLDrang;
