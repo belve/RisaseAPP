@@ -46,7 +46,7 @@ $queryp= "select id_subgrupo,
 (SELECT clave from subgrupos where id=id_subgrupo ) as idsg, 
 (SELECT nombre from grupos where id=idg ) as ng, 
 sum(stockini * preciocosto) as SI, sum(stock * preciocosto) as SS 
-from articulos WHERE temporada='$temp' GROUP BY id_subgrupo ORDER BY ng,nsg; ";	
+from articulos WHERE temporada='$temp' GROUP BY id_subgrupo ORDER BY idg,idsg; ";	
 $dbnivel->query($queryp);if($debug){echo "$queryp \n\n";};
 echo $dbnivel->error();
 while ($row = $dbnivel->fetchassoc()){
