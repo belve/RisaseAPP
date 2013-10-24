@@ -87,6 +87,43 @@ if(window.debug ==1) {console.log('window.top.tsel: '); console.info(window.top.
 
 
 
+function dlT(id){
+document.getElementById(id).value="";
+document.getElementById(id).setAttribute("style", "color:#333333;");
+}
+
+function tabT(id){
+var fech=document.getElementById(id).value;
+if(fech.length==1){fech=fech + '/';};
+if(fech.length==5){fech=fech.substr(0,4);};
+var fech=fech.replace("//","/");
+document.getElementById(id).value=fech;	
+}
+
+function informeM(t){
+var temp=document.getElementById('temp').value
+temp=temp.replace('t/aa','');
+
+
+if((temp=="")||(temp.length<4)){
+alert('Debe introducir una temporada válida');	
+}else{
+
+var url="/informes/iGastos.php?";	
+	
+url = url 
+
+ + "&temp=" + temp 
+ + "&tipo=" + t 
+ + '&listador=1'; 
+
+getDATA(url);
+
+
+
+}	
+	
+}
 
 
 function informeR(){
