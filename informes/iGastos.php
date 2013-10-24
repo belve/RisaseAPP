@@ -165,7 +165,7 @@ $sng=$subgrupos[$sg];
 	$grid[$fila][$B]='Total'; 
 	$align		[$B . $fila]='L';
 	$BOLDrang	[$A . $fila . ':' . $C . $fila]=1;
-	$grid[$fila][$C]=$sum;
+	$grid[$fila][$C]=number_format($sum,2,',','.');
 	$align		[$C . $fila]='R'; $sum=0;
 	$fila++; $count++;	$fila++; $count++;	
 	 }
@@ -185,7 +185,7 @@ $fila=48;
 $grid[$fila]['G']='TOTAL:'; 
 $align		['G' . $fila]='L';
 
-$grid[$fila]['H']=$total; 
+$grid[$fila]['H']=number_format($total,2,',','.'); 
 $align		['H' . $fila]='R';
 $BOLDrang	['G' . $fila . ':' . 'H' . $fila]=1;
 
