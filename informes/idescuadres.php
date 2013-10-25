@@ -103,13 +103,13 @@ $codigosIN="AND id_articulo IN ($codigosIN)";
 
 
 $agrupaciones="";
-$queryp= "select distinct agrupar from pedidos where ((fecha >= '$fini' AND fecha <= '$ffin') OR tip=1) $codigosIN  AND agrupar is not null;";
+$queryp= "select distinct agrupar from pedidos where agrupar is not null $codigosIN ;";
 $dbnivel->query($queryp); if($debug){echo "$queryp \n\n";};
 while ($row = $dbnivel->fetchassoc()){$agrupaciones .=$row['agrupar'] . ",";};
 $agrupaciones=substr($agrupaciones, 0,-1);
 
 
-$queryp= "select id from agrupedidos where id IN ($agrupaciones) AND (estado='T' OR estado='E' OR estado='F') AND ((fecha >= '$fini' AND fecha <= '$ffin') OR tip=1);";
+$queryp= "select id from agrupedidos where id IN ($agrupaciones) AND (estado='T' OR estado='E' OR estado='F');";
 $dbnivel->query($queryp); if($debug){echo "$queryp \n\n";};
 while ($row = $dbnivel->fetchassoc()){$peds .=$row['id'] . ",";};
 
@@ -125,7 +125,7 @@ while ($row = $dbnivel->fetchassoc()){
 	
 $cd=$row['codbarras']; $idt=$row['id_tienda']; $cant=$row['cant']; $refprov=$row['refprov'];
 
-
+if(array_key_exists($idt,$tiendasN)){
 if(!array_key_exists($cd, $codigos)){
 $codigos[$cd]="$cd / $refprov";
 $g=substr($cd,0,1);$sg=substr($cd,1,1);$c=substr($cd,4);
@@ -133,6 +133,8 @@ $cord[$g][$sg][$c]=$cd;
 $cods .=$cd . ","; 
 $totcod[$cd]=1;
 }
+}
+
 
 $tiends[$idt]=1;
 $enviados[$idt][$cd]=$cant;
@@ -141,16 +143,21 @@ $enviados[$idt][$cd]=$cant;
 
 ############ aqui debo sumar lo enviado en fijarstock
 $queryp= "select (select codbarras from articulos where id=id_articulo) as codbarras, 
-id_tienda, sum(suma) as cant from fij_stock where bd=2 AND (fecha >= '$fini' AND fecha <= '$ffin') $codigosIN group by id_articulo, id_tienda;";
+id_tienda, sum(suma) as cant from fij_stock where bd=2 $codigosIN group by id_articulo, id_tienda;";
 $dbnivel->query($queryp); if($debug){echo "$queryp \n\n";};
 while ($row = $dbnivel->fetchassoc()){
-$cd=$row['codbarras']; $idt=$row['id_tienda']; $cant=$row['cant']; 
+$cd=$row['codbarras']; $idt=$row['id_tienda']; $cant=$row['cant'];
+
+if(array_key_exists($idt,$tiendasN)){ 
 if(array_key_exists($idt, $enviados)){
 if(array_key_exists($cd, $enviados[$idt])){	
 $enviados[$idt][$cd]=$enviados[$idt][$cd]+$cant;	
 
 }else{$enviados[$idt][$cd]=$cant;	}
 }else{$enviados[$idt][$cd]=$cant;	}
+}
+
+
 }
 ########################################################
 
@@ -160,13 +167,14 @@ $enviados[$idt][$cd]=$enviados[$idt][$cd]+$cant;
 $cods=substr($cods, 0,-1);
 
 $codv=array();
-$queryp= "select id_articulo, id_tienda, sum(cantidad) as cant, sum(importe * cantidad) as imp, importe from ticket_det where (fecha >= '$fini' AND fecha <= '$ffin')
- AND id_articulo IN ($cods) group by id_articulo, id_tienda;";
+$queryp= "select id_articulo, id_tienda, sum(cantidad) as cant, sum(importe * cantidad) as imp, importe from ticket_det where id_articulo IN ($cods) group by id_articulo, id_tienda;";
 $dbnivel->query($queryp); if($debug){echo "$queryp \n\n";};
 $cods2="";
 while ($row = $dbnivel->fetchassoc()){
 $cd=$row['id_articulo']; $idt=$row['id_tienda']; $cant=$row['cant']; $imp=$row['imp'];
+if(array_key_exists($idt,$tiendasN)){
 $vendidos[$idt][$cd]=$cant;
+}
 }
 $cods2=substr($cods2, 0,-1);
 
@@ -248,44 +256,117 @@ $BTrang=array();
 $cols[1]['A']='A';
 $cols[1]['B']='B';
 $cols[1]['C']='C';
+$cols[1]['D']='D';
 
-$cols[2]['A']='E';
-$cols[2]['B']='F';
-$cols[2]['C']='G';
-
-$cols[3]['A']='I';
-$cols[3]['B']='J';
-$cols[3]['C']='K';
+$cols[2]['A']='F';
+$cols[2]['B']='G';
+$cols[2]['C']='H';
+$cols[2]['D']='I';
 
 
-$fila=0;
+$cols[3]['A']='K';
+$cols[3]['B']='L';
+$cols[3]['C']='M';
+
+
+$fila=0;$count=0;$cabecera=1;$lastfil=$fila;$f=0;$romp=0;$pt=1;$first=1;$Lend=50;
 $c=1; $lidt="";
 if(count($cdg)>0){ foreach ($cdg as $idt => $valueC) {
 foreach ($valueC as $codbar => $point) {
+if($first){$lidt=$idt;$first=0;};		
 	
-$fila++; $count++;
+	
+
+
+if($count > 49){
+if ($c < 2){$Lend=$fila ;$c++; $fila=$lastfil+3; $count=3;}else{  $romp=1;};
+}
+
+
+
+
+
+
+if($lidt!=$idt){
+	$romp=1;	
+	$lidt=$idt;
+	$fila=$Lend;
+}
+
+
+
+if($romp){$romp=0;
+$c=1;
+$paginas[$fila]=1;
+$lastfil=$fila; $count=0;
+$romp=0;
+$pt=1;
+
+
+}	
+
+
 
 $A=$cols[$c]['A'];
 $B=$cols[$c]['B'];
 $C=$cols[$c]['C'];
+$D=$cols[$c]['D'];
 
-if($lidt!=$idt){$lidt=$idt;
+
+if($pt){
+$fila++; $count++;	
 $grid[$fila][$A]=$tiendasN[$idt];
-$align		[$A . $fila . ':' . $C . $fila]='C';
-$Mrang		[$A . $fila . ':' . $C . $fila]=1;
-$BOLDrang	[$A . $fila . ':' . $C . $fila]=1;	
+$align		['A' . $fila . ':' . 'I' . $fila]='C';
+$Mrang		['A' . $fila . ':' . 'I' . $fila]=1;
+$BOLDrang	['A' . $fila . ':' . 'I' . $fila]=1;
+$crang		['A' . $fila . ':' . 'I' . $fila]='8AE65C'; 	
 $fila++; $count++;
+
+$grid[$fila]['A']='CODIGO';
+$grid[$fila]['B']='STK';
+$grid[$fila]['C']='ORD';
+$grid[$fila]['D']='TIE';
+
+$grid[$fila]['F']='CODIGO';
+$grid[$fila]['G']='STK';
+$grid[$fila]['H']='ORD';
+$grid[$fila]['I']='TIE';
+
+
+$align		['A' . $fila . ':' . 'D' . $fila]='C';
+$BOLDrang	['A' . $fila . ':' . 'D' . $fila]=1;	
+$BTrang		['A' . $fila . ':' . 'D' . $fila]=1;
+
+$align		['F' . $fila . ':' . 'I' . $fila]='C';
+$BOLDrang	['F' . $fila . ':' . 'I' . $fila]=1;	
+$BTrang		['F' . $fila . ':' . 'I' . $fila]=1;
+
+
+
+$fila++; $count++;
+
+
+
+$pt=0;
 }
+
+
+
+
+
 
 $S="";
 if(array_key_exists($codbar, $stocks[$idt])){$S=$stocks[$idt][$codbar];};
 
+$fila++; $count++;
 $grid[$fila][$A]=$codbar;
 $grid[$fila][$B]=$S;
+$grid[$fila][$C]='';//$fila;
+$grid[$fila][$D]='';//$count;
 
-$BTrang		[$A . $fila . ':' . $C . $fila]=1;
-$BOLDrang	[$A . $fila . ':' . $C . $fila]=2;
-
+$BTrang		[$A . $fila . ':' . $D . $fila]=1;
+$BOLDrang	[$A . $fila . ':' . $D . $fila]=2;
+$align		[$A . $fila . ':' . $D . $fila]='C';
 
 
 
@@ -295,15 +376,16 @@ $BOLDrang	[$A . $fila . ':' . $C . $fila]=2;
 
 
 $anchos['A']=18;
-$anchos['B']=10;
-$anchos['C']=10;
-$anchos['D']=4;
-$anchos['E']=18;
-$anchos['F']=10;
-$anchos['G']=10;
-$anchos['H']=4;
-$anchos['I']=18;
-$anchos['J']=10;
+$anchos['B']=8;
+$anchos['C']=8;
+$anchos['D']=8;
+
+$anchos['E']=4;
+$anchos['F']=18;
+$anchos['G']=8;
+$anchos['H']=8;
+$anchos['I']=8;
+$anchos['J']=4;
 $anchos['K']=10;
 
 
@@ -316,7 +398,7 @@ $_SESSION['Mrang']=$Mrang;
 $_SESSION['BTrang']=$BTrang;
 $_SESSION['paginas']=$paginas;
 $_SESSION['format']=$format;
-$_SESSION['nomfil']="HVentas";
+$_SESSION['nomfil']="DescuadresStockFECHA-" . date('Y') . date('m') . date('d');
 $_SESSION['BOLDrang']=$BOLDrang;
 $res['ng']=count($grid)+count($anchos)+count($align)+count($crang)+count($Mrang)+count($BTrang)+count($paginas)+count($format);
 
