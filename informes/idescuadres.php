@@ -199,7 +199,7 @@ foreach ($vendidos as $idt => $vals) { foreach ($vals as $cb => $qty) {
 
 
 
-
+$cBAK=array();
 
 $act=1;$actO='A';
 if($act==1){
@@ -290,7 +290,9 @@ $BOLDrang	[$A . $fila . ':' . $C . $fila]=2;
 
 
 
-}}}
+}}
+
+
 
 $anchos['A']=18;
 $anchos['B']=10;
@@ -317,6 +319,13 @@ $_SESSION['format']=$format;
 $_SESSION['nomfil']="HVentas";
 $_SESSION['BOLDrang']=$BOLDrang;
 $res['ng']=count($grid)+count($anchos)+count($align)+count($crang)+count($Mrang)+count($BTrang)+count($paginas)+count($format);
+
+
+}else{
+$res['ng']=0;	
+}
+
+
 echo json_encode($res);
 //echo "rows: " . (count($grid)+count($anchos)+count($align)+count($crang));
 
