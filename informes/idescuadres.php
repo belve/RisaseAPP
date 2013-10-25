@@ -370,7 +370,7 @@ $fila++; $count++;
 $grid[$fila][$A]=$codbar;
 $grid[$fila][$B]=$S;
 $grid[$fila][$C]='';//$fila;
-$grid[$fila][$D]='' . $idt;//$count;
+$grid[$fila][$D]='';//$count;
 
 $BTrang		[$A . $fila . ':' . $D . $fila]=1;
 $BOLDrang	[$A . $fila . ':' . $D . $fila]=2;
