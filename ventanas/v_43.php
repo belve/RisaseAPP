@@ -116,22 +116,11 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 
 <div style="clear:both;"></div>
 
-<div style="float: left; border: 1px solid #888888; padding: 5px; margin-top: 10px;">
-	
-	
-	
-<div style="float: left; position: relative">	
-	
-	<div style="">Desde: <input value="dd/mm/aaaa" type="text" class="medio" id="fini" onfocus="javascript:dlF(this.id);" onkeyup="javascript:tabF(this.id);"></div>
-	<div style="">Hasta: <input class="contH medio" value="dd/mm/aaaa" type="text" id="ffin" onfocus="javascript:dlF(this.id);" onkeyup="javascript:tabF(this.id);" style="color:#333333;"></div>
-
-</div>
-
-</div>
 
 
 
-<div style="float: left; position: relative; margin-left: 20px; margin-top: 5px;">
+
+<div style="float: left; position: relative;  margin-top: 5px;">
 	
 	<div class="boton" onclick="javascript:informe('descuadre');" >Descuadres >> </div>
 
@@ -147,7 +136,6 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 
 </div>
 
-<div id="mphotos" class="mphotos" style="visibility: hidden;"><img style="height: 62px;" src="/iconos/iphoto.png" / onclick="popupPhotos();"></div>
 
 <div class="timer" id="timer" style="visibility: hidden; left: 47%; top:50%;"><img src="/iconos/loading1.gif"></div>
 

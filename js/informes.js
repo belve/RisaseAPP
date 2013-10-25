@@ -262,9 +262,13 @@ var temp=document.getElementById(10).value
 var detalles=document.getElementById(11).value
 var comentarios=document.getElementById(12).value
 
+if(document.getElementById('fini')){
 var fini=document.getElementById('fini').value
 var ffin=document.getElementById('ffin').value
-
+}else{
+var fini="";
+var ffin="";	
+}
 
 //document.getElementById(2).value="";
 //document.getElementById(3).value="";
@@ -322,10 +326,13 @@ url = url
 fini=fini.replace('dd/mm/aaaa','');
 ffin=ffin.replace('dd/mm/aaaa','');
 
+if(document.getElementById('fini')){
 if((fini=="")||(ffin=="")){
 alert('Debe introducir un rango de fechas');	
 }else{
 getDATA(url);
+}}else{
+getDATA(url);	
 }
 
 }

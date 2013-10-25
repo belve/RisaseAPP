@@ -103,7 +103,7 @@ $codigosIN="AND id_articulo IN ($codigosIN)";
 
 
 $agrupaciones="";
-$queryp= "select distinct agrupar from pedidos where ((fecha >= '$fini' AND fecha <= '$ffin') OR tip=1) $codigosIN ;";
+$queryp= "select distinct agrupar from pedidos where ((fecha >= '$fini' AND fecha <= '$ffin') OR tip=1) $codigosIN AND agrupar is not null;";
 $dbnivel->query($queryp); if($debug){echo "$queryp \n\n";};
 while ($row = $dbnivel->fetchassoc()){$agrupaciones .=$row['agrupar'] . ",";};
 $agrupaciones=substr($agrupaciones, 0,-1);
