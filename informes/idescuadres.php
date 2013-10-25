@@ -223,6 +223,9 @@ $cdgP[$idt][$codbar]=1;
 $cBAK[$idt] .="$codbar,";
 }}}}}}
 
+
+
+
 foreach ($tiendas as $key => $value) {
 if(array_key_exists($key, $cdgP)){	
 $cdg[$key]=$cdgP[$key];	
@@ -273,7 +276,8 @@ $cols[3]['B']='M';
 $cols[3]['C']='N';
 
 
-$fila=0;$count=0;$cabecera=1;$lastfil=$fila;$f=0;$romp=0;$pt=1;$first=1;$Lend=50;
+
+$fila=0;$count=0;$cabecera=1;$lastfil=$fila;$f=0;$romp=0;$pt=1;$first=1;$Lend=50;$poc=0;
 $c=1; $lidt="";
 if(count($cdg)>0){ foreach ($cdg as $idt => $valueC) {
 foreach ($valueC as $codbar => $point) {
@@ -283,7 +287,7 @@ if($first){$lidt=$idt;$first=0;};
 
 
 if($count > 49){
-if ($c < 2){$Lend=$fila ;$c++; $fila=$lastfil+3; $count=3;}else{  $romp=1;};
+if ($c < 2){$Lend=$fila ;$c++; $fila=$lastfil+3; $count=3; $poc=1;}else{  $romp=1;$poc=1;};
 }
 
 
@@ -294,7 +298,7 @@ if ($c < 2){$Lend=$fila ;$c++; $fila=$lastfil+3; $count=3;}else{  $romp=1;};
 if($lidt!=$idt){
 	$romp=1;	
 	$lidt=$idt;
-	$fila=$Lend;
+	if($poc){$fila=$Lend;$poc=0;};
 }
 
 
@@ -366,7 +370,7 @@ $fila++; $count++;
 $grid[$fila][$A]=$codbar;
 $grid[$fila][$B]=$S;
 $grid[$fila][$C]='';//$fila;
-$grid[$fila][$D]='';//$count;
+$grid[$fila][$D]='' . $idt;//$count;
 
 $BTrang		[$A . $fila . ':' . $D . $fila]=1;
 $BOLDrang	[$A . $fila . ':' . $D . $fila]=2;
