@@ -219,10 +219,14 @@ if($actO=='A'){ksort($valuess);}else{krsort($valuess);}
 foreach ($valuess as $gu => $subs) {
 	if($actO=='A'){ksort($subs);}else{krsort($subs);} foreach ($subs as $sb => $ccs)	{
 		if($actO=='A'){ksort($ccs);}else{krsort($ccs);} foreach ($ccs as $cd => $codbar) {
-$cdg[$idt][$codbar]=1;
+$cdgP[$idt][$codbar]=1;
 $cBAK[$idt] .="$codbar,";
 }}}}}}
 
+foreach ($tiendas as $key => $value) {
+if(array_key_exists($key, $cdgP)){	
+$cdg[$key]=$cdgP[$key];	
+}}
 
 
 
@@ -330,7 +334,7 @@ $grid[$fila]['E']='TIE';
 $grid[$fila]['G']='CODIGO';
 $grid[$fila]['H']='STK';
 $grid[$fila]['I']='ORD';
-$grid[$fila]['J ']='TIE';
+$grid[$fila]['J']='TIE';
 
 
 $align		['B' . $fila . ':' . 'E' . $fila]='C';
