@@ -330,7 +330,7 @@ $grid[$fila]['E']='TIE';
 $grid[$fila]['G']='CODIGO';
 $grid[$fila]['H']='STK';
 $grid[$fila]['I']='ORD';
-$grid[$fila]['J']='TIE';
+$grid[$fila]['J ']='TIE';
 
 
 $align		['B' . $fila . ':' . 'E' . $fila]='C';
@@ -398,7 +398,7 @@ $_SESSION['Mrang']=$Mrang;
 $_SESSION['BTrang']=$BTrang;
 $_SESSION['paginas']=$paginas;
 $_SESSION['format']=$format;
-$_SESSION['nomfil']="DescuadresStockFECHA-" . date('Y') . date('m') . date('d');
+$_SESSION['nomfil']="DescuadresStock-" . date('Y') . date('m') . date('d');
 $_SESSION['BOLDrang']=$BOLDrang;
 $res['ng']=count($grid)+count($anchos)+count($align)+count($crang)+count($Mrang)+count($BTrang)+count($paginas)+count($format);
 
