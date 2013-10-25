@@ -253,20 +253,20 @@ $crang=array();
 $Mrang=array();
 $BTrang=array();
 
-$cols[1]['A']='A';
-$cols[1]['B']='B';
-$cols[1]['C']='C';
-$cols[1]['D']='D';
+$cols[1]['A']='B';
+$cols[1]['B']='C';
+$cols[1]['C']='D';
+$cols[1]['D']='E';
 
-$cols[2]['A']='F';
-$cols[2]['B']='G';
-$cols[2]['C']='H';
-$cols[2]['D']='I';
+$cols[2]['A']='G';
+$cols[2]['B']='H';
+$cols[2]['C']='I';
+$cols[2]['D']='J';
 
 
-$cols[3]['A']='K';
-$cols[3]['B']='L';
-$cols[3]['C']='M';
+$cols[3]['A']='L';
+$cols[3]['B']='M';
+$cols[3]['C']='N';
 
 
 $fila=0;$count=0;$cabecera=1;$lastfil=$fila;$f=0;$romp=0;$pt=1;$first=1;$Lend=50;
@@ -316,30 +316,30 @@ $D=$cols[$c]['D'];
 if($pt){
 $fila++; $count++;	
 $grid[$fila][$A]=$tiendasN[$idt];
-$align		['A' . $fila . ':' . 'I' . $fila]='C';
-$Mrang		['A' . $fila . ':' . 'I' . $fila]=1;
-$BOLDrang	['A' . $fila . ':' . 'I' . $fila]=1;
-$crang		['A' . $fila . ':' . 'I' . $fila]='8AE65C'; 	
+$align		['B' . $fila . ':' . 'J' . $fila]='C';
+$Mrang		['B' . $fila . ':' . 'J' . $fila]=1;
+$BOLDrang	['B' . $fila . ':' . 'J' . $fila]=1;
+$crang		['B' . $fila . ':' . 'J' . $fila]='8AE65C'; 	
 $fila++; $count++;
 
-$grid[$fila]['A']='CODIGO';
-$grid[$fila]['B']='STK';
-$grid[$fila]['C']='ORD';
-$grid[$fila]['D']='TIE';
+$grid[$fila]['B']='CODIGO';
+$grid[$fila]['C']='STK';
+$grid[$fila]['D']='ORD';
+$grid[$fila]['E']='TIE';
 
-$grid[$fila]['F']='CODIGO';
-$grid[$fila]['G']='STK';
-$grid[$fila]['H']='ORD';
-$grid[$fila]['I']='TIE';
+$grid[$fila]['G']='CODIGO';
+$grid[$fila]['H']='STK';
+$grid[$fila]['I']='ORD';
+$grid[$fila]['J']='TIE';
 
 
-$align		['A' . $fila . ':' . 'D' . $fila]='C';
-$BOLDrang	['A' . $fila . ':' . 'D' . $fila]=1;	
-$BTrang		['A' . $fila . ':' . 'D' . $fila]=1;
+$align		['B' . $fila . ':' . 'E' . $fila]='C';
+$BOLDrang	['B' . $fila . ':' . 'E' . $fila]=1;	
+$BTrang		['B' . $fila . ':' . 'E' . $fila]=1;
 
-$align		['F' . $fila . ':' . 'I' . $fila]='C';
-$BOLDrang	['F' . $fila . ':' . 'I' . $fila]=1;	
-$BTrang		['F' . $fila . ':' . 'I' . $fila]=1;
+$align		['G' . $fila . ':' . 'J' . $fila]='C';
+$BOLDrang	['G' . $fila . ':' . 'J' . $fila]=1;	
+$BTrang		['G' . $fila . ':' . 'J' . $fila]=1;
 
 
 
@@ -373,20 +373,20 @@ $align		[$A . $fila . ':' . $D . $fila]='C';
 
 }}
 
+$anchos['A']=20;
 
-
-$anchos['A']=18;
-$anchos['B']=8;
+$anchos['B']=18;
 $anchos['C']=8;
 $anchos['D']=8;
+$anchos['E']=8;
 
-$anchos['E']=4;
-$anchos['F']=18;
-$anchos['G']=8;
+$anchos['F']=4;
+$anchos['G']=18;
 $anchos['H']=8;
 $anchos['I']=8;
-$anchos['J']=4;
-$anchos['K']=10;
+$anchos['J']=8;
+$anchos['K']=4;
+$anchos['M']=10;
 
 
 $_SESSION['cgd'] = $cdg; 
