@@ -292,6 +292,12 @@ if(codigo=='valorado'){
 	
 	};
 
+if(codigo=='descuadre'){
+	var url="/informes/idescuadres.php?";
+	var act=window.top.VOrdV;
+	var actO=window.top.VOrdVO;
+	
+	};
 
 	
 url = url 
