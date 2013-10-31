@@ -1,6 +1,19 @@
 window.debug =1;
 
 
+function risa(){
+if(window.top.bRISASA==1){window.top.bRISASA=0;}else{window.top.bRISASA=1;};
+
+if(window.top.bRISASA==1){
+document.getElementById('bRISASA').setAttribute("style", "background-color:#8DC29E;");	
+document.getElementById('bRISASE').setAttribute("style", "background-color:none;");		
+}else{
+document.getElementById('bRISASE').setAttribute("style", "background-color:#8DC29E;");	
+document.getElementById('bRISASA').setAttribute("style", "background-color:none;");			
+}	
+
+	
+}
 
 function botRD(b){
 
@@ -92,6 +105,7 @@ document.getElementById(id).value="";
 document.getElementById(id).setAttribute("style", "color:#333333;");
 }
 
+
 function tabT(id){
 var fech=document.getElementById(id).value;
 if(fech.length==1){fech=fech + '/';};
@@ -125,6 +139,44 @@ getDATA(url);
 	
 }
 
+function informePD(){
+
+if(document.getElementById('frqcia').checked){
+var frqcia=1;	
+}else{
+var frqcia=0;	
+}
+
+var ttss=""; var tn=0;
+var tsel=window.top.tsel;
+for (var i = 0; i < tsel.length; i++) {if(tsel[i]==1){
+ttss=ttss + i + ','; tn++;
+}}
+if(tn==0){alert('Debe seleccionar alguna tienda.');}else{
+var mes=document.getElementById('fini').value
+mes=mes.replace('mm/aaaa','');
+
+if(mes==""){
+alert('Debe introducir un mes');	
+}else{
+
+var url="/informes/iPordias.php?";	
+	
+url = url 
+
+ + "&mes=" + mes 
+ + "&ttss=" + ttss 
+ + "&risase=" + window.top.bRISASA  
+ + "&frqcia=" + frqcia  
+ + '&listador=1'; 
+
+getDATA(url);
+
+
+}
+}
+
+}
 
 function informeR(){
 
@@ -159,7 +211,8 @@ url = url
 getDATA(url);
 
 
-}}
+}
+}
 
 }
 

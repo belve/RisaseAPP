@@ -10,3 +10,10 @@ if(fech.length==5){fech=fech + '/';};
 var fech=fech.replace("//","/");
 document.getElementById(id).value=fech;	
 }
+
+function tabFm(id){
+var fech=document.getElementById(id).value;
+if(fech.length==2){fech=fech + '/';};
+var fech=fech.replace("//","/");
+document.getElementById(id).value=fech;	
+}

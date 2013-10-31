@@ -355,4 +355,16 @@ height:15px; width:96%; padding-left:3px; cursor:pointer;
     cursor:pointer;
     }
 
+.risaB { border: 1px solid #888888;
+    float: left;
+    height: 21px;
+    margin-left: 2px;
+    margin-right: 5px;
+    margin-top: 4px;
+    padding-top: 5px;
+    position: relative;
+    text-align: center;
+    width: 56px;
+    cursor:pointer;}
 
+.pdias {width:70px;}

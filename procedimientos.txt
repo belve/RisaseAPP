@@ -66,7 +66,7 @@ delete from stocklocal_2 where id_art IN (1997,1998,1999,2000,2001,2002,2003,200
 delete from stocklocal_9 where id_art IN (1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008);
 delete from stocklocal_12 where id_art IN (1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008);
 delete from stocklocal_18 where id_art IN (1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008);
-
+delete from stocklocal_27 where id_art IN (1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008);
 
 
 
