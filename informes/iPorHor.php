@@ -82,13 +82,13 @@ $col[23]='S';
 	
 $anchos['A']=1;	
 $anchos['B']=12;	
-$anchos['T']=15;
+$anchos['T']=18;
 
 
-$fila=1;
+$fila=1; $tots=array();
 
 
-$dh=6;  $grid[$fila]['B']='TIENDA';   $grid[$fila]['T']='TOTAL'; 
+$dh=6;  $grid[$fila]['B']='TIENDA';   $grid[$fila]['T']='TOTAL';  $BTrang		['B' . $fila . ':' . 'T' . $fila]=1;
 while ($dh < 23) {$dh++; $grid[$fila][$col[$dh]]=$dh; };
 $BOLDrang	['B' . $fila . ':' . 'T' . $fila]=1;
 $align		['B' . $fila . ':' . 'T' . $fila]='C'; 
@@ -105,10 +105,13 @@ $BOLDrang	['B' . $fila]=1;
 $dh=6;  $sum=0;
 while ($dh < 23) {$dh++;
 
-$anchos[$col[$dh]]=13;
+$anchos[$col[$dh]]=15;
 
 if(array_key_exists($dh, $days)){$qty=$days[$dh];}else{$qty=0;};
 $sum=$sum+$qty;
+
+if(array_key_exists($dh, $tots)){$tots[$dh]=$tots[$dh]+$qty;}else{$tots[$dh]=$qty;};
+
 $qty=number_format($qty,2,',','.');
 $grid[$fila][$col[$dh]]=$qty; 
 
@@ -119,14 +122,28 @@ $BOLDrang	['T' . $fila]=1;
 
 if($p==1){$p=0;$color='DDDDDD';}else{$p=1;$color='FFFFFF';}
 
-$BOLDrang	['B' . $fila . ':' . 'T' . $fila]=2;
+$BOLDrang	['C' . $fila . ':' . 'S' . $fila]=2;
 $align		['B' . $fila . ':' . 'T' . $fila]='C'; 
 $crang		['B' . $fila . ':' . 'T' . $fila]=$color;
 $BTrang		['B' . $fila . ':' . 'T' . $fila]=1;
 
 }}
 
+$fila++;
 
+$dh=6;  $sum=0;
+while ($dh < 23) {$dh++;
+if(array_key_exists($dh, $tots)){$qty=$tots[$dh];}else{$$qty=0;};
+$sum=$sum+$qty;
+$qty=number_format($qty,2,',','.');
+$grid[$fila][$col[$dh]]=$qty; 
+}
+
+$grid[$fila]['B']='TOTAL';
+$grid[$fila]['T']=number_format($sum,2,',','.'); 
+$BOLDrang	['B' . $fila . ':' . 'T' . $fila]=1;
+$align		['B' . $fila . ':' . 'T' . $fila]='C'; 
+$BTrang		['B' . $fila . ':' . 'T' . $fila]=1;
 
 
 
