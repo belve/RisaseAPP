@@ -81,9 +81,10 @@ $col[29]='AE';	$col[30]='AF';	$col[31]='AG';
 $fila=1;
 
 $grid[$fila]['B']='TIENDA'; 
-$BOLDrang	['B' . $fila . ':' . 'AG' . $fila]=1;
-$align		['C' . $fila . ':' . 'AG' . $fila]='C';
-$BTrang		['B' . $fila . ':' . 'AG' . $fila]=1;
+$grid[$fila]['AH']='TOTAL'; 
+$BOLDrang	['B' . $fila . ':' . 'AH' . $fila]=1;
+$align		['B' . $fila . ':' . 'AH' . $fila]='C';
+$BTrang		['B' . $fila . ':' . 'AH' . $fila]=1;
 foreach ($col as $dia => $cl) {$grid[$fila][$cl]=$dia; $anchos[$cl]=12;};
 
 foreach ($tiendas as $idt => $nomt) {if(array_key_exists($idt, $datos)){
@@ -110,12 +111,12 @@ $grid[$fila][$col[$dd]]=$qty;
 $BOLDrang	['C' . $fila . ':' . 'AG' . $fila]=2;
 $BTrang		['B' . $fila . ':' . 'AG' . $fila]=1;
 $crang		['C' . $fila . ':' . 'AG' . $fila]=$color;
-$align		['C' . $fila . ':' . 'AG' . $fila]='C'; 
+$align		['B' . $fila . ':' . 'AG' . $fila]='C'; 
 
 $grid[$fila]['AH']=number_format($sumt,2,',','.');
 
 $BOLDrang	['AH' . $fila]=1;
-//$BTrang		['AH' . $fila]=1;
+$BTrang		['AH' . $fila]=1;
 //$crang		['AH' . $fila]=$color;
 $align		['AH' . $fila]='C'; 
 
@@ -132,12 +133,12 @@ $grid[$fila][$col[$dd]]=$qty;
 $BOLDrang	['B' . $fila . ':' . 'AG' . $fila]=1;
 $BTrang		['C' . $fila . ':' . 'AG' . $fila]=1;
 $crang		['C' . $fila . ':' . 'AG' . $fila]=$color;
-$align		['C' . $fila . ':' . 'AG' . $fila]='C';  
+$align		['B' . $fila . ':' . 'AG' . $fila]='C';  
 
 $grid[$fila]['AH']=number_format($tott,2,',','.');
 
 $BOLDrang	['AH' . $fila]=1;
-//$BTrang		['AH' . $fila]=1;
+$BTrang		['AH' . $fila]=1;
 //$crang		['AH' . $fila]=$color;
 $align		['AH' . $fila]='C'; 
 
