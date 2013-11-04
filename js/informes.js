@@ -178,6 +178,46 @@ getDATA(url);
 }
 
 
+function informePH(){
+
+var ttss=""; var tn=0;
+var tsel=window.top.tsel;
+for (var i = 0; i < tsel.length; i++) {if(tsel[i]==1){
+ttss=ttss + i + ','; tn++;
+}}
+if(tn==0){alert('Debe seleccionar alguna tienda.');}else{
+
+var fini=document.getElementById('fini').value
+var ffin=document.getElementById('ffin').value
+fini=fini.replace('dd/mm/aaaa','');
+ffin=ffin.replace('dd/mm/aaaa','');
+
+if((fini=="")||(ffin=="")){
+alert('Debe introducir un rango de fechas');	
+}else{
+
+var url="/informes/iPorHor.php?";	
+	
+url = url 
+
+ + "&fini=" + fini 
+ + "&ffin=" + ffin  
+ + "&ttss=" + ttss 
+ + "&risase=" + window.top.bRISASA  
+ + '&listador=1'; 
+
+getDATA(url);
+
+
+}
+}
+
+}
+
+
+
+
+
 
 
 function informePD(){
