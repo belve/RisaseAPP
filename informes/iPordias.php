@@ -38,7 +38,7 @@ $format=array(); $BOLDrang=array(); $tipo=""; $temp="";$ccn=0;$total=0;
 $ttss="";$rot=0; $dev=0; 
 foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
 $ttss=substr($ttss, 0,-1);
-
+$frqcia=1;
 
 $fini=substr($mes, 3,4) . "-" . substr($mes, 0,2) . "-01";
 $ffin=substr($mes, 3,4) . "-" . substr($mes, 0,2) . "-31";
@@ -83,11 +83,13 @@ $fila=1;
 $grid[$fila]['B']='TIENDA'; 
 $BOLDrang	['B' . $fila . ':' . 'AG' . $fila]=1;
 $align		['C' . $fila . ':' . 'AG' . $fila]='C';
-$BTrang		['C' . $fila . ':' . 'AG' . $fila]=1;
+$BTrang		['B' . $fila . ':' . 'AG' . $fila]=1;
 foreach ($col as $dia => $cl) {$grid[$fila][$cl]=$dia; $anchos[$cl]=12;};
 
+foreach ($tiendas as $idt => $nomt) {if(array_key_exists($idt, $datos)){
+$days=$datos[$idt];	
+$ndo=1;
 
-foreach ($datos as $idt => $days) {$ndo=1;
 if(!$frqcia){if(array_key_exists($idt,$franq)){$ndo=0;}else{$ndo=1;}; };	
 if($ndo){
 		
@@ -96,31 +98,55 @@ $grid[$fila]['B']=$tiendas[$idt];
 $BOLDrang	['B' . $fila]=1;
 
 if($p==1){$p=0;$color='DDDDDD';}else{$p=1;$color='FFFFFF';}
-foreach ($days as $dd => $qty){$qty=number_format($qty,2,',','.');
+$sumt=0;
+foreach ($days as $dd => $qty){$sumt=$sumt+$qty;
+if(array_key_exists($dd, $sumas)){$sumas[$dd]=$sumas[$dd]+$qty;}else{$sumas[$dd]=$qty;};	
+$qty=number_format($qty,2,',','.');
 $grid[$fila][$col[$dd]]=$qty; 	
 
-if(array_key_exists($dd, $sumas)){$sumas[$dd]=$sumas[$dd]+$qty;}else{$sumas[$dd]=$qty;};
+
 }
+
 $BOLDrang	['C' . $fila . ':' . 'AG' . $fila]=2;
-$BTrang		['C' . $fila . ':' . 'AG' . $fila]=1;
+$BTrang		['B' . $fila . ':' . 'AG' . $fila]=1;
 $crang		['C' . $fila . ':' . 'AG' . $fila]=$color;
-$align		['C' . $fila . ':' . 'AG' . $fila]='R'; 
-}}
+$align		['C' . $fila . ':' . 'AG' . $fila]='C'; 
+
+$grid[$fila]['AH']=number_format($sumt,2,',','.');
+
+$BOLDrang	['AH' . $fila]=1;
+//$BTrang		['AH' . $fila]=1;
+//$crang		['AH' . $fila]=$color;
+$align		['AH' . $fila]='C'; 
+
+
+
+}}}
 
 $fila++;$fila++;
-$grid[$fila]['B']='TOTAL:';
-foreach ($sumas as $dd => $qty) {$qty=$qty*1;
+$grid[$fila]['B']='TOTAL:'; $tott=0;
+foreach ($sumas as $dd => $qty) {$qty=$qty*1;$tott=$tott+$qty;
 $qty=number_format($qty,2,',','.');
 $grid[$fila][$col[$dd]]=$qty; 		
 }
 $BOLDrang	['B' . $fila . ':' . 'AG' . $fila]=1;
 $BTrang		['C' . $fila . ':' . 'AG' . $fila]=1;
 $crang		['C' . $fila . ':' . 'AG' . $fila]=$color;
-$align		['C' . $fila . ':' . 'AG' . $fila]='R';  
+$align		['C' . $fila . ':' . 'AG' . $fila]='C';  
+
+$grid[$fila]['AH']=number_format($tott,2,',','.');
+
+$BOLDrang	['AH' . $fila]=1;
+//$BTrang		['AH' . $fila]=1;
+//$crang		['AH' . $fila]=$color;
+$align		['AH' . $fila]='C'; 
+
+
+
 
 $anchos['A']=1;
 $anchos['B']=15;
-
+$anchos['AH']=15;
 
 
 if(count($grid)>0){

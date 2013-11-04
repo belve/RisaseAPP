@@ -141,11 +141,12 @@ getDATA(url);
 
 function informePD(){
 
-if(document.getElementById('frqcia').checked){
-var frqcia=1;	
-}else{
-var frqcia=0;	
-}
+var frqcia=1;
+//if(document.getElementById('frqcia').checked){
+//var frqcia=1;	
+//}else{
+//var frqcia=0;	
+//}
 
 var ttss=""; var tn=0;
 var tsel=window.top.tsel;
