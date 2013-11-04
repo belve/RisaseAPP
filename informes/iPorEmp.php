@@ -92,8 +92,19 @@ $col[25]='AA';	$col[26]='AB';	$col[27]='AC';	$col[28]='AD';
 $col[29]='AE';	$col[30]='AF';	$col[31]='AG';
 
 $fila=0;$maxc=0;
-
-
+$anchos['A']=1;
+$anchos['B']=10;
+$anchos['C']=32;
+$anchos['D']=32;
+$anchos['E']=32;
+$anchos['F']=32;
+$anchos['G']=32;
+$anchos['H']=32;
+$anchos['I']=32;
+$anchos['J']=32;
+$anchos['K']=32;
+$anchos['M']=32;
+$anchos['N']=32;
 
 foreach ($tiendas as $idt => $nomt) {if(array_key_exists($idt, $datos)){
 $fila++;			
@@ -153,24 +164,12 @@ $align		['B1:' . $col[$maxc] . $fila]='C';
 
 
 
-
+$anchos[$col[$maxc]]=15;
 	
 
 
 
-$anchos['A']=1;
-$anchos['B']=15;
-$anchos['C']=35;
-$anchos['D']=35;
-$anchos['E']=35;
-$anchos['F']=35;
-$anchos['G']=35;
-$anchos['H']=35;
-$anchos['I']=35;
-$anchos['J']=15;
-$anchos['K']=15;
-$anchos['M']=15;
-$anchos['N']=15;
+
 
 
 if(count($grid)>0){
