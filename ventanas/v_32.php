@@ -69,24 +69,22 @@ window.top.tselALL	=1;
 	<script>
 		window.top.bRISASA=1;
 	</script>
+
 	
 	
-	<div style="margin-left: 2px">Mes: <input value="mm/aaaa" type="text" class="corto pdias"  id="fini" onfocus="javascript:dlF(this.id);" onkeyup="javascript:tabFm(this.id);"></div>
-	
-	<div style="float: left; border: 1px solid #888888; padding: 5px; margin-top: 10px;">
-	
-	
-	
+
 <div style="float: left; position: relative">	
 	
-	<div style="">Desde: <input type="text" onkeyup="javascript:tabF(this.id);" onfocus="javascript:dlF(this.id);" id="fini" class="medio" value="dd/mm/aaaa" style="color:#333333;"></div>
-	<div style="">Hasta: <input type="text" style="color:#333333;" onkeyup="javascript:tabF(this.id);" onfocus="javascript:dlF(this.id);" id="ffin" value="dd/mm/aaaa" class="contH medio"></div>
+	<div style=""><input type="text" onkeyup="javascript:tabF(this.id);" onfocus="javascript:dlF(this.id);" id="fini" class="medio" value="dd/mm/aaaa" style="color:#333333;"></div>
+	<div style=""><input type="text" style="color:#333333;" onkeyup="javascript:tabF(this.id);" onfocus="javascript:dlF(this.id);" id="ffin" value="dd/mm/aaaa" class="medio"></div>
 
 </div>
 
-</div>
+
 	
-	<div class="boton" style=" margin-left: 2px; width: 100px;"; onclick="javascript:informePD();" >Informe >> </div>
+<div style="clear: both;"></div>
+
+<div class="boton" style=" margin-left: 2px; width: 100px;"; onclick="javascript:informePE();" >Informe >> </div>
 </div>
 
 
