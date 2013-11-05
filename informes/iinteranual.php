@@ -20,6 +20,7 @@ $detalles="";
 $comentarios="";
 $ord=1;
 $tab=1;
+$totales=array();
 $arts=array();
 $vals=array();
 $fijos	=array();
@@ -140,8 +141,12 @@ $porc=(($value/$tot)-1)*100;$porc=round($porc,2);
 $grid[$fila][$col[$cl+1]]=$porc; 
 }
 
+if(array_key_exists($cl, $totales)){$totales[$cl]=$totales[$cl]+$value;}else{$totales[$cl]=$value;};
+
+
 $value=number_format($value,2,',','.');
 $grid[$fila][$col[$cl]]=$value; 
+
 
 
 //$porc="t:$tot v:$value";
@@ -166,8 +171,23 @@ $fila++;
 }}
 
 
+foreach ($totales as $cl => $value) {
+if($cl==1){$tot=$value;}
+if(($cl>1)&&($value>0)){
+$porc=(($value/$tot)-1)*100;$porc=round($porc,2);
+$grid[$fila][$col[$cl+1]]=$porc; 
+}
+	
+$value=number_format($value,2,',','.');
+$grid[$fila][$col[$cl]]=$value; 
+}
 
 
+$grid[$fila]['B']='TOTAL'; 
+$BOLDrang	['B' . $fila . ':' . 'J' . $fila]=1;
+$align		['B' . $fila . ':' . 'J' . $fila]='C'; 
+//$crang		['B' . $fila . ':' . 'J' . $fila]=$color;
+$BTrang		['B' . $fila . ':' . 'J' . $fila]=1;
 
 
 
@@ -183,7 +203,7 @@ $_SESSION['Mrang']=$Mrang;
 $_SESSION['BTrang']=$BTrang;
 $_SESSION['format']=$format;
 $_SESSION['paginas']=$paginas;
-$_SESSION['nomfil']="Interanual-" . $mes;
+$_SESSION['nomfil']="Interanual";
 $_SESSION['BOLDrang']=$BOLDrang;
 $res['ng']=count($grid)+count($anchos)+count($align)+count($crang)+count($Mrang)+count($BTrang)+count($paginas)+count($format);
 
