@@ -287,7 +287,40 @@ getDATA(url);
 
 
 
+function informeMES(){
 
+var frqcia=1;
+
+var ttss=""; var tn=0;
+var tsel=window.top.tsel;
+for (var i = 0; i < tsel.length; i++) {if(tsel[i]==1){
+ttss=ttss + i + ','; tn++;
+}}
+if(tn==0){alert('Debe seleccionar alguna tienda.');}else{
+var mes=document.getElementById('fini').value
+mes=mes.replace('mm/aaaa','');
+
+if(mes==""){
+alert('Debe introducir un mes');	
+}else{
+
+var url="/informes/iMensual.php?";	
+	
+url = url 
+
+ + "&mes=" + mes 
+ + "&ttss=" + ttss 
+ + "&risase=" + window.top.bRISASA  
+ + "&frqcia=" + frqcia  
+ + '&listador=1'; 
+
+getDATA(url);
+
+
+}
+}
+
+}
 
 function informePD(){
 

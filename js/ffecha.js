@@ -17,6 +17,6 @@ if(fech.length==2){fech=fech + '/';};
 var fech=fech.replace("//","/");
 
 
-document.getElementById(id).value=fech.substr(0,5);	
+document.getElementById(id).value=fech;//.substr(0,5);	
 
 }
