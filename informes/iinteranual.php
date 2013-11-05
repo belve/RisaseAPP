@@ -138,7 +138,7 @@ if($cl==1){$tot=$value;}
 
 if(($cl>1)&&($value>0)){
 $porc=(($tot/$value)-1)*100;$porc=round($porc,2);
-$grid[$fila][$col[$cl+1]]=$porc; 
+$grid[$fila][$col[$cl+1]]=number_format($porc,2,',','.'); 
 }
 
 if(array_key_exists($cl, $totales)){$totales[$cl]=$totales[$cl]+$value;}else{$totales[$cl]=$value;};
@@ -175,7 +175,7 @@ foreach ($totales as $cl => $value) {
 if($cl==1){$tot=$value;}
 if(($cl>1)&&($value>0)){
 $porc=(($tot/$value)-1)*100;$porc=round($porc,2);
-$grid[$fila][$col[$cl+1]]=$porc; 
+$grid[$fila][$col[$cl+1]]=number_format($porc,2,',','.');  
 }
 	
 $value=number_format($value,2,',','.');
