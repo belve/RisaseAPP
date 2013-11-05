@@ -194,10 +194,13 @@ $paginas[$fila-1]=1;
 $anchos['A']=1;
 $anchos['B']=5;
 
-
+//$Mrang['H3:H14']=1;
+//$angle['H3']=90;
+//$grid[3]['H']='prueba';
 
 if(count($grid)>0){
 
+//$_SESSION['angle']=$angle;
 $_SESSION['BOLDrang']=$BOLDrang;
 //$_SESSION['cgd'] = $cdg; 
 $_SESSION['grid'] = $grid; 

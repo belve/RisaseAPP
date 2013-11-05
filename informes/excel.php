@@ -11,6 +11,7 @@ $nomfil=$_SESSION['nomfil'];
 $format=$_SESSION['format'];
 $paginas=$_SESSION['paginas'];
 $BOLDrang=$_SESSION['BOLDrang'];
+if(array_key_exists('angle', $_SESSION)){$angle=$_SESSION['angle'];}else{$angle=array();};
 $debug=0;
 
 require_once '../Classes/PHPExcel.php';
@@ -69,6 +70,11 @@ foreach ($align  as $rang => $value) {
 }
 
 foreach ($crang  as $rang => $value){$sheet->getStyle($rang)->applyFromArray(array('fill' => array('type' => PHPExcel_Style_Fill::FILL_SOLID,'color' => array('rgb' => $value)) ));};
+
+foreach ($angle as $cell => $angulo) {
+$sheet->getStyle($cell)->getAlignment()->setTextRotation($angulo);	
+}
+
 
 foreach ($Mrang as $rang => $value) {$sheet->mergeCells($rang);};
 foreach ($BTrang as $rang => $value) {

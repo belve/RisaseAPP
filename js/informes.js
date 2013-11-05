@@ -242,6 +242,38 @@ getDATA(url);
 
 
 
+function informePV(){
+
+
+
+var fini=document.getElementById('fini').value
+var ffin=document.getElementById('ffin').value
+fini=fini.replace('dd/mm/aaaa','');
+ffin=ffin.replace('dd/mm/aaaa','');
+
+if((fini=="")||(ffin=="")){
+alert('Debe introducir un rango de fechas');	
+}else{
+
+var url="/informes/iPorcVent.php?";	
+	
+url = url 
+
+ + "&fini=" + fini 
+ + "&ffin=" + ffin  
+ + "&risase=" + window.top.bRISASA  
+ + '&listador=1'; 
+
+getDATA(url);
+
+
+
+}
+
+}
+
+
+
 
 
 
