@@ -178,6 +178,75 @@ getDATA(url);
 }
 
 
+function manio(b,anio){
+
+if(b==1){	if(window.top.A_1==0){window.top.A_1=anio;}else{window.top.A_1=0;};	 }	
+if(b==2){	if(window.top.A_2==0){window.top.A_2=anio;}else{window.top.A_2=0;};	 }	
+if(b==3){	if(window.top.A_3==0){window.top.A_3=anio;}else{window.top.A_3=0;};	 }		
+
+if(window.top.A_1==0){document.getElementById('a1').setAttribute("style", "background-color:none;");}else{document.getElementById('a1').setAttribute("style", "background-color:orange;");}
+if(window.top.A_2==0){document.getElementById('a2').setAttribute("style", "background-color:none;");}else{document.getElementById('a2').setAttribute("style", "background-color:orange;");}
+if(window.top.A_3==0){document.getElementById('a3').setAttribute("style", "background-color:none;");}else{document.getElementById('a3').setAttribute("style", "background-color:orange;");}
+	
+	
+}
+
+
+
+
+function informeIA(){
+console.log(window.top.A_1 + "," + window.top.A_2 + "," + window.top.A_3);
+var ttss=""; var tn=0;
+var tsel=window.top.tsel;
+for (var i = 0; i < tsel.length; i++) {if(tsel[i]==1){
+ttss=ttss + i + ','; tn++;
+}}
+if(tn==0){alert('Debe seleccionar alguna tienda.');}else{
+
+var fini=document.getElementById('fini').value
+var ffin=document.getElementById('ffin').value
+fini=fini.replace('dd/mm','');
+ffin=ffin.replace('dd/mm','');
+
+if((fini=="")||(ffin=="")){
+alert('Debe introducir un rango de fechas');	
+}else{
+
+var anios="";
+if(window.top.A_1>0){anios=anios + window.top.A_1 + ",";};
+if(window.top.A_2>0){anios=anios + window.top.A_2 + ",";};
+if(window.top.A_3>0){anios=anios + window.top.A_3 + ",";};
+ 
+if(anios==''){alert('Debe seleccionar por lo menos un año con el que comparar');}else{
+
+var url="/informes/iinteranual.php?";	
+	
+url = url 
+
+ + "&fini=" + fini 
+ + "&ffin=" + ffin  
+ + "&ttss=" + ttss 
+ + "&anios=" + anios 
+ + "&risase=" + window.top.bRISASA  
+ + '&listador=1'; 
+
+getDATA(url);
+
+}
+}
+}
+
+}
+
+
+
+
+
+
+
+
+
+
 function informePH(){
 
 var ttss=""; var tn=0;
