@@ -46,10 +46,12 @@ $ffin=substr($mes, 3,4) . "-" . substr($mes, 0,2) . "-31";
 
 
 if (!$dbnivel->open()){die($dbnivel->error());};
-$queryp= "select id, (select id from tiendas where tiendas.id_tienda=empleados.id_tienda) as id_tienda, CONCAT_WS(' ', nombre, apellido1, apellido2) as nom, orden from empleados order by id_tienda, orden ASC;";
+$queryp= "select id, orden, (select id from tiendas where tiendas.id_tienda=empleados.id_tienda) as id_tienda, CONCAT_WS(' ', nombre, apellido1, apellido2) as nom, orden from empleados order by id_tienda, orden ASC;";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){$count++;
-$empsn[$row['id_tienda']][$row['id']]=$row['nom'];
+$ord=$row['orden'];
+if($ord==0){$ord=100;};
+$empsn[$row['id_tienda']][$ord][$row['id']]=$row['nom'];
 };
 
 
@@ -93,29 +95,36 @@ $fila=1;
 
 
 foreach ($tiendas as $idt => $nomt) {if(array_key_exists($idt, $datos)){
-	
+$totales=array();	
 $emps=$datos[$idt];	
 $empi=$empsn[$idt];
 
-
-$grid[$fila]['C']=$nomt;
+$Mrang['C' . $fila .':G' .$fila]=1;
+$align['C' . $fila]='C';
+$crang['C' . $fila]='99CCFF';
+$grid[$fila]['C']=$tiendasN[$idt];
 $BOLDrang	['C' . $fila]=1;
 $fila++;
 
 $cc=0;
 
-foreach ($empi as $ide => $nom) {
+ksort($empi);
+foreach ($empi as $ord => $empi2) {
+foreach ($empi2 as $ide => $nom) {
 if(array_key_exists($ide, $emps)){
-	$cc++;	$anchos[$col[$cc]]=28;
+	$cc++;	$anchos[$col[$cc]]=35;
 	$days=$emps[$ide];
-	$grid[$fila][$col[$cc]]=$nom;
+	$grid[$fila][$col[$cc]]=$nom;// . "/$ord" ;
 	
 	$d=1;$p=0;
 	while ($d <= 31){
 			
 		if( array_key_exists($d, $days) ){ $qty=$days[$d]; }else{ $qty=0; };
+		
+		if(array_key_exists($cc, $totales)){$totales[$cc]=$totales[$cc]+$qty;}else{$totales[$cc]=$qty;};
+		
 		$nf=($fila*1)+($d*1);
-			$grid[$nf]['B']=$d;
+		$grid[$nf]['B']=$d;
 			
 			$grid[$nf][$col[$cc]]=number_format($qty,2,',','.');;
 			
@@ -132,12 +141,12 @@ if(array_key_exists($ide, $emps)){
 		$d++;
 		}
 	
-}}
+}}}
 $grid[$fila][$col[$cc+1]]='GASTOS';		
 $BOLDrang	['C' . $fila . ':' . $col[$cc+1] . $fila]=1;
 $align		['C' . $fila . ':' . $col[$cc+1] . $fila]='C'; 
 
-$anchos[$col[$cc+1]]=18;
+$anchos[$col[$cc+1]]=35;
 
 $BOLDrang	['C' . ($fila+1) . ':' . $col[$cc+1] . ($fila+31)]=2;
 $BTrang		['B' . ($fila+1) . ':' . $col[$cc+1] . ($fila+31)]=1;
@@ -161,7 +170,19 @@ $align		['B' . ($fila+1) . ':' . $col[$cc+1] . ($fila+31)]='C';
 //$grid[$fila]['AH']=number_format($sumt,2,',','.');
 
 
-$fila=$fila+33;
+$fila=$fila+32;
+
+$cc=0;
+foreach ($totales as $cca => $qty) {
+$grid[$fila][$col[$cca]]=number_format($qty,2,',','.');;	
+if($cca>$cc){$cc=$cca;};
+}
+
+$BOLDrang	['C' . ($fila) . ':' . $col[$cc+1] . ($fila)]=1;
+$BTrang		['C' . ($fila) . ':' . $col[$cc+1] . ($fila)]=1;
+$align		['C' . ($fila) . ':' . $col[$cc+1] . ($fila)]='C'; 
+
+$fila++;
 $paginas[$fila-1]=1;	
 }}
 
@@ -187,7 +208,7 @@ $_SESSION['Mrang']=$Mrang;
 $_SESSION['BTrang']=$BTrang;
 $_SESSION['format']=$format;
 $_SESSION['paginas']=$paginas;
-$_SESSION['nomfil']="PorDias-" . $mes;
+$_SESSION['nomfil']="Mensual-" . $mes;
 $_SESSION['BOLDrang']=$BOLDrang;
 $res['ng']=count($grid)+count($anchos)+count($align)+count($crang)+count($Mrang)+count($BTrang)+count($paginas)+count($format);
 
