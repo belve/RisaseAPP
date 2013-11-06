@@ -45,6 +45,16 @@ $ffin=substr($ffin, 6,4) . "-" . substr($ffin, 3,2) . "-" . substr($ffin, 0,2);
 
 
 
+if (!$dbnivel->open()){die($dbnivel->error());};
+$queryp= "select id, orden, id_tienda, nombre, franquicia from tiendas";
+$dbnivel->query($queryp);
+while ($row = $dbnivel->fetchassoc()){
+$idttt=$row['id'];$orden=$row['orden'];$nidtienda=$row['id_tienda'];$f=$row['franquicia'];
+$tiendas2[$idttt]=$nidtienda;
+}
+if (!$dbnivel->close()){die($dbnivel->error());};
+
+
 
 $tot=0;
 
@@ -78,7 +88,7 @@ $fila=1; $tots=array();
 
 $Mrang["B$fila:D$fila"]=1;
 $grid[$fila]['B']="Porcentaje de ventas del $fini2 al $ffin2"; 
-$BOLDrang	['B' . $fila]=1;
+$BOLDrang	['B' . $fila]=3;
 $align		['B' . $fila]='C'; 
 
 
@@ -87,7 +97,7 @@ $fila++;$fila++;
 $grid[$fila]['B']="TIENDAS"; 
 $grid[$fila]['C']="VENTAS"; 
 $grid[$fila]['D']="%"; 
-$BOLDrang	['B' . $fila . ':' . 'D' . $fila]=1;
+$BOLDrang	['B' . $fila . ':' . 'D' . $fila]=3;
 $align		['B' . $fila . ':' . 'D' . $fila]='C'; 
 
 
@@ -95,13 +105,13 @@ $align		['B' . $fila . ':' . 'D' . $fila]='C';
 $fila++;
 
 foreach ($datos as $idt => $qty) {
-$grid[$fila]['B']=$tiendas[$idt]; 
+$grid[$fila]['B']=$tiendas2[$idt]; 
 $BOLDrang	['B' . $fila]=1;	
 	
 $grid[$fila]['C']=number_format($qty,2,',','.'); 
 $grid[$fila]['D']=number_format(($qty/$tot*100),2,',','.');	
 
-$BOLDrang	['C' . $fila . ':' . 'D' . $fila]=2;
+$BOLDrang	['C' . $fila . ':' . 'D' . $fila]=4;
 $align		['B' . $fila . ':' . 'D' . $fila]='C'; 
 $fila++;
 }
@@ -110,7 +120,7 @@ $fila++;
 $grid[$fila]['B']="TOTAL:"; 
 $grid[$fila]['C']=number_format($tot,2,',','.'); 
 
-$BOLDrang	['B' . $fila . ':' . 'D' . $fila]=1;
+$BOLDrang	['B' . $fila . ':' . 'D' . $fila]=3;
 $align		['B' . $fila . ':' . 'D' . $fila]='C'; 
 
 /*
@@ -122,10 +132,10 @@ $BTrang		['B' . $fila . ':' . 'T' . $fila]=1;
 
 
 
-$anchos['B']=20;
-$anchos['C']=29;
-$anchos['D']=15;
-$anchos['E']=15;
+$anchos['B']=25;
+$anchos['C']=35;
+$anchos['D']=18;
+$anchos['E']=18;
 
 if(count($grid)>0){
 
