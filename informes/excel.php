@@ -37,6 +37,15 @@ $styleArray2 = array(
 );
 
 
+$styleArray3 = array(
+  'borders' => array(
+    'outline' => array(
+      'style' => PHPExcel_Style_Border::BORDER_MEDIUM
+    )
+  )
+);
+
+
 $bold1 = array(
     'font'  => array(
         'bold'  => true,
@@ -81,6 +90,7 @@ $objPHPExcel->getDefaultStyle()->getFont()->setName('Arial')->setSize(7);
 foreach ($anchos as $col => $value) {$sheet->getColumnDimension($col)->setWidth($value);};
 foreach ($align  as $rang => $value) {
 	if($value=="C"){$sheet->getStyle($rang)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);};
+	if($value=="VC"){$sheet->getStyle($rang)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);};
 	if($value=="R"){$sheet->getStyle($rang)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);};
 	if($value=="L"){$sheet->getStyle($rang)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);};
 }
@@ -94,11 +104,9 @@ $sheet->getStyle($cell)->getAlignment()->setTextRotation($angulo);
 
 foreach ($Mrang as $rang => $value) {$sheet->mergeCells($rang);};
 foreach ($BTrang as $rang => $value) {
-	if($value==1){	
-	$sheet->getStyle($rang)->applyFromArray($styleArray1);
-	}else{
-	$sheet->getStyle($rang)->applyFromArray($styleArray2);	
-	}
+	if($value==1){$sheet->getStyle($rang)->applyFromArray($styleArray1);};
+	if($value==2){$sheet->getStyle($rang)->applyFromArray($styleArray2);};
+	if($value==3){$sheet->getStyle($rang)->applyFromArray($styleArray3);};
 }
 
 foreach ($BOLDrang as $rang => $value) {
