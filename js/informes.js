@@ -511,6 +511,69 @@ getDATA(url);
 
 
 
+function informeVPT(){
+
+var prov=document.getElementById(2).value
+var grup=document.getElementById(3).value
+var subg=document.getElementById(4).value
+var colo=document.getElementById(5).value
+var codi=document.getElementById(6).value
+var pvp=document.getElementById(7).value
+var desd=document.getElementById(8).value
+var hast=document.getElementById(9).value
+var temp=document.getElementById(10).value
+var detalles=document.getElementById(11).value
+var comentarios=document.getElementById(12).value
+
+if(document.getElementById('fini')){
+var fini=document.getElementById('fini').value
+var ffin=document.getElementById('ffin').value
+}else{
+var fini="";
+var ffin="";	
+}
+
+
+var act=window.top.VOrdV;
+var actO=window.top.VOrdVO;
+
+fini=fini.replace('dd/mm/aaaa','');
+ffin=ffin.replace('dd/mm/aaaa','');
+
+if((fini=="")||(ffin=="")){
+alert('Debe introducir un rango de fechas');	
+}else{
+
+
+var url="/informes/informeVpT.php?";
+	
+	
+url = url 
+ + "id_proveedor=" + prov
+ + "&id_grupo=" + grup
+ + "&id_subgrupo=" + subg
+ + "&id_color=" + colo
+ + "&codigo=" + codi
+ + "&pvp=" + pvp
+ + "&desde=" + desd
+ + "&hasta=" + hast
+ + "&temporada=" + temp 
+ + "&comentarios=" + comentarios
+ + "&detalles=" + detalles
+ + "&fini=" + fini 
+ + "&ffin=" + ffin
+ + "&risase=" + window.top.bRISASA   
+ + "&act=" + act 
+ + "&actO=" + actO 
+ + '&listador=1'; 
+
+getDATA(url);
+
+
+
+}	
+	
+}
 
 
 
