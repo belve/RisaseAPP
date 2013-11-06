@@ -164,6 +164,17 @@ $gru=$grus[$id]; $vt=$vend[$id]; $idt=$tven[$id]; $p1=($vt/$sum[$gru])*100; $p2=
 
 
 if($gru!=$lg){
+if($lg){	
+$grid[$fila]['A']='TOTAL';		
+$grid[$fila]['B']=number_format($sum[$lg],2,',','.');
+$grid[$fila]['D']=number_format(($sum[$lg]/$stot*100),2,',','.');		
+$BOLDrang	['A' . $fila. ':' . 'D' . $fila]=1;
+$align		['A' . $fila. ':' . 'D' . $fila]='C'; 
+$BTrang		['A' . $fila. ':' . 'D' . $fila]=1;
+$fila++;
+}
+
+
 $lg=$gru;
 $Mrang["A$fila:D$fila"]=1;
 $grid[$fila]['A']=$nomSG[$gru]; 
@@ -186,6 +197,15 @@ $BOLDrang	['B' . $fila . ':' . 'D' . $fila]=2;
 $align		['A' . $fila . ':' . 'D' . $fila]='C'; 
 $BTrang		['A' . $fila . ':' . 'D' . $fila]=1;
 }
+
+$fila++;
+$grid[$fila]['A']='TOTAL';		
+$grid[$fila]['B']=number_format($sum[$lg],2,',','.');
+$grid[$fila]['D']=number_format(($sum[$lg]/$stot*100),2,',','.');		
+$BOLDrang	['A' . $fila. ':' . 'D' . $fila]=1;
+$align		['A' . $fila. ':' . 'D' . $fila]='C'; 
+$BTrang		['A' . $fila. ':' . 'D' . $fila]=1;
+
 
 
 

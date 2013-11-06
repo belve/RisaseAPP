@@ -99,7 +99,7 @@ $totales=array();
 $emps=$datos[$idt];	
 $empi=$empsn[$idt];
 
-$Mrang['C' . $fila .':G' .$fila]=1;
+$Mrang['C' . $fila .':D' .$fila]=1;
 $align['C' . $fila]='C';
 $crang['C' . $fila]='99CCFF';
 $grid[$fila]['C']=$tiendasN[$idt];
@@ -112,7 +112,7 @@ ksort($empi);
 foreach ($empi as $ord => $empi2) {
 foreach ($empi2 as $ide => $nom) {
 if(array_key_exists($ide, $emps)){
-	$cc++;	$anchos[$col[$cc]]=35;
+	$cc++;	$anchos[$col[$cc]]=32;
 	$days=$emps[$ide];
 	$grid[$fila][$col[$cc]]=$nom;// . "/$ord" ;
 	
@@ -146,7 +146,7 @@ $grid[$fila][$col[$cc+1]]='GASTOS';
 $BOLDrang	['C' . $fila . ':' . $col[$cc+1] . $fila]=1;
 $align		['C' . $fila . ':' . $col[$cc+1] . $fila]='C'; 
 
-$anchos[$col[$cc+1]]=35;
+$anchos[$col[$cc+1]]=32;
 
 $BOLDrang	['C' . ($fila+1) . ':' . $col[$cc+1] . ($fila+31)]=2;
 $BTrang		['B' . ($fila+1) . ':' . $col[$cc+1] . ($fila+31)]=1;
