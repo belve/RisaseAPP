@@ -138,7 +138,8 @@ while ($row = $dbn->fetchassoc()){$id++;
 	$gru=$g . $sg;
 	if(array_key_exists($gru, $sum)){$sum[$gru]=$sum[$gru]+$qty;}else{$sum[$gru]=$qty;}; $stot=$stot+$qty;
 		
-	$grus[$id]=$gru;
+	$grus2[$gru][$qty]=$id;
+	$grus3[$id]=$gru;
 	$vend[$id]=$qty;
 	$tven[$id]=$idt;
 	}
@@ -146,8 +147,6 @@ while ($row = $dbn->fetchassoc()){$id++;
 if (!$dbn->close()){die($dbn->error());};
 
 
-if ($act==1){if($actO=='A'){asort($grus);}else{arsort($grus);};$d=$grus;};
-if ($act==3){if($actO=='A'){asort($vend);}else{arsort($vend);};$d=$vend;};
 
 
 
@@ -158,65 +157,126 @@ $crang=array();
 $Mrang=array();
 $BTrang=array();
 
+
+
+$col[1]['A']='B';
+$col[1]['B']='C';
+$col[1]['C']='D';
+$col[1]['D']='E';
+
+$col[2]['A']='G';
+$col[2]['B']='H';
+$col[2]['C']='I';
+$col[2]['D']='J';
+
+
+
+
+if($id){
+
+
+
+
+
+
+if ($act==1){if($actO=='A'){ksort($grus2);}else{krsort($grus2);};
+foreach ($grus2 as $grup => $ngrus) {krsort($ngrus); foreach ($ngrus as $q => $idd) {
+$grus[$idd]=$grup;	
+}}
+$d=$grus;
+};
+
+if ($act==3){if($actO=='A'){asort($vend);}else{arsort($vend);};$d=$vend;$grus=$grus3;	};
+
+
+
 $fila=0;$lg="";
-foreach ($d as $id => $value) {$fila++;
+$lf=0;
+$count=0;
+
+$c=1;
+foreach ($d as $id => $value) {
 $gru=$grus[$id]; $vt=$vend[$id]; $idt=$tven[$id]; $p1=($vt/$sum[$gru])*100; $p2=($vt/$stot)*100; 
 
+if($count > 40) {
+	if($c==1){ $fila=$fila-41; $c=2; $lg=""; $count=0;}else{$paginas[$fila]=1; $fila++; $c=1;  $lg="";$count=0; }
+}
 
 if($gru!=$lg){
-if($lg){	
-$grid[$fila]['A']='TOTAL';		
-$grid[$fila]['B']=number_format($sum[$lg],2,',','.');
-$grid[$fila]['D']=number_format(($sum[$lg]/$stot*100),2,',','.');		
-$BOLDrang	['A' . $fila. ':' . 'D' . $fila]=1;
-$align		['A' . $fila. ':' . 'D' . $fila]='C'; 
-$BTrang		['A' . $fila. ':' . 'D' . $fila]=1;
-$fila++;
-}
+
+	
+			if($lg){	
+			$grid[$fila][$col[$c]['A']]='TOTAL';		
+			$grid[$fila][$col[$c]['B']]=number_format($sum[$lg],2,',','.');
+			$grid[$fila][$col[$c]['D']]=number_format(($sum[$lg]/$stot*100),2,',','.');		
+			$BOLDrang	[$col[$c]['A'] . $fila. ':' . $col[$c]['D'] . $fila]=1;
+			$align		[$col[$c]['A'] . $fila. ':' . $col[$c]['D'] . $fila]='C'; 
+			$BTrang		[$col[$c]['A'] . $fila. ':' . $col[$c]['D'] . $fila]=1;
+			$fila++;$count++;
+			}
 
 
+$fila++;$count++;
 $lg=$gru;
-$Mrang["A$fila:D$fila"]=1;
-$grid[$fila]['A']=$nomSG[$gru]; 
+$Mrang[$col[$c]['A'] . $fila . ":" . $col[$c]['D'] .$fila]=1;
+$grid[$fila][$col[$c]['A']]=$nomSG[$gru]; 
 
-$BOLDrang	['A' . $fila]=1;
-$align		['A' . $fila]='C'; 
-$BTrang		['A' . $fila]=1;
+$BOLDrang	[$col[$c]['A'] . $fila]=1;
+$align		[$col[$c]['A'] . $fila]='C'; 
+$BTrang		[$col[$c]['A'] . $fila. ':' . $col[$c]['D'] . $fila]=1;
+$fila++;$count++;	
 
-$fila++;		
+		
+$grid[$fila][$col[$c]['B']]='VENTA';
+$grid[$fila][$col[$c]['C']]='%SUB';
+$grid[$fila][$col[$c]['D']]='%TOT';		
+$BOLDrang	[$col[$c]['A'] . $fila. ':' . $col[$c]['D'] . $fila]=1;
+$align		[$col[$c]['A'] . $fila. ':' . $col[$c]['D'] . $fila]='C'; 
+$BTrang		[$col[$c]['A'] . $fila. ':' . $col[$c]['D'] . $fila]=1;
+$fila++;$count++;
+	
 }
 
 
-$grid[$fila]['A']=$tiendas2[$idt]; 
-$BOLDrang	['A' . $fila]=1;
+$grid[$fila][$col[$c]['A']]=$tiendas2[$idt]; 
+$BOLDrang	[$col[$c]['A'] . $fila]=1;
 
-$grid[$fila]['B']=number_format($vt,2,',','.');
-$grid[$fila]['C']=number_format($p1,2,',','.');
-$grid[$fila]['D']=number_format($p2,2,',','.');	
-$BOLDrang	['B' . $fila . ':' . 'D' . $fila]=2;
-$align		['A' . $fila . ':' . 'D' . $fila]='C'; 
-$BTrang		['A' . $fila . ':' . 'D' . $fila]=1;
+$grid[$fila][$col[$c]['B']]=number_format($vt,2,',','.');
+$grid[$fila][$col[$c]['C']]=number_format($p1,2,',','.');
+$grid[$fila][$col[$c]['D']]=number_format($p2,2,',','.');	
+$BOLDrang	[$col[$c]['B'] . $fila . ':' . $col[$c]['D'] . $fila]=2;
+$align		[$col[$c]['A'] . $fila . ':' . $col[$c]['D'] . $fila]='C'; 
+$BTrang		[$col[$c]['A'] . $fila . ':' . $col[$c]['D'] . $fila]=1;
+
+$fila++;$count++;
 }
 
-$fila++;
-$grid[$fila]['A']='TOTAL';		
-$grid[$fila]['B']=number_format($sum[$lg],2,',','.');
-$grid[$fila]['D']=number_format(($sum[$lg]/$stot*100),2,',','.');		
-$BOLDrang	['A' . $fila. ':' . 'D' . $fila]=1;
-$align		['A' . $fila. ':' . 'D' . $fila]='C'; 
-$BTrang		['A' . $fila. ':' . 'D' . $fila]=1;
+
+
+$grid[$fila][$col[$c]['A']]='TOTAL';		
+$grid[$fila][$col[$c]['B']]=number_format($sum[$lg],2,',','.');
+$grid[$fila][$col[$c]['D']]=number_format(($sum[$lg]/$stot*100),2,',','.');		
+$BOLDrang	[$col[$c]['A'] . $fila. ':' . $col[$c]['D'] . $fila]=1;
+$align		[$col[$c]['A'] . $fila. ':' . $col[$c]['D'] . $fila]='C'; 
+$BTrang		[$col[$c]['A'] . $fila. ':' . $col[$c]['D'] . $fila]=1;
+
+
+}
 
 
 
 
-
-
-
-$anchos['A']=10;
-$anchos['B']=15;
-$anchos['C']=10;
+$anchos['B']=10;
+$anchos['C']=15;
 $anchos['D']=10;
 $anchos['E']=10;
+$anchos['F']=5;
+$anchos['G']=10;
+$anchos['H']=15;
+$anchos['I']=10;
+$anchos['J']=10;
+
+
 
 if(count($grid)>0){
 
@@ -229,7 +289,7 @@ $_SESSION['Mrang']=$Mrang;
 $_SESSION['BTrang']=$BTrang;
 $_SESSION['format']=$format;
 $_SESSION['paginas']=$paginas;
-$_SESSION['nomfil']="PocentVentas";
+$_SESSION['nomfil']="VentasporTienda";
 $_SESSION['BOLDrang']=$BOLDrang;
 $res['ng']=count($grid)+count($anchos)+count($align)+count($crang)+count($Mrang)+count($BTrang)+count($paginas)+count($format);
 
