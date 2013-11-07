@@ -445,7 +445,7 @@ getDATA(url);
 
 
 
-function informeFF(){
+function informeFF(t){
 
 var frqcia=1;
 
@@ -462,7 +462,11 @@ if(mes==""){
 alert('Debe introducir un mes');	
 }else{
 
+if(t=='s'){
 var url="/informes/iFactFranq.php?";	
+}else{
+var url="/informes/iFactFranqDET.php?";	
+}
 	
 url = url 
 

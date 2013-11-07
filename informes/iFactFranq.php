@@ -7,10 +7,11 @@ require_once("basics.php");
 require_once("../db.php");
 require_once("../variables.php");
 
-$debug=1;
+$debug=0;
 
 
-
+$eqtip[1]="REPARTOS";
+$eqtip[2]="PEDIDOS";
 
 $frqcia="";
 $options=""; $cong=0;
@@ -46,23 +47,25 @@ $ffin=substr($mes, 3,4) . "-" . substr($mes, 0,2) . "-31";
 
 
 if (!$dbnivel->open()){die($dbnivel->error());};
-$queryp= "select  $fini $ffin;";
-$dbnivel->query($queryp);echo $queryp;
-while ($row = $dbnivel->fetchassoc()){$count++;
-$ord=$row['orden'];
-if($ord==0){$ord=100;};
-$empsn[$row['id_tienda']][$ord][$row['id']]=$row['nom'];
+$queryp= "select id_tienda, tip, agrupar, 
+(select nombre from agrupedidos where id=agrupar) as nomag, fecha, 
+sum(cantidad) as qty, 
+sum(cantidad * (select preciocosto from articulos where id=id_articulo)) as imp 
+from pedidos where id_tienda IN ($ttss) AND fecha >= '$fini' AND fecha <= '$ffin' GROUP BY id_tienda, tip, agrupar order by id_tienda, tip, fecha;
+";
+$dbnivel->query($queryp);
+while ($row = $dbnivel->fetchassoc()){
+
+
+$datos[$row['id_tienda']][$row['tip']][$row['fecha']][$row['nomag']]['qty']=$row['qty'];
+$datos[$row['id_tienda']][$row['tip']][$row['fecha']][$row['nomag']]['imp']=$row['imp'];
+	
+
 };
 
 
 
 if (!$dbnivel->close()){die($dbnivel->error());};
-
-
-
-
-
-
 
 
 
@@ -75,13 +78,53 @@ $Mrang=array();
 $BTrang=array();$p=1;$sumas=array();
 
 
+$fila=1; $lT=""; $lTi="";
+foreach ($datos as $idt => $tips){
+$totQ=0; $totI=0;
+####### cabecera tienda		
+$grid[$fila]['B']=$tiendasN[$idt];	
+$Mrang["B$fila:E$fila"]=1;
+$align["B$fila"]='C';
+$BOLDrang	['B' . $fila]=1;
+$fila++;$fila++;		
+ foreach ($tips as $tip => $dates) {
+	############ cabecera tipo	 		
+	$grid[$fila]['B']=$eqtip[$tip];	
+	$Mrang["B$fila:E$fila"]=1;
+	$align["B$fila"]='C';
+	$BOLDrang	['B' . $fila]=1;
+	$fila++;	 	
+	 	 foreach ($dates as $fecha => $noms) { foreach ($noms as $nomag => $vals) {
+
+			$grid[$fila]['B']=$fecha;
+			$grid[$fila]['C']=$nomag;		
+			
+			$grid[$fila]['D']=$vals['qty'];	$totQ=$totQ+$vals['qty'];
+			$align["D$fila"]='R';
+			
+			$grid[$fila]['E']=number_format($vals['imp'],2,',','.');	$totI=$totI+$vals['imp'];
+			$align["E$fila"]='R';
+			
+			$BOLDrang	['B' . $fila . ':' . 'E' . $fila]=2;
+			
+			$fila++;
+	
+}}}
+
+$fila++;
+$grid[$fila]['B']='TOTAL:';
+$grid[$fila]['D']=$totQ;							$align["D$fila"]='R';
+$grid[$fila]['E']=number_format($totI,2,',','.');	$align["E$fila"]='R';
+$BOLDrang	['B' . $fila . ':' . 'E' . $fila]=1;
+$paginas[$fila]=1;
+$fila++;
+}
 
 
-
-
-
-
-
+$anchos['B']=15;
+$anchos['C']=35;
+$anchos['D']=15;
+$anchos['E']=15;
 
 
 if(count($grid)>0){

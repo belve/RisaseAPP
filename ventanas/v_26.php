@@ -69,7 +69,8 @@ window.top.tselALL	=1;
 	<div style="margin-left: -2px; margin-top: 4px; "><input type="checkbox" id="frqcia" /> Incluir franquicias. </div>
 	-->
 	
-	<div class="boton" style=" margin-left: 2px; width: 100px;"; onclick="javascript:informeFF();" >Informe >> </div>
+	<div class="boton" style=" margin-left: 2px; width: 130px;"; onclick="javascript:informeFF('s');" >Informe simple    >> </div>
+	<div class="boton" style=" margin-left: 2px; width: 130px;"; onclick="javascript:informeFF('d');" >Informe detallado >> </div>
 </div>
 
 
