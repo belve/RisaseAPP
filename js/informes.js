@@ -412,6 +412,49 @@ for (var i = 0; i < tsel.length; i++) {if(tsel[i]==1){
 ttss=ttss + i + ','; tn++;
 }}
 if(tn==0){alert('Debe seleccionar alguna tienda.');}else{
+
+var fini=document.getElementById('fini').value
+var ffin=document.getElementById('ffin').value
+fini=fini.replace('dd/mm/aaaa','');
+ffin=ffin.replace('dd/mm/aaaa','');
+
+if((fini=="")||(ffin=="")){
+alert('Debe introducir un rango de fechas');	
+}else{
+
+
+var url="/informes/iDescTien.php?";	
+	
+url = url 
+
+ + "&fini=" + fini 
+ + "&ffin=" + ffin 
+ + "&ttss=" + ttss 
+ + "&risase=" + window.top.bRISASA  
+ + "&frqcia=" + frqcia  
+ + '&listador=1'; 
+
+getDATA(url);
+
+
+}
+}
+
+}
+
+
+
+
+function informeFF(){
+
+var frqcia=1;
+
+var ttss=""; var tn=0;
+var tsel=window.top.tsel;
+for (var i = 0; i < tsel.length; i++) {if(tsel[i]==1){
+ttss=ttss + i + ','; tn++;
+}}
+if(tn==0){alert('Debe seleccionar alguna tienda.');}else{
 var mes=document.getElementById('fini').value
 mes=mes.replace('mm/aaaa','');
 
@@ -419,7 +462,7 @@ if(mes==""){
 alert('Debe introducir un mes');	
 }else{
 
-var url="/informes/iDescTien.php?";	
+var url="/informes/iFactFranq.php?";	
 	
 url = url 
 
@@ -436,6 +479,9 @@ getDATA(url);
 }
 
 }
+
+
+
 
 
 

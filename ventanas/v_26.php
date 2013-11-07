@@ -6,7 +6,7 @@ require_once("../functions/gettiendas.php");
 
 
 $cajt="";
-foreach ($tiendas as $idt => $nomt) {
+foreach ($franq as $idt => $p) {$nomt=$tiendas[$idt];
 $cajt.="<div class='cajt' id='idt_$idt' onclick='javascript:cajtie($idt);' ondblclick='tselALL();' style='background-color:#8DC29E;'>$nomt</div> <script>window.top.tsel[$idt]=1;</script> ";	
 }
 $cajt.="<div style='clear:both;'></div>";
@@ -60,26 +60,16 @@ window.top.tselALL	=1;
 
 <div style="float: left; position: relative; margin-left: 20px;   margin-top: 14px;">	
 	
-	
 
-	<script>
-		window.top.bRISASA=0;
-	</script>
 	
 	
-	<div style="float: left; position: relative">	
+	<div style="margin-left: 2px">Mes: <input value="mm/aaaa" type="text" class="corto pdias"  id="fini" onfocus="javascript:dlF(this.id);" onkeyup="javascript:tabFm(this.id);"></div>
 	
-	<div style=""><input type="text" onkeyup="javascript:tabF(this.id);" onfocus="javascript:dlF(this.id);" id="fini" class="medio" value="dd/mm/aaaa" style="color:#333333;"></div>
-	<div style=""><input type="text" style="color:#333333;" onkeyup="javascript:tabF(this.id);" onfocus="javascript:dlF(this.id);" id="ffin" value="dd/mm/aaaa" class="medio"></div>
-
-</div>
-
-<div style="clear: both"></div>
 	<!--
 	<div style="margin-left: -2px; margin-top: 4px; "><input type="checkbox" id="frqcia" /> Incluir franquicias. </div>
 	-->
 	
-	<div class="boton" style=" margin-left: 2px; width: 100px;"; onclick="javascript:informeDT();" >Informe >> </div>
+	<div class="boton" style=" margin-left: 2px; width: 100px;"; onclick="javascript:informeFF();" >Informe >> </div>
 </div>
 
 

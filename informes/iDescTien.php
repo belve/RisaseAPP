@@ -39,9 +39,9 @@ $ttss="";$rot=0; $dev=0;
 foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
 $ttss=substr($ttss, 0,-1);
 $frqcia=1;
+$fini=substr($fini, 6,4) . "-" . substr($fini, 3,2) . "-" . substr($fini, 0,2);
+$ffin=substr($ffin, 6,4) . "-" . substr($ffin, 3,2) . "-" . substr($ffin, 0,2);
 
-$fini=substr($mes, 3,4) . "-" . substr($mes, 0,2) . "-01";
-$ffin=substr($mes, 3,4) . "-" . substr($mes, 0,2) . "-31";
 
 
 /*
