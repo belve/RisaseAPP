@@ -93,7 +93,7 @@ $align=array();
 $crang=array();
 $Mrang=array();
 $BTrang=array();$p=1;$sumas=array();
-
+$angle=array();
 
 $fila=1;
 
@@ -131,9 +131,8 @@ $BTrang		['A' . $fila . ':E' . $fila]=1;
 
 if(count($datos)>0){
 
-//$_SESSION['angle']=$angle;
+$_SESSION['angle']=$angle;
 $_SESSION['BOLDrang']=$BOLDrang;
-//$_SESSION['cgd'] = $cdg; 
 $_SESSION['grid'] = $grid; 
 $_SESSION['anchos'] = $anchos;
 $_SESSION['align'] = $align;

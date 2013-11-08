@@ -131,6 +131,7 @@ $align=array();
 $crang=array();
 $Mrang=array();
 $BTrang=array();
+$angle=array();
 
 $fila=0;$cuenf=0; $first=1; $lg=""; $lsg="";$lidt=""; $c=1; $count=0; $lastfil=$fila;
 
@@ -234,6 +235,7 @@ $anchos['I']=18;
 $anchos['J']=10;
 $anchos['K']=10;
 
+$_SESSION['angle']=$angle;
 $_SESSION['BOLDrang']=$BOLDrang;
 $_SESSION['cgd'] = $cdg; 
 $_SESSION['grid'] = $grid; 

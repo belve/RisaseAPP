@@ -79,7 +79,7 @@ $datos[$idt][$ide][$fecha]=$qty;
 
 if (!$dbn->close()){die($dbn->error());};
 
-
+$angle=array();
 $grid=array();
 $anchos=array();
 $align=array();
@@ -200,7 +200,7 @@ $anchos['B']=5;
 
 if(count($grid)>0){
 
-//$_SESSION['angle']=$angle;
+$_SESSION['angle']=$angle;
 $_SESSION['BOLDrang']=$BOLDrang;
 //$_SESSION['cgd'] = $cdg; 
 $_SESSION['grid'] = $grid; 

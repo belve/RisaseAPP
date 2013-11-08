@@ -9,7 +9,13 @@ require_once("../variables.php");
 
 $debug=0;
 
-
+$angle=array();
+$grid=array();
+$anchos=array();
+$align=array();
+$crang=array();
+$Mrang=array();
+$BTrang=array();
 
 $options="";
 $id_proveedor="";$id_grupo="";$id_subgrupo="";$id_color="";$codigo="";$pvp="";$desde="";$hasta="";$temporada="";$hago="";
@@ -476,6 +482,7 @@ $BTrang['A1:S1']=1;
 $BTrang['A2:O2']=1;
 $BTrang['B3:O3']=1;
 
+$_SESSION['angle']=$angle;
 $_SESSION['cgd'] = $cdg; 
 $_SESSION['grid'] = $grid; 
 $_SESSION['anchos'] = $anchos;

@@ -89,7 +89,7 @@ $act=1;$actO='A';
 
 
 
-
+$angle=array();
 $gridD=array();
 $anchos=array();
 $align=array();
@@ -202,7 +202,7 @@ $anchos['I']=15;
 
 
 $_SESSION['BOLDrang']=$BOLDrang;
-//$_SESSION['cgd'] = $cdg; 
+$_SESSION['angle']=$angle;
 $_SESSION['grid'] = $grid; 
 $_SESSION['anchos'] = $anchos;
 $_SESSION['align'] = $align;

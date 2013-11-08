@@ -82,6 +82,7 @@ $cols[2]['C']='H';
 $cols[2]['D']='I';
 $cols[2]['E']='J';
 
+$angle=array();
 $grid=array();
 $anchos=array();
 $align=array();
@@ -163,9 +164,8 @@ $anchos['J']=12;
 
 if(count($grid)>0){
 
-//$_SESSION['angle']=$angle;
+$_SESSION['angle']=$angle;
 $_SESSION['BOLDrang']=$BOLDrang;
-//$_SESSION['cgd'] = $cdg; 
 $_SESSION['grid'] = $grid; 
 $_SESSION['anchos'] = $anchos;
 $_SESSION['align'] = $align;

@@ -156,7 +156,7 @@ $cdg[$codbar]=1;
 }}}}}
 
 
-
+$angle=array();
 $gridD=array();
 $anchos=array();
 $align=array();
@@ -242,6 +242,7 @@ $anchos['I']=2;
 $anchos['J']=18;
 $anchos['K']=13;
 
+$_SESSION['angle']=$angle;
 $_SESSION['BOLDrang']=$BOLDrang;
 $_SESSION['cgd'] = $cdg; 
 $_SESSION['grid'] = $grid; 

@@ -75,7 +75,7 @@ if (!$dbn->close()){die($dbn->error());};
 
 
 
-
+$angle=array();
 $grid=array();
 $anchos=array();
 $align=array();
@@ -194,7 +194,7 @@ $BTrang		['B' . $fila . ':' . 'J' . $fila]=1;
 if(count($grid)>0){
 
 $_SESSION['BOLDrang']=$BOLDrang;
-//$_SESSION['cgd'] = $cdg; 
+$_SESSION['angle']=$angle;
 $_SESSION['grid'] = $grid; 
 $_SESSION['anchos'] = $anchos;
 $_SESSION['align'] = $align;

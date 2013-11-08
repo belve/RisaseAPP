@@ -65,7 +65,7 @@ $datos[$idt][$hora]=$qty;
 
 if (!$dbn->close()){die($dbn->error());};
 
-
+$angle=array();
 $grid=array();
 $anchos=array();
 $align=array();
@@ -150,6 +150,7 @@ $BTrang		['B' . $fila . ':' . 'T' . $fila]=1;
 
 if(count($grid)>0){
 
+$_SESSION['angle']=$angle;
 $_SESSION['BOLDrang']=$BOLDrang;
 //$_SESSION['cgd'] = $cdg; 
 $_SESSION['grid'] = $grid; 

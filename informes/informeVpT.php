@@ -149,7 +149,7 @@ if (!$dbn->close()){die($dbn->error());};
 
 
 
-
+$angle=array();
 $grid=array();
 $anchos=array();
 $align=array();
@@ -280,6 +280,7 @@ $anchos['J']=10;
 
 if(count($grid)>0){
 
+$_SESSION['angle']=$angle;
 $_SESSION['BOLDrang']=$BOLDrang;
 $_SESSION['grid'] = $grid; 
 $_SESSION['anchos'] = $anchos;
