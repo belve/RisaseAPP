@@ -122,7 +122,7 @@ if($risase){$db='risasa';}else{$db='risase';};
 $dbn=new DB('192.168.1.11','edu','admin',$db);
 
 if (!$dbn->open()){die($dbn->error());};
-$queryp= "select id_tienda, id_articulo, sum(cantidad) as qty from ticket_det 
+$queryp= "select id_tienda, id_articulo, sum(cantidad) as qty, importe from ticket_det 
 where fecha >= '$fini' AND fecha <= '$ffin' AND id_tienda IN ($ttss) 
 AND id_articulo NOT IN (10009999,20009999,30009999,40009999,50009999,60009999,70009999,80009999,90009999) 
 group by id_tienda, id_articulo; ";	
@@ -135,11 +135,11 @@ while ($row = $dbn->fetchassoc()){
 $cd=$row['id_articulo'];
 $idt=$row['id_tienda'];			
 	
-if((array_key_exists($cd, $pvps))&&(array_key_exists($cd, $pcos))){
-$vend[$idt][$cd]['pvp']=$row['qty'] * $pvps[$cd];
+
+$vend[$idt][$cd]['pvp']=$row['qty'] * $row['importe'];
 $vend[$idt][$cd]['pcos']=$row['qty'] * $pcos[$cd];
 $vend[$idt][$cd]['piez']=$row['qty'];
-}
+
 
 }
 if (!$dbn->close()){die($dbn->error());};
@@ -197,9 +197,9 @@ $tven[$idt]=$tven[$idt]+$dat['pcos'];
 
 //print_r($resultV);
 
-$idfil=0;
+$idfil=0;$sumMGB=array();
 foreach ($resultE as $idt => $datos) {ksort($datos); foreach ($datos as $gr => $dat){$idfil++;
-$sumMGB[$idt]=0;
+if(!array_key_exists($idt, $sumMGB)){$sumMGB[$idt]=0;};
 
 
 $datt[$idt][$gr]['idfil']=$idfil;
@@ -231,7 +231,7 @@ $datt[$idt][$gr]['MVpvp']=$MVpvp;
 
 #####  Margen Bº: Mercancía Vendida PVP-Mercancía Enviada (6º columna - 1º columna). Si la Mercancía Vendida a PVP es = 0 no debe mostrar resultado.
 if($MVpvp > 0 ){$MGB=$MVpvp-$ME; }else{$MGB="";};
-$datt[$idt][$gr]['MGB']=$MGB; $sumMGB[$idt]=$sumMGB[$idt]+$MGB;
+$datt[$idt][$gr]['MGB']=$MGB; $sumMGB[$idt]=($sumMGB[$idt]*1)+($MGB*1);
 
 #### Piezas es el número total de piezas vendidas por esa tienda, por subgrupos.
 if(array_key_exists($gr, $resultV[$idt])){$PIEZ=$resultV[$idt][$gr]['piez'];}else{$PIEZ="";};
@@ -257,10 +257,12 @@ $fila=0;$adfil=0;	$first=1;
 
 $flini=3;$lg="";
 foreach ($datt as $idt => $vals) {
-
+if(!array_key_exists($idt,$sumas)){$sumas[$idt]=array();};
 
 $fila++;$adfil++;
-$Mrang["B$fila:M$fila"]=1;
+$Mrang["B$fila:C$fila"]=1;
+$BOLDrang["B$fila"]=1;
+$crang["B$fila"]='91E3FF';
 $grid[$fila]['B']=$tiendasN[$idt];
 
 
@@ -272,7 +274,7 @@ $grid[$fila]['F']='DIFERENCIA';
 $grid[$fila]['G']='DIFERENCIA EU';
 
 $grid[$fila]['I']='MERC.VEND PVP';
-$grid[$fila]['J']='MARGEN Bª';
+$grid[$fila]['J']='MARGEN Bº';
 $grid[$fila]['K']='% Bº';
 $grid[$fila]['L']='PIEZAS';
 $grid[$fila]['M']='MARGEN Bº PIEZA';
@@ -291,39 +293,41 @@ foreach ($vals as $gru => $dat){
 	
 $fil=$dat['idfil']+$adfil;		
 
-$BOLDrang   ['C' . $fil .':M' .$fil]=2;
+$BOLDrang   ['C' . $fil .':M' .$fil]=2;    
 $align		['A' . $fil .':M' .$fil]='C';
 $BTrang 	['B' . $fil .':M' .$fil]=1;
 
 $grid[$fil]['B']=$gru;
 
-$grid[$fil]['C']=number_format($dat['ME']*1,2,',','.');		
-$grid[$fil]['D']=number_format($dat['MV']*1,2,',','.');
+$grid[$fil]['C']=number_format($dat['ME']*1,2,',','.');	 if(!array_key_exists('C',$sumas[$idt])){$sumas[$idt]['C']=$dat['ME'];}else{$sumas[$idt]['C']=$sumas[$idt]['C']+$dat['ME'];};	
+$grid[$fil]['D']=number_format($dat['MV']*1,2,',','.');	 if(!array_key_exists('D',$sumas[$idt])){$sumas[$idt]['D']=$dat['MV'];}else{$sumas[$idt]['D']=$sumas[$idt]['D']+$dat['MV'];};	
 
 $cpV[$fil]=$dat['pV'];	
 if($dat['pV']){$E=number_format($dat['pV']*1,2,',','.'). "%";}else{$E="";};
 $grid[$fil]['E']=$E;	
 
-if($dat['DF']){$F=number_format($dat['DF']*1,2,',','.'). "%";}else{$F="";};
-$grid[$fil]['F']=$F;	
+if($dat['DF']){
+	$F=number_format($dat['DF']*1,2,',','.'). "%";
+	if($dat['DF']<0){$crang["F$fil"]='94FF70';}else{$crang["F$fil"]='FFB6A3';};	
+	}else{$F="";};
+$grid[$fil]['F']=$F; 
 
 if($dat['DE']){$G=number_format($dat['DE']*1,2,',','.'); $crang["G$fil"]='FFB6A3';  }else{$G="";};
-$grid[$fil]['G']=$G;		
+$grid[$fil]['G']=$G;		if(!array_key_exists('G',$sumas[$idt])){$sumas[$idt]['G']=$dat['DE'];}else{$sumas[$idt]['G']=$sumas[$idt]['G']+$dat['DE'];};
 
 if($dat['MVpvp']){$I=number_format($dat['MVpvp']*1,2,',','.');}else{$I="";};
-$grid[$fil]['I']=$I;		
-
+$grid[$fil]['I']=$I;	    if(!array_key_exists('I',$sumas[$idt])){$sumas[$idt]['I']=$dat['MVpvp'];}else{$sumas[$idt]['I']=$sumas[$idt]['I']+$dat['MVpvp'];};
 
 
 if($dat['MGB']){$J=number_format($dat['MGB']*1,2,',','.');$cMGM[$fil]=$dat['MGB'];}else{$J="";};
-$grid[$fil]['J']=$J;	
+$grid[$fil]['J']=$J;	   if(!array_key_exists('J',$sumas[$idt])){$sumas[$idt]['J']=$dat['MGB'];}else{$sumas[$idt]['J']=$sumas[$idt]['J']+$dat['MGB'];};
 
 ####% Bº: es el % que representa el Margen de Beneficio de cada subgrupo. Margen de Bº de cada subgrupo / suma total Margen de Bº. (Cada registro de la 7ª columna entre la suma total de esa columna).
 $pcB=(($dat['MGB'])/$sumMGB[$idt])*100;    
 if($pcB){$K=number_format($pcB,2,',','.') . "%"; $cPCB[$fil]=$pcB;}else{$K="";};
 $grid[$fil]['K']=$K;	
 
-$grid[$fil]['L']=$dat['PIEZ'];	
+$grid[$fil]['L']=$dat['PIEZ'];	if(!array_key_exists('L',$sumas[$idt])){$sumas[$idt]['L']=$dat['PIEZ'];}else{$sumas[$idt]['L']=$sumas[$idt]['L']+$dat['PIEZ'];};
 
 $cMGPP[$fil]=$dat['MGPP'];
 $grid[$fil]['M']=number_format($dat['MGPP'],2,',','.');	
@@ -380,6 +384,16 @@ if($flfin>$fila){$flfin=$fila;};
 	$BTrang 	['A' . $flini .':M' .$flfin]=3;
 	
 	}
+
+$fila++;$adfil++;$adfil++;$fila++;
+foreach ($sumas[$idt] as $cel => $value) {
+if($cel!='L'){$value=number_format($value,2,',','.');};	
+$grid[$fila][$cel]=$value;	
+}
+$BOLDrang   ['C' . $fila .':M' .$fila]=1;    
+$align		['C' . $fila .':M' .$fila]='C';
+
+$fila++;$fila++;$adfil++;$adfil++;
 
 $paginas[$fila]=1;$lats=array();
 
