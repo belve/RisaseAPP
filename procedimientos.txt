@@ -45,10 +45,25 @@ delete from ticket_det where fecha >= '2013-10-14';
 http://192.168.1.11/importadores/tickects.php
 http://192.168.1.11/importadores/detTicket.php
 
-___________________________________________________ arreglar de codigo tambien FER2
-Arreglar tickets COR4
-UPDATE tickets set id_tienda=12 where id_tienda=9 and id_ticket like 'COR4%';
-UPDATE ticket_det set id_tienda=12 where id_tienda=9 and id_ticket like 'COR4%';
+Y RISASA
+
+
+___________________________________________________ 
+arregla tickets largos
+
+
+UPDATE tickets SET 
+id_tienda=(SELECT id FROM tiendas WHERE id_tienda=substring(id_ticket,1,4)), 
+hora=substring(id_ticket,11,2) 
+WHERE length(id_ticket)=16;
+
+UPDATE ticket_det SET 
+id_tienda=(SELECT id FROM tiendas WHERE id_tienda=substring(id_ticket,1,4)), 
+hora=substring(id_ticket,11,2) 
+WHERE length(id_ticket)=16;
+
+Y RISASA
+
 _______________________________________________________________________
 
 stocklocales

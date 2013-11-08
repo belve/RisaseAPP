@@ -51,7 +51,7 @@ if(!$idpedido){
 $queryp= "INSERT INTO pedidos (id_articulo,id_tienda,cantidad,tip,fecha,prov,grupo,subgrupo,codigo) values ($idarti,$idtiendae,$cant,1,'$fecha',$prov,$grupo,$subgrupo,$code);";
 $dbnivel->query($queryp);echo $queryp;	
 
-}elseif(($idpedido)AND($estado != 'F')){
+}elseif(($idpedido)&&($estado != 'F')&&($estado != 'T')){
 $queryp= "UPDATE pedidos set cantidad=$cant where id=$idpedido;";$dbnivel->query($queryp);echo $queryp;	
 }
 
