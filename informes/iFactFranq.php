@@ -50,7 +50,7 @@ if (!$dbnivel->open()){die($dbnivel->error());};
 $queryp= "select id_tienda, tip, agrupar, 
 (select nombre from agrupedidos where id=agrupar) as nomag, fecha, 
 sum(cantidad) as qty, 
-sum(cantidad * (select preciocosto from articulos where id=id_articulo)) as imp 
+sum(cantidad * (select precioneto from articulos where id=id_articulo)) as imp 
 from pedidos where id_tienda IN ($ttss) AND fecha >= '$fini' AND fecha <= '$ffin' GROUP BY id_tienda, tip, agrupar order by id_tienda, tip, fecha;
 ";
 $dbnivel->query($queryp);
@@ -82,13 +82,15 @@ $fila=1; $lT=""; $lTi="";
 foreach ($datos as $idt => $tips){
 $totQ=0; $totI=0;
 ####### cabecera tienda		
-$grid[$fila]['B']=$tiendasN[$idt];	
+$grid[$fila]['B']=$tiendasN[$idt] . " - $mes";	
 $Mrang["B$fila:E$fila"]=1;
 $align["B$fila"]='C';
 $BOLDrang	['B' . $fila]=1;
-$fila++;$fila++;		
+$crang ['B' . $fila]='70DBFF';
+$fila++;		
  foreach ($tips as $tip => $dates) {
-	############ cabecera tipo	 		
+	############ cabecera tipo	
+	$fila++; 		
 	$grid[$fila]['B']=$eqtip[$tip];	
 	$Mrang["B$fila:E$fila"]=1;
 	$align["B$fila"]='C';
@@ -106,7 +108,7 @@ $fila++;$fila++;
 			$align["E$fila"]='R';
 			
 			$BOLDrang	['B' . $fila . ':' . 'E' . $fila]=2;
-			
+			$BTrang     ['B' . $fila . ':' . 'E' . $fila]=1;
 			$fila++;
 	
 }}}
@@ -116,6 +118,7 @@ $grid[$fila]['B']='TOTAL:';
 $grid[$fila]['D']=$totQ;							$align["D$fila"]='R';
 $grid[$fila]['E']=number_format($totI,2,',','.');	$align["E$fila"]='R';
 $BOLDrang	['B' . $fila . ':' . 'E' . $fila]=1;
+$BTrang     ['B' . $fila . ':' . 'E' . $fila]=1;
 $paginas[$fila]=1;
 $fila++;
 }
@@ -139,7 +142,7 @@ $_SESSION['Mrang']=$Mrang;
 $_SESSION['BTrang']=$BTrang;
 $_SESSION['format']=$format;
 $_SESSION['paginas']=$paginas;
-$_SESSION['nomfil']="Mensual-" . $mes;
+$_SESSION['nomfil']="FacturacionFranquicias-" . $mes;
 $_SESSION['BOLDrang']=$BOLDrang;
 $res['ng']=count($grid)+count($anchos)+count($align)+count($crang)+count($Mrang)+count($BTrang)+count($paginas)+count($format);
 

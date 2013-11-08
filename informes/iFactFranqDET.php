@@ -55,7 +55,7 @@ $queryp= "select id_tienda, tip, (SELECT codbarras from articulos where id=id_ar
 CONCAT( (substring((SELECT codbarras from articulos where id=id_articulo),1,2)),(substring((SELECT codbarras from articulos where id=id_articulo),5)) ) as GS, 
 sum(cantidad) as qty , 
 (select preciocosto from articulos where id=id_articulo) as impu, 
-sum(cantidad * (select preciocosto from articulos where id=id_articulo)) as impt 
+sum(cantidad * (select precioneto from articulos where id=id_articulo)) as impt 
 from pedidos where id_tienda IN ($ttss) AND fecha >= '$fini' AND fecha <= '$ffin' GROUP BY id_tienda, tip, id_articulo order by id_tienda, tip, GS;";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){
@@ -98,9 +98,10 @@ foreach ($datos as $idt => $tips){
 $totQ=0; $totI=0; $cc=1;
 ####### cabecera tienda	
 	
-$grid[$fila]['B']=$tiendasN[$idt];	
+$grid[$fila]['B']=$tiendasN[$idt] . " - $mes";	
 $Mrang[$cols[1]['B'] . $fila . ":" . $cols[2]['E'] . $fila]=1;
 $align[$cols[$cc]['B'] . $fila]='C';
+$crang [$cols[$cc]['B'] . $fila]='70DBFF';
 
 $BOLDrang	[$cols[$cc]['B'] . $fila]=1;
  $ffila=$fila+3; $fila++;$fila++;	$count=1;
@@ -114,7 +115,7 @@ $BOLDrang	[$cols[$cc]['B'] . $fila]=1;
 
 	foreach ($cbs as $cb => $vals) {
 	
-	 if($count>40){
+	 if($count>46){
 		if($cc==1){$cc=2; $fila=$ffila; $count=1; }else{$cc=1; $paginas[$fila]=1; $fila++; $count=1; $ffila=$fila; };			  
 	  }
 			
@@ -129,17 +130,19 @@ $BOLDrang	[$cols[$cc]['B'] . $fila]=1;
 			$align[$cols[$cc]['E'] . $fila]='R';
 			
 			$BOLDrang	[$cols[$cc]['B'] . $fila . ":" . $cols[$cc]['E'] . $fila]=2;
+			$BTrang     [$cols[$cc]['B'] . $fila . ":" . $cols[$cc]['E'] . $fila]=1;
 			
 			$fila++;$count++;
 	
 }}
 
 $fila++;$count++;
-$fila=$ffila+40;
+$fila=$ffila+46;
 $grid[$fila][$cols[$cc]['B']]='TOTAL:';
 $grid[$fila][$cols[$cc]['C']]=$totQ;							$align[$cols[$cc]['C'] . $fila]='R';
 $grid[$fila][$cols[$cc]['E']]=number_format($totI,2,',','.');	$align[$cols[$cc]['E'] . $fila]='R';
 $BOLDrang	[$cols[$cc]['B'] . $fila . ":" . $cols[$cc]['E'] . $fila]=1;
+$BTrang     [$cols[$cc]['B'] . $fila . ":" . $cols[$cc]['E'] . $fila]=1;
 $paginas[$fila]=1;
 $fila++;$count++;
 }
@@ -174,7 +177,7 @@ $_SESSION['Mrang']=$Mrang;
 $_SESSION['BTrang']=$BTrang;
 $_SESSION['format']=$format;
 $_SESSION['paginas']=$paginas;
-$_SESSION['nomfil']="Mensual-" . $mes;
+$_SESSION['nomfil']="FacturacionFranquicias-" . $mes;
 $_SESSION['BOLDrang']=$BOLDrang;
 $res['ng']=(count($grid)+count($anchos)+count($align)+count($crang)+count($Mrang)+count($BTrang)+count($paginas)+count($format))*2;
 
