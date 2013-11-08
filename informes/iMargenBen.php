@@ -56,6 +56,14 @@ if($debug){echo "$queryp \n\n";};
 while ($row = $dbnivel->fetchassoc()){$nomgru[$row['id']]=$row['nombre'];};
 
 
+$queryp= "
+select codbarras, pvp, preciocosto from articulos;";
+$dbnivel->query($queryp);
+if($debug){echo "$queryp \n\n";};$piez=array();
+while ($row = $dbnivel->fetchassoc()){
+$pvps[$row['codbarras']]=$row['pvp'];	
+$pcos[$row['codbarras']]=$row['preciocosto'];
+}
 
 
 $queryp= "
@@ -77,8 +85,6 @@ $idt=$row['id_tienda'];
 $piez[$idt][$row['SG']]['pvp']=$row['cant']*$row['pvp'];
 $piez[$idt][$row['SG']]['pcos']=$row['cant']*$row['pcos'];
 
-$pvps[$row['SG']]=$row['pvp'];	
-$pcos[$row['SG']]=$row['pcos'];
 }
 
 
