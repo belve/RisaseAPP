@@ -141,7 +141,7 @@ $_SESSION['Mrang']=$Mrang;
 $_SESSION['BTrang']=$BTrang;
 $_SESSION['format']=$format;
 $_SESSION['paginas']=$paginas;
-$_SESSION['nomfil']="Mensual-" . $mes;
+$_SESSION['nomfil']="DescuentoTiendas";
 $_SESSION['BOLDrang']=$BOLDrang;
 $res['ng']=count($grid)+count($anchos)+count($align)+count($crang)+count($Mrang)+count($BTrang)+count($paginas)+count($format);
 
