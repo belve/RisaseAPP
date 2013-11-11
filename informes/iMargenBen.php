@@ -279,7 +279,7 @@ $grid[$fila]['K']='% Bº';
 $grid[$fila]['L']='PIEZAS';
 $grid[$fila]['M']='MARGEN Bº PIEZA';
 
-$BOLDrang	['A' . $fila .':M' .$fila]=1;
+$BOLDrang	['A' . $fila .':M' .$fila]=5;
 $align		['A' . $fila .':M' .$fila]='C';
 
 $cMGM=array();
@@ -392,7 +392,7 @@ $grid[$fila][$cel]=$value;
 }
 $BOLDrang   ['C' . $fila .':M' .$fila]=1;    
 $align		['C' . $fila .':M' .$fila]='C';
-
+$BTrang 	['C' . $fila .':M' .$fila]=1;
 $fila++;$fila++;$adfil++;$adfil++;
 
 $paginas[$fila]=1;$lats=array();
@@ -417,7 +417,7 @@ $anchos['H']=2;
 
 $anchos['I']=23;
 $anchos['J']=18;
-$anchos['K']=16;
+$anchos['K']=12;
 $anchos['L']=14;
 $anchos['M']=22;
 
