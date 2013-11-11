@@ -60,6 +60,15 @@ $bold12 = array(
         )
 	);
 
+
+$bold130 = array(
+    'font'  => array(
+        'bold'  => true,
+        'size'  => 9
+        )
+	);
+
+
 $bold120 = array(
     'font'  => array(
         'bold'  => false,
@@ -113,6 +122,7 @@ foreach ($BOLDrang as $rang => $value) {
 	if($value==1){$sheet->getStyle($rang)->applyFromArray($bold1);}
 	elseif($value==3){$sheet->getStyle($rang)->applyFromArray($bold12);}
 	elseif($value==4){$sheet->getStyle($rang)->applyFromArray($bold120);}
+	elseif($value==5){$sheet->getStyle($rang)->applyFromArray($bold130);}
 	else{$sheet->getStyle($rang)->applyFromArray($bold0);};};
 
 

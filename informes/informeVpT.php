@@ -129,7 +129,7 @@ if (!$dbn->open()){die($dbn->error());};
 $stot=0;
 $queryp= "select g, sg, id_tienda, sum(importe * cantidad) as qty from ticket_det where
  fecha >= '$fini' AND fecha <= '$ffin' $codigosIN GROUP BY g, sg, id_tienda ORDER BY g, sg DESC; ";	
-$dbn->query($queryp);
+$dbn->query($queryp); 
 if($debug){echo "$queryp \n\n";};
 echo $dbn->error();$id=0;
 while ($row = $dbn->fetchassoc()){$id++;
