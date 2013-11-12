@@ -68,7 +68,7 @@ window.top.tselALL	=1;
 		<div id="bRISASE" class="risaB" style="background-color:#8DC29E;" onclick="risa();">RISASE</div>
 		<div style="clear:both;"></div>
 	</div>
-<? } ?>
+<? }else{echo '<div class="norisasa"></div>'; };?>
 
 	<script>
 		window.top.bRISASA=0;
