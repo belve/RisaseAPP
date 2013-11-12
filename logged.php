@@ -112,7 +112,15 @@ $(window).keydown(function(evt) {
  
 <?php if($ussid['ut']){   ?>
 	   
-    <li><a>Utilidades</a></li>
+    <li><a>Utilidades</a>
+    	
+    	<ul class="submenu">
+        	<li onclick="javascript:owin('v_45','Procesar Risasa','');"><a>Procesar Risasa</a></li>
+        	<li onclick="javascript:owin('v_46','Eliminador de referencias','');"><a>Eliminador de referencias</a></li>
+        
+        </ul>
+    	
+    </li>
 
 
 <?php } ?>
