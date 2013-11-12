@@ -1,3 +1,4 @@
+<?php $ussid=$_SESSION['ussid']; ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
 <head>
@@ -76,7 +77,9 @@ $(window).keydown(function(evt) {
     	
     </li>
     
-    
+    <?php 
+    if($ussid['ig']){
+    ?>
     <li><a>Informes generales</a>
     	<ul class="submenu">
         	<li onclick="javascript:owin('v_30','Control de ventas','');"><a>Control de ventas</a></li>
@@ -94,6 +97,8 @@ $(window).keydown(function(evt) {
         	
         </ul>
     </li>
+    <?php } ?>
+    
  
     <li><a>Informes de almacén</a>
     	<ul class="submenu">
@@ -105,9 +110,12 @@ $(window).keydown(function(evt) {
     </li>
  	
  
-    
+<?php if($ussid['ut']){   ?>
+	   
     <li><a>Utilidades</a></li>
-   
+
+
+<?php } ?>
 </ul>
 </div>
 

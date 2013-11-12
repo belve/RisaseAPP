@@ -1,4 +1,6 @@
 <?php
+session_start();
+$ussid=$_SESSION['ussid'];
 require_once("../db.php");
 require_once("../variables.php");
 
@@ -61,13 +63,17 @@ window.top.tselALL	=1;
 <div style="float: left; position: relative; margin-left: 20px;   margin-top: 14px;">	
 	
 	
+	
+<?php if($ussid['ra']){   ?>	
 	<div style=" margin-bottom: 14px;">
-		<div id="bRISASA" class="risaB" style="background-color:#8DC29E;" onclick="risa();">RISASA</div> 
-		<div id="bRISASE" class="risaB" onclick="risa();">RISASE</div>
+		<div id="bRISASA" class="risaB" onclick="risa();">RISASA</div> 
+		<div id="bRISASE" class="risaB" style="background-color:#8DC29E;" onclick="risa();">RISASE</div>
 		<div style="clear:both;"></div>
 	</div>
+<? } ?>
+
 	<script>
-		window.top.bRISASA=1;
+		window.top.bRISASA=0;
 	</script>
 
 	
