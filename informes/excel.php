@@ -90,8 +90,16 @@ $bold0 = array(
 
 foreach ($grid as $fil => $colums) { foreach ($colums as $col => $val){ 
 $cel=$col . $fil;
+
+if(strpos($val,'%')>0){ $val=str_replace('%','',$val); $format[$cel]=2; };	
+if((strpos($val,'.')>0)||(strpos($val,',')>0)){
+$lp=str_replace(',','',$val);	$lp=str_replace('.','',$lp); $lp=str_replace('-','',$lp); $lp=$lp*1;
+if(is_numeric($lp)){$val=(str_replace('.','',$val)); $val=(str_replace(',','.',$val))*1;  $format[$cel]=3; };
+
+}
+	
 $sheet->setCellValue($cel, $val);
-//$sheet->getStyle($cel)->getNumberFormat()->setFormatCode('0000');	
+
 }}
 
 
@@ -133,6 +141,7 @@ foreach ($BOLDrang as $rang => $value) {
 
 $for= '#,##0.00_-[$EUR ]';
 $for2= '#,##0.00_-[$% ]';
+$for3= '#,##0.00';
 $cer2= '00';
 $cer4= '0000';
 $cer6= '000000';
@@ -140,7 +149,8 @@ $cer6= '000000';
 foreach ($format as $rang => $value) {
 	if($value==1){$sheet->getStyle($rang)->getNumberFormat()->setFormatCode($for);};
 	if($value==2){$sheet->getStyle($rang)->getNumberFormat()->setFormatCode($for2);};
-
+	if($value==3){$sheet->getStyle($rang)->getNumberFormat()->setFormatCode($for3);};
+	
 	if($value=='cer2'){$sheet->getStyle($rang)->getNumberFormat()->setFormatCode($cer2);};
 	if($value=='cer4'){$sheet->getStyle($rang)->getNumberFormat()->setFormatCode($cer4);};
 	if($value=='cer6'){$sheet->getStyle($rang)->getNumberFormat()->setFormatCode($cer6);};
