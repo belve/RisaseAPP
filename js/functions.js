@@ -127,6 +127,9 @@ document.getElementById('articulos').src='/ajax/listarticulos.php';
 
 function listaArticulos(tab,ord){
 timer(1);
+
+if(document.getElementById('cong').checked){var cong=1;}else{var cong=0;};
+
 var prov=document.getElementById(2).value
 var grup=document.getElementById(3).value
 var subg=document.getElementById(4).value
@@ -151,6 +154,7 @@ url = "/ajax/listarticulos.php?id_proveedor=" + prov
  + "&comentarios=" + comentarios
  + "&tab=" + tab
  + "&ord=" + ord
+ + "&cong=" + cong
  + "&temporada=" + temp;
 
 

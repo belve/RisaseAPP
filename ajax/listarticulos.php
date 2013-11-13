@@ -32,7 +32,7 @@ td		{width: 90px; border: 1px  solid #888888; margin:0px;}
 
 
 <?php
-$id_proveedor="";$id_subgrupo="";$id_color="";$codigo="";$pvp="";$comentarios="";$detalles="";$desde="";$hasta="";$temporada="";$id_grupo="";$tab=1;$ord=1;
+$id_proveedor="";$id_subgrupo="";$id_color="";$codigo="";$pvp="";$comentarios="";$detalles="";$desde="";$hasta="";$temporada="";$id_grupo="";$tab=1;$ord=1;$cong=0;
 if(count($_GET)>0){
 	
 
@@ -50,7 +50,10 @@ $options="";
 
 require_once("../functions/listador.php"); 
 
-$queryp= "select * from articulos where $options $campord;";
+$conge="";
+if($cong){$conge="AND congelado=0";};
+
+$queryp= "select * from articulos where $options $conge $campord;";
 
 $listado="";
 

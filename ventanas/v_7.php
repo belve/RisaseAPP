@@ -184,6 +184,12 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 	</table>
 	
 	
+<div style=" border: 1px solid #888888;    float: left;    height: 41px;    margin-top: 8px;    padding-top: 2px;    position: relative;    text-align: center;    width: 184px;">
+<input type="checkbox" id="cong"> <br>
+Ocultar congelados	
+</div>
+<div style="clear: both;"></div>
+	
 	<div onclick="listaArticulos(1,1);" class="boton">Listar</div>
 	<div onclick="limpiaAB();" class="boton">Limpiar</div>
 </div>	

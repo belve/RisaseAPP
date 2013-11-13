@@ -161,19 +161,20 @@ foreach ($cdg as $cd => $point) {$fila++; //$cuenf++;
 //if($cuenf >= 8){$cuenf=0;$paginas[$fila+4]=1;}	
 
 if ($first) {
-$grid[$fila]['B']="CODIGO";
-$grid[$fila]['C']="REF. PROV."; 
-$grid[$fila]['D']="STOCK"; 
-$grid[$fila]['E']="INICIAL"; 
-$grid[$fila]['F']="TEMP"; 
-$grid[$fila]['G']="CONG"; 
-$grid[$fila]['H']="PVP"; 
-$grid[$fila]['I']="NETO"; 
+$grid[$fila]['A']="CODIGO";
+$grid[$fila]['D']="REF. PROV."; 
+$grid[$fila]['E']="STOCK"; 
+$grid[$fila]['F']="INICIAL"; 
+$grid[$fila]['G']="TEMP"; 
+$grid[$fila]['H']="CONG"; 
+$grid[$fila]['I']="PVP"; 
+$grid[$fila]['J']="NETO"; 
 
-$align['A' . $fila . ':' . 'I' . $fila]='C';
-$BOLDrang['A' . $fila . ':' . 'I' . $fila]=1;
-$BTrang['B' . $fila . ':' . 'I' . $fila]=1;
-$fila++;$fila++;$first=0;
+$Mrang['A' . $fila . ':' . 'C' . $fila]=1;
+$align['A' . $fila . ':' . 'J' . $fila]='C';
+$BOLDrang['A' . $fila . ':' . 'J' . $fila]=1;
+$BTrang['A' . $fila . ':' . 'J' . $fila]=1;
+$fila++;$first=0;
 
 }
 
@@ -189,50 +190,68 @@ $g=substr($cd,0,1);
 $sg=substr($cd,0,2);
 
 
-if($g!=$lg){
-	$grid[$fila]['A']=$grupos[$g]; $lg=$g;
-	$align['A' . $fila . ':' . 'I' . $fila]='C';
-	$BOLDrang['A' . $fila . ':' . 'I' . $fila]=1;
-	}
+//if($g!=$lg){
+	//$grid[$fila]['A']=$grupos[$g]; $lg=$g;
+	//$align['A' . $fila . ':' . 'I' . $fila]='C';
+	//$BOLDrang['A' . $fila . ':' . 'I' . $fila]=1;
+	//}
 
 if(!array_key_exists($sg, $subgrupos)){$subgrupos[$sg]="GENERICO";};
 $sng=$subgrupos[$sg];
 
 if($sg!=$lsg){$fila++;
-	 $grid[$fila]['B']=$sng; 
+	 $grid[$fila]['A']=$grupos[$g] . "/" . $sng; 
 	 $lsg=$sg; 
 	 $align['A' . $fila . ':' . 'I' . $fila]='C';
 	 $BOLDrang['A' . $fila . ':' . 'I' . $fila]=1;
+	 $Mrang['A' . $fila . ':' . 'D' . $fila]=1;
+	 $crang['A' . $fila]='A3ECFF';
 	 $fila++;}
 
 
 $align['A' . $fila . ':' . 'B' . $fila]='C';
-$align['C' . $fila]='L';
-$align['D' . $fila . ':' . 'I' . $fila]='C';
-$grid[$fila]['B']=$cd;
-$grid[$fila]['C']=$datos[$cd]['refprov']; 
-$grid[$fila]['D']=$datos[$cd]['stock']; 
-$grid[$fila]['E']=$datos[$cd]['stockini']; 
-$grid[$fila]['F']=$datos[$cd]['temporada']; 
-$grid[$fila]['G']=$datos[$cd]['congelado']; 
-$grid[$fila]['H']=$datos[$cd]['pvp']; 
-$grid[$fila]['I']=$datos[$cd]['precioneto']; 
-$BTrang['B' . $fila . ':' . 'I' . $fila]=1;
-$BOLDrang['A' . $fila . ':' . 'I' . $fila]=2;
+$align['D' . $fila]='L';
+$align['E' . $fila . ':' . 'I' . $fila]='C';
+
+$cgs=substr($cd,0,2); 		$cgs=str_pad($cgs, 2, '0', STR_PAD_LEFT);
+$color=substr($cd,2,2); 	$color=str_pad($color, 2, '0', STR_PAD_LEFT);
+$codigosim=substr($cd,4);  	$codigosim=str_pad($codigosim, (strlen($cd)-4), '0', STR_PAD_LEFT);
+
+$grid[$fila]['A']=$cgs; $grid[$fila]['B']=$color; $grid[$fila]['C']=$codigosim;
+
+$format["A$fila"]='cer2';
+$format["B$fila"]='cer2';
+$format["C$fila"]='cer' . strlen($codigosim);
+
+
+$grid[$fila]['D']=$datos[$cd]['refprov']; 
+$grid[$fila]['E']=$datos[$cd]['stock']; 
+$grid[$fila]['F']=$datos[$cd]['stockini']; 
+$grid[$fila]['G']=$datos[$cd]['temporada']; 
+$grid[$fila]['H']=$datos[$cd]['congelado']; 
+$grid[$fila]['I']=$datos[$cd]['pvp']; 
+$grid[$fila]['J']=$datos[$cd]['precioneto']; 
+$BTrang['A' . $fila . ':' . 'J' . $fila]=1;
+$BOLDrang['A' . $fila . ':' . 'J' . $fila]=2;
 
 
 
 }}
 
-$anchos['A']=15;
-$anchos['B']=17;
-$anchos['C']=33;
-$anchos['D']=11;
+
+
+
+$anchos['A']=5;
+$anchos['B']=5;
+$anchos['C']=8;
+
+$anchos['D']=48;
 $anchos['E']=11;
 $anchos['F']=11;
 $anchos['G']=11;
 $anchos['H']=11;
 $anchos['I']=11;
+$anchos['J']=11;
 
 $_SESSION['angle']=$angle;
 $_SESSION['BOLDrang']=$BOLDrang;
