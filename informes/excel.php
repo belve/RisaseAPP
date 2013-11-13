@@ -91,12 +91,15 @@ $bold0 = array(
 foreach ($grid as $fil => $colums) { foreach ($colums as $col => $val){ 
 $cel=$col . $fil;
 
-if(strpos($val,'%')>0){ $val=str_replace('%','',$val); $format[$cel]=2; };	
-if((strpos($val,'.')>0)||(strpos($val,',')>0)){
-$lp=str_replace(',','',$val);	$lp=str_replace('.','',$lp); $lp=str_replace('-','',$lp); $lp=$lp*1;
-if(is_numeric($lp)){$val=(str_replace('.','',$val)); $val=(str_replace(',','.',$val))*1;  $format[$cel]=3; };
+if(strpos($val,'%')>0){ $val=str_replace('%','',$val); $val=(str_replace(',','.',trim($val)))*1; $format[$cel]=2; }else{	
+
+	if((strpos($val,'.')>0)||(strpos($val,',')>0)){
+	$lp=str_replace(',','',$val);	$lp=str_replace('.','',$lp); $lp=str_replace('-','',$lp); $lp=$lp*1;
+	if(is_numeric($lp)){$val=(str_replace('.','',$val)); $val=(str_replace(',','.',$val))*1;  $format[$cel]=3; };
+	}
 
 }
+
 	
 $sheet->setCellValue($cel, $val);
 
