@@ -109,6 +109,7 @@ document.getElementById('txt').innerHTML="No hay tickets pendientes de procesar.
 </head>
 <body>	
 
+
 <?php if($lid < $midt){ ?>
 <div id="txt">
 Se procesarán del ticket <?php echo $lid; ?> al <?php echo $midt; ?>.
@@ -124,5 +125,7 @@ Se morderá uno de cada <?php echo $delT; ?> tickets.
 No hay tickets pendientes de procesar.
 
 <?php }  ?>
+
+
 </body>
 </html>
