@@ -4,6 +4,7 @@ require_once("../db.php");
 require_once("../variables.php");
 $a=1;
 while($a <= 20){$valores[$a]="";$a++;};
+$valores['rep']="";
 
 if (!$dbnivel->open()){die($dbnivel->error());};
 
@@ -21,7 +22,8 @@ pvp,
 detalles,
 comentarios, 
 congelado, 
-codbarras, 
+codbarras,
+(select sum(repo) from reposiciones WHERE ida=articulos.id) as repo, 
 id, 
 (select dto1 from proveedores where proveedores.id=articulos.id_proveedor) as dto1, 
 (select dto2 from proveedores where proveedores.id=articulos.id_proveedor) as dto2, 
@@ -59,7 +61,9 @@ while ($row = $dbnivel->fetchassoc()){
 	$valores[18]=$row['detalles'];
 	$valores[19]=$row['comentarios'];
 	$valores[20]=$row['stockini'];
-};
+	$valores['rep']=$row['repo'];
+	
+	};
 
 if (!$dbnivel->close()){die($dbnivel->error());};
 

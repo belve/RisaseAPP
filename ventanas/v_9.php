@@ -122,6 +122,10 @@ require_once("../variables.php");
 			<td><input type="text" name="idmost" class="corto" id="20" ></td>
 		</tr>
 		
+			<tr>
+			<td>Repos.</td>
+			<td><input type="text" name="idmost" class="corto" id="rep" ></td>
+		</tr>
 		
 		<tr>
 			<td>Temporada</td>
