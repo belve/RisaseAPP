@@ -93,10 +93,12 @@ require_once("../functions/listador.php");
 
 $codigosIN="";$codigosIN2="";
 if($options){
-$queryp= "select id, codbarras, preciocosto, pvp, stockini, stock, refprov  from articulos where $options ;";
+$queryp= "select id, codbarras, preciocosto, pvp, (stockini + COALESCE((select sum(repo) from reposiciones WHERE ida=articulos.id),0)) as stockini, stock, refprov  from articulos where $options ;";
 }else{
-$queryp= "select id, codbarras, preciocosto, pvp, stockini, stock, refprov  from articulos where congelado=0;";	
+$queryp= "select id, codbarras, preciocosto, pvp, (stockini + COALESCE((select sum(repo) from reposiciones WHERE ida=articulos.id),0)) as stockini, stock, refprov  from articulos where congelado=0;";	
 }
+
+
 
 $dbnivel->query($queryp);if($debug){echo "$queryp \n\n";};
 while ($row = $dbnivel->fetchassoc()){
