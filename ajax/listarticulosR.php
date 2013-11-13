@@ -13,7 +13,38 @@
 
 </head>
 
+<script>
 
+window.top.listAREPO=new Array();
+
+
+$(document).keypress(function(e) {
+      switch(e.keyCode) { 
+      	
+      	 // User pressed "left" arrow
+         case 37:
+           mrep('up'); break;
+      	
+       // User pressed "right" arrow
+         case 39:
+           mrep('down');break;
+      	
+         // User pressed "up" arrow
+         case 38:
+           mrep('up'); break;
+         
+         // User pressed "down" arrow
+         case 40:
+           mrep('down'); break;
+         
+         // User pressed "enter"
+         case 13:
+            mrep('down'); break;
+      }
+   });	
+	
+	
+</script>
 
 
 
@@ -70,8 +101,8 @@ $ide=$row['id']; $repo=$row['repo']; $stock=$row['stock']; if(!$repo){$repo2=0;}
 $listado .="
 <tr>
 <td style='width:140px'><input tabindex='z'  type='text' class='camp_artC_codbar' value='$codbarras'></td>
-<td style='width:45px'><input tabindex='$ide' value='$repo' type='text' id='$ide' onchange='repon($ide,this.value,$repo2,$stock);'  style='border:0px; width:45px; font-size:9px; color:888888; text-align:right;' ></td>
-
+<td style='width:45px'><input tabindex='$ide' value='$repo' type='text' id='$ide' onfocus='sel(this.id)'; onchange='repon($ide,this.value,$repo2,$stock);'  style='border:0px; width:45px; font-size:9px; color:888888; text-align:right;' ></td>
+<script> window.top.listAREPO.push($ide); </script>
 </tr>
 	";
 $count++;
@@ -96,6 +127,34 @@ if($forsync){SyncModBD($forsync);};
 
 <script>
 
+function mrep(w){
+var i=$("*:focus").attr("id");	
+//console.log("i:" + i);
+i=i*1;
+var pos=window.top.listAREPO.indexOf(i);	
+
+//console.log("pos:" + pos);
+
+if(w=='up'){pos=pos-1;};
+if(w=='down'){pos=pos+1;};
+
+//console.log("pos:" + pos);
+
+if(window.top.listAREPO[pos]){
+	
+var nid=window.top.listAREPO[pos];
+//console.log("nid:" + nid);
+setTimeout("$('#" + nid + "').focus();",10);
+}	
+
+}
+
+function sel(id){
+$('#'+ id).select();	
+}
+
+
+
 function repon(id,nrep,orep,stock){
 var tmp='<?php echo $tempR;?>';
 
@@ -107,7 +166,7 @@ $.getJSON(url, function(data) {
 	
 }
 
-
+//console.info(window.top.listAREPO);
    
 
 parent.document.getElementById("timer").style.visibility = "hidden";

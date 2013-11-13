@@ -9,12 +9,12 @@ if (!$dbnivel->open()){die($dbnivel->error());};
 
 
 $do="";
-$queryp= "SELECT id from reposiciones WHERE ida=$id;"; 
+$queryp= "SELECT id from reposiciones WHERE ida=$id AND temp='$tmp';"; 
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){$do=$row['id'];}
 
 if($do){	
-$queryp= "update reposiciones set repo='$nrep' where ida=$id;";
+$queryp= "update reposiciones set repo='$nrep' where id=$do;";
 $dbnivel->query($queryp); 
 echo $dbnivel->error() . "\n";	
 echo $queryp . "\n";
