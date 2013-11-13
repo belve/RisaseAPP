@@ -51,7 +51,7 @@ $options="";
 require_once("../functions/listador.php"); 
 
 $conge="";
-if($cong){$conge="AND congelado=0";};
+if($cong){$conge="AND congelado=0"; if(trim($options)==''){$conge="congelado=0";};};
 
 $queryp= "select * from articulos where $options $conge $campord;";
 

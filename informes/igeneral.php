@@ -162,7 +162,7 @@ foreach ($cdg as $cd => $point) {$fila++; //$cuenf++;
 
 if ($first) {
 $grid[$fila]['A']="CODIGO";
-$grid[$fila]['D']="REF. PROV."; 
+$grid[$fila]['D']="REF PROV"; 
 $grid[$fila]['E']="STOCK"; 
 $grid[$fila]['F']="INICIAL"; 
 $grid[$fila]['G']="TEMP"; 
@@ -209,9 +209,9 @@ if($sg!=$lsg){$fila++;
 	 $fila++;}
 
 
-$align['A' . $fila . ':' . 'B' . $fila]='C';
+$align['A' . $fila . ':' . 'C' . $fila]='C';
 $align['D' . $fila]='L';
-$align['E' . $fila . ':' . 'I' . $fila]='C';
+$align['E' . $fila . ':' . 'J' . $fila]='C';
 
 $cgs=substr($cd,0,2); 		$cgs=str_pad($cgs, 2, '0', STR_PAD_LEFT);
 $color=substr($cd,2,2); 	$color=str_pad($color, 2, '0', STR_PAD_LEFT);
@@ -243,9 +243,9 @@ $BOLDrang['A' . $fila . ':' . 'J' . $fila]=2;
 
 $anchos['A']=5;
 $anchos['B']=5;
-$anchos['C']=8;
+$anchos['C']=10;
 
-$anchos['D']=48;
+$anchos['D']=46;
 $anchos['E']=11;
 $anchos['F']=11;
 $anchos['G']=11;
