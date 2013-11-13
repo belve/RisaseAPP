@@ -51,10 +51,11 @@ $(window).keydown(function(evt) {
 	<li><a>Mantenimiento</a>
 		<ul class="submenu">
         	<!-- <li onclick="javascript:owin('v_1','Test1');"><a>Test1</a></li> -->
-        	 <li onclick="javascript:owin('v_9','Articulos','');"><a>Articulos</a></li>
-        	 <li onclick="javascript:owin('v_7','Altas / Bajas','');"><a>Altas / Bajas</a></li>
-        	  <li onclick="javascript:owin('v_8','Altas masivas','');"><a>Altas masivas</a></li>
-        	 <li onclick="javascript:owin('v_6','Tiendas','');"><a>Tiendas</a></li>
+        	<li onclick="javascript:owin('v_9','Articulos','');"><a>Articulos</a></li>
+        	<li onclick="javascript:owin('v_7','Altas / Bajas','');"><a>Altas / Bajas</a></li>
+        	<li onclick="javascript:owin('v_8','Altas masivas','');"><a>Altas masivas</a></li>
+        	<li onclick="javascript:owin('v_47','Reposiciones','');"><a>Reposiciones</a></li>
+        	<li onclick="javascript:owin('v_6','Tiendas','');"><a>Tiendas</a></li>
             <li onclick="javascript:owin('v_2','Colores','');"><a>Colores</a></li>
             <li onclick="javascript:owin('v_3','Grupos','');"><a>Grupos</a></li>
             <li onclick="javascript:owin('v_4','Subgrupos','');"><a>Subgrupos</a></li>
