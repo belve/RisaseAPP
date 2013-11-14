@@ -100,3 +100,6 @@ show status like 'Qcache%';
 
 backup
 http://chuwiki.chuidiang.org/index.php?title=Volcado_de_seguridad_en_MySQL_con_mysqldump
+
+
+

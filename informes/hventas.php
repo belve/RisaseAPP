@@ -36,7 +36,7 @@ $paginas=array();
 $format=array();
 $BOLDrang=array();
 $fini="";
-$ffin="";
+$ffin="";$barrasIN="";
 
 foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
 $fdesde=$fini; $fhasta=$ffin;
@@ -92,17 +92,19 @@ require_once("../functions/listador.php");
 
 $codigosIN="";
 if($options){
-$queryp= "select id from articulos where $options;";
+$queryp= "select id, codbarras from articulos where $options;";
 }else{
-$queryp= "select id from articulos where congelado=0;";
+$queryp= "select id, codbarras from articulos where congelado=0;";
 }	
 		
 $dbnivel->query($queryp);if($debug){echo "$queryp \n\n";};
 while ($row = $dbnivel->fetchassoc()){
-$id_articulo=$row['id'];
+$id_articulo=$row['id']; $barras=$row['codbarras'];
 $codigosIN .=$id_articulo . ",";
+$barrasIN .=$barras . ",";
 }
 $codigosIN=substr($codigosIN, 0,-1);
+$barrasIN=substr($barrasIN, 0,-1);
 $codigosIN="AND id_articulo IN ($codigosIN)";
 
 
@@ -167,7 +169,7 @@ $cods=substr($cods, 0,-1);
 
 $codv=array();
 $queryp= "select id_articulo, id_tienda, sum(cantidad) as cant, sum(importe * cantidad) as imp, importe from ticket_det where (fecha >= '$fini' AND fecha <= '$ffin')
- AND id_articulo IN ($cods) group by id_articulo, id_tienda;";
+ AND id_articulo IN ($barrasIN) group by id_articulo, id_tienda;";
 $dbnivel->query($queryp); if($debug){echo "$queryp \n\n";};
 $cods2="";
 while ($row = $dbnivel->fetchassoc()){
