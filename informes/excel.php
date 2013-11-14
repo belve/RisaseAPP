@@ -98,8 +98,10 @@ if(strpos($val,'€')>0){ $val=str_replace('€','',$val);
 		$val=(str_replace('.','',$val)); $val=(str_replace(',','.',$val))*1; 
 		}else{
 		$val=(str_replace(',','.',trim($val)))*1;
-		}	
-	 $format[$cel]=7; }
+		}
+		
+		if($val==0){$val="";}else{$format[$cel]=7;};
+	  }
 
 elseif(strpos($val,'%')>0){ $val=str_replace('%','',$val); $val=(str_replace(',','.',trim($val)))*1; $format[$cel]=2; }else{	
 
