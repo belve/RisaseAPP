@@ -40,21 +40,51 @@ foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo .
 
 
 if (!$dbnivel->open()){die($dbnivel->error());};
+
+
+
+$queryp= "select 
+substring( (select codbarras from articulos where id=ida),1,2) as G, 
+sum(repo * (select preciocosto from articulos where articulos.id=ida) ) as SI 
+from reposiciones WHERE temp = '$temp' group by G;
+ ";	
+$dbnivel->query($queryp);if($debug){echo "$queryp \n\n";}; 
+echo $dbnivel->error();
+while ($row = $dbnivel->fetchassoc()){
+$cg=$row['G'];		
+$repos[$cg]=$row['SI'];	
+}
+
+
+
+
+
+
 $queryp= "select id_subgrupo, 
 (SELECT nombre from subgrupos where id=id_subgrupo )as nsg, 
 (SELECT id_grupo from subgrupos where id=id_subgrupo ) as idg, 
 (SELECT clave from subgrupos where id=id_subgrupo ) as idsg, 
 (SELECT nombre from grupos where id=idg ) as ng, 
-(sum(stockini * preciocosto) +  COALESCE((select sum(repo * articulos.preciocosto) from reposiciones WHERE temp='$temp' AND ida=articulos.id),0) ) as SI, sum(stock * preciocosto) as SS 
+sum(stockini * preciocosto) as SI, sum(stock * preciocosto) as SS 
 from articulos WHERE temporada='$temp'  AND stockini > 0  GROUP BY id_subgrupo ORDER BY idg,idsg; ";	
 $dbnivel->query($queryp);if($debug){echo "$queryp \n\n";}; 
 echo $dbnivel->error();
 while ($row = $dbnivel->fetchassoc()){
-$g=$row['idg']; $sg=$g . $row['idsg'];  
-$datos[$g][$sg]['C']=$row['SI'];	
+$g=$row['idg']; $sg=$g . $row['idsg'];
+$SI=$row['SI'];	
+if(array_key_exists($sg, $repos)){$SI=$SI+$repos[$sg];};
+	  
+$datos[$g][$sg]['C']=$SI;	
 $datos[$g][$sg]['S']=$row['SS'];
 
 }
+
+
+
+
+
+
+
 
 $queryp= "select (select nombre from grupos where id=id_grupo) as G, nombre as SG, id_grupo, clave from subgrupos;";	
 $dbnivel->query($queryp);if($debug){echo "$queryp \n\n";};
