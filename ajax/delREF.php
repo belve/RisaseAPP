@@ -7,10 +7,23 @@ $list=substr($list, 0,-1);
 
 if (!$dbnivel->open()){die($dbnivel->error());};
 
+
+$queryp= "DELETE FROM repartir WHERE id_articulo IN ($list);";
+$dbnivel->query($queryp); echo $dbnivel->error();
+
+$queryp= "DELETE FROM fij_pvp WHERE id_articulo IN ($list);";
+$dbnivel->query($queryp); echo $dbnivel->error();
+
+$queryp= "DELETE FROM fij_stock WHERE id_articulo IN ($list);";
+$dbnivel->query($queryp); echo $dbnivel->error();
+
 $queryp= "DELETE FROM articulos WHERE id IN ($list);";
 $dbnivel->query($queryp); echo $dbnivel->error();
 if (!$dbnivel->close()){die($dbnivel->error());};
 
+SyncModBD($queryp);
+
+$queryp= "DELETE FROM pvp_fijo WHERE id_articulo IN ($list);";
 SyncModBD($queryp);
 
 $queryp= "DELETE FROM stocklocal WHERE id_art IN ($list);";
