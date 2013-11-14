@@ -246,7 +246,7 @@ $_SESSION['Mrang']=$Mrang;
 $_SESSION['BTrang']=$BTrang;
 $_SESSION['format']=$format;
 $_SESSION['paginas']=$paginas;
-$_SESSION['nomfil']="Inventario-" . date('Y') . date('m') . date('d');
+$_SESSION['nomfil']="Devoluciones-" . date('Y') . date('m') . date('d');
 
 $res['ng']=count($grid)+count($anchos)+count($align)+count($crang)+count($Mrang)+count($BTrang)+count($paginas)+count($format);
 
