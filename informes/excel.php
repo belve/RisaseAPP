@@ -103,9 +103,11 @@ if(strpos($val,'€')>0){ $val=str_replace('€','',$val);
 		if($val==0){$val="";}else{$format[$cel]=7;};
 	  }
 
-elseif(strpos($val,'%')>0){ $val=str_replace('%','',$val); $val=(str_replace(',','.',trim($val)))*1; $format[$cel]=2; }else{	
+elseif(strpos($val,'%')>0){ $val=str_replace('%','',$val); $val=(str_replace(',','.',trim($val)))*1; $format[$cel]=2;
 
-	if((strpos($val,'.')>0)||(strpos($val,',')>0)){
+ }else{	
+
+if((strpos($val,'.')>0)||(strpos($val,',')>0)){
 		
 	$lp=str_replace(',','',$val);	$lp=str_replace('.','',$lp); $lp=str_replace('-','',$lp); $lp=$lp*1;
 	
