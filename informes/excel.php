@@ -121,9 +121,9 @@ if((strpos($val,'.')>0)||(strpos($val,',')>0)){
 		$val=(str_replace('.','',$val)); $val=(str_replace(',','.',$val))*1; 
 		}
 		
-		//if((strpos($val,'.')>0)||(strpos($val,',')<0)){	
-		//$val=(str_replace('.','',$val)); $val=(str_replace(',','.',$val))*1; 
-		//}
+		if((strpos($val,',')>0)&&(strpos($val,'.')==0)){	
+		$val=(str_replace(',','.',$val))*1; 
+		}
 		
 		 $format[$cel]=3; 
 	}
