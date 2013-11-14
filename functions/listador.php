@@ -69,7 +69,7 @@ $campord="";$orden="";
 if ($ord==1){$orden="DESC";};
 if ($ord==2){$orden="ASC";};
 
-if ($tab==1){$campord="ORDER BY id_subgrupo, codigo";};
+if ($tab==1){$campord="ORDER BY (substring(codbarras,1,2)), (substring(codbarras,5))";};
 if ($tab==3){$campord="ORDER BY stock $orden";};
 if ($tab==4){$campord="ORDER BY pvp $orden";};
 if ($tab==5){$campord="ORDER BY preciocosto $orden";};

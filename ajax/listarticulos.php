@@ -55,6 +55,8 @@ if($cong){$conge="AND congelado=0"; if(trim($options)==''){$conge="congelado=0";
 
 $queryp= "select * from articulos where $options $conge $campord;";
 
+  
+
 $listado="";
 
 $dbnivel->query($queryp);$count=1;
