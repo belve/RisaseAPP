@@ -37,9 +37,18 @@ document.getElementById('foto').src='http://192.168.1.11/photos/nodisp.jpg';
 url = "/ajax/getimage.php?nodet=1&codbarras=" + id;
 $.getJSON(url, function(data) {
 $.each(data, function(key, val) {
-val=val.replace('c:/D/fotos/','');	
-if(key==0){document.getElementById('foto').src='http://192.168.1.11/photos/' + val;};  
 
+if(key==0){
+val=val.replace('c:/D/fotos/','');	
+document.getElementById('foto').src='http://192.168.1.11/photos/' + val;};  
+
+if(key>0){
+if(document.getElementById('opciones')){	
+var op=document.getElementById('opciones').innerHTML;
+op=op + "," + val;
+document.getElementById('opciones').innerHTML=op;};  
+
+}
 
 });
 });	
