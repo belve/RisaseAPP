@@ -317,8 +317,11 @@ if($dat['DF']){
 	}else{$F="";};
 $grid[$fil]['F']=$F; 
 
-if($dat['DE']<0){$G=number_format($dat['DE']*1,2,',','.'); $crang["G$fil"]='FFB6A3';  }else{$G="";};
-$grid[$fil]['G']=$G;		if(!array_key_exists('G',$sumas[$idt])){$sumas[$idt]['G']=$dat['DE'];}else{$sumas[$idt]['G']=$sumas[$idt]['G']+$dat['DE'];};
+if($dat['DE']<0){
+if(!array_key_exists('G',$sumas[$idt])){$sumas[$idt]['G']=$dat['DE'];}else{$sumas[$idt]['G']=$sumas[$idt]['G']+$dat['DE'];};	
+$G=number_format($dat['DE']*1,2,',','.'); $crang["G$fil"]='FFB6A3';  }else{$G="";};
+$grid[$fil]['G']=$G;		
+
 
 if($dat['MVpvp']){$I=number_format($dat['MVpvp']*1,2,',','.');}else{$I="";};
 $grid[$fil]['I']=$I;	    if(!array_key_exists('I',$sumas[$idt])){$sumas[$idt]['I']=$dat['MVpvp'];}else{$sumas[$idt]['I']=$sumas[$idt]['I']+$dat['MVpvp'];};
