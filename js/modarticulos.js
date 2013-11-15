@@ -39,6 +39,8 @@ $.getJSON(url, function(data) {
 $.each(data, function(key, val) {
 val=val.replace('c:/D/fotos/','');	
 if(key==0){document.getElementById('foto').src='http://192.168.1.11/photos/' + val;};  
+
+
 });
 });	
 
