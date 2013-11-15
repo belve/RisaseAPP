@@ -175,6 +175,12 @@ foreach ($vend as $idt => $vend2) { foreach ($vend2 as $cb => $dat){
 	
 	if(!array_key_exists($idt, $resultV)){$resultV[$idt]=array();};
 	
+	if(!array_key_exists($idt, $resultE)){$resultE[$idt]=array();};
+	if(!array_key_exists($gr, $resultE[$idt])){
+	$resultE[$idt][$gr]['pvp']=0;	
+	$resultE[$idt][$gr]['pcos']=0;	
+	}
+	
 	if(array_key_exists($gr, $resultV[$idt])){
 	$resultV[$idt][$gr]['pvp']=$resultV[$idt][$gr]['pvp']+$dat['pvp'];
 	$resultV[$idt][$gr]['pcos']=$resultV[$idt][$gr]['pcos']+$dat['pcos'];	
@@ -243,8 +249,7 @@ $datt[$idt][$gr]['MGPP']=$MGPP;
 
 	
 }}
-	
-	
+
 	
 $grid=array();
 $anchos=array();
