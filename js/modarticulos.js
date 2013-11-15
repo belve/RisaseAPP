@@ -5,6 +5,8 @@ window.ok=0;
 url = "/ajax/modarticulos.php?codbarras=" + codbarras;
 $.getJSON(url, function(data) {
 $.each(data, function(key, val) {
+
+if(key==1){if(document.getElementById('id')){document.getElementById('id').value=val;}}
   
 if(key==8){
 if(val==0){document.getElementById(key).checked=false;};

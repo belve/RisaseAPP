@@ -60,6 +60,7 @@ $(window).keydown(function(evt) {
             <li onclick="javascript:owin('v_3','Grupos','');"><a>Grupos</a></li>
             <li onclick="javascript:owin('v_4','Subgrupos','');"><a>Subgrupos</a></li>
         	<li onclick="javascript:owin('v_5','Proveedores','');"><a>Proveedores</a></li>
+        	<li onclick="javascript:owin('v_27','Buscador de referencias','');"><a>Buscador de referencias</a></li>
         </ul>
 	</li>
     
