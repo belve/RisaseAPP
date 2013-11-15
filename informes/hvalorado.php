@@ -163,7 +163,7 @@ if($vcods[$cd]['sti']>0){$BU[$cd]=round($vcods[$cd]['bene_V']/$vcods[$cd]['sti']
 
 
 
-
+/*
 $agrupaciones="";
 $queryp= "select distinct agrupar from pedidos where ((fecha >= '$fini' AND fecha <= '$ffin') OR tip=1) $codigosIN2 ;";
 $dbnivel->query($queryp); if($debug){echo "$queryp \n\n";};
@@ -178,9 +178,10 @@ while ($row = $dbnivel->fetchassoc()){$peds .=$row['id'] . ",";};
 
 $peds=substr($peds, 0,-1);
 
+*/
 
 $queryp= "select (select codbarras from articulos where id=id_articulo) as codbarras, 
-sum(cantidad) as cant from pedidos where agrupar in ($peds) $codigosIN2 group by id_articulo;";
+sum(cantidad) as cant from pedidos where (fecha >= '$fini' AND fecha <= '$ffin') AND (estado='T' OR estado='A' OR estado='F') $codigosIN2 group by id_articulo;";
 $dbnivel->query($queryp); if($debug){echo "$queryp \n\n";};$enviados=array();
 while ($row = $dbnivel->fetchassoc()){
 $cd=$row['codbarras']; $cant=$row['cant'];

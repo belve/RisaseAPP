@@ -1,6 +1,8 @@
 <?php
-ini_set("memory_limit", "-1");
 session_start();
+set_time_limit(0);
+ini_set("memory_limit", "-1");
+
 $grid=$_SESSION['grid'];
 $anchos=$_SESSION['anchos'];
 $align=$_SESSION['align'];

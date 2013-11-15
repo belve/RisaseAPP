@@ -71,7 +71,7 @@ select id_tienda, (select pvp from articulos where id=id_articulo) as pvp,
 (select preciocosto from articulos where id=id_articulo) as pcos,  
 (select codbarras from articulos where id=id_articulo) as SG , sum(cantidad) as cant 
 from pedidos 
-where (estado='T' OR estado='E' OR estado='F') AND 
+where (estado='T' OR estado='A' OR estado='F') AND 
 (fecha >= '$fini' AND fecha <= '$ffin') 
 AND id_tienda IN ($ttss) 
 AND id_articulo NOT IN (10009999,20009999,30009999,40009999,50009999,60009999,70009999,80009999,90009999) 
