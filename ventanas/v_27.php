@@ -166,8 +166,10 @@ require_once("../variables.php");
     
     </div>
 
-<div style="clear: both;margin-bottom: 10px; "></div>
 
+
+<div style="clear: both;margin-bottom: 10px; "></div>
+<div id='opciones'>345566,3847758,938477</div>
 
 
 
