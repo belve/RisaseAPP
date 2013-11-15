@@ -317,7 +317,7 @@ if($dat['DF']){
 	}else{$F="";};
 $grid[$fil]['F']=$F; 
 
-if($dat['DE']){$G=number_format($dat['DE']*1,2,',','.'); $crang["G$fil"]='FFB6A3';  }else{$G="";};
+if($dat['DE']<0){$G=number_format($dat['DE']*1,2,',','.'); $crang["G$fil"]='FFB6A3';  }else{$G="";};
 $grid[$fil]['G']=$G;		if(!array_key_exists('G',$sumas[$idt])){$sumas[$idt]['G']=$dat['DE'];}else{$sumas[$idt]['G']=$sumas[$idt]['G']+$dat['DE'];};
 
 if($dat['MVpvp']){$I=number_format($dat['MVpvp']*1,2,',','.');}else{$I="";};
