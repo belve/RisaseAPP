@@ -45,7 +45,7 @@ document.getElementById('foto').src='http://192.168.1.11/photos/' + val;};
 if(key>0){
 if(document.getElementById('opciones')){	
 var op=document.getElementById('opciones').innerHTML;
-op=op + "," + val;
+op=op + val + " ";
 document.getElementById('opciones').innerHTML=op;};  
 
 }
