@@ -1,8 +1,8 @@
 <?php
-
+$nodet="";
 foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
 require_once("../db.php");
-require_once("../variables.php");$nodet="";
+require_once("../variables.php");
 
 $codigos[$codbarras]=1;
 $files=array();
@@ -97,10 +97,17 @@ $files[]=$codi;
 	
 }}
 
+
+
 $files2['img']=$files;
 $files2['cod']=$cdg;
 
 if($nodet){
+	
+foreach ($cdg as $cd => $uno) {
+$files[]=$cd;		
+}	
+	
 echo json_encode($files);	
 }else{
 echo json_encode($files2);
