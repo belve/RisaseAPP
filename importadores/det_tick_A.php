@@ -4,7 +4,7 @@ require_once("../db.php");$rows=array();
 $dbnivel=new DB('192.168.1.11','edu','admin','risasa');
 if (!$dbnivel->open()){die($dbnivel->error());};
 
-$idt='';$idtt='';
+$idt='';$idttt='';
 $queryp= "select max(idt) as midt from ticket_det;";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){$idt=$row['midt'];};
@@ -24,7 +24,7 @@ $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){$idttt=$row['id'];};
  echo $queryp;
 echo "<br><br>";
-if(!$idtt){$idtt="0";};
+if(!$idttt){$idttt="0";};
 
 
 $cnoms="";
