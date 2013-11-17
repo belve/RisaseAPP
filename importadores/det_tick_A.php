@@ -9,15 +9,20 @@ $queryp= "select max(idt) as midt from ticket_det;";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){$idt=$row['midt'];};
 if(!$idt){$idt="0";};
+ echo $queryp;
+echo "<br><br>";
 
 $queryp= "select id_ticket from ticket_det where idt='$idt';";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){$idtt=$row['id_ticket'];};
 
+ echo $queryp;
+echo "<br><br>";
+
 $queryp= "select id from tickets where id_ticket='$idtt';";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){$idttt=$row['id'];};
-
+ echo $queryp;
 echo "<br><br>";
 
 $cnoms="";
