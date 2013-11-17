@@ -1,3 +1,19 @@
+
+truncate table `risase`.`articulos`;
+truncate table `risase`.`empleados`;
+truncate table `risase`.`proveedores`;
+truncate table `risase`.`subgrupos`;
+truncate table `risase`.`tiendas`;
+truncate table `risase`.`repartir`;
+truncate table `risase`.`agrupedidos`;
+truncate table `risase`.`pedidos`;
+truncate table `risase`.`reposiciones`;
+truncate table `risase`.`roturas`;
+truncate table `risase`.`syncupdate`;
+truncate table `risase`.`reposiciones`;
+truncate table `risase`.`reposiciones`;
+truncate table `risase`.`reposiciones`;
+
 http://192.168.1.11/importadores/colores.php Arreglar
 
 http://192.168.1.11/importadores/empleados.php 
@@ -38,12 +54,16 @@ _______________________________________________________
 Reparar stock de repartos
 
 
-ultimos tickets buenos 2013-10-14
-delete from tickets where fecha >= '2013-10-14';
-delete from ticket_det where fecha >= '2013-10-14';
+ultimos tickets buenos 2013-11-15
+delete from tickets where fecha >= '2013-11-15';
+delete from ticket_det where fecha >= '2013-11-15';
 
 http://192.168.1.11/importadores/tickects.php
 http://192.168.1.11/importadores/detTicket.php
+
+http://192.168.1.11/importadores/tick_A.php
+http://192.168.1.11/importadores/det_tick_A.php
+
 
 Y RISASA
 

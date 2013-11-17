@@ -28,7 +28,7 @@ if(!$idttt){$idttt="0";};
 
 
 $cnoms="";
-$queryp= "select id, id_ticket, id_tienda, fecha, hora from tickets WHERE id > $idttt LIMIT 50;";
+$queryp= "select id, id_ticket, id_tienda, fecha, hora from tickets WHERE id > $idttt LIMIT 5000;";
 $dbnivel->query($queryp); echo $queryp; 
 while ($row = $dbnivel->fetchassoc()){
 	$cnoms.="'" . $row['id_ticket'] . "',";
