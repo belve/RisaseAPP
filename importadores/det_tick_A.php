@@ -10,9 +10,19 @@ $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){$idt=$row['midt'];};
 if(!$idt){$idt="0";};
 
+$queryp= "select id_ticket from ticket_det where idt='$idt';";
+$dbnivel->query($queryp);
+while ($row = $dbnivel->fetchassoc()){$idtt=$row['id_ticket'];};
+
+$queryp= "select id from tickets where id_ticket='$idtt';";
+$dbnivel->query($queryp);
+while ($row = $dbnivel->fetchassoc()){$idttt=$row['id'];};
+
+echo "<br><br>";
+
 $cnoms="";
-$queryp= "select id, id_ticket, id_tienda, fecha, hora from tickets WHERE id > $idt LIMIT 5000;";
-$dbnivel->query($queryp); echo $queryp;
+$queryp= "select id, id_ticket, id_tienda, fecha, hora from tickets WHERE id > $idttt LIMIT 5000;";
+$dbnivel->query($queryp); echo $queryp; 
 while ($row = $dbnivel->fetchassoc()){
 	$cnoms.="'" . $row['id_ticket'] . "',";
 	$idsti[$row['id_ticket']]=$row['id'];
