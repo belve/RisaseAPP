@@ -119,7 +119,7 @@ $(window).keydown(function(evt) {
     	<ul class="submenu">
         	<li onclick="javascript:owin('v_45','Procesar Risasa','');"><a>Procesar Risasa</a></li>
         	<li onclick="javascript:owin('v_48','Eliminador de referencias','');"><a>Eliminador de referencias</a></li>
-        
+        	<li onclick="javascript:owin('v_49','Borrar rebajas','');"><a>Borrar rebajas</a></li>
         </ul>
     	
     </li>
