@@ -337,6 +337,8 @@ document.getElementById('DV2P1').setAttribute("style", "visibility:hidden;");
 document.getElementById('DV2P2').setAttribute("style", "visibility:hidden;");
 document.getElementById('DV2P3').setAttribute("style", "visibility:hidden;");
 document.getElementById('DV2P4').setAttribute("style", "visibility:hidden;");	
+
+
 }
 
 if(p=='P2'){
@@ -374,7 +376,8 @@ document.getElementById('V' + p).setAttribute("style", "visibility:visible !impo
 
 
 var tip=window.tipi;	
-cargaAgrupados2(tip,0,"","");	
+cargaAgrupados2(tip,0,"","");
+if(p=='P1'){initP();};	
 }
 
 
