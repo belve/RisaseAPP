@@ -99,6 +99,17 @@ var url='/ajax/crate_art_grid.php?id_proveedor=' + idpro +
 var aimpr=(c5*1) + 1;
 
 if(a < 8){
+
+d1=c1;
+d2=c2;
+d3=c3;
+d4=c4;
+d5=c5;
+d6=c6;
+d7=c7;
+d8=c8;	
+	
+
 $.getJSON(url, function(data) {
 $.each(data, function(key, val) {
 
@@ -108,6 +119,8 @@ innerDoc2.getElementById('codbarras').innerHTML=contenido + '<div style="float:l
  
 });
 });
+
+
 }else{
 
 innerDoc.getElementById(i + 'V1').value="";
