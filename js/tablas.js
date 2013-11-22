@@ -127,8 +127,8 @@ function changefield_art(value){
 		};	
 	
 	
-	$('#'+ nuevo).focus().select();
-
+	//$('#'+ nuevo).focus().select();
+	setTimeout("$('#" + nuevo + "').focus().select();",10);
 	
 }
 
@@ -169,8 +169,8 @@ function changefield_mas(value){
 		};	
 	
 	
-	$('#'+ nuevo).focus().select();
-
+	//$('#'+ nuevo).focus().select();
+	setTimeout("$('#" + nuevo + "').focus().select();",10);
 	
 }
 

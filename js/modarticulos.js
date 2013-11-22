@@ -110,6 +110,7 @@ url = "/ajax/update2.php?tabla=articulos&campos[stock]=" + stock +
 $.getJSON(url, function(data) {
 });	
 
+foc();
 timer(0);
 }
 
