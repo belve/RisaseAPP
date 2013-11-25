@@ -50,7 +50,7 @@ if (!$dbnivel->open()){die($dbnivel->error());};
 $queryp= "select id_tienda, tip, agrupar, 
 (select nombre from agrupedidos where id=agrupar) as nomag, fecha, 
 sum(cantidad) as qty, 
-sum(cantidad * (select precioneto from articulos where id=id_articulo)) as imp 
+sum(cantidad * ((select preciocosto from articulos where id=id_articulo)*1.05)) as imp 
 from pedidos where id_tienda IN ($ttss) AND fecha >= '$fini' AND fecha <= '$ffin' GROUP BY id_tienda, tip, agrupar order by id_tienda, tip, fecha;
 ";
 $dbnivel->query($queryp);

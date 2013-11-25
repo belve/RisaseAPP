@@ -55,7 +55,7 @@ $queryp= "select id_tienda, tip, (SELECT codbarras from articulos where id=id_ar
 CONCAT( (substring((SELECT codbarras from articulos where id=id_articulo),1,2)),(substring((SELECT codbarras from articulos where id=id_articulo),5)) ) as GS, 
 sum(cantidad) as qty , 
 (select preciocosto from articulos where id=id_articulo) as impu, 
-sum(cantidad * (select precioneto from articulos where id=id_articulo)) as impt 
+sum(cantidad * ((select preciocosto from articulos where id=id_articulo)*1.05)) as impt  
 from pedidos where id_tienda IN ($ttss) AND fecha >= '$fini' AND fecha <= '$ffin' GROUP BY id_tienda, tip, id_articulo order by id_tienda, tip, GS;";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){
