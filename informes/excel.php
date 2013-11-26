@@ -115,7 +115,9 @@ elseif(strpos($val,'%')>0){
 
 if((strpos($val,'.')>0)||(strpos($val,',')>0)){
 		
-	$lp=str_replace(',','',$val);	$lp=str_replace('.','',$lp); $lp=str_replace('-','',$lp); $lp=$lp*1;
+	$lp=str_replace(',','',$val);	$lp=str_replace('.','',$lp); $lp=str_replace('-','',$lp);
+	
+	// $lp=$lp*1;
 	
 	if(is_numeric($lp)){
 		
