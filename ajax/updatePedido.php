@@ -21,7 +21,7 @@ while ($row = $dbnivel->fetchassoc()){$idgs[$row['id']]=$row['agrupar']; if(coun
 
 if(count($borr)>0){foreach ($borr as $idpb => $pp){
 $queryp= "delete from pedidos where id=$idpb;";
-$dbnivel->query($queryp);echo "\n" . $queryp;		
+#$dbnivel->query($queryp);echo "\n" . $queryp;		
 }}
 	
 }
