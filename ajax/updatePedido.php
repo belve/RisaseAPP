@@ -33,6 +33,16 @@ $dbnivel->query($queryp);echo "\n" . $queryp;
 while ($row = $dbnivel->fetchassoc()){$idp=$row['id'];};	
 }
 if ($idp){
+
+$queryp= "select id from pedidos where agrupar='$idg' AND id_tienda='$idt' AND id_articulo='$ida' AND id NOT IN ($idp);";
+$dbnivel->query($queryp);echo "\n" . $queryp;
+while ($row = $dbnivel->fetchassoc()){
+	$idborr=$row['id'];
+	$queryp= "delete from pedidos where id=$idborr;";
+	$dbnivel->query($queryp);
+};	
+	
+	
 $queryp= "update pedidos set cantidad='$cant' where id=$idp;";
 $dbnivel->query($queryp);echo "\n" . $queryp;
 }else{
