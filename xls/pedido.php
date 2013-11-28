@@ -35,8 +35,8 @@ id_tienda,
 (select codbarras from articulos where articulos.id=pedidos.id_articulo) as codbarras,
 (select refprov from articulos where articulos.id=pedidos.id_articulo) as refprov, 
 id_articulo, 
-cantidad 
-from pedidos where agrupar=$id ORDER BY  grupo, subgrupo, codigo;";
+sum(cantidad) as cantidad
+from pedidos where agrupar=$id GROUP BY id_articulo ORDER BY  grupo, subgrupo, codigo;";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){
 	
