@@ -186,6 +186,39 @@ $queryp= "delete from pedidos where cantidad=0;";
 $dbnivel->query($queryp);
 
 
+
+
+
+$duplis=array();
+$queryp= "select id_tienda, id_articulo, count(id) as C 
+from pedidos where tip=$tip AND estado='-' 
+GROUP BY agrupar,id_tienda,id_articulo ORDER BY id_tienda, C desc;";
+$dbnivel->query($queryp); 
+while ($row = $dbnivel->fetchassoc()){if($row['C']>1){$duplis[$row['id_tienda']][$row['id_articulo']]=1;};};
+
+if(count($duplis)>0){
+		
+	foreach ($duplis as $idtien => $dups){ foreach ($dups as $idarticul => $value) {
+
+		$queryp= "select id, cantidad from pedidos where tip=$tip AND estado='-' AND id_tienda=$idtien AND id_articulo=$idarticul;";
+		$dbnivel->query($queryp); 
+		$qttyb=0;	$idsd=''; $borrr=''; 
+		
+		while ($row = $dbnivel->fetchassoc()){
+		if(!$idsd){ $idsd=$row['id']; }else{ $borrr.=$row['id'] . ','; } 	
+		$qttyb=$qttyb + $row['cantidad'];
+		}
+		$borrr=substr($borrr, 0,-1);
+		
+		$queryp= "UPDATE pedidos SET cantidad='$qttyb' WHERE id=$idsd;";
+		$dbnivel->query($queryp); 
+		
+		$queryp= "DELETE FROM pedidos WHERE id IN ($borrr) AND id NOT IN ($idsd);";
+		$dbnivel->query($queryp); 
+	
+}}}
+
+
 $queryp= "SELECT id_articulo, sum(cantidad) as rep, 
 (select codbarras from articulos where articulos.id=pedidos.id_articulo) as codbarras, 
 (select refprov from articulos where articulos.id=pedidos.id_articulo) as refprov 
