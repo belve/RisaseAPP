@@ -58,7 +58,7 @@ while ($row = $dbnivel->fetchassoc()){$nomrep=$row['nombre'];$estado=$row['estad
 
 
 
-$nomrep=strtoupper($nomrep);
+$nomrep=strtoupper($nomrep);$estt=$estado;
 $estado=strtoupper($equiEST[$estado]);
 $reparto="REPARTO NÚMERO: $nomrep / ESTADO: $estado";
 
@@ -78,9 +78,13 @@ from pedidos where agrupar=$id ORDER BY prov, grupo, subgrupo, codigo;";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){
 $datos[$row['id_articulo']]['nom']=$row['codbarras'] . " / " .  $row['refprov'];
+
+
+
 $datos[$row['id_articulo']]['stok']=$row['stock'];
 
-$grid2[$row['id_articulo']][$row['id_tienda']]['cantidad']=$row['stock'] - $row['cantidad'];	
+$grid2[$row['id_articulo']][$row['id_tienda']]['cantidad']=$row['cantidad'];
+
 $grid2[$row['id_articulo']][$row['id_tienda']]['estado']=$row['estado'];	
 
 $g=substr($row['codbarras'], 0,1); $sg=substr($row['codbarras'], 1,1); $cod=substr($row['codbarras'],4);
@@ -244,7 +248,7 @@ $objPHPExcel->getActiveSheet()->getStyle('A' . $count . ':' . $ultColu . $count)
 
 $objPHPExcel->getActiveSheet()->setCellValue('A' . $count, $prov);
 $objPHPExcel->getActiveSheet()->getStyle('A' . $count)->getAlignment()->setWrapText(false); 
-$objPHPExcel->getActiveSheet()->setCellValue('C' . $count, $stock);
+
 $rango="A" . $count . ":C" . $count;
 
 $objPHPExcel->getActiveSheet()->getStyle($rango)->getFont()->setSize(10);
@@ -274,6 +278,12 @@ $objPHPExcel->getActiveSheet()->getStyle($cell)->applyFromArray(array('fill' => 
 }
 
 $objPHPExcel->getActiveSheet()->setCellValue('B' . $count, $suma);
+
+if($estt=='A'){$stock=$stock - $suma;}else{$stock=$stock;};
+
+$objPHPExcel->getActiveSheet()->setCellValue('C' . $count, $stock);
+
+
 $objPHPExcel->getActiveSheet()->getRowDimension($count)->setRowHeight(18);
 
 
