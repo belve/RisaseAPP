@@ -80,7 +80,7 @@ while ($row = $dbnivel->fetchassoc()){
 $datos[$row['id_articulo']]['nom']=$row['codbarras'] . " / " .  $row['refprov'];
 $datos[$row['id_articulo']]['stok']=$row['stock'];
 
-$grid2[$row['id_articulo']][$row['id_tienda']]['cantidad']=$row['cantidad'];	
+$grid2[$row['id_articulo']][$row['id_tienda']]['cantidad']=$row['stock'] - $row['cantidad'];	
 $grid2[$row['id_articulo']][$row['id_tienda']]['estado']=$row['estado'];	
 
 $g=substr($row['codbarras'], 0,1); $sg=substr($row['codbarras'], 1,1); $cod=substr($row['codbarras'],4);
