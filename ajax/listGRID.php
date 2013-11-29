@@ -80,7 +80,7 @@ $cb[$g][$sg][$cod]=$ida;
 
 
 #############3 saco lo que se esta repartiendo de ese articulo no finalizado este en reparto o pedido
-$queryp="select id_articulo, sum(cantidad) as rep from pedidos where (estado != 'F' AND estado !='T') GROUP BY id_articulo;";
+$queryp="select id_articulo, sum(cantidad) as rep from pedidos where (estado != 'F' AND estado !='T' AND estado !='-' AND estado !='P') GROUP BY id_articulo;";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){
 $rep2[$row['id_articulo']]=$row['rep'];
