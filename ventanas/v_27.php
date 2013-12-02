@@ -162,7 +162,7 @@ require_once("../variables.php");
     </div>
 
 <div style="position: absolute; top: 12px;left: 754px;">
-<div style="position: absolute; top: -12px;left: 2px;">Ref. Prov.</div>	
+<div style="position: absolute; top: -12px;left: 2px;">Referencia Proveedor</div>	
 <input class="medio" style="width: 130px;" onchange="buscaREF(this.value)"/>
 <div style="position:absolute;top: 30px; width: 132px;height: 296px; left:2px; background-color: white;" id="refs">
 	
