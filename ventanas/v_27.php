@@ -99,7 +99,7 @@ require_once("../variables.php");
 </tbody>
 </table>
 
-<table style="float: left; margin-left: 10px;">
+<table style="float: left; margin-left: -33px;">
 		<tbody>
 		
 		<tr>
@@ -155,18 +155,13 @@ require_once("../variables.php");
 </table>
 
 
-<div style="border: 1px solid #888888;
-    height: 241px;
-    left: 545px;
-    position: absolute;
-    top: 14px;
-    width: 300px; background-color: #ffffff;">
+<div style="border: 1px solid #888888;   height: 241px;   left: 445px;    position: absolute;    top: 14px;    width: 300px; background-color: #ffffff;">
     
 <img src="" id="foto" style="max-width: 298px; max-height: 239px";>    
     
     </div>
 
-<div style="position: absolute; top: 12px;left: 858px;">
+<div style="position: absolute; top: 12px;left: 754px;">
 <input class="medio" style="width: 130px;" onchange="buscaREF(this.value)"/>
 <div style="position:absolute;top: 30px; width: 132px;height: 296px; left:2px; background-color: white;" id="refs">
 	

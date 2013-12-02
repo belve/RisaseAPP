@@ -7,12 +7,13 @@ require_once("../variables.php");
 if (!$dbnivel->open()){die($dbnivel->error());};
 
 
-$queryp= "select codbarras from articulos where refprov LIKE '%$ref%';";
+$queryp= "select codbarras, substring(codbarras,1,1) as G, substring(codbarras,2,1) as SG, substring(codbarras,5) as COD from articulos where refprov LIKE '%$ref%' ORDER BY G, SG, COD limit 15;";
 $html="";
-$dbnivel->query($queryp);
-while ($row = $dbnivel->fetchassoc()){
+$dbnivel->query($queryp);$c=1;
+while ($row = $dbnivel->fetchassoc()){$c++;
 $codbarras=$row['codbarras'];
-$html .="<div class='refPcomb' id='$codbarras' onclick='selREF(this.id)'>$codbarras</div>";	
+if($c>15){$col="style='background-color:red;'";}else{$col="";};
+$html .="<div class='refPcomb' id='$codbarras' $col onclick='selREF(this.id)'>$codbarras</div>";	
 }
 
 
