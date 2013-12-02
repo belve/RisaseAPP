@@ -166,7 +166,15 @@ require_once("../variables.php");
     
     </div>
 
+<div style="position: absolute; top: 12px;left: 858px;">
+<input class="medio" style="width: 130px;" onchange="buscaREF(this.value)"/>
+<div style="position:absolute;top: 30px; width: 132px;height: 296px; left:2px; background-color: white;" id="refs">
+	
 
+
+	
+</div>	
+</div>
 
 <div style="clear: both;margin-bottom: 10px; "></div>
 <div id='opciones' style="   left: 545px;    position: absolute;    text-align: center;    top: 270px;    width: 300px;"></div>

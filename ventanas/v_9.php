@@ -124,7 +124,7 @@ require_once("../variables.php");
 		
 			<tr>
 			<td>Repos.</td>
-			<td><input type="text" name="idmost" class="corto" id="rep" ></td>
+			<td><input type="text" name="idmost" class="corto" id="rep" style="border:0px;background-color: #C8C8C8;    font-size: 10px;" readonly ></td>
 		</tr>
 		
 		<tr>

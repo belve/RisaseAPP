@@ -20,6 +20,20 @@ body {
 	
 }
 
+
+.refPcomb { background-color: #DDDDDD;
+    float: left;
+    font-size: 10px;
+    height: 16px;
+    margin: 1px;
+    padding-left: 4px;
+    padding-top: 2px;
+    position: relative;
+    width: 126px;}
+    
+    
+
+
 .blnco_limpio ul{
 list-style-type: none;
 padding: 0px;

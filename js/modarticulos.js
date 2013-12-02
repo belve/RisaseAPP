@@ -1,4 +1,25 @@
 $.ajaxSetup({'async': false});
+
+
+function buscaREF(ref){
+if(ref.length>2){	
+url = "/ajax/buscaREF.php?ref=" + ref;
+$.getJSON(url, function(data) {
+$.each(data, function(key, val) {
+if(key=='html'){document.getElementById('refs').innerHTML=val;}
+});
+});
+}
+	
+	
+}
+
+function selREF(cod){
+document.getElementById('cod').value=cod;	
+document.getElementById('cod').select();
+cargaArticulo(cod);	
+}
+
 function cargaArticulo(codbarras){
 document.getElementById('foto').src='';	
 window.ok=0;

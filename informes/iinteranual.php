@@ -97,13 +97,13 @@ $anchos['C']=18;
 $anchos['D']=3;
 
 $anchos['E']=18;
-$anchos['F']=8;
+$anchos['F']=10;
 
 $anchos['G']=18;
-$anchos['H']=8;
+$anchos['H']=10;
 
 $anchos['I']=18;
-$anchos['J']=8;
+$anchos['J']=10;
 
 
 $fila=2; $tots=array();$first=1;
@@ -135,10 +135,13 @@ if($cl>1){$grid[1][$col[$cl+1]]='%';};
 if($cl==1){$tot=$value;}
 
 
-
+$doit=0;
 if(($cl>1)&&($value>0)){
 $porc=(($tot/$value)-1)*100;$porc=round($porc,2);
-$grid[$fila][$col[$cl+1]]=number_format($porc,2,',','.'); 
+$grid[$fila][$col[$cl+1]]=number_format($porc,2,',','.');
+$doit=$col[$cl+1] . $fila;
+if($porc >= 0){$colorin='80E680';}else{$colorin='FFB2B2';};
+$crang[$doit]=$colorin; 
 }
 
 if(array_key_exists($cl, $totales)){$totales[$cl]=$totales[$cl]+$value;}else{$totales[$cl]=$value;};
@@ -162,8 +165,9 @@ if($p==1){$p=0;$color='DDDDDD';}else{$p=1;$color='FFFFFF';}
 $BOLDrang	['B' . $fila]=1;
 $BOLDrang	['C' . $fila . ':' . 'J' . $fila]=2;
 $align		['B' . $fila . ':' . 'J' . $fila]='C'; 
-$crang		['B' . $fila . ':' . 'J' . $fila]=$color;
+#$crang		['B' . $fila . ':' . 'J' . $fila]=$color;
 $BTrang		['B' . $fila . ':' . 'J' . $fila]=1;
+
 
 
 $fila++;
@@ -175,7 +179,12 @@ foreach ($totales as $cl => $value) {
 if($cl==1){$tot=$value;}
 if(($cl>1)&&($value>0)){
 $porc=(($tot/$value)-1)*100;$porc=round($porc,2);
-$grid[$fila][$col[$cl+1]]=number_format($porc,2,',','.');  
+$grid[$fila][$col[$cl+1]]=number_format($porc,2,',','.'); 
+
+if($porc >= 0){$colorin='80E680';}else{$colorin='FFB2B2';};
+$crang[$col[$cl+1] . $fila]=$colorin; 
+
+
 }
 	
 $value=number_format($value,2,',','.');
