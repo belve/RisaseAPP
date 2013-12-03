@@ -26,17 +26,20 @@ require_once("../functions/listador.php");
 	while ($row = $dbnivel->fetchassoc()){
 	$cd=$row['codbarras']; $id_articulo=$row['id']; $pvp=$row['pvp']; $pvori=$row['pvp'];
 	
-	$g=substr($cd,0,1); $s=substr($cd,1,1);$c=substr($cd,4);
+	$g=(substr($cd,0,1))*1; $s=(substr($cd,1,1))*1;$c=(substr($cd,4))*1;
 		
 	$arts[$g][$s][$c][$id_articulo]=$cd;	
 	}
 
 if (!$dbnivel->close()){die($dbnivel->error());};
 
+
+
+
 if(count($arts)>0){
-ksort($arts);
+ksort($arts);$ccc=0;
 foreach ($arts as $g => $sub) {ksort($sub); foreach ($sub as $s => $cods) {ksort($cods); foreach ($cods as $co => $art) { foreach ($art as $id => $codbarras) {
-	$vals[$id]=$codbarras;
+	$vals[$ccc]=$codbarras;$ccc++;
 }}}}}
 
 echo json_encode($vals);

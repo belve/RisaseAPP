@@ -20,9 +20,9 @@ window.sel = new Array();
 	$.getJSON(url, function(data) {
 	$.each(data, function(key, val) {
 	
-		window.lArts.push(key);
-		window.cdbar.push(val);
-		window.sel.push(1);
+		window.lArts[key]=val;
+		window.cdbar[key]=val;
+		window.sel[key]=1;
 		
 	if(window.top.listArts.indexOf(key) >= 0){
 		window.nfij.push(window.top.fijo[window.top.listArts.indexOf(key)]); 
@@ -359,8 +359,9 @@ idA=art[i];
 idC=cod[i]; 	
 pf=fij[i]; 	
 ps=tie[i]; 
-artic=artic + '&arts[' + idA + '][f]=' + pf;
-artic=artic + '&arts[' + idA + '][s]=' + ps;
+if(pf){artic=artic + '&arts[' + idA + '][f]=' + pf;};
+if(ps){artic=artic + '&arts[' + idA + '][s]=' + ps;};
+
 }
 
 for (var i = 0; i < tsel.length; i++) {if(tsel[i]==1){
