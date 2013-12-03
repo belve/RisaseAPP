@@ -60,6 +60,12 @@ window.top.tselALL	=1;
 		<?php echo $cajt; ?>		
 </div>
 
+<div style="position: absolute; top: 157px;">
+Porcentaje de depreciación: 
+<input type="txt" id="porcen" style="position: absolute; left:155px; width:20px; top:-7px;"; />	
+</div>
+
+
 <div style="float: left; position: relative; margin-left: 20px;   margin-top: 5px;">	
 	
 	

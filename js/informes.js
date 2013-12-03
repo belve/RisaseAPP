@@ -361,7 +361,25 @@ document.getElementById('reloj').setAttribute("style", "visibility:hidden;");
 
 
 
+function informeAUd(t){var url="";
+	
+	var porcen=document.getElementById('porcen').value;
+	if(porcen){
+	var ttss=""; var tn=0;
+	var tsel=window.top.tsel;
+	for (var i = 0; i < tsel.length; i++) {if(tsel[i]==1){
+	ttss=ttss + i + ','; tn++;
+	}}
+	if(tn==0){alert('Debe seleccionar alguna tienda.');}else{
+	var url="/informes/iAuditoria.php?i=" + t  + "&ttss=" + ttss + "&porcen=" + porcen;	
+	}}else{
+	alert ('Debe introducir un porcentaje de depreciación')	
+	}
 
+
+if(url){getDATA(url);};
+
+}
 
 
 function informePH(){
