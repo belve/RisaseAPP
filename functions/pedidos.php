@@ -371,6 +371,10 @@ $queryp= "UPDATE articulos SET stock=stock - $qty WHERE id=$idaact;";
 $dbnivel->query($queryp);	
 }}
 
+############# pongo a 0 stock de almacen roto
+$queryp= "UPDATE articulos SET stock=0 WHERE stock < 0;";
+$dbnivel->query($queryp);
+
 }
 
 $valores=array();
