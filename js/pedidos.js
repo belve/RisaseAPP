@@ -910,7 +910,20 @@ setTimeout("timerAD(0,'timer',0);",6000);
 
 }
 
+function envALM(tip){$.ajaxSetup({'async': false});
+timerAD(1,'timer1',0);	
+	
+var url="/ajax/envALM.php?tip=" + tip 
 
+$.getJSON(url, function(data) {
+$.each(data, function(key, val) {
+
+	
+});
+});
+selPEST('P2');	
+timerAD(0,'timer1',0);	
+}
 
 function updtPed(idp,field){
 	

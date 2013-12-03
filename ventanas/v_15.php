@@ -185,6 +185,7 @@ $(window).keydown(function(evt) {
 <iframe id="FV2P1" src="/ajax/agrupacionesV2.php" width="111" height="340" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
 
 <div class="boton" style="margin-left:1px; width: 76px; margin-top: 27px;" onclick="roturas(<?php echo $tip;?>);">Imp Roturas</div>
+<div class="boton" style="margin-left:1px; width: 76px; margin-top: 84px;" onclick="envALM(<?php echo $tip;?>);">Todos a Alm</div>
 </div>
 
 <div class="agV2" style="visibility: hidden" id="DV2P2"><input type="hidden" id='nfV2P2' value=''>
