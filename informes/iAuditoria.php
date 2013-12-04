@@ -370,6 +370,9 @@ $fila++;$cont++;
 
 $first=0;$ltien = $tien;	
 }}}
+
+if($liniF>$fila){$fila=$liniF;};
+
 $fila++;
 $grid[$fila][$cols[1]['A']]='Total';
 $grid[$fila][$cols[1]['B']]=$sumS;
