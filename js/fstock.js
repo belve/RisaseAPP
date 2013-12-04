@@ -335,7 +335,7 @@ if(window.debug ==1) {console.log('window.top.tsel: '); console.info(window.top.
 
 
 function enviaTiendas(){
-
+timer(1);
 
 var art=window.top.listArts;
 var cod=window.top.codbars;
@@ -354,36 +354,50 @@ var artic=""; var ttss="";
 if(art.length>0){
 if(tco>0){
 
+
+var c=0; var hagos=new Array();
+
+
+
 for (var i = 0; i < art.length; i++) {
+	
+if(c >= 250) {c=0; hagos.push(artic); artic="";}	
+	
 idA=art[i]; 	
 idC=cod[i]; 	
 pf=fij[i]; 	
 ps=tie[i]; 
 if(pf){artic=artic + '&arts[' + idA + '][f]=' + pf;};
 if(ps){artic=artic + '&arts[' + idA + '][s]=' + ps;};
-
+c++;
 }
+hagos.push(artic);
 
 for (var i = 0; i < tsel.length; i++) {if(tsel[i]==1){
 ttss=ttss + '&tsel[]=' + i;
 }}
 
 
+
+
 var alm=window.top.filtFIj_alm;
 var bd=window.top.filtFIj_bd;
 
-url='/ajax/insFIJstock.php?h=1' 
-+ '&alm=' + alm + '&bd=' + bd + artic + ttss;
 
-if(window.debug ==1) {console.log('url: ' + url);  };	
-	$.getJSON(url, function(data) {
-	$.each(data, function(key, val) {
-	alert(val);
-	});
-	});	
+
+for (var i = 0; i < hagos.length; i++) {
+var artic2=hagos[i];
+
+url='/ajax/insFIJstock.php?h=1' 
++ '&alm=' + alm + '&bd=' + bd + artic2 + ttss;
+$.getJSON(url, function(data) {
+$.each(data, function(key, val) {
+alert(val);
+});
+});	
 	
-	
-	
+}	
+timer(0);	
 window.top.listArts = new Array();
 window.top.select   = new Array();
 window.top.codbars 	= new Array();

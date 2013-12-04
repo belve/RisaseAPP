@@ -796,16 +796,20 @@ $(V).find(fila).remove();
 function borra_agru(idag,tip){v='V2P1';$.ajaxSetup({'async': false});
 var iframe = parent.document.getElementById('agrupaciones');
 var V = iframe.contentDocument || iframe.contentWindow.document;
-if(V.getElementById('agrupSel').value==idag){
+
+var sell=V.getElementById('agrupSel').value;
 
 var iframe = parent.document.getElementById('pediagrup');
 var V = iframe.contentDocument || iframe.contentWindow.document;
 V.getElementById('pedipent').innerHTML='';	
-}	
+	
 	
 var iframe = parent.document.getElementById('agrupaciones');
 var V = iframe.contentDocument || iframe.contentWindow.document;
+if(V.getElementById(sell)){
+V.getElementById(sell).setAttribute("style", "background-color:white;");
 V.getElementById('agrupSel').value='';
+}
 
 $(V).find('#' + idag).remove();	
 

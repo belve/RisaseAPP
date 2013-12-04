@@ -23,6 +23,9 @@ cargaArticulo(cod);
 }
 
 function cargaArticulo(codbarras){
+$('#cod').focus();
+$('#cod').select();	
+	
 document.getElementById('foto').src='';	
 window.ok=0;
 url = "/ajax/modarticulos.php?codbarras=" + codbarras;
@@ -51,7 +54,8 @@ window.ok=1;
 });
 
 if(window.ok==0){alert('Codigo no encontrado');}else{cargafoto(codbarras);	};	
-document.getElementById('cod').select();	
+$('#cod').focus();
+$('#cod').select();
 }
 
 
