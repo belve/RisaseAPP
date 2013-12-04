@@ -84,7 +84,7 @@ substring(cod,1,1) as G,
 substring(cod,1,1) as SG,  
 stock, 
 substring(cod,5) as codigo 
-from stocklocal_$idt where stock > 0 AND cod NOT LIKE ('_0009999')  ORDER BY substring(cod,1,1) ASC, substring(cod,2,1) ASC, substring(cod,5) ASC limit 200;
+from stocklocal_$idt where stock > 0 AND cod NOT LIKE ('_0009999')  ORDER BY substring(cod,1,1) ASC, substring(cod,2,1) ASC, substring(cod,5) ASC;
 ";	
 $dbn->query($queryp);if($debug){echo "$queryp \n\n";};
 echo $dbn->error();
@@ -147,7 +147,7 @@ codbarras,
 stock, codigo, 
 (preciocosto * stock) as valor, 
 ((preciocosto * stock)- (preciocosto * stock * $porcen) ) as valorA
- from articulos where stock > 0 AND codbarras NOT LIKE ('_0009999')  ORDER BY substring(codbarras,1,1) ASC, substring(codbarras,2,1) ASC, codigo ASC limit 200;
+ from articulos where stock > 0 AND codbarras NOT LIKE ('_0009999')  ORDER BY substring(codbarras,1,1) ASC, substring(codbarras,2,1) ASC, codigo ASC;
 ";	
 $dbn->query($queryp);if($debug){echo "$queryp \n\n";};
 echo $dbn->error();
