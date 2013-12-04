@@ -215,20 +215,20 @@ $cols[2]['D']="I";
 $cols[2]['E']="J";
 
 
-$anchos['A']=18;
+$anchos['A']=16;
 $anchos['B']=10;
 $anchos['C']=10;
 $anchos['D']=10;
 
 $anchos['E']=4;
 
-$anchos['F']=18;
+$anchos['F']=16;
 $anchos['G']=10;
 $anchos['H']=10;
 $anchos['I']=10;
 
-if($i==3){$datos=$resumen;$anchos['A']=26;$anchos['F']=26;};
-if($i==1){$datos=$resumen;$anchos['A']=26;$anchos['F']=26;};
+if($i==3){$datos=$resumen;$anchos['A']=24;$anchos['F']=24;};
+if($i==1){$datos=$resumen;$anchos['A']=24;$anchos['F']=24;};
 if(($i==1)||($i==3)){$cm=1;}else{$cm=2;};
 
 
@@ -238,6 +238,9 @@ $nodo=1;
 
 $fila=$liniF+3;
 $liniF=1;
+
+$sumS=0;$sumV=0;$sumVa=0;
+
 if(count($datos)>0){
 foreach ($datos as $tien => $valst) { foreach ($valst as $codb => $values) {$G=$values['G'];
 
@@ -245,6 +248,13 @@ foreach ($datos as $tien => $valst) { foreach ($valst as $codb => $values) {$G=$
 if($ltien != $tien){
 
 if(!$first){	
+
+$grid[$fila][$cols[1]['A']]='TOTAL'; 	
+$grid[$fila][$cols[1]['B']]=$sumS; 		
+$grid[$fila][$cols[1]['C']]=$sumV; 
+$grid[$fila][$cols[1]['D']]=$sumVa; 	
+$fila++;$cont++;
+$sumS=0;$sumV=0;$sumVa=0;
 	
 if($c==1){$liniF=$fila;
 $cont=0;$fila++;$fila++;
@@ -293,7 +303,7 @@ $align[$cols[1]['A'] . ($fila-2)]="C";
 
 
 ######
-if($cont > 80){
+if($cont > 56){
 	
 if($c==1){$fila2=$fila;$lG="";
 $fila=$liniF+2; $c=2;
@@ -342,15 +352,24 @@ $lG=$G; $fila++;$cont++;
 }
 #############
 
-
-$grid[$fila][$cols[$c]['A']]=$codb; 	
-$grid[$fila][$cols[$c]['B']]=$values['s']; 		
-$grid[$fila][$cols[$c]['C']]=$values['v']; 
-$grid[$fila][$cols[$c]['D']]=$values['va']; 	
+$sumS=$sumS+$values['s'];$sumV=$sumV+$values['v'];$sumVa=$sumVa+$values['va'];
+$grid[$fila][$cols[1]['A']]=$codb; 	
+$grid[$fila][$cols[1]['B']]=$values['s']; 		
+$grid[$fila][$cols[1]['C']]=$values['v']; 
+$grid[$fila][$cols[1]['D']]=$values['va']; 	
 $fila++;$cont++;
 
 $first=0;$ltien = $tien;	
 }}}
+
+
+$grid[$fila][$cols[$c]['A']]='TOTAL'; 	
+$grid[$fila][$cols[$c]['B']]=$sumS; 		
+$grid[$fila][$cols[$c]['C']]=$sumV; 
+$grid[$fila][$cols[$c]['D']]=$sumVa; 	
+$fila++;$cont++;
+$sumS=0;$sumV=0;$sumVa=0;
+
 
 
 $format['defSize']=10;
