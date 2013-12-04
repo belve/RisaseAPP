@@ -215,20 +215,20 @@ $cols[2]['D']="I";
 $cols[2]['E']="J";
 
 
-$anchos['A']=16;
+$anchos['A']=14;
 $anchos['B']=10;
 $anchos['C']=10;
 $anchos['D']=10;
 
 $anchos['E']=4;
 
-$anchos['F']=16;
+$anchos['F']=14;
 $anchos['G']=10;
 $anchos['H']=10;
 $anchos['I']=10;
 
-if($i==3){$datos=$resumen;$anchos['A']=24;$anchos['F']=24;};
-if($i==1){$datos=$resumen;$anchos['A']=24;$anchos['F']=24;};
+if($i==3){$datos=$resumen;$anchos['A']=20;$anchos['F']=20;};
+if($i==1){$datos=$resumen;$anchos['A']=20;$anchos['F']=20;};
 if(($i==1)||($i==3)){$cm=1;}else{$cm=2;};
 
 
