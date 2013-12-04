@@ -111,6 +111,21 @@ innerDoc.getElementById('pedipent').innerHTML='';
 cargaAgrupados2(tip,0);	
 }
 
+function autoDESagrupar(tip){$.ajaxSetup({'async': false});
+var url='/ajax/desagrupar.php?tip=' + tip;
+$.getJSON(url, function(data) {
+$.each(data, function(key, val) {
+});
+});	
+
+
+cargaAgrupados(tip,0);
+var iframe = document.getElementById('pediagrup');
+var V = iframe.contentDocument || iframe.contentWindow.document;
+V.getElementById('pedipent').innerHTML='';
+cargaPendientes(tip);
+	
+}
 
 
 function detAgrupado(id,tip){$.ajaxSetup({'async': false});	

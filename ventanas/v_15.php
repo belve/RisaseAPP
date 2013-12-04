@@ -103,7 +103,8 @@ $(window).keydown(function(evt) {
 
 
 <div style="float:left: ">
-<div class="boton" onclick="autoagrupar(<?php echo $tip;?>);">Auto-agrupar</div>	
+<div class="boton" onclick="autoagrupar(<?php echo $tip;?>);">Auto-agrupar</div>
+<div class="boton" onclick="autoDESagrupar(<?php echo $tip;?>);">Desagrupar todos</div>		
 </div>
 
 
