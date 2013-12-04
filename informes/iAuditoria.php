@@ -84,7 +84,7 @@ substring(cod,1,1) as G,
 substring(cod,2,1) as SG,  
 stock, 
 substring(cod,5) as codigo 
-from stocklocal_$idt where stock > 0 AND cod NOT LIKE ('_0009999')  ORDER BY substring(cod,1,1) ASC, substring(cod,2,1) ASC, substring(cod,5) ASC;
+from stocklocal_$idt where stock > 0 AND cod NOT LIKE ('_0009999')  ORDER BY substring(cod,1,1) ASC, substring(cod,2,1) ASC, CONVERT(substring(cod,5),UNSIGNED INTEGER) ASC;
 ";	
 $dbn->query($queryp);if($debug){echo "$queryp \n\n";};
 echo $dbn->error();
@@ -129,7 +129,6 @@ $resumen[$idttt][$G]['G']=$G;
 
 if (!$dbn->close()){die($dbn->error());};
 }
-
 
 
 
