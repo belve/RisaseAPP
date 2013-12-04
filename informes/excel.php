@@ -141,8 +141,17 @@ $sheet->setCellValue($cel, $val);
 
 }}
 
-
+if(array_key_exists('defSize', $format)){
+$objPHPExcel->getDefaultStyle()->getFont()->setName('Arial')->setSize($format['defSize']);	
+}else{
 $objPHPExcel->getDefaultStyle()->getFont()->setName('Arial')->setSize(7);
+}
+
+
+if(array_key_exists('defALign', $format)){
+$objPHPExcel->getDefaultStyle()->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);	
+}
+
 
 foreach ($anchos as $col => $value) {$sheet->getColumnDimension($col)->setWidth($value);};
 foreach ($align  as $rang => $value) {

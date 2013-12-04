@@ -81,7 +81,7 @@ $queryp= "
 select 
 cod, 
 substring(cod,1,1) as G, 
-substring(cod,1,1) as SG,  
+substring(cod,2,1) as SG,  
 stock, 
 substring(cod,5) as codigo 
 from stocklocal_$idt where stock > 0 AND cod NOT LIKE ('_0009999')  ORDER BY substring(cod,1,1) ASC, substring(cod,2,1) ASC, substring(cod,5) ASC;
@@ -188,8 +188,7 @@ $resumen['ALMACEN'][$G]['G']=$G;
 if (!$dbn->close()){die($dbn->error());};
 }
 
-if($i==3){$datos=$resumen;};
-if($i==1){$datos=$resumen;};
+
 
 
 
@@ -217,6 +216,24 @@ $cols[2]['D']="I";
 $cols[2]['E']="J";
 
 
+$anchos['A']=18;
+$anchos['B']=10;
+$anchos['C']=10;
+$anchos['D']=10;
+
+$anchos['E']=4;
+
+$anchos['F']=18;
+$anchos['G']=10;
+$anchos['H']=10;
+$anchos['I']=10;
+
+if($i==3){$datos=$resumen;$anchos['A']=26;$anchos['F']=26;};
+if($i==1){$datos=$resumen;$anchos['A']=26;$anchos['F']=26;};
+if(($i==1)||($i==3)){$cm=1;}else{$cm=2;};
+
+
+
 $c=1;
 $nodo=1;
 
@@ -237,10 +254,10 @@ $grid[$fila-2][$cols[$c]['A']]=$tien; $lG="";
 
 $grid[$fila-1][$cols[$c]['B']]='Stock'; 
 $grid[$fila-1][$cols[$c]['C']]='Valor'; 
-$grid[$fila-1][$cols[$c]['D']]='V Adq';  
+$grid[$fila-1][$cols[$c]['D']]='V Est';  
 
 
-$Mrang[$cols[1]['A'] . ($fila-2) . ":" . $cols[2]['D'] . ($fila-2)]=1;
+$Mrang[$cols[1]['A'] . ($fila-2) . ":" . $cols[$cm]['D'] . ($fila-2)]=1;
 $align[$cols[1]['A'] . ($fila-2)]="C";
 		
 }else{	
@@ -252,10 +269,10 @@ $grid[$fila-2][$cols[$c]['A']]=$tien; $lG="";
 
 $grid[$fila-1][$cols[$c]['B']]='Stock'; 
 $grid[$fila-1][$cols[$c]['C']]='Valor'; 
-$grid[$fila-1][$cols[$c]['D']]='V Adq';
+$grid[$fila-1][$cols[$c]['D']]='V Est';
 
 
-$Mrang[$cols[1]['A'] . ($fila-2) . ":" . $cols[2]['D'] . ($fila-2)]=1;
+$Mrang[$cols[1]['A'] . ($fila-2) . ":" . $cols[$cm]['D'] . ($fila-2)]=1;
 $align[$cols[1]['A'] . ($fila-2)]="C";	
 }
 
@@ -265,9 +282,10 @@ $grid[$fila-2][$cols[$c]['A']]=$tien; $lG="";
 
 $grid[$fila-1][$cols[$c]['B']]='Stock'; 
 $grid[$fila-1][$cols[$c]['C']]='Valor'; 
-$grid[$fila-1][$cols[$c]['D']]='V Adq';
+$grid[$fila-1][$cols[$c]['D']]='V Est';
 
-$Mrang[$cols[1]['A'] . ($fila-2) . ":" . $cols[2]['D'] . ($fila-2)]=1;
+
+$Mrang[$cols[1]['A'] . ($fila-2) . ":" . $cols[$cm]['D'] . ($fila-2)]=1;
 $align[$cols[1]['A'] . ($fila-2)]="C";
 	
 }
@@ -285,7 +303,7 @@ $liniF=$fila2;
 
 $grid[$fila-1][$cols[$c]['B']]='Stock'; 
 $grid[$fila-1][$cols[$c]['C']]='Valor'; 
-$grid[$fila-1][$cols[$c]['D']]='V Adq';
+$grid[$fila-1][$cols[$c]['D']]='V Est';
 
 }else{
 
@@ -295,9 +313,10 @@ $grid[$fila-2][$cols[$c]['A']]=$tien; $lG="";
 
 $grid[$fila-1][$cols[$c]['B']]='Stock'; 
 $grid[$fila-1][$cols[$c]['C']]='Valor'; 
-$grid[$fila-1][$cols[$c]['D']]='V Adq';
+$grid[$fila-1][$cols[$c]['D']]='V Est';
 
-$Mrang[$cols[1]['A'] . ($fila-2) . ":" . $cols[2]['D'] . ($fila-2)]=1;
+
+$Mrang[$cols[1]['A'] . ($fila-2) . ":" . $cols[$cm]['D'] . ($fila-2)]=1;
 $align[$cols[1]['A'] . ($fila-2)]="C";
 
 }
@@ -314,6 +333,7 @@ if($G!=$lG){
 
 
 if(!is_numeric($codb)){$codb=$G;}else{
+	
 $Mrang[$cols[$c]['A'] . $fila . ":" . $cols[$c]['D'] . $fila]=1;		
 $grid[$fila][$cols[$c]['A']]=$G;	
 $lG=$G; $fila++;$cont++;
@@ -334,8 +354,14 @@ $first=0;$ltien = $tien;
 }}}
 
 
+$format['defSize']=10;
+$format['defALign']=1;
 
-
+if($i==1){$nombre="Tiendas-Simple-";};
+if($i==2){$nombre="Tiendas-Detalle-";};
+if($i==3){$nombre="Almacen-Simple-";};
+if($i==4){$nombre="Almacen-Detalle-";};
+$hoy=date('Y') . date('m') . date('d');
 
 if(count($grid)>0){
 
@@ -350,7 +376,7 @@ $_SESSION['Mrang']=$Mrang;
 $_SESSION['BTrang']=$BTrang;
 $_SESSION['format']=$format;
 $_SESSION['paginas']=$paginas;
-$_SESSION['nomfil']="PorHoras-" . $mes;
+$_SESSION['nomfil']=$nombre . $hoy;
 $_SESSION['BOLDrang']=$BOLDrang;
 $res['ng']=count($grid)+count($anchos)+count($align)+count($crang)+count($Mrang)+count($BTrang)+count($paginas)+count($format);
 
