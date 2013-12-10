@@ -84,7 +84,7 @@ substring(cod,1,1) as G,
 substring(cod,2,1) as SG,  
 stock, 
 substring(cod,5) as codigo 
-from stocklocal_$idt where stock > 0 AND cod NOT LIKE ('_0009999')  ORDER BY substring(cod,1,1) ASC, substring(cod,2,1) ASC, CONVERT(substring(cod,5),UNSIGNED INTEGER) ASC;
+from stocklocal_$idt where stock > 0 AND cod NOT LIKE ('_0009999') ORDER BY substring(cod,1,1) ASC, substring(cod,2,1) ASC, CONVERT(substring(cod,5),UNSIGNED INTEGER) ASC;
 ";	
 $dbn->query($queryp);if($debug){echo "$queryp \n\n";};
 echo $dbn->error();
@@ -312,7 +312,7 @@ $align[$cols[1]['A'] . ($fila-2)]="C";
 
 
 ######
-if($cont > 51){
+if($cont > 50){
 	
 if($c==1){$fila2=$fila;$lG="";
 $fila=$liniF+2; $c=2;
@@ -374,10 +374,10 @@ $first=0;$ltien = $tien;
 if($liniF>$fila){$fila=$liniF;};
 
 $fila++;
-$grid[$fila][$cols[1]['A']]='Total';
-$grid[$fila][$cols[1]['B']]=$sumS;
-$grid[$fila][$cols[1]['C']]=$sumV;
-$grid[$fila][$cols[1]['D']]=$sumVa;
+$grid[$fila][$cols[2]['A']]='Total';
+$grid[$fila][$cols[2]['B']]=$sumS;
+$grid[$fila][$cols[2]['C']]=$sumV;
+$grid[$fila][$cols[2]['D']]=$sumVa;
 $sumS=0;$sumV=0;$sumVa=0;
 
 
