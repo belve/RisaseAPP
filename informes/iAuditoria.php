@@ -286,10 +286,10 @@ $align[$cols[1]['A'] . ($fila-2)]="C";
 
 
 
-$grid[$fila-3][$cols[1]['A']]='Total';
-$grid[$fila-3][$cols[1]['B']]=$sumS;
-$grid[$fila-3][$cols[1]['C']]=$sumV;
-$grid[$fila-3][$cols[1]['D']]=$sumVa;
+$grid[$fila-3][$cols[2]['A']]='Total';
+$grid[$fila-3][$cols[2]['B']]=$sumS;
+$grid[$fila-3][$cols[2]['C']]=$sumV;
+$grid[$fila-3][$cols[2]['D']]=$sumVa;
 $sumS=0;$sumV=0;$sumVa=0;
 
 
