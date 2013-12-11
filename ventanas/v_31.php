@@ -74,8 +74,8 @@ window.top.tselALL	=1;
 		window.top.bRISASA=0;
 	</script>
 	
-	
-	<div style="margin-left: 2px">Mes: <input value="mm/aaaa" type="text" class="corto pdias"  id="fini" onfocus="javascript:dlF(this.id);" onkeyup="javascript:tabFm(this.id);"></div>
+	<?php $defmes=date('m') . "/" . date('Y'); ?>
+	<div style="margin-left: 2px">Mes: <input value="<?php echo $defmes;?>" type="text" class="corto pdias"  id="fini" onfocus="javascript:dlF(this.id);" onkeyup="javascript:tabFm(this.id);"></div>
 	
 	<!--
 	<div style="margin-left: -2px; margin-top: 4px; "><input type="checkbox" id="frqcia" /> Incluir franquicias. </div>

@@ -102,8 +102,13 @@ $empi=$empsn[$idt];
 $Mrang['C' . $fila .':D' .$fila]=1;
 $align['C' . $fila]='C';
 $crang['C' . $fila]='99CCFF';
-$grid[$fila]['C']=$tiendasN[$idt];
+$grid[$fila]['C']=$tiendasN[$idt]; 
 $BOLDrang	['C' . $fila]=1;
+
+$grid[$fila]['E']=$mes;
+$BOLDrang	['E' . $fila]=1;
+$align['E' . $fila]='C';
+
 $fila++;
 
 $cc=0;

@@ -78,7 +78,12 @@ $col[21]='W';	$col[22]='X';	$col[23]='Y';	$col[24]='Z';
 $col[25]='AA';	$col[26]='AB';	$col[27]='AC';	$col[28]='AD';
 $col[29]='AE';	$col[30]='AF';	$col[31]='AG';
 
-$fila=1;
+$Mrang['A1:D1']=1;
+$align['A1:D1']='C';	
+$BOLDrang['A1:D1']=1;
+$grid[1]['A']=$mes; 
+
+$fila=3;
 
 $grid[$fila]['B']='TIENDA'; 
 $grid[$fila]['AH']='TOTAL'; 
