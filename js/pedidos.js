@@ -657,6 +657,7 @@ alert ('Codigo ya listado en el grid');
 }else{
 GRID.getElementById('grid').innerHTML=GRID.getElementById('grid').innerHTML + cont;
 GRID.getElementById(fil + '-1').focus();
+window.top.Gmaxfil=Number(fil);
 }
 
 window.top.GnewfilHTM=window.top.GnewfilHTM_2;	
