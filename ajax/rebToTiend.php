@@ -15,7 +15,7 @@ $tisel=$_GET['tisel'];
 
 if(array_key_exists('doit', $_GET)){$doit=$_GET['doit'];}else{$doit=0;}
 
-if($doit==1){$arts=array();};
+if($doit==1){$arts=array(); $_SESSION['arts']=$arts; };
 if($doit==0){$arts=$_SESSION['arts']; foreach ($artis as $idart => $precio) {$arts[$idart]=$precio;}; $_SESSION['arts']=$arts; }
 
 
