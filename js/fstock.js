@@ -3,7 +3,7 @@
 // window.top.codbars 	= new Array();
 // window.top.fijo 	= new Array();
 // window.top.tienda	= new Array();	
-window.debug =1;
+window.debug =0;
 
 
 
