@@ -560,7 +560,7 @@ document.getElementById('amount').value='';
 function enviaTiendas(){$.ajaxSetup({'async': false});
 if(window.debug ==1) {console.log('L419 :enviaTiendas()');};
 document.getElementById("timer").style.visibility = "visible";	
-var detalle="";
+
 var fini=document.getElementById('fini').value;	
 var ffin=document.getElementById('ffin').value;	
 var id_rebaja=document.getElementById('idrebaja').value;
@@ -575,36 +575,53 @@ var iframe = document.getElementById('articulos');
 var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
 total=innerDoc.getElementById('total').value;	
 
+var c=1;var detalle=""; var detalles=new Array;
+detalles.push('&doit=1');
 for (var i = 1; i <= total; i++) {
 var id_articulo=innerDoc.getElementById('c_' + i).value;	
 var pvp=innerDoc.getElementById('p_' + i).value;	
 var precio=innerDoc.getElementById(i).value;
 	
-if(pvp!=precio){var detalle=detalle + '&arts[' + id_articulo + ']=' + precio;};
+if(pvp!=precio){
+	var detalle=detalle + '&arts[' + id_articulo + ']=' + precio;
+	if(c>100){detalles.push(detalle); c=0; detalle=""; }
+	c++;
+	};
 }
+if(detalle!=''){detalles.push(detalle);}
 
+detalles.push('&doit=2');
+
+console.info(detalles);
+for (a=0; a < detalles.length ; a++){
+var error=0;
 var url="/ajax/rebToTiend.php?id_rebaja=" + id_rebaja 
 + "&fini=" + fini 
 + "&ffin=" + ffin 
 + "&tisel=" + tisel 
-+ detalle;	
++ detalles[a];	
 
 $.getJSON(url, function(data) {
 $.each(data, function(key, val) {
-if(key=='ok'){
+if(key=='ok'){}else{error=1;}
+});
+});
+
+}
+
+if(error==0){
 alert('Rebajas enviadas correctamente');
 document.getElementById('R_nom').value="";
 document.getElementById('R_ini').value="";	
 document.getElementById('R_fin').value="";
 var iframe = document.getElementById('FrebAct');
 var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
-total=innerDoc.getElementById('t_' + id_rebaja).value=tisel;
-
-
-	
+total=innerDoc.getElementById('t_' + id_rebaja).value=tisel;	
 }
-});
-});
+
+
+
+
 }
 document.getElementById("timer").style.visibility = "hidden";
 }
