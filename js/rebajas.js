@@ -1,4 +1,4 @@
-window.debug =1;
+window.debug =0;
 
 
 $.ajaxSetup({'async': false});
