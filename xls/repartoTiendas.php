@@ -49,9 +49,9 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 
 foreach ($tiendas as $tie => $nt){ if(array_key_exists($tie, $cb)){$cbo[$tie]=$cb[$tie];}; };
 
+$cb=$cbo;
 
-
-foreach ($cbo as $idt => $gs) {ksort($gs); foreach ($gs as $g => $sgs) { ksort($sgs); foreach ($sgs as $sg => $cods) {ksort($cods); foreach ($cods as $cod => $codb) {
+foreach ($cb as $idt => $gs) {ksort($gs); foreach ($gs as $g => $sgs) { ksort($sgs); foreach ($sgs as $sg => $cods) {ksort($cods); foreach ($cods as $cod => $codb) {
 if(array_key_exists($codb, $grid2[$idt])){$grid[$idt][$codb]=$grid2[$idt][$codb];};
 }}}}
 
