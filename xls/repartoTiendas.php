@@ -47,8 +47,11 @@ $cb[$row['id_tienda']][$g][$sg][$cod]=$row['id_articulo'];
 if (!$dbnivel->close()){die($dbnivel->error());};
 
 
-ksort($cb);
-foreach ($cb as $idt => $gs) {ksort($gs); foreach ($gs as $g => $sgs) { ksort($sgs); foreach ($sgs as $sg => $cods) {ksort($cods); foreach ($cods as $cod => $codb) {
+foreach ($tiendas as $tie => $nt){ if(array_key_exists($tie, $cb)){$cbo[$tie]=$cb[$tie];}; };
+
+
+
+foreach ($cbo as $idt => $gs) {ksort($gs); foreach ($gs as $g => $sgs) { ksort($sgs); foreach ($sgs as $sg => $cods) {ksort($cods); foreach ($cods as $cod => $codb) {
 if(array_key_exists($codb, $grid2[$idt])){$grid[$idt][$codb]=$grid2[$idt][$codb];};
 }}}}
 
