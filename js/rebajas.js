@@ -78,6 +78,10 @@ var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
 var arts=window.top.listArts[id]; //innerDoc.getElementById('art_' + id).value;
 
 
+var iframe = document.getElementById('articulos');
+var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+window.top.ocuhtml=innerDoc.getElementById('ocultos').innerHTML;
+
 $.getJSON(url, function(data) {
 $.each(data, function(key, val) {
 
@@ -93,21 +97,19 @@ var idc=datos[0];
 var idp=datos[1];
 var idr=datos[2];
 
-var iframe = document.getElementById('FrebAct');
-var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
-
+//var iframe = document.getElementById('FrebAct');
+//var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
 //innerDoc.getElementById('art_' + id).value
+
 window.top.listArts[id]=arts; 						
 
-var iframe = document.getElementById('articulos');
-var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
-
-innerDoc.getElementById('ocultos').innerHTML=innerDoc.getElementById('ocultos').innerHTML + 
+window.top.ocuhtml=window.top.ocuhtml + 
 "<div id='oc_" + key + "' >" + 
 "<input type='hidden' id='" + id + "_i_" + key + "' value='" + key + "'>" + 
 "<input type='hidden' id='" + id + "_c_" + key + "' value='" + idc + "'>" + 
 "<input type='hidden' id='" + id + "_p_" + key + "' value='" + idp + "'>" + 
 "<input type='hidden' id='" + id + "_r_" + key + "' value='" + idr + "'> </div>";
+
 }
 
 
@@ -117,6 +119,10 @@ innerDoc.getElementById('ocultos').innerHTML=innerDoc.getElementById('ocultos').
 
 });
 });	
+
+var iframe = document.getElementById('articulos');
+var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+innerDoc.getElementById('ocultos').innerHTML=window.top.ocuhtml;
 
 if(window.debug ==1) {console.log('L114 : REB_ACT|(art_' + id + ') : '+ window.top.listArts[id]);}; //innerDoc.getElementById('art_' + id).value
 ordencodigos(1);
@@ -592,7 +598,7 @@ if(detalle!=''){detalles.push(detalle);}
 
 detalles.push('&doit=2');
 
-console.info(detalles);
+
 for (a=0; a < detalles.length ; a++){
 var error=0;
 var url="/ajax/rebToTiend.php?id_rebaja=" + id_rebaja 
@@ -694,18 +700,38 @@ var id_rebaja=parent.document.getElementById('idrebaja').value;
 var cods=window.top.listArts[id_rebaja]; //document.getElementById('art_' + id_rebaja).value	
 }
 
-if(window.debug ==1) {console.log('L567 :START JSON ordencodigos(w);');};
-var url= "/ajax/ordenacods.php?codis=" + cods;	
-$.get( url, function( data ) {
-data=data.replace(/(\r\n|\n|\r)/gm,"")
+var codis=cods.split(' ');
 
 
+var params=new Array();
+params.push('doit=1'); var ci=0; var ccod="";
+for (a=0; a < codis.length; a++){ci++;
+ccod=ccod + ' ' + codis[a];
+if(ci > 400){ params.push('codis=' + ccod); ccod=""; ci=0; }
+}
+params.push('codis=' + ccod);
+params.push('doit=2')
+
+for (a=0; a < params.length; a++){var param=params[a]
+if(params[a]!='doit=2'){
+$.post("/ajax/ordenacods.php",param, function( data ) { });
+	
+}else{
+
+$.post("/ajax/ordenacods.php",param, function( data ) {
+
+data=data.replace(/(\r\n|\n|\r)/gm,"")	
 if(w==1){//innerDoc.getElementById('art_' + id_rebaja).value
 		window.top.listArts[id_rebaja]=data;		 	if(window.debug ==1) {console.log('L556 : DesdeF REB_ACT|(art_' + id_rebaja + ') : '+ window.top.listArts[id_rebaja]);};}; //innerDoc.getElementById('art_' + id_rebaja).value
 if(w==2){//document.getElementById('art_' + id_rebaja).value
 		window.top.listArts[id_rebaja]=data;			if(window.debug ==1) {console.log('L556 : DesdeD REB_ACT|(art_' + id_rebaja + ') : '+ window.top.listArts[id_rebaja]);};}; //document.getElementById('art_' + id_rebaja).value	
+	
 
-});
+});	
+
+}}
+	
+
 
 if(w==1){getRebC_htm2(id_rebaja);};
 if(w==2){getRebC_htm(id_rebaja);};
