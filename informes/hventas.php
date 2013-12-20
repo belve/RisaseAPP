@@ -58,7 +58,7 @@ while ($row = $dbnivel->fetchassoc()){$nprov=$row['nomcorto'];};
 $ngrupo="";
 if($id_grupo){
 $queryp= "select nombre from grupos where id=$id_grupo;"; 
-$dbnivel->query($queryp);
+$dbnivel->query($queryp); 
 while ($row = $dbnivel->fetchassoc()){$ngrupo=$row['nombre'];};
 }
 $nsgrupo="";
@@ -92,16 +92,29 @@ require_once("../functions/listador.php");
 
 $codigosIN="";
 if($options){
-$queryp= "select id, codbarras from articulos where $options;";
+$queryp= "select * from articulos where $options;";
 }else{
-$queryp= "select id, codbarras from articulos where congelado=0;";
+$queryp= "select * from articulos where congelado=0;";
 }	
 		
 $dbnivel->query($queryp);if($debug){echo "$queryp \n\n";};
 while ($row = $dbnivel->fetchassoc()){
-$id_articulo=$row['id']; $barras=$row['codbarras'];
+$id_articulo=$row['id']; $cd=$row['codbarras']; $refprov=$row['refprov'];
 $codigosIN .=$id_articulo . ",";
-$barrasIN .=$barras . ",";
+$barrasIN .=$cd . ",";
+
+
+if(!array_key_exists($cd, $codigos)){
+$codigos[$cd]="$cd / $refprov";
+$g=substr($cd,0,1);$sg=substr($cd,1,1);$c=substr($cd,4);
+$cord[$g][$sg][$c]=$cd;
+$cods .=$cd . ","; 
+$totcod[$cd]=1;
+}
+
+
+
+
 }
 $codigosIN=substr($codigosIN, 0,-1);
 $barrasIN=substr($barrasIN, 0,-1);
@@ -110,6 +123,31 @@ $codigosIN="AND id_articulo IN ($codigosIN)";
 
 
 /*
+ * 
+ * 
+ * 
+
+$queryp= "select (select codbarras from articulos where id=id_articulo) as codbarras, 
+(select refprov from articulos where id=id_articulo) as refprov, 
+id_tienda, sum(cantidad) as cant from pedidos where (fecha >= '$fini' AND fecha <= '$ffin') AND (estado='T' OR estado='A' OR estado='F') $codigosIN group by id_articulo, id_tienda;";
+$dbnivel->query($queryp); if($debug){echo "$queryp \n\n";};$enviados=array();
+while ($row = $dbnivel->fetchassoc()){
+	
+$cd=$row['codbarras']; $idt=$row['id_tienda']; $cant=$row['cant']; $refprov=$row['refprov'];
+
+
+if(!array_key_exists($cd, $codigos)){
+$codigos[$cd]="$cd / $refprov";
+$g=substr($cd,0,1);$sg=substr($cd,1,1);$c=substr($cd,4);
+$cord[$g][$sg][$c]=$cd;
+$cods .=$cd . ","; 
+$totcod[$cd]=1;
+}
+
+$tiends[$idt]=1;
+$enviados[$cd][$idt]=$cant;
+} 
+
 $agrupaciones="";
 
 $queryp= "select distinct agrupar from pedidos where ((fecha >= '$fini' AND fecha <= '$ffin') OR tip=1) $codigosIN AND agrupar is not null;";
@@ -166,7 +204,8 @@ $enviados[$cd][$idt]=$enviados[$cd][$idt]+$cant;
 
 
 
-$cods=substr($cods, 0,-1);
+
+
 
 $codv=array();
 $queryp= "select id_articulo, id_tienda, sum(cantidad) as cant, sum(importe * cantidad) as imp, importe from ticket_det where (fecha >= '$fini' AND fecha <= '$ffin')
@@ -175,13 +214,17 @@ $dbnivel->query($queryp); if($debug){echo "$queryp \n\n";};
 $cods2="";
 while ($row = $dbnivel->fetchassoc()){
 $cd=$row['id_articulo']; $idt=$row['id_tienda']; $cant=$row['cant']; $imp=$row['imp'];
-
+$cods2 .=$cd . ","; 
 			$vendidos[$idt][$cd]['c']=$cant;
 			$vendidos[$idt][$cd]['i']=$imp;
 
-
+$totcod[$cd]=1;
 }
+
+$cods=substr($cods, 0,-1);
 $cods2=substr($cods2, 0,-1);
+
+
 
 
 if (!$dbnivel->close()){die($dbnivel->error());};
@@ -235,6 +278,7 @@ $codPOR[$cdba]=$por;  }else{ $codPOR[$cdba]=0;};
 $codVEND[$cdba]=$ven;
 $codSTOK[$cdba]=$stc;
 }
+
 
 if($act==1){
 $cdg=array();
