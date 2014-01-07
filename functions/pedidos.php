@@ -26,8 +26,25 @@ $hora=date('H') . date('i');
 $html="";
 if (!$dbnivel->open()){die($dbnivel->error());};
 
+
+
 $queryp= "delete from pedidos where cantidad=0;";
 $dbnivel->query($queryp);
+
+
+$queryp= "select id_articulo from pedidos where estado='-' AND tip=2;";$lpens="";
+$dbnivel->query($queryp); 
+while ($row = $dbnivel->fetchassoc()){$lpens.=$row['id_articulo'] . ",";};
+$lpens=substr($lpens, 0,-1);
+
+$queryp= "select id from articulos where id IN ($lpens) AND (congelado=1 OR stock=0);";$lpens2="";
+$dbnivel->query($queryp); 
+while ($row = $dbnivel->fetchassoc()){$lpens2.=$row['id'] . ",";};
+$lpens2=substr($lpens2, 0,-1);
+
+$queryp= "delete from pedidos where estado='-' AND tip=2 AND id_articulo IN ($lpens2);";
+//echo $queryp;
+$dbnivel->query($queryp); 
 
 
 if($agrupar){
