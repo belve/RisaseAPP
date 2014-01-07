@@ -81,8 +81,8 @@ window.top.tselALL	=1;
 
 <div style="float: left; position: relative; font-size: 14px; top:-10px;">	
 	
-	<div style=""><input type="text" onkeyup="javascript:tabFm(this.id);" onfocus="javascript:dlF(this.id);" id="fini" class="corto" value="dd/mm" style="color:#333333;">/<?php echo $anio; ?></div>
-	<div style=""><input type="text" style="color:#333333;" onkeyup="javascript:tabFm(this.id);" onfocus="javascript:dlF(this.id);" id="ffin" value="dd/mm" class="corto">/<?php echo $anio; ?></div>
+	<div style=""><input type="text" onkeyup="javascript:tabF(this.id);" onfocus="javascript:dlF(this.id);" id="fini" class="medio" value="dd/mm/aaaa" style="color:#333333;"></div>
+	<div style=""><input type="text" style="color:#333333;" onkeyup="javascript:tabF(this.id);" onfocus="javascript:dlF(this.id);" id="ffin" value="dd/mm/aaaa" class="medio"></div>
 
 </div>
 
@@ -91,12 +91,12 @@ window.top.tselALL	=1;
 <div style="clear: both;"></div>
 
 <div style="position: relative; top:-8px; left:1px;">
-	<div class="aniosA" onclick="manio(1,<?php echo $anio-1; ?>)" id="a1" style="background-color:orange;"><?php echo $anio-1; ?></div>
-	<div class="aniosA" onclick="manio(2,<?php echo $anio-2; ?>)" id="a2" style="background-color:none;"><?php echo $anio-2; ?></div>
-	<div class="aniosA" onclick="manio(3,<?php echo $anio-3; ?>)" id="a3" style="background-color:none;"><?php echo $anio-3; ?></div>
+	<div class="aniosA" onclick="manio(1,-1)" id="a1" style="background-color:orange;">-1</div>
+	<div class="aniosA" onclick="manio(2,-2)" id="a2" style="background-color:none;">-2</div>
+	<div class="aniosA" onclick="manio(3,-3)" id="a3" style="background-color:none;">-3</div>
 </div>
 <script>
-		window.top.A_1=<?php echo $anio-1; ?>;
+		window.top.A_1=-1;
 		window.top.A_2=0;
 		window.top.A_3=0;
 </script>

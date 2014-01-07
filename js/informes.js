@@ -205,17 +205,17 @@ if(tn==0){alert('Debe seleccionar alguna tienda.');}else{
 
 var fini=document.getElementById('fini').value
 var ffin=document.getElementById('ffin').value
-fini=fini.replace('dd/mm','');
-ffin=ffin.replace('dd/mm','');
+fini=fini.replace('dd/mm/aaaa','');
+ffin=ffin.replace('dd/mm/aaaa','');
 
 if((fini=="")||(ffin=="")){
 alert('Debe introducir un rango de fechas');	
 }else{
 
 var anios="";
-if(window.top.A_1>0){anios=anios + window.top.A_1 + ",";};
-if(window.top.A_2>0){anios=anios + window.top.A_2 + ",";};
-if(window.top.A_3>0){anios=anios + window.top.A_3 + ",";};
+if(window.top.A_1!=0){anios=anios + window.top.A_1 + ",";};
+if(window.top.A_2!=0){anios=anios + window.top.A_2 + ",";};
+if(window.top.A_3!=0){anios=anios + window.top.A_3 + ",";};
  
 if(anios==''){alert('Debe seleccionar por lo menos un año con el que comparar');}else{
 

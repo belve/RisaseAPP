@@ -41,7 +41,7 @@ foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo .
 $ttss=substr($ttss, 0,-1);$emps=array();
 $frqcia=1;
 
-$anios=date('Y') . "," . $anios;
+$anios="0," . $anios;
 $anno=explode(',', substr($anios, 0,-1));
 
 
@@ -54,17 +54,17 @@ if (!$dbn->open()){die($dbn->error());};
 foreach ($anno as $aa => $anio) {
 	
 
-$fini2=$anio . "-" . substr($fini, 3,2) . "-" . substr($fini, 0,2);
-$ffin2=$anio . "-" . substr($ffin, 3,2) . "-" . substr($ffin, 0,2);
+$fini2=(substr($fini, 6,4) + $anio) . "-" . substr($fini, 3,2) . "-" . substr($fini, 0,2);
+$ffin2=(substr($ffin, 6,4) + $anio) . "-" . substr($ffin, 3,2) . "-" . substr($ffin, 0,2);
 
 $queryp= "select id_tienda, sum(importe) as qty 
 from tickets where fecha >= '$fini2' AND fecha <= '$ffin2' AND id_tienda IN ($ttss) GROUP BY id_tienda;";	
-$dbn->query($queryp);
+$dbn->query($queryp); //echo $queryp;
 if($debug){echo "$queryp \n\n";};
 echo $dbn->error();
 	while ($row = $dbn->fetchassoc()){
 	$idt=$row['id_tienda'];$qty=$row['qty'];	
-	$datos[$idt][$anio]=$qty;
+	$datos[$idt][$fini2 . "/" . $ffin2]=$qty;
 	}
 
 }
@@ -93,16 +93,16 @@ $col[23]='S';
 $anchos['A']=1;	
 $anchos['B']=12;	
 
-$anchos['C']=18;
+$anchos['C']=29;
 $anchos['D']=3;
 
-$anchos['E']=18;
+$anchos['E']=29;
 $anchos['F']=10;
 
-$anchos['G']=18;
+$anchos['G']=29;
 $anchos['H']=10;
 
-$anchos['I']=18;
+$anchos['I']=29;
 $anchos['J']=10;
 
 
