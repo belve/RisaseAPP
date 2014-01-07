@@ -32,6 +32,7 @@ $queryp= "delete from pedidos where cantidad=0;";
 $dbnivel->query($queryp);
 
 
+
 $queryp= "select id_articulo from pedidos where estado='-' AND tip=2;";$lpens="";
 $dbnivel->query($queryp); 
 while ($row = $dbnivel->fetchassoc()){$lpens.=$row['id_articulo'] . ",";};
