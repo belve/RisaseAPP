@@ -546,6 +546,8 @@ var pact=Number(pact);
 if (h==1){pact=pact - ((pact/100)*amount)*1; };
 if (h==2){pact=pact + ((pact/100)*amount)*1; };
 
+
+
 if (h==3){pact=pact - (amount*1);};
 if (h==4){pact=pact + (amount*1);};
 
@@ -553,6 +555,19 @@ if (h==5){pact=(amount*1); };
 
 
 var pact = pact.toFixed(2);
+
+if (h <= 2) {
+var l=(pact.length); var lN=pact.substring(l-1,l);	
+
+if(lN==1){lN=0;};if(lN==2){lN=0;};if(lN==3){lN=0;};if(lN==4){lN=0;};
+if(lN==6){lN=5;};if(lN==7){lN=5;};if(lN==8){lN=5;};if(lN==9){lN=5;};
+
+var newP=pact.substring(0,l-1) + lN; var pact = Number(newP);	var pact = pact.toFixed(2);
+
+}
+
+
+
 innerDoc.getElementById(i).value=pact;
 var ida=innerDoc.getElementById('c_' + i).value;
 innerDoc.getElementById(id_rebaja + '_r_' + ida).value=pact;
