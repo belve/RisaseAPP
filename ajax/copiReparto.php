@@ -13,7 +13,7 @@ $copios=explode(',',$idarticulo_new);
 
 $insertos=array();$updates=array();
 
-$queryp= "select id_tienda, cantidad, stockmin from repartir where id_articulo=$idarticulo;";
+$queryp= "select id_tienda, cantidad, stockmin from repartir where id_articulo=$idarticulo AND id_tienda IN ($liT);";
 $dbnivel->query($queryp); if($debug==1){echo $queryp . "\n\n";};
 while ($row = $dbnivel->fetchassoc()){
 	
