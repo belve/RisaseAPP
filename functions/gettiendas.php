@@ -7,9 +7,10 @@ $queryp= "select id, orden, id_tienda, nombre, franquicia from tiendas where act
 
 $listado="";
 
-$dbnivel->query($queryp);
+$dbnivel->query($queryp);$liT="";
 while ($row = $dbnivel->fetchassoc()){$count++;
 	
+	$liT.=$row['id'] . ",";
 	$idttt=$row['id'];$orden=$row['orden'];$nidtienda=$row['id_tienda'];$f=$row['franquicia'];
 	if($orden < 10){$orden="0" . $orden;};
 	$tiendas[$idttt]=$nidtienda;
@@ -21,5 +22,5 @@ while ($row = $dbnivel->fetchassoc()){$count++;
 
 
 if (!$dbnivel->close()){die($dbnivel->error());};
-
+$liT=substr($liT, 0,-1);
 ?>
