@@ -160,9 +160,9 @@ echo "<div onclick='sumatienda($postiendas,\"$nomt\")' class='cabtab_REP tab_REP
 </div>
 	
 </div>
-<iframe style="position:relative; margin-top:35px;" id="GRID" src="/ajax/grid.php" width="847" height="420" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
+<iframe style="position:absolute; top:122px; left:0px;" id="GRID" src="/ajax/grid.php" width="847" height="420" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
 
-<input type="text" class="medio" id="cod" onchange="addfGrid();"  />
+<input type="text" style="position:absolute; top:546px; left:0px;" class="medio" id="cod" onchange="addfGrid();"  />
 
 
 
