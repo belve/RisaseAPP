@@ -595,7 +595,38 @@ function cargaPedGRID(){$.ajaxSetup({'async': false});
 
 timerAD(1,'timer4',0);
 
-var url='/ajax/listGRID.php?idagrupacion=GRID';
+window.top.htGrid="";
+
+var prov=document.getElementById(2).value
+var grup=document.getElementById(3).value
+var subg=document.getElementById(4).value
+var colo=document.getElementById(5).value
+var codi=document.getElementById(6).value
+var pvp=document.getElementById(7).value
+var desd=document.getElementById(8).value
+var hast=document.getElementById(9).value
+var temp=document.getElementById(10).value
+var detalles=document.getElementById(11).value
+var comentarios=document.getElementById(12).value
+	
+var url='/ajax/listGRID.php?idagrupacion=GRID&id_proveedor=' + prov
+ + "&id_grupo=" + grup
+ + "&id_subgrupo=" + subg
+ + "&id_color=" + colo
+ + "&codigo=" + codi
+ + "&pvp=" + pvp
+ + "&desde=" + desd
+ + "&hasta=" + hast
+ + "&temporada=" + temp
+ + "&comentarios=" + comentarios
+ + "&detalles=" + detalles
+
+
+
+
+
+
+
 $.getJSON(url, function(data) {
 $.each(data, function(key, val) {
 var iframe = document.getElementById('GRID');
@@ -652,10 +683,17 @@ var GRID = iframe.contentDocument || iframe.contentWindow.document;
 var cont=window.top.GnewfilHTM;
 
 
+window.top.htGrid=GRID.getElementById('grid').innerHTML;
+
 if(GRID.getElementById(window.top.idachk)){
 alert ('Codigo ya listado en el grid');	
 }else{
-GRID.getElementById('grid').innerHTML=GRID.getElementById('grid').innerHTML + cont;
+
+//window.top.htGrid=window.top.htGrid + cont;	
+//GRID.getElementById('grid').innerHTML=window.top.htGrid;
+
+$("#grid",$("#GRID").contents()).append(cont);
+
 GRID.getElementById(fil + '-1').focus();
 window.top.Gmaxfil=Number(fil);
 }

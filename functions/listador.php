@@ -1,5 +1,6 @@
 <?php
 
+
 if($id_proveedor){$options .=" AND id_proveedor=$id_proveedor";};
 
 if($id_subgrupo){$options .=" AND id_subgrupo=$id_subgrupo";}

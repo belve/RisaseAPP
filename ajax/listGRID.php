@@ -18,6 +18,24 @@ $modi=0;$todas="";
 
 
 if($idagrupacion=='GRID'){
+	
+$options="";$idsabuscar="";
+$tab=1;$ord=1;
+require_once("../functions/listador.php");	
+
+
+if($options){
+$quer2= "select id from articulos where $options;";		
+$dbnivel->query($quer2); 
+
+while ($row = $dbnivel->fetchassoc()){$idsabuscar .=$row['id'] . ",";};
+$idsabuscar=substr($idsabuscar,0,strlen($idsabuscar)-1);
+$options="AND id_articulo IN ($idsabuscar)";
+
+
+}
+
+	
 $queryp= "select id_articulo, id_tienda, sum(cantidad) as cantidad, 
 (select nombre from agrupedidos where id=agrupar) as nagru,
 (select estado from agrupedidos where id=agrupar) as estado,
@@ -25,7 +43,7 @@ $queryp= "select id_articulo, id_tienda, sum(cantidad) as cantidad,
 (select codbarras from articulos where id=id_articulo) as codbarras, 
 (select refprov from articulos where id=id_articulo) as nomprov, 
 id, tip 
-from pedidos where estado='A' AND tip=2 GROUP BY id_articulo, id_tienda;";
+from pedidos where estado='A' AND tip=2 $options GROUP BY id_articulo, id_tienda;";
 
 $todas=0;
 	

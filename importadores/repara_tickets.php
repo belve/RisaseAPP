@@ -12,7 +12,7 @@ if (!$dbnivel->open()){die($dbnivel->error());};
 $lids="";
 $ltiks="";	
 $queryp= "select id, count(id) as C , id_ticket, fecha from tickets 
-where  fecha > '2013-10-01'  group by id_ticket ORDER BY C DESC, fecha;";
+where  fecha > '2013-12-01'  group by id_ticket ORDER BY C DESC, fecha;";
 $dbnivel->query($queryp);
 while ($row = $dbnivel->fetchassoc()){
 $c=$row['C'];	
