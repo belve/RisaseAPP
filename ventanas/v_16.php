@@ -142,8 +142,7 @@ $(window).keydown(function(evt) {
 
 
 	
-<div class="cabREP" style="width: 845px;margin-top:0px; position: absolute;
-    top: 101px; ">
+<div class="cabREP" style="width: 845px; position: absolute; top:96px; ">
 	<div class="cabtab_REP tab_REP_art">Artículos</div>
 	<div class="cabtab_REP tab_REP_rep">REP</div>
 	<div class="cabtab_REP tab_REP_alm">ALM</div>
