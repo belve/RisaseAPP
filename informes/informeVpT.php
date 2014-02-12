@@ -129,7 +129,7 @@ if (!$dbn->open()){die($dbn->error());};
 $stot=0;
 $queryp= "select g, sg, id_tienda, sum(importe * cantidad) as qty from ticket_det where
  fecha >= '$fini' AND fecha <= '$ffin' $codigosIN GROUP BY g, sg, id_tienda ORDER BY g, sg DESC; ";	
-$dbn->query($queryp); 
+$dbn->query($queryp);  
 if($debug){echo "$queryp \n\n";};
 echo $dbn->error();$id=0;
 while ($row = $dbn->fetchassoc()){$id++;
@@ -138,7 +138,7 @@ while ($row = $dbn->fetchassoc()){$id++;
 	$gru=$g . $sg;
 	if(array_key_exists($gru, $sum)){$sum[$gru]=$sum[$gru]+$qty;}else{$sum[$gru]=$qty;}; $stot=$stot+$qty;
 		
-	$grus2[$gru][$qty]=$id;
+	$grus2[$gru][$id]=$qty;
 	$grus3[$id]=$gru;
 	$vend[$id]=$qty;
 	$tven[$id]=$idt;
@@ -178,9 +178,8 @@ if($id){
 
 
 
-
 if ($act==1){if($actO=='A'){ksort($grus2);}else{krsort($grus2);};
-foreach ($grus2 as $grup => $ngrus) {krsort($ngrus); foreach ($ngrus as $q => $idd) {
+foreach ($grus2 as $grup => $ngrus) {arsort($ngrus); foreach ($ngrus as $idd => $q) {
 $grus[$idd]=$grup;	
 }}
 $d=$grus;
@@ -194,7 +193,7 @@ $fila=0;$lg="";
 $lf=0;
 $count=0;
 
-$c=1;
+$c=1; 
 foreach ($d as $id => $value) {
 $gru=$grus[$id]; $vt=$vend[$id]; $idt=$tven[$id]; $p1=($vt/$sum[$gru])*100; $p2=($vt/$stot)*100; 
 
