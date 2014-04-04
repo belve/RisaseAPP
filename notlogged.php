@@ -69,6 +69,8 @@ document.getElementById('pass').value="";
 			</div>
 
 
-	
+<script>
+document.getElementById('user').focus();		
+</script>	
 </body>
 </html>

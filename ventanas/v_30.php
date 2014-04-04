@@ -167,6 +167,9 @@ if (!$dbnivel->close()){die($dbnivel->error());};
 
 <div id="mphotos" class="mphotos" style="visibility: hidden;"><img style="height: 62px;" src="/iconos/iphoto.png" / onclick="popupPhotos();"></div>
 
+
+<div style="position: absolute; top:160px; left:-5px;"><input type="checkbox" id="refAgru"> Agrupar por referencias </div>
+
 <div class="timer" id="timer" style="visibility: hidden; left: 47%; top:50%;"><img src="/iconos/loading1.gif"></div>
 
 <iframe id="excel" src="" width="0" height="0" border="0" frameborder="0" marginheight="0" scrolling="no"></iframe>

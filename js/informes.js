@@ -782,6 +782,11 @@ var temp=document.getElementById(10).value
 var detalles=document.getElementById(11).value
 var comentarios=document.getElementById(12).value
 
+var agru=0;
+if(document.getElementById('refAgru')){
+if(document.getElementById('refAgru').checked){var agru=1;}
+}
+
 if(document.getElementById('fini')){
 var fini=document.getElementById('fini').value
 var ffin=document.getElementById('ffin').value
@@ -804,6 +809,7 @@ var ffin="";
 
 if(codigo=='ventas'){
 	var url="/informes/hventas.php?";
+	if(agru){var url="/informes/refhventas.php?";}
 	var act=window.top.OrdV;
 	var actO=window.top.OrdVO;
 	
@@ -840,6 +846,7 @@ url = url
  + "&ffin=" + ffin 
  + "&act=" + act 
  + "&actO=" + actO 
+ + "&agru=" + agru 
  + '&listador=1'; 
 
 
