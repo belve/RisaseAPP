@@ -61,7 +61,7 @@ document.getElementById('pass').value="";
 			<div style="color:#444444; font-size:10px; margin-left: 2px; margin-top: 4px">Contraseña:</div>
 			<div><input type='password' id='pass' style='width:150px; color:#444444; font-size:10px;'  /></div>	
 			
-			<input type="button" onclick="login();"  value="Loggin" style="color:#444444; font-size:10px; width:80px; height: 20px; margin-top:10px; margin-left:39px;";>
+			<input type="button" onclick="login();"  value="Login" style="color:#444444; font-size:10px; width:80px; height: 20px; margin-top:10px; margin-left:39px;";>
 			</div>	
 			
 			</iframe>
