@@ -340,7 +340,7 @@ $BTrang['A1:' . $coli . ($fila+2)]=1;
 
 //echo json_encode($valores);
 
-print_r($gridEX);
+//print_r($gridEX);
 
 $_SESSION['angle']=array();
 $_SESSION['cgd'] = array(); 
