@@ -163,8 +163,18 @@ echo "<div onclick='sumatienda($postiendas,\"$nomt\")' class='cabtab_REP tab_REP
 
 <input type="text" style="position:absolute; top:546px; left:0px;" class="medio" id="cod" onchange="addfGrid();"  />
 
+<script>
 
+function impPedGRID(){
+	
+document.getElementById('excel2').src='/informes/excel.php';	
+}
+	
+</script>
 
+<div onclick="impPedGRID();" style="position:absolute; left:690px; top:535px;" class="boton"> imprimir </div>
+
+<iframe style="display:none" id="excel2" src="" width="0" height="0" border="0" frameborder="0" marginheight="0" scrolling="auto"></iframe>
 
 
 <div class="timer" id="timer4" style="visibility: hidden; left: 400px; top:300px;"><img src="/iconos/loading1.gif"></div>

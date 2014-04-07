@@ -1,4 +1,5 @@
 <?php
+session_start();
 foreach($_GET as $nombre_campo => $valor){  $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";   eval($asignacion);};
 require_once("../db.php");
 require_once("../variables.php");require_once("../functions/gridreparto.php");
@@ -13,8 +14,8 @@ $dbnivel->query($queryp);
 
 $rep=array();$grid=array();$nagru="";$NFhtml="";
 
-$modi=0;$todas="";
-
+$modi=0;$todas=""; $rotis=array();
+$sumav=array();$sumREP=0;
 
 
 if($idagrupacion=='GRID'){
@@ -89,6 +90,9 @@ $grid[$ida][$idt]=$cant;
 $stocks[$ida]=$row['stock'];
 $rep[$ida]=$rep[$ida] + $cant;
 $noms[$ida]=$row['codbarras'] . " / " . $row['nomprov'];
+
+$nomis[$ida]=$row['nomprov'];
+$codis[$ida]=$row['codbarras'];
 $tieacts[$idt]=1;	
 
 
@@ -135,7 +139,23 @@ $stock3=$stock-$re2;
 $dr=$re2-$re;
 
 $fila++;
-if($stock3 < 0){$st=" style='background-color:#F8CDD9;'";$rotura=1;}else{$st="";};
+
+
+$cdbb=$codis[$ida];
+$gp=substr($cdbb,0, 2);
+$cog=substr($cdbb,2, 2);
+$cdar=substr($cdbb,4);
+
+$gridEX[$fila+1]['A']=$gp;
+$gridEX[$fila+1]['B']=$cog;
+$gridEX[$fila+1]['C']=$cdar;
+$gridEX[$fila+1]['D']=$nomis[$ida];
+$gridEX[$fila+1]['E']=$re;
+$sumREP=$sumREP+$re;
+
+
+
+if($stock3 < 0){$st=" style='background-color:#F8CDD9;'";$rotura=1;$rotis[$fila+1]='#F8CDD9';}else{$st="";};
 
 $html.="
 <tr id='$ida' $st>
@@ -188,12 +208,15 @@ $NFhtml="
 
 $count=0;$columna=0;
 
-
+$gridEX[1]['E']='REP'; 
+$colT[]='F';$colT[]='G';$colT[]='H';$colT[]='I';$colT[]='J';$colT[]='K';$colT[]='L';$colT[]='M';
+$colT[]='N';$colT[]='O';$colT[]='P';$colT[]='Q';$colT[]='R';$colT[]='S';$colT[]='T';$colT[]='U';$colT[]='V';$colT[]='W';
 //if($idagrupacion=='GRID'){$tindm=$tiendas;};
+$ctt=0;
 foreach ($tiendas as $idt => $nomc) {if(array_key_exists($idt, $tindm)){
 		
 $cabe[$nomc]= "<div class='cabtab_REP tab_REP_tie'>$nomc</div>";		
-		
+$gridEX[1][$colT[$ctt]]=$nomc; 		
 		
 	$count++;
 	$columna++;	
@@ -233,6 +256,12 @@ $cabe[$nomc]= "<div class='cabtab_REP tab_REP_tie'>$nomc</div>";
 	
 	";	
 	
+	
+	$gridEX[$fila+1][$colT[$ctt]]=$cant; 	
+	if(isset($sumav[$colT[$ctt]])){$sumav[$colT[$ctt]]=$sumav[$colT[$ctt]]+$cant;}else{$sumav[$colT[$ctt]]=$sumav[$colT[$ctt]]=$cant;}	
+	
+	$ctt++;
+	
   $NFhtml .="
   
  	<td class='' style='width:24px;border-bottom: 1px solid #888888;'>
@@ -257,6 +286,12 @@ $cabe[$nomc]= "<div class='cabtab_REP tab_REP_tie'>$nomc</div>";
 	
 }
 
+$gridEX[$fila+2]['E']=$sumREP;
+if(count($sumav)>0){
+foreach ($sumav as $coli => $value) {
+$gridEX[$fila+2][$coli]=$value;
+$anchos[$coli]=10;		
+}}
 
 
 }else{
@@ -269,13 +304,21 @@ while ($row = $dbnivel->fetchassoc()){$html="";$nagru=$row['nombre'];$estado=$ro
 
 
 
-
 if (!$dbnivel->close()){die($dbnivel->error());};
 
 $cabe2="";
 if(count($cabe)>0){foreach($cabe as $nc => $cod){$cabe2.=$cod;};};
 
 if(!$todas){$valores['cabe']=$cabe2;};
+
+
+
+$anchos['A']=10;
+$anchos['B']=10;
+$anchos['C']=10;
+$anchos['D']=30;
+$anchos['E']=10;
+
 
 
 $valores['cabe']=$cabe2;
@@ -286,7 +329,33 @@ $valores['estado']=$estado;
 $valores['maxfil']=$fila;
 $valores['new_fil']=$NFhtml;
 
-echo json_encode($valores);
+
+if(count($rotis)>0){foreach ($rotis as $fil => $cgr) {
+$crang["A$fil:" . $coli . $fil]=$cgr;	
+}}else{
+$crang=array();	
+}
+
+$BTrang['A1:' . $coli . ($fila+2)]=1;
+
+//echo json_encode($valores);
+
+print_r($gridEX);
+
+$_SESSION['angle']=array();
+$_SESSION['cgd'] = array(); 
+$_SESSION['grid'] = array(); 
+$_SESSION['anchos'] = $anchos;
+$_SESSION['align'] = array();
+$_SESSION['crang']=$crang;
+$_SESSION['Mrang']=array();
+$_SESSION['BTrang']=$BTrang;
+$_SESSION['paginas']=array();
+$_SESSION['format']=array();
+$_SESSION['nomfil']="PedidosGRID";
+$_SESSION['BOLDrang']=array();
+
+$_SESSION['grid'] = $gridEX; 
 
 ?>
 

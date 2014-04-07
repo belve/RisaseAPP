@@ -17,7 +17,7 @@
 
 
 
-function loggin(){
+function login(){
 
 
 var user=document.getElementById('user').value;	
