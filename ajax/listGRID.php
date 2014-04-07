@@ -14,7 +14,7 @@ $dbnivel->query($queryp);
 
 $rep=array();$grid=array();$nagru="";$NFhtml="";
 
-$modi=0;$todas=""; $rotis=array();
+$modi=0;$todas=""; $rotis=array(); $format=array();
 $sumav=array();$sumREP=0;
 
 
@@ -146,10 +146,13 @@ $fila++;
 $cdbb=$codis[$ida];
 $gp=substr($cdbb,0, 2);
 $cog=substr($cdbb,2, 2);
+
+
+
 $cdar=substr($cdbb,4);
 
 $gridEX[$fila+1]['A']=$gp;
-$gridEX[$fila+1]['B']=$cog;
+$gridEX[$fila+1]['B']=$cog; $format['B' . ($fila+1)]='cer2';
 $gridEX[$fila+1]['C']=$cdar;
 $gridEX[$fila+1]['D']=$nomis[$ida];
 $gridEX[$fila+1]['E']=$re;
@@ -353,7 +356,7 @@ $_SESSION['crang']=$crang;
 $_SESSION['Mrang']=array();
 $_SESSION['BTrang']=$BTrang;
 $_SESSION['paginas']=array();
-$_SESSION['format']=array();
+$_SESSION['format']=$format;
 $_SESSION['nomfil']="PedidosGRID";
 $_SESSION['BOLDrang']=array();
 
