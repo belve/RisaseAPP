@@ -66,6 +66,8 @@ while ($row = $dbnivel->fetchassoc()){
 }
 
 if($tip==2){
+	
+	
 $queryp= "SELECT distinct(id_tienda) as idt, 
 (select id_tienda from tiendas where id=idt) as ntie, 
 (select orden from tiendas where id=idt) as orden  
@@ -73,6 +75,7 @@ from pedidos WHERE tip=$tip AND estado='-' AND (agrupar='' or agrupar IS NULL) G
 $dbnivel->query($queryp); 
 while ($row = $dbnivel->fetchassoc()){$agrupaciones[$row['idt']]=$row['ntie'] . "-" . $fecha . $hora;}
 }
+
 
 if(count($agrupaciones)>0){foreach($agrupaciones as $idpr => $agrupp){
 	
@@ -122,6 +125,8 @@ $dbnivel->query($queryp);
 
 $queryp= "select id, nombre from agrupedidos where estado='P' AND tip=$tip ORDER BY nombre;";
 $dbnivel->query($queryp); 
+//echo $queryp;
+
 while ($row = $dbnivel->fetchassoc()){
 $idagrupado=$row['id'];$nomagrup=$row['nombre'];
 $html.= "
