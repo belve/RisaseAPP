@@ -51,6 +51,8 @@ $todas=0;
 }else{
 	
 $queryp= "select tip from agrupedidos where id=$idagrupacion;";
+
+
 $dbnivel->query($queryp);$cb=array();
 while ($row = $dbnivel->fetchassoc()){
 if($row['tip']==1){$todas=1;}else{$todas=0;};
@@ -338,7 +340,7 @@ $crang=array();
 
 $BTrang['A1:' . $coli . ($fila+2)]=1;
 
-//echo json_encode($valores);
+echo json_encode($valores);
 
 //print_r($gridEX);
 
